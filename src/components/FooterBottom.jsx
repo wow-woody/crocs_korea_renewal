@@ -1,17 +1,18 @@
 import React from 'react';
-import FooterTitle from './FooterTitle';
-import FooterContents from './FooterContents';
-import FooterBottom from './FooterBottom';
-import './scss/Footer.scss';
+import './scss/FooterBottom.scss';
+import { Link } from 'react-router-dom';
 
-const Footer = () => {
+const FooterBottom = () => {
     return (
-        <footer>
-            <FooterTitle />
-            <FooterContents />
-            <FooterBottom />
-        </footer>
+        <>
+            <div className="footer_bottom">
+                <Link to="/cscenter">CS Center</Link>{' '}
+                <Link to="/companyinfo">
+                    <span>INFO</span>
+                </Link>
+            </div>
+        </>
     );
 };
 
-export default Footer;
+export default FooterBottom;
