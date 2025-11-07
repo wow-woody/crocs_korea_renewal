@@ -6,6 +6,7 @@ export const collaboAuthStore = create((set, get) => ({
     //section3_CollaboJibbitz 상품 목록을 저장할 배열
     jibbitzItems: jibbitzAll,
     disneyItems: jibbitzAll.filter(
-        (item) => item.title.includes('디즈니') && item.title.includes('세트')
+        (item) =>
+            (item.title.includes('디즈니') || item.title.includes('동물')) && item.price !== ''
     ),
 }));
