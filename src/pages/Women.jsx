@@ -4,7 +4,7 @@ import Title from '../components/Title';
 const Women = () => {
     return (
         <div className="sub_page">
-            <div className="content_inner">
+            <div className="inner">
                 <Title title="women" />
             </div>
         </div>

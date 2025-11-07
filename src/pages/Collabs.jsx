@@ -4,7 +4,7 @@ import Title from '../components/Title';
 const Collabs = () => {
     return (
         <div className="sub_page">
-            <div className="content_inner">
+            <div className="inner">
                 <Title title="collabs" />
             </div>
         </div>
