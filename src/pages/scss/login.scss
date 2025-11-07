@@ -25,7 +25,6 @@
             border-radius: 50px;
             padding-left: 2rem;
             text-align: start;
-            font-weight: bold;
         }
 
         .checkbox_wrap {
@@ -33,11 +32,14 @@
             height: 5rem;
             @include g.flex();
             .checkbox_left {
-                input {
-                    width: 2rem;
-                    height: 2rem;
-                    border-radius: 50px;
-                    border: 1px solid #ddd;
+                label {
+                    cursor: pointer;
+                    input {
+                        width: 2rem;
+                        height: 2rem;
+                        border-radius: 50px;
+                        border: 1px solid #ddd;
+                    }
                 }
             }
         }
