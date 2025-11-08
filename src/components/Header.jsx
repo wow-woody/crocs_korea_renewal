@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import MainmenuList from './MainmenuList';
 import './scss/header.scss';
 import GnbWrap from './GnbWrap';
+import Depth1 from './Depth1';
 
 const Header = () => {
     return (
@@ -16,6 +17,7 @@ const Header = () => {
                     </h1>
                     <nav>
                         <MainmenuList />
+                        <Depth1 />
                     </nav>
                 </div>
                 <div className="header_right">
