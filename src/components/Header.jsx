@@ -4,6 +4,7 @@ import MainmenuList from './MainmenuList';
 import './scss/header.scss';
 import GnbWrap from './GnbWrap';
 import Depth1 from './Depth1';
+import Search from './Search';
 
 const Header = () => {
     return (
@@ -22,6 +23,7 @@ const Header = () => {
                 </div>
                 <div className="header_right">
                     <GnbWrap />
+                    <Search />
                 </div>
             </div>
         </header>

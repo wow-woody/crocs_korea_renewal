@@ -1,11 +1,21 @@
 import React from 'react';
-import Title from './Title';
+import SearchInput from './SearchInput';
+import { Link } from 'react-router-dom';
+// import Title from './Title';
 
 const Search = () => {
     return (
-        <div className="sub_page">
-            <div className="content_inner">
-                <Title title="search" />
+        <div className="search_wrap">
+            <div className="search_top">
+                <SearchInput />
+            </div>
+            <div className="search_bottom">
+                <div className="search_left"></div>
+                <div className="search_right">
+                    <Link>
+                        <img src="" alt="" />
+                    </Link>
+                </div>
             </div>
         </div>
     );

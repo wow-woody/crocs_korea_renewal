@@ -11,11 +11,11 @@ const submenus = [
     { key: 'collabs', label: 'COLLABS' },
 ];
 
-const SubList = () => {
+const SubmenuList = () => {
     return (
         <ul className="submenu">
             {submenus.map((submenu) => (
-                <li key={submenu.key}>
+                <li key={submenu.key} className={submenu.key}>
                     <Link to={`/${submenu.key}`}>{submenu.label}</Link>
                 </li>
             ))}
@@ -23,4 +23,4 @@ const SubList = () => {
     );
 };
 
-export default SubList;
+export default SubmenuList;

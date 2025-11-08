@@ -1,13 +1,15 @@
 import React from 'react';
-import SubList from './SubList';
+import SubmenuList from './SubmenuList';
 
 const Depth1 = () => {
     return (
-        <div className="depth1">
-            <div className="depth1_left">
-                <SubList />
+        <div className="depth_wrap">
+            <div className="depth1">
+                <div className="depth1_left">
+                    <SubmenuList />
+                </div>
+                <div className="depth1_right"></div>
             </div>
-            <div className="depth1_right"></div>
         </div>
     );
 };
