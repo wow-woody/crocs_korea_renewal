@@ -2,11 +2,11 @@ import React from 'react';
 
 const SearchInput = () => {
     return (
-        <div className="SearchInput">
+        <div className="search_input">
             <input type="text" placeholder="SEARCH" />
-            <p className="search_icon">
-                <img src="" alt="" />
-            </p>
+            <button className="search_btn">
+                <img src="./images/search_icon.svg" alt="search_icon" />
+            </button>
         </div>
     );
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
-// import Title from './Title';
+import './scss/search.scss';
 
 const Search = () => {
     return (
-        <div className="search_wrap">
+        <div className="search_wrap inner">
             <div className="search_top">
                 <SearchInput />
             </div>
