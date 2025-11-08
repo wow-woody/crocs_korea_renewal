@@ -1,11 +1,11 @@
 import React from 'react';
-import SubMenuList from './SubMenuList';
+import SubList from './SubList';
 
 const Depth1 = () => {
     return (
         <div className="depth1">
             <div className="depth1_left">
-                <SubMenuList />
+                <SubList />
             </div>
             <div className="depth1_right"></div>
         </div>
