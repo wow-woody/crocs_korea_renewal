@@ -1,0 +1,10 @@
+@use '../../App.scss' as g;
+
+.content_inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2.5%;
+    .title_wrap {
+        text-align: center;
+    }
+}

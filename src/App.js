@@ -11,7 +11,6 @@ import Promotion from './pages/Promotion';
 import Login from './pages/Login';
 import Join from './pages/Join';
 import Cart from './pages/Cart';
-import JibbitzCollaboSwiper from './components/JibbitzCollaboSwiper';
 import Footer from './components/Footer';
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
                 <Route path="/join" element={<Join />} />
                 <Route path="/cart" element={<Cart />} />
             </Routes>
-            <JibbitzCollaboSwiper />
             <Footer />
         </div>
     );
