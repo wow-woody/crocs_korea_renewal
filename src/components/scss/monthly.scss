@@ -4,6 +4,7 @@
     height: 100vh;
     position: relative;
     overflow: hidden;
+    // padding-top: 5rem;
 
     .inner {
         @include g.flex();
@@ -18,7 +19,7 @@
             .title_wrap {
                 @include g.flex($fd: column, $jc: center, $ai: flex-start);
                 // height: 100vh;
-                padding-top: 20rem;
+                padding-top: 25rem;
 
                 .section_title,
                 .section_sub_title {
