@@ -7,12 +7,13 @@ const JoinForm = () => {
     //변수
     const [formData, setFormData] = useState({
         name: '',
-        nickname: '',
-        email: '',
-        password: '',
         phone: '',
-        file: null,
-        profile: '',
+        nickname: '',
+        ID: '',
+        password: '',
+        email: '',
+        birthday: '',
+        gender: '',
     });
 
     const { onJoin } = joinStore();
@@ -43,19 +44,22 @@ const JoinForm = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="이름"
+                        placeholder="이름을 입력하세요"
                         onChange={handleChange}
                         className="admit_input"
                     />
                     <p>전화번호</p>
                     <input
                         type="tel"
+                        inputmode="numeric"
+                        pattern="[0-9]*"
                         name="phone"
                         placeholder="전화번호"
                         onChange={handleChange}
                         className="admit_input"
                     />
                 </div>
+                <div className="form_line"></div>
                 <div className="required">
                     <p className="required_title">필수정보</p>
                     <input
@@ -83,24 +87,23 @@ const JoinForm = () => {
                     />
                 </div>
                 <div className="add_info">
-                    <p>
-                        <span>회원가입</span>
-                        <input
-                            type="date"
-                            name="text"
-                            placeholder="생년월일"
-                            onChange={handleChange}
-                        />
-                    </p>
-                    <p>
-                        <span>성별</span>
-                        <span>남자</span>
-                        <input type="radio" name="gender_man" onChange={handleChange} />
-                        <span>여자</span>
-                        <input type="radio" name="gender_women" onChange={handleChange} />
-                    </p>
+                    <p>생년월일</p>
+                    <input type="date" name="birthday" onChange={handleChange} />
+                    <p>성별</p>
+                    <div className="gender_wrap">
+                        <label className="radio">
+                            <input type="radio" name="gender" onChange={handleChange} />
+                            <span className="radio_custom"></span>
+                            남자
+                        </label>
+                        <label className="radio">
+                            <input type="radio" name="gender" onChange={handleChange} />
+                            <span className="radio_custom"></span>
+                            여자
+                        </label>
+                    </div>
                 </div>
-                <button type="submit">회원가입</button>
+                <button type="submit">Join</button>
             </form>
         </div>
     );
