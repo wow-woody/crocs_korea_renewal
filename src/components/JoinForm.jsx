@@ -8,7 +8,6 @@ const JoinForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
-        nickname: '',
         ID: '',
         password: '',
         email: '',
