@@ -70,6 +70,8 @@ input[type='email'],
 input[type='search'],
 input[type='url'],
 input[type='tel'],
+input[type='date'],
+input[type='radio'],
 textarea {
     all: unset; /* 브라우저 기본 스타일 제거 */
     display: inline-block; /* 너비와 높이 설정 가능하게 함 */
