@@ -1,23 +1,22 @@
 @use '/src/App.scss' as g;
 
 .inner {
-    // min-height: 100vh;
-    // display: flex;
     position: relative;
+
     .title_wrap {
+        text-align: right;
         position: absolute;
-        right: 0;
+        right: 2.5%;
     }
+
     .collabo-wrap {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        margin-top: 10rem;
 
         .MySwiper {
-            width: 110rem;
-            transform: translateX(-10%);
-            margin: 0 auto;
+            width: 100rem;
+            margin-left: 0;
             @include g.flex();
             .swiper-wrapper {
                 max-width: 50rem;
@@ -28,6 +27,9 @@
                     max-width: 30rem;
                     // background-color: pink;
                     scale: 1;
+                    &:hover {
+                        scale: 1.1;
+                    }
                 }
             }
         }
@@ -38,12 +40,50 @@
             padding: 10rem;
             overflow: hidden;
         }
-        .swiper-button-prev {
-            left: -8rem;
-        }
-        .swiper-button-next {
-            right: -8rem;
-            transform: none;
+        .swiper-btn-wrap {
+            display: flex;
+            justify-content: flex-end;
+            gap: 50px;
+            transform: translate(-50%, 100%);
+            .swiper-button-prev,
+            .swiper-button-next {
+                position: relative !important;
+                inset: unset !important;
+                transform: none !important;
+                margin: 0 !important;
+                border: 1px solid #eee;
+                border-radius: 50%;
+                width: 6rem;
+                height: 6rem;
+                cursor: pointer;
+                transition: 0.5s;
+                @include g.flex();
+                &:hover {
+                    background: g.$subColor;
+                }
+                .swiper-navigation-icon {
+                    display: none;
+                }
+                &::after {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: g.$mainColor;
+                    font-weight: 600;
+                    font-size: 4rem;
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
+            .swiper-button-prev::after {
+                content: '';
+                background: url(../../assets/images/icon-prev-color.svg) no-repeat center center;
+            }
+            .swiper-button-next::after {
+                content: '';
+                background: url(../../assets/images/icon-next-color.svg) no-repeat center center;
+            }
         }
     }
 }
@@ -60,8 +100,15 @@
     .img-box {
         position: relative;
         background-color: #eee;
+        // background-color: #d6e8ca;
+        // background-color: #dbffc5;
+        // background-image: radial-gradient(circle, white 3px, transparent 3px),
+        //     radial-gradient(circle, white 3px, transparent 3px);
+        // background-size: 20px 20px;
+        // background-position: 3px 3px, 13px 13px;
+        font-weight: 800;
         width: 120%;
-        transform: translateY(-20%);
+        transform: translateY(-10%);
         border-radius: 50%;
         aspect-ratio: 1/1;
         img {
@@ -70,10 +117,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            scale: 1.2;
-            // display: block;
-            width: 12rem;
-            // width: 100%;
+            width: 20rem;
         }
     }
     .text-box {
@@ -105,34 +149,4 @@
             color: #fff;
         }
     }
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-    background-color: #eee;
-    border-radius: 50%;
-    width: 6rem;
-    height: 6rem;
-    cursor: pointer;
-    &::after {
-        color: g.$mainColor;
-        font-size: 3rem;
-    }
-    .swiper-navigation-icon {
-        display: none;
-    }
-}
-.swiper-button-prev::after {
-    content: '<';
-    position: absolute;
-    color: g.$mainColor;
-    font-weight: 600;
-    font-size: 4rem;
-}
-.swiper-button-next::after {
-    content: '>';
-    position: absolute;
-    color: g.$mainColor;
-    font-weight: 600;
-    font-size: 4rem;
 }

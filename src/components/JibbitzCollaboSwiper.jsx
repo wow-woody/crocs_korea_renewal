@@ -17,13 +17,14 @@ const JibbitzCollaboSwiper = () => {
                     title={`COLLABO <br/> Jibbitz`}
                     subTitle="당신의 스타일에 맞는 완벽한 크록스를 찾아보세요"
                 />
+
                 <div className="collabo-wrap">
                     <Swiper
                         modules={[Navigation, Scrollbar, Pagination]}
                         pagination
                         navigation={{
-                            prevEl: '.swiper-button-prev', // ← 이걸 이전 버튼으로 써!
-                            nextEl: '.swiper-button-next', // ← 이걸 다음 버튼으로 써!
+                            prevEl: '.swiper-button-prev',
+                            nextEl: '.swiper-button-next',
                         }}
                         scrollbar
                         grabCursor={true}
@@ -31,6 +32,7 @@ const JibbitzCollaboSwiper = () => {
                         slidesPerView={2.5}
                         centeredSlides={true}
                         loop={true}
+                        speed={700}
                         className="MySwiper"
                     >
                         {disneyItems.map((item) => (
@@ -41,9 +43,10 @@ const JibbitzCollaboSwiper = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-
-                    <div className="swiper-button-prev"></div>
-                    <div className="swiper-button-next"></div>
+                    <div className="swiper-btn-wrap">
+                        <div className="swiper-button-prev"></div>
+                        <div className="swiper-button-next"></div>
+                    </div>
                 </div>
             </div>
         </section>
