@@ -64,22 +64,24 @@ const MonthlyCardList = () => {
                                 src={card.aImg}
                                 alt={card.dec}
                             />
-                        </div>
-                    </Link>
-                    <Link className="item_card">
-                        <div className={`item_box item_box_${card.id}`}>
-                            <div className="img_box">
-                                <img src={card.itemImg} alt={card.item} />
-                            </div>
-                            <div className="text_box">
-                                <p className="title">{card.item}</p>
-                                <p className="dc_wrap">
-                                    <strong>{card.dc}</strong>
-                                    <span>{card.dcPrice}</span>
-                                </p>
-                                {/* <p className="price">{card.price}</p> */}
-                                <p className={card.dc ? 'price_d' : 'price'}>{card.price}</p>
-                            </div>
+                            <Link className="item_card">
+                                <div className={`item_box item_box_${card.id}`}>
+                                    <div className="img_box">
+                                        <img src={card.itemImg} alt={card.item} />
+                                    </div>
+                                    <div className="text_box">
+                                        <p className="title">{card.item}</p>
+                                        <p className="dc_wrap">
+                                            <strong>{card.dc}</strong>
+                                            <span>{card.dcPrice}</span>
+                                        </p>
+                                        {/* <p className="price">{card.price}</p> */}
+                                        <p className={card.dc ? 'price_d' : 'price'}>
+                                            {card.price}
+                                        </p>
+                                    </div>
+                                </div>
+                            </Link>
                         </div>
                     </Link>
                 </li>

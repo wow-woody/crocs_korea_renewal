@@ -74,8 +74,22 @@
             top: 50%;
             left: 40%;
             button {
-                &::after {
+                &::before {
                     content: '';
+                    display: block;
+                    width: 1.5px;
+                    height: 80px;
+                    background: url(../../assets/arrow.svg) no-repeat center center;
+                    transition: opacity 0.8s ease;
+                }
+
+                &:hover {
+                    &::before {
+                        background: url(../../assets/arrow_active.svg) no-repeat left center;
+                        width: 80px;
+                        height: 80px;
+                        // transition: 0.4s;
+                    }
                 }
             }
         }
@@ -88,8 +102,7 @@
             height: 100vh;
             background: #eee;
             padding-left: 20rem;
-            // overflow: hidden;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 2s ease-in-out;
             transform: translateX(0);
 
             &.active {
@@ -108,7 +121,7 @@
                             position: relative;
 
                             .main_img {
-                                position: relative;
+                                // position: relative;
                                 width: 40rem;
                                 height: 52rem;
                             }
@@ -123,6 +136,11 @@
                                 top: 60%;
                                 left: 45%;
                                 transform: translate(-50%, -50%);
+
+                                &:hover ~ .item_card .item_box_1 {
+                                    opacity: 1;
+                                    visibility: visible;
+                                }
                             }
 
                             .a_img_2 {
@@ -130,6 +148,11 @@
                                 left: 50%;
                                 transform: translateX(-50%);
                                 z-index: 600;
+
+                                &:hover ~ .item_card .item_box_2 {
+                                    opacity: 1;
+                                    visibility: visible;
+                                }
                             }
 
                             .a_img_3 {
@@ -138,95 +161,110 @@
                                 transform: translate(-50%, -50%);
                                 height: 85rem;
                                 z-index: 600;
+
+                                &:hover ~ .item_card .item_box_3 {
+                                    opacity: 1;
+                                    visibility: visible;
+                                }
                             }
 
                             .a_img_4 {
                                 top: 55%;
                                 left: 50%;
                                 transform: translate(-50%, -50%);
-                            }
-                        }
-                    }
 
-                    .item_card {
-                        .item_box {
-                            @include g.flex($gap: null);
-                            position: absolute;
-                            z-index: 500;
-                            border: 0.5px solid #ccc;
-                            border-radius: 1rem;
-
-                            .img_box {
-                                width: 15rem;
-                                height: 15rem;
-                                background: rgba($color: #fff, $alpha: 0.6);
-                                text-align: center;
-                                border-radius: 1rem 0 0 1rem;
-                                line-height: 15rem;
-                                // border: 1px solid #000;
-                                img {
-                                    width: 12rem;
+                                &:hover ~ .item_card .item_box_4 {
+                                    opacity: 1;
+                                    visibility: visible;
                                 }
                             }
 
-                            .text_box {
-                                width: 15rem;
-                                height: 15rem;
-                                background: rgba($color: g.$subColor, $alpha: 0.7);
-                                border-radius: 0 1rem 1rem 0;
-                                @include g.flex($fd: column, $jc: center, $gap: 1rem);
-                                // border: 1px solid #000;
+                            .item_card {
+                                .item_box {
+                                    @include g.flex($gap: null);
+                                    position: absolute;
+                                    z-index: 500;
+                                    border: 0.5px solid #ccc;
+                                    border-radius: 1rem;
+                                    opacity: 0;
+                                    visibility: hidden;
+                                    transition: opacity 0.3s ease-in-out,
+                                        visibility 0.3s ease-in-out;
 
-                                .title {
-                                    font-weight: 500;
-                                    color: #fff;
-                                }
-
-                                .dc_wrap {
-                                    @include g.flex($gap: 1rem);
-                                    > span {
-                                        font-weight: bold;
-                                        color: g.$mainColor;
+                                    .img_box {
+                                        width: 15rem;
+                                        height: 15rem;
+                                        background: rgba($color: #fff, $alpha: 0.6);
+                                        text-align: center;
+                                        border-radius: 1rem 0 0 1rem;
+                                        line-height: 15rem;
+                                        // border: 1px solid #000;
+                                        img {
+                                            width: 12rem;
+                                        }
                                     }
-                                    strong {
-                                        color: #fff;
+
+                                    .text_box {
+                                        width: 15rem;
+                                        height: 15rem;
+                                        background: rgba($color: g.$subColor, $alpha: 0.7);
+                                        border-radius: 0 1rem 1rem 0;
+                                        @include g.flex($fd: column, $jc: center, $gap: 1rem);
+                                        // border: 1px solid #000;
+
+                                        .title {
+                                            font-weight: 500;
+                                            color: #fff;
+                                        }
+
+                                        .dc_wrap {
+                                            @include g.flex($gap: 1rem);
+                                            > span {
+                                                font-weight: bold;
+                                                color: g.$mainColor;
+                                            }
+                                            strong {
+                                                color: #fff;
+                                            }
+                                        }
+
+                                        .price {
+                                            font-weight: bold;
+                                            color: g.$mainColor;
+                                        }
+
+                                        .price_d {
+                                            color: #ccc;
+                                            font-size: 1.4rem;
+                                            text-decoration: line-through;
+                                        }
+                                    }
+
+                                    &.item_box_1 {
+                                        // bottom: 5%;
+                                        // transform: translate(-50%, -50%);
+                                        bottom: 5%;
+                                        left: 0;
+                                        transform: translate(-50%, 0);
+                                    }
+
+                                    &.item_box_2 {
+                                        top: -10%;
+                                        left: 0;
+                                        transform: translate(-50%, 0);
+                                    }
+
+                                    &.item_box_3 {
+                                        top: -25%;
+                                        left: 60%;
+                                    }
+
+                                    &.item_box_4 {
+                                        top: 40%;
+                                        left: 70%;
                                     }
                                 }
-
-                                .price {
-                                    font-weight: bold;
-                                    color: g.$mainColor;
-                                }
-
-                                .price_d {
-                                    color: #ccc;
-                                    font-size: 1.4rem;
-                                    text-decoration: line-through;
-                                }
                             }
-                        }
-
-                        .item_box_1 {
-                            bottom: 20%;
-                            transform: translate(-50%, -50%);
-                        }
-
-                        .item_box_2 {
-                            top: 25%;
-                            left: 23%;
-                            transform: translate(-50%, -50%);
-                        }
-
-                        .item_box_3 {
-                            top: 15%;
-                            left: 52%;
-                            transform: translate(-50%, -50%);
-                        }
-
-                        .item_box_4 {
-                            top: 40%;
-                            left: 70%;
-                            transform: translate(-50%, -50%);
                         }
                     }
                 }
