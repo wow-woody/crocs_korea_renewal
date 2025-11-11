@@ -25,8 +25,10 @@ const SearchLeft = () => {
                     {recentSearches.map((search) => (
                         <li key={search.id}>
                             <Link to="*">{search.inputText}</Link>
+                            <button>x</button>
                         </li>
                     ))}
+                    <button>전제 삭제 x</button>
                 </div>
             </div>
 
