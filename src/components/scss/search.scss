@@ -73,21 +73,34 @@
             .recent_searches_wrap {
                 text-align: start;
                 h4 {
-                    padding-bottom: 2rem;
+                    padding-bottom: 1rem;
                 }
 
                 .recent_search_list {
-                    text-align: start;
                     height: 10rem;
                     font-weight: 700;
                     font-size: 1.2rem;
+                    line-height: 2;
+                    color: #444;
+                    li {
+                        > button {
+                            margin-left: 2rem;
+                        }
+                    }
+                    button {
+                        color: #777;
+                        padding: 0;
+                        > span {
+                            margin-left: 2rem;
+                        }
+                    }
                 }
             }
 
             .hashtag_wrap {
                 text-align: start;
                 h4 {
-                    padding-bottom: 2rem;
+                    padding-bottom: 1rem;
                 }
                 .hashtag_list {
                     display: grid;

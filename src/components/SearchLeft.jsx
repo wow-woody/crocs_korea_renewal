@@ -3,15 +3,15 @@ import { useSearchStore } from '../store/useSearchStore';
 import { Link } from 'react-router-dom';
 
 const hashtags = [
-    { tag: '신상' },
-    { tag: '라인드 클로그' },
-    { tag: '주토피아' },
-    { tag: '지비츠' },
-    { tag: '베이 크록스' },
-    { tag: '아이브' },
-    { tag: '르세라핌' },
-    { tag: '장 폴 고티에' },
-    { tag: '샤몬 로샤' },
+    '신상',
+    '라인드 클로그',
+    '주토피아',
+    '지비츠',
+    '베이 크록스',
+    '아이브',
+    '르세라핌',
+    '장 폴 고티에',
+    '샤몬 로샤',
 ];
 
 const SearchLeft = () => {
@@ -28,7 +28,9 @@ const SearchLeft = () => {
                             <button>x</button>
                         </li>
                     ))}
-                    <button>전제 삭제 x</button>
+                    <button>
+                        전제 삭제 <span>x</span>
+                    </button>
                 </div>
             </div>
 
@@ -37,7 +39,7 @@ const SearchLeft = () => {
                 <div className="hashtag_list">
                     {hashtags.map((hashtag) => (
                         <span className="tag">
-                            <Link to="*">{`# ${hashtag.tag}`}</Link>
+                            <Link to="*">{`# ${hashtag}`}</Link>
                         </span>
                     ))}
                 </div>
