@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import './scss/joinform.scss';
 import { joinStore } from '../store/joinStore';
 import { useNavigate } from 'react-router-dom';
+import Policy from './Policy';
+import './scss/joinform.scss';
+import './scss/joinformpolicy.scss';
 
 const JoinForm = () => {
     //변수
@@ -43,7 +45,7 @@ const JoinForm = () => {
                     <input
                         type="text"
                         name="name"
-                        placeholder="이름을 입력하세요"
+                        placeholder="name"
                         onChange={handleChange}
                         className="admit_input"
                     />
@@ -53,7 +55,7 @@ const JoinForm = () => {
                         inputmode="numeric"
                         pattern="[0-9]*"
                         name="phone"
-                        placeholder="전화번호"
+                        placeholder="phone"
                         onChange={handleChange}
                         className="admit_input"
                     />
@@ -64,7 +66,7 @@ const JoinForm = () => {
                     <input
                         type="text"
                         name="ID"
-                        placeholder="아이디"
+                        placeholder="ID"
                         onChange={handleChange}
                         className="required_input"
                     />
@@ -72,7 +74,7 @@ const JoinForm = () => {
                     <input
                         type="password"
                         name="password"
-                        placeholder="비밀번호"
+                        placeholder="PW"
                         onChange={handleChange}
                         className="required_input"
                     />
@@ -80,7 +82,7 @@ const JoinForm = () => {
                     <input
                         type="email"
                         name="email"
-                        placeholder="이메일"
+                        placeholder="email"
                         onChange={handleChange}
                         className="required_input"
                     />
@@ -102,8 +104,11 @@ const JoinForm = () => {
                         </label>
                     </div>
                 </div>
-                <button type="submit">Join</button>
             </form>
+            <Policy />
+            <button type="submit" className="join_btn" onClick={handleSubmit}>
+                Join
+            </button>
         </div>
     );
 };

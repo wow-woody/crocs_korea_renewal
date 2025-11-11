@@ -8,8 +8,8 @@ const LoginSns = () => {
     return (
         <div className="login_sns_wrap">
             <LoginKakao />
-            <LoginNaver />
             <LoginGoogle />
+            <LoginNaver />
         </div>
     );
 };
