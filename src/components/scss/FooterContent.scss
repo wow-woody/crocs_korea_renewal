@@ -1,0 +1,27 @@
+@use '/src/App.scss' as g;
+
+.wide_inner {
+    background-color: g.$mainColor;
+    .footer_left {
+        font-size: 2rem;
+        font-weight: 600;
+        li {
+            padding: 0.8rem 0;
+        }
+    }
+
+    .footer_right {
+        display: flex;
+        flex-direction: column;
+        gap: 3.2rem;
+        padding: 4rem 0;
+        .sns_img_box {
+            @include g.flex();
+        }
+        .copy-text {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+    }
+}

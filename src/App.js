@@ -12,6 +12,7 @@ import Promotion from './pages/Promotion';
 import Login from './pages/Login';
 import Join from './pages/Join';
 import Cart from './pages/Cart';
+import Footer from './components/Footer';
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/join" element={<Join />} />
                 <Route path="/cart" element={<Cart />} />
             </Routes>
+            <Footer />
         </div>
     );
 }

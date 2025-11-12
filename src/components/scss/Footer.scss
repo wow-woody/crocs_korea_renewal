@@ -1,0 +1,5 @@
+@use '/src/App.scss' as g;
+
+.footer_inner {
+    background-color: g.$mainColor;
+}
