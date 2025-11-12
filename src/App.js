@@ -26,7 +26,7 @@ function App() {
                 <Route path="/collabs" element={<Collabs />} />
                 <Route path="/promotion" element={<Promotion />} />
                 <Route path="/Brand" element={<Brand />} />
-                <Route path="/search" element={<Search />} />
+                {/* <Route path="/search" element={<Search />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
                 <Route path="/cart" element={<Cart />} />
