@@ -5,8 +5,9 @@ import './scss/search.scss';
 import SearchLeft from './SearchLeft';
 import { useSearchStore } from '../store/useSearchStore';
 
-const Search = ({ onClose }) => {
-    const { inputText, onInputText, onAddRecentSearches } = useSearchStore();
+const Search = () => {
+    const { inputText, onInputText, onAddRecentSearches, searchOpen, onCloseSearch } =
+        useSearchStore();
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -14,8 +15,8 @@ const Search = ({ onClose }) => {
     };
 
     return (
-        <div className="search_wrap">
-            <button className="close_btn" onClick={onClose}>
+        <div className={`search_wrap ${searchOpen ? 'open' : ''}`}>
+            <button className="close_btn" onClick={onCloseSearch}>
                 <img src="./images/close_btn.svg" alt="close_btn" />
             </button>
             <div className="search_top">

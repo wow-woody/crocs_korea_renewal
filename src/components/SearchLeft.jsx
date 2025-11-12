@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchStore } from '../store/useSearchStore';
 import { Link } from 'react-router-dom';
 
@@ -12,10 +12,29 @@ const hashtags = [
     '르세라핌',
     '장 폴 고티에',
     '샤몬 로샤',
+    '도라에몽',
+    '언퍼게터블',
 ];
+
+// 배열 섞기 함수
+const shuffleTag = (tag) => {
+    const newTag = [...tag];
+    for (let i = newTag.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newTag[i], newTag[j]] = [newTag[j], newTag[i]];
+    }
+
+    return newTag;
+};
 
 const SearchLeft = () => {
     const { recentSearches, onRemoveSearch, onClearAll } = useSearchStore();
+    const [randomTags, setRandomTags] = useState([]);
+
+    useEffect(() => {
+        const shuffled = shuffleTag(hashtags).slice(0, 6);
+        setRandomTags(shuffled);
+    }, []);
 
     return (
         <>
@@ -43,8 +62,13 @@ const SearchLeft = () => {
             <div className="hashtag_wrap">
                 <h4 className="hashtag"># HASHTAG</h4>
                 <div className="hashtag_list">
-                    {hashtags.map((hashtag) => (
+                    {/* {hashtags.map((hashtag) => (
                         <span className="tag">
+                            <Link to="*">{`# ${hashtag}`}</Link>
+                        </span>
+                    ))} */}
+                    {randomTags.map((hashtag, id) => (
+                        <span className="tag" key={id}>
                             <Link to="*">{`# ${hashtag}`}</Link>
                         </span>
                     ))}

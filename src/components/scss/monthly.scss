@@ -18,7 +18,6 @@
 
             .title_wrap {
                 @include g.flex($fd: column, $jc: center, $ai: flex-start);
-                // height: 100vh;
                 padding-top: 25rem;
 
                 .section_title,

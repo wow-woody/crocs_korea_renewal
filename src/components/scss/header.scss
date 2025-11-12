@@ -9,6 +9,12 @@ header {
     z-index: 1000;
     width: 100%;
     border-bottom: 1px solid #eee;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    &.hide {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
 
     .wide_inner {
         line-height: 7rem;
