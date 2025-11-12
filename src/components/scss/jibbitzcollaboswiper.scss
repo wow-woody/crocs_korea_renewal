@@ -22,13 +22,18 @@
                 max-width: 50rem;
                 .swiper-slide {
                     scale: 0.8;
+                    transition: 0.8s;
+                    &:hover {
+                        scale: 0.85;
+                    }
                 }
                 .swiper-slide-active {
                     max-width: 30rem;
                     // background-color: pink;
                     scale: 1;
+                    transition: 0.8s;
                     &:hover {
-                        scale: 1.1;
+                        scale: 1.05;
                     }
                 }
             }
@@ -97,9 +102,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+
+    --x: 50%;
+    --y: 50%;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0.5;
+        background: radial-gradient(
+            circle at var(--x) var(--y),
+            rgba(102, 222, 27, 0.3) 0%,
+            transparent 50%
+        );
+    }
     .img-box {
         position: relative;
         background-color: #eee;
+        // background-color: #cfffcd;
         // background-color: #d6e8ca;
         // background-color: #dbffc5;
         // background-image: radial-gradient(circle, white 3px, transparent 3px),
@@ -117,7 +139,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            width: 20rem;
+            width: 25rem;
         }
     }
     .text-box {
@@ -148,5 +170,17 @@
             padding: 0 0.8rem;
             color: #fff;
         }
+    }
+}
+
+@keyframes cardFloat {
+    0% {
+        transform: translateX(var(--x)) translateY(var(--y));
+    }
+    50% {
+        transform: translateX(calc(var(--x) + 10px)) translateY(calc(var(--y) - 10px));
+    }
+    100% {
+        transform: translateX(var(--x)) translateY(var(--y));
     }
 }
