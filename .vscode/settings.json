@@ -1,0 +1,10 @@
+{
+    "gitlens.outputLevel": "warn",
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "gitlens.advanced.repositorySearchDepth": 2,
+    "gitlens.defaultDateLocale": "ko-KR",
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "files.encoding": "utf8",
+    "files.eol": "\r\n"
+}
