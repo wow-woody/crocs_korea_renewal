@@ -109,4 +109,16 @@
         font-size: 1.6rem;
         background: g.$mainColor;
     }
+
+    a {
+        display: block;
+        width: 40rem;
+        height: 4rem;
+        border-radius: 50px;
+        border: none;
+        font-weight: bold;
+        font-size: 1.6rem;
+        background: g.$mainColor;
+        line-height: 4rem;
+    }
 }

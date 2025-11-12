@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Join from './pages/Join';
 import Cart from './pages/Cart';
 import Header from './components/Header';
+import CrocsClubPopup from './components/CrocsClubPopup';
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/crocsclub" element={<CrocsClubPopup />} />
             </Routes>
         </div>
     );

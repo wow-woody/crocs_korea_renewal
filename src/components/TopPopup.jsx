@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const TopPopup = () => {
     return (
-        <div className="top_Popup_wrap">
+        <div className="top_popup_wrap">
             <button>
                 <Link>{/* <img src="" alt="" /> */}</Link>
             </button>

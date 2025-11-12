@@ -1,6 +1,6 @@
 @use '../../App.scss' as g;
 
-.top_Popup_wrap {
+.top_popup_wrap {
     @include g.flex($jc: center);
     background: g.$subColor;
 

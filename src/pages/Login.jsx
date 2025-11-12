@@ -59,7 +59,8 @@ const Login = () => {
                             <img src="./images/benefit_img_03.svg" alt="benefit" />
                         </li>
                     </ul>
-                    <button>CrocsClub Join</button>
+                    {/* <button>CrocsClub Join</button> */}
+                    <Link to="/crocsclub">CrocsClub Join</Link>
                 </div>
             </div>
         </div>

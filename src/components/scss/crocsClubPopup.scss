@@ -1,0 +1,44 @@
+@use '../../App.scss' as g;
+
+.crocs_club_popup_wrap {
+    max-width: 1000px;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 5rem 10rem;
+    border: 1px solid #ddd;
+
+    .title_wrap {
+        padding-bottom: 5rem;
+
+        .section_title {
+            padding-bottom: 2rem;
+        }
+    }
+    .popup_wrap {
+        @include g.flex();
+
+        .crocs_club_popup_left {
+            text-align: start;
+            p {
+                span {
+                    display: inline-block;
+                    width: 2rem;
+                    height: 2rem;
+                    background: #eee;
+                    border-radius: 50rem;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    button {
+        width: 40rem;
+        height: 4rem;
+        border-radius: 50px;
+        border: none;
+        font-weight: bold;
+        font-size: 1.6rem;
+        background: g.$mainColor;
+    }
+}
