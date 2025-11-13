@@ -1,0 +1,162 @@
+@use '../../App.scss' as g;
+
+header {
+    height: 7rem;
+    background: rgba($color: #eee, $alpha: 0.4);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    // border-bottom: 1px solid #eee;
+    // transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    // &.hide {
+    //     opacity: 0;
+    //     transform: translateY(-100%);
+    // }
+
+    .wide_inner {
+        line-height: 7rem;
+
+        .header_left {
+            @include g.flex();
+
+            .logo {
+                width: 15rem;
+                a {
+                    img {
+                        width: 15rem;
+                    }
+                }
+            }
+
+            nav {
+                // position: relative;
+                .main_menu {
+                    @include g.flex();
+
+                    li {
+                        a {
+                            font-size: 1.8rem;
+                            font-weight: bold;
+                            padding: 1rem 2rem;
+                            height: 8rem;
+                        }
+                    }
+
+                    .collabs {
+                        color: g.$mainColor;
+                    }
+                }
+                .depth_wrap {
+                    .depth1 {
+                        display: none;
+                        background: rgba($color: #eee, $alpha: 0.4);
+                        width: 100%;
+                        height: 48rem;
+                        position: absolute;
+                        left: 0;
+                        top: 7rem;
+                        border-radius: 0 0 1rem 1rem;
+                        // @include g.flex();
+                        .depth1_left {
+                            padding: 0 5rem 0;
+                            .depthmenu {
+                                @include g.flex($fd: column);
+                                li {
+                                    a {
+                                        display: block;
+                                        width: 20rem;
+                                        height: 4.4rem;
+                                        line-height: 4.4rem;
+                                        // background-color: #66de1b;
+                                        background: #ccc;
+                                        border-radius: 1rem;
+                                        // font-size: 1.8rem;
+                                        font-weight: 600;
+                                        color: g.$subColor;
+
+                                        &.active {
+                                            background: g.$mainColor;
+                                        }
+                                    }
+
+                                    &.collabs {
+                                        a {
+                                            color: g.$mainColor;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .depth1_right {
+                            margin: 0 auto;
+                            .submenu_wrap {
+                                .submenu {
+                                    display: grid;
+                                    grid-template-columns: repeat(3, 1fr);
+                                    gap: 5rem;
+                                    li {
+                                        a {
+                                            @include g.flex($fd: column, $gap: 0.5rem);
+                                            background: #ddd;
+                                            width: 25rem;
+                                            border-radius: 1rem;
+                                            img {
+                                                height: 10rem;
+                                            }
+                                            span {
+                                                height: 4rem;
+                                                line-height: 4rem;
+                                                font-weight: 700;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .header_right {
+            .gnb_wrap {
+                @include g.flex();
+                .gnb_left {
+                    @include g.flex();
+                    li {
+                        a {
+                            font-size: 1.8rem;
+                            font-weight: bold;
+                            padding: 1rem 2rem;
+                            height: 8rem;
+                        }
+                    }
+                    .brand {
+                        color: #66de1b;
+                    }
+                }
+
+                .gnb_right {
+                    @include g.flex($gap: 1rem);
+                    li {
+                        // a,
+                        // button {
+                        //     height: 8rem;
+                        // }
+                        button {
+                            @include g.flex($jc: center);
+                            padding: 0;
+                            line-height: 8rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

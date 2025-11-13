@@ -1,8 +1,9 @@
-/* .App {
-  text-align: center;
+.App {
+    /* text-align: center; */
+    overflow: hidden;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }

@@ -10,6 +10,7 @@
 
 // 색상 변수
 $mainColor: #66de1b;
+$mainColorTransparent: rgba(102, 222, 27, 0.1); // 추가된 투명 색상 변수(김정우)
 $subColor: #444444;
 // 사용 방법 g.$mainColor
 
@@ -44,7 +45,7 @@ body {
 
 section {
     height: 100vh;
-    padding: 12rem;
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 .section_title {
@@ -54,6 +55,11 @@ section {
 }
 
 .section_sub_title {
-    font-size: 1.6rem;
-    font-weight: 400;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.sub_page {
+    padding: 12rem 0;
+    margin: 0 auto;
 }

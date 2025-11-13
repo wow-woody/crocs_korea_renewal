@@ -1,92 +1,96 @@
 @use '/src/App.scss' as g;
 
-.inner {
-    position: relative;
+.jibbitz_wrap {
+    padding-top: 12rem;
 
-    .title_wrap {
-        text-align: right;
-        position: absolute;
-        right: 2.5%;
-    }
+    .inner {
+        position: relative;
 
-    .collabo-wrap {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        > .title_wrap {
+            @include g.flex($fd: column, $ai: flex-end);
+            text-align: right;
+            position: absolute;
+            right: -2rem;
+        }
 
-        .MySwiper {
-            width: 100rem;
-            margin-left: 0;
-            @include g.flex();
-            .swiper-wrapper {
-                max-width: 50rem;
-                .swiper-slide {
-                    scale: 0.8;
-                    transition: 0.8s;
-                    &:hover {
-                        scale: 0.85;
-                    }
-                }
-                .swiper-slide-active {
-                    max-width: 30rem;
-                    scale: 1;
-                    transition: 0.8s;
-                    &:hover {
-                        scale: 1.05;
-                    }
-                }
-            }
-        }
-        .swiper {
-            position: relative;
-        }
-        .swiper-horizontal {
-            padding: 10rem;
-            overflow: hidden;
-        }
-        .swiper-btn-wrap {
-            display: flex;
-            justify-content: flex-end;
-            gap: 50px;
-            transform: translate(-50%, 100%);
-            .swiper-button-prev,
-            .swiper-button-next {
-                position: relative !important;
-                inset: unset !important;
-                transform: none !important;
-                margin: 0 !important;
-                border: 1px solid #eee;
-                border-radius: 50%;
-                width: 6rem;
-                height: 6rem;
-                cursor: pointer;
-                transition: 0.5s;
+        .collabo-wrap {
+            @include g.flex($jc: flex-end);
+
+            .MySwiper {
+                width: 100rem;
+                margin-left: 0;
                 @include g.flex();
-                &:hover {
-                    background: g.$subColor;
-                }
-                .swiper-navigation-icon {
-                    display: none;
-                }
-                &::after {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    color: g.$mainColor;
-                    font-weight: 600;
-                    font-size: 4rem;
-                    width: 2rem;
-                    height: 2rem;
+                .swiper-wrapper {
+                    max-width: 50rem;
+                    .swiper-slide {
+                        scale: 0.8;
+                        transition: 0.8s;
+                        &:hover {
+                            scale: 0.85;
+                        }
+                    }
+                    .swiper-slide-active {
+                        max-width: 30rem;
+                        // background-color: pink;
+                        scale: 1;
+                        transition: 0.8s;
+                        &:hover {
+                            scale: 1.05;
+                        }
+                    }
                 }
             }
-            .swiper-button-prev::after {
-                content: '';
-                background: url(../../assets/images/icon-prev-color.svg) no-repeat center center;
+            .swiper {
+                position: relative;
             }
-            .swiper-button-next::after {
-                content: '';
-                background: url(../../assets/images/icon-next-color.svg) no-repeat center center;
+            .swiper-horizontal {
+                padding: 10rem;
+                overflow: hidden;
+            }
+            .swiper-btn-wrap {
+                display: flex;
+                justify-content: flex-end;
+                gap: 50px;
+                transform: translate(-50%, 100%);
+                .swiper-button-prev,
+                .swiper-button-next {
+                    position: relative !important;
+                    inset: unset !important;
+                    transform: none !important;
+                    margin: 0 !important;
+                    border: 1px solid #eee;
+                    border-radius: 50%;
+                    width: 6rem;
+                    height: 6rem;
+                    cursor: pointer;
+                    transition: 0.5s;
+                    @include g.flex();
+                    &:hover {
+                        background: g.$subColor;
+                    }
+                    .swiper-navigation-icon {
+                        display: none;
+                    }
+                    &::after {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        color: g.$mainColor;
+                        font-weight: 600;
+                        font-size: 4rem;
+                        width: 2rem;
+                        height: 2rem;
+                    }
+                }
+                .swiper-button-prev::after {
+                    content: '';
+                    background: url(../../assets/images/icon-prev-color.svg) no-repeat center center;
+                }
+                .swiper-button-next::after {
+                    content: '';
+                    background: url(../../assets/images/icon-next-color.svg) no-repeat center center;
+                }
             }
         }
     }
