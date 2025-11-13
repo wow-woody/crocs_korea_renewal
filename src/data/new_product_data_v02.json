@@ -17,19 +17,6 @@
         "product":  "클래식 언퍼게터블 스웨이드 클로그"
     },
     {
-        "id":  "211979",
-        "cate":  "신상품",
-        "price_cost":  "₩89,900",
-        "price":  "₩89,900",
-        "rating":  "images/icon_start.svg",
-        "product_img":  [
-                            "images/2_클래식_퍼프_스트랩_라인드_클로그_1.jpg",
-                            "images/2_클래식_퍼프_스트랩_라인드_클로그_2.jpg"
-                        ],
-        "product":  "클래식 퍼프 스트랩 라인드 클로그",
-        "price_dc_rate":  "₩71,900 (20%)"
-    },
-    {
         "id":  "212857",
         "cate":  "신상품",
         "color":  [
