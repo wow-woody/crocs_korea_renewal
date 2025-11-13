@@ -15,6 +15,7 @@ import Cart from './pages/Cart';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import CrocsClubPopup from './components/CrocsClubPopup';
+import UserInfo from './UserInfo';
 
 function App() {
     return (
@@ -30,11 +31,11 @@ function App() {
                 <Route path="/collabs" element={<Collabs />} />
                 <Route path="/promotion" element={<Promotion />} />
                 <Route path="/Brand" element={<Brand />} />
-                {/* <Route path="/search" element={<Search />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/crocsclub" element={<CrocsClubPopup />} />
+                <Route path="/userinfo" element={<UserInfo />} />
             </Routes>
             <Footer />
         </div>

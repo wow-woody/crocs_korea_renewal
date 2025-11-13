@@ -3,13 +3,13 @@ import Title from '../components/Title';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import './scss/login.scss';
-import { useAuthStore } from '../store/useAuthStore';
+import { loginAuthStore } from '../store/loginStore';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { onLogin, onGoogleLogin } = useAuthStore();
+    const { onLogin, onGoogleLogin } = loginAuthStore();
 
     const navigate = useNavigate();
 
@@ -32,9 +32,8 @@ const Login = () => {
     return (
         <div className="sub_page">
             <div className="inner">
-                <Title title="Login" />
                 <div className="login_wrap">
-                    {/* <Title title="Login" /> */}
+                    <Title title="Login" />
                     <LoginForm
                         onLoginSubmit={handleSubmit}
                         email={email}

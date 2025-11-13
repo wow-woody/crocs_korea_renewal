@@ -60,6 +60,18 @@
             background: g.$mainColor;
         }
 
+        .join_link {
+            display: block;
+            width: 40rem;
+            height: 4rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            font-size: 1.6rem;
+            background: g.$mainColor;
+            line-height: 4rem;
+        }
+
         .sns_login_wrap {
             @include g.flex();
             padding: 1rem 0;
@@ -85,6 +97,7 @@
     padding-top: 2rem;
     width: 400px;
     margin: 0 auto;
+    text-align: center;
 
     .section_sub_title {
         font-weight: 700;
