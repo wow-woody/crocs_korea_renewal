@@ -1,18 +1,19 @@
 @use '/src/App.scss' as g;
 
+section {
+    padding-top: 12rem;
+}
 .inner {
     position: relative;
 
     .title_wrap {
         text-align: right;
         position: absolute;
-        right: 2.5%;
+        right: -2rem;
     }
 
     .collabo-wrap {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        @include g.flex($jc: flex-end);
 
         .MySwiper {
             width: 100rem;

@@ -2,7 +2,7 @@ import React from 'react';
 import { collaboAuthStore } from '../store/authStore';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom';
-import { EffectCoverflow, Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import { EffectCoverflow, Navigation, Scrollbar } from 'swiper/modules';
 import JibbitzProductCard from './JibbitzProductCard';
 import 'swiper/css';
 import './scss/jibbitzcollaboswiper.scss';
@@ -20,8 +20,8 @@ const JibbitzCollaboSwiper = () => {
 
                 <div className="collabo-wrap">
                     <Swiper
-                        modules={[Navigation, Scrollbar, Pagination]}
-                        pagination
+                        modules={[Navigation, Scrollbar]}
+                        // pagination
                         navigation={{
                             prevEl: '.swiper-button-prev',
                             nextEl: '.swiper-button-next',

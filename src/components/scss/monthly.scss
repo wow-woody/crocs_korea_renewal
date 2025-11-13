@@ -4,7 +4,7 @@
     height: 100vh;
     position: relative;
     overflow: hidden;
-    // padding-top: 5rem;
+    padding: 0;
 
     .inner {
         @include g.flex();
@@ -17,6 +17,9 @@
             position: relative;
 
             .title_wrap {
+                position: absolute;
+                // top: 0;
+                left: 0;
                 @include g.flex($fd: column, $jc: center, $ai: flex-start);
                 padding-top: 25rem;
 
@@ -72,7 +75,8 @@
             position: absolute;
             top: 50%;
             left: 40%;
-            button {
+            transform: translateY(-50%);
+            .monthly_btn {
                 &::before {
                     content: '';
                     display: block;
@@ -111,7 +115,6 @@
             .monthly_card_wrap {
                 @include g.flex($fw: wrap);
                 height: 100vh;
-
                 .monthly_card_list {
                     @include g.flex($gap: 8rem);
 
