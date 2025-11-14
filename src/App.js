@@ -15,7 +15,7 @@ import Cart from './pages/Cart';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import CrocsClubPopup from './components/CrocsClubPopup';
-import UserInfo from './UserInfo';
+import UserInfo from './pages/UserInfo';
 
 function App() {
     return (
