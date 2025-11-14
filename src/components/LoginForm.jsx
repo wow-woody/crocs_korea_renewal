@@ -38,18 +38,12 @@ const LoginForm = ({ onLoginSubmit, email, password, setEmail, setPassword, onGo
             <button className="login_btn" type="submit">
                 Login
             </button>
-<<<<<<< HEAD
-            <button className="join_btn" type="button">
-                Join
-            </button>
-=======
             {/* <button className="join_btn" type="button">
                 Join
             </button> */}
             <Link to="/join" className="join_link" type="button">
                 Join
             </Link>
->>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
 
             <div className="sns_login_wrap">
                 <button className="sns_login kakao">

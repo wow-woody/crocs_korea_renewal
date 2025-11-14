@@ -3,25 +3,13 @@
 header {
     height: 7rem;
     background: rgba($color: #eee, $alpha: 0.4);
-<<<<<<< HEAD
-=======
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
->>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
     width: 100%;
-<<<<<<< HEAD
-    border-bottom: 1px solid #eee;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-
-    &.hide {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-=======
     // border-bottom: 1px solid #eee;
     // transition: opacity 0.3s ease, visibility 0.3s ease;
 
@@ -29,7 +17,6 @@ header {
     //     opacity: 0;
     //     transform: translateY(-100%);
     // }
->>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
 
     .wide_inner {
         line-height: 7rem;

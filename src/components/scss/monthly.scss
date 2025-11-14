@@ -4,11 +4,7 @@
     height: 100vh;
     position: relative;
     overflow: hidden;
-<<<<<<< HEAD
-    // padding-top: 5rem;
-=======
     padding: 0;
->>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
 
     .inner {
         @include g.flex();
@@ -20,14 +16,10 @@
             height: 100vh;
             position: relative;
 
-<<<<<<< HEAD
-            .title_wrap {
-=======
             > .title_wrap {
                 position: absolute;
                 // top: 0;
                 left: 0;
->>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
                 @include g.flex($fd: column, $jc: center, $ai: flex-start);
                 padding-top: 25rem;
 
@@ -83,12 +75,8 @@
             position: absolute;
             top: 50%;
             left: 40%;
-<<<<<<< HEAD
-            button {
-=======
             transform: translateY(-50%);
             .monthly_btn {
->>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
                 &::before {
                     content: '';
                     display: block;
@@ -127,10 +115,6 @@
             .monthly_card_wrap {
                 @include g.flex($fw: wrap);
                 height: 100vh;
-<<<<<<< HEAD
-
-=======
->>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
                 .monthly_card_list {
                     @include g.flex($gap: 8rem);
 
