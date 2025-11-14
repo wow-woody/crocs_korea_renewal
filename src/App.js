@@ -12,8 +12,15 @@ import Promotion from './pages/Promotion';
 import Login from './pages/Login';
 import Join from './pages/Join';
 import Cart from './pages/Cart';
+<<<<<<< HEAD
 import Header from './components/Header';
 import CrocsClubPopup from './components/CrocsClubPopup';
+=======
+import Footer from './components/Footer';
+import Header from './components/Header';
+import CrocsClubPopup from './components/CrocsClubPopup';
+import UserInfo from './pages/UserInfo';
+>>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
 
 function App() {
     return (
@@ -33,7 +40,12 @@ function App() {
                 <Route path="/join" element={<Join />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/crocsclub" element={<CrocsClubPopup />} />
+<<<<<<< HEAD
+=======
+                <Route path="/userinfo" element={<UserInfo />} />
+>>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
             </Routes>
+            <Footer />
         </div>
     );
 }

@@ -3,13 +3,21 @@ import Title from '../components/Title';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import './scss/login.scss';
+<<<<<<< HEAD
 import { useAuthStore } from '../store/useAuthStore';
+=======
+import { loginAuthStore } from '../store/loginStore';
+>>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+<<<<<<< HEAD
     const { onLogin, onGoogleLogin } = useAuthStore();
+=======
+    const { onLogin, onGoogleLogin } = loginAuthStore();
+>>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
 
     const navigate = useNavigate();
 

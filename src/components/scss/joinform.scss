@@ -1,0 +1,138 @@
+@use '../../App.scss' as g;
+
+.join_form_wrap {
+    max-width: 82rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+    form {
+        grid-column: 1/2;
+        grid-row: 1;
+        @include g.flex();
+        flex-direction: column;
+
+        .phone_admit {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            align-items: center;
+            p {
+                font-weight: 600;
+            }
+            .admit_input {
+                height: 4rem;
+                &::placeholder {
+                    // font-size: 1.2rem;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .form_line {
+            width: 100%;
+            border: 0.4px solid rgba($color: g.$subColor, $alpha: 0.3);
+        }
+
+        .required {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+
+            .required_title {
+                width: 100%;
+                margin-bottom: 2rem;
+                text-align: left;
+                font-weight: 600;
+            }
+
+            .required_input {
+                // padding: 1.8rem 4rem;
+                width: 100%;
+                height: 4rem;
+                padding-left: 2rem;
+                background-color: #eee;
+                border-radius: 5rem;
+            }
+
+            .required_content {
+                padding: 0 4rem 1.2rem;
+                font-size: 1.2rem;
+                color: #8a8a8a;
+            }
+        }
+
+        .add_info {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            align-items: center;
+            p {
+                font-weight: 600;
+            }
+            input[type='date'] {
+                border: none;
+                padding: 0.8rem;
+                font-size: 1.4rem;
+            }
+            .gender_wrap {
+                @include g.flex($jc: unset, $gap: 1rem);
+                padding: 0.8rem;
+                .radio {
+                    font-size: 1.4rem;
+                    cursor: pointer;
+
+                    input[type='radio'] {
+                        display: none;
+
+                        &:checked + .radio_custom {
+                            border-color: g.$subColor;
+                            background-color: g.$mainColor;
+                        }
+                    }
+
+                    .radio_custom {
+                        display: inline-block;
+                        width: 1.2rem;
+                        height: 1.2rem;
+                        margin-right: 1rem;
+                        border: 2px solid g.$subColor;
+                        border-radius: 50%;
+                        vertical-align: middle;
+                        transition: 0.1s;
+                    }
+                }
+            }
+        }
+    }
+
+    .join_btn {
+        grid-column: 1/3;
+        grid-row: 2;
+        display: block;
+        justify-self: center;
+        width: 40rem;
+        height: 4rem;
+        // padding: 1.8rem 4rem;
+        text-align: center;
+        background: g.$subColor;
+        border-radius: 5rem;
+        color: g.$mainColor;
+        &:hover {
+            background: g.$mainColor;
+            color: g.$subColor;
+        }
+    }
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='search'],
+input[type='url'],
+input[type='tel'],
+input[type='radio'] {
+    border: none;
+}

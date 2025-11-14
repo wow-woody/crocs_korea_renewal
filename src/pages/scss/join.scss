@@ -1,0 +1,10 @@
+@use '../../App.scss' as g;
+
+.inner {
+    .title_wrap {
+        text-align: center;
+    }
+    .login_sns_wrap {
+        margin: 4rem 0;
+    }
+}
