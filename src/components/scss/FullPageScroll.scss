@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  overflow: hidden; /* 기본 스크롤 제거 */
+}
+
+.fullpage-container {
+  width: 100vw;
+}
+
+.fullpage-section {
+  height: 100vw;
+  // display: flex;
+  transition: background 0.5s ease, color 0.5s ease;
+}

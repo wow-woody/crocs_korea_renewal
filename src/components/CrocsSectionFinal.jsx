@@ -35,7 +35,7 @@ const CrocsSection = () => {
   ];
 
   return (
-    <div className="crocs-section">
+    <section className="crocs-section">
       <svg className="svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1">
         <defs>
           <filter id="gooey">
@@ -58,7 +58,7 @@ const CrocsSection = () => {
         </defs>
       </svg>
 
-      <section className="crocs-hero">
+      <div className="crocs-hero">
         <div className="text-container text-base">
           {textRows.map((row) => (
             <div key={row.id} className={`text-row ${row.className}`}>
@@ -85,8 +85,8 @@ const CrocsSection = () => {
             </div>
           ))}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

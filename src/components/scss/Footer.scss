@@ -1,6 +1,7 @@
 @use '/src/App.scss' as g;
 
 footer {
+    //  min-height: 50vh;
     > .wide_inner {
         background-color: g.$mainColor;
         .footer_left {
