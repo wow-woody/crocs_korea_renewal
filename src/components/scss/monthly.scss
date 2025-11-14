@@ -72,26 +72,84 @@
         }
 
         .btn_wrap {
-            position: absolute;
+            // position: absolute;
             top: 50%;
             left: 40%;
-            transform: translateY(-50%);
+            // transform: translateY(-50%);
+
+            position: absolute;
+            // top: 50%;
+            // left: 50%;
+            // width: 500px;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 9999;
+            pointer-events: none; /* 버튼 외 다른 영역 클릭이 막히지 않도록 */
+
             .monthly_btn {
-                &::before {
+                pointer-events: auto;
+                position: absolute;
+                font-size: 15px;
+                font-weight: 600;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                user-select: none;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                transform: translateY(-50%);
+                // left: -170px;
+                transform: rotate(-90deg);
+                transform-origin: center;
+                &::before,
+                &:after {
+                    // content: '';
+                    // display: block;
+                    // width: 1.5px;
+                    // height: 80px;
+                    // // background: url(../../assets/arrow.svg) no-repeat center center;
+                    // transition: opacity 0.8s ease-in-out;
+
                     content: '';
-                    display: block;
-                    width: 1.5px;
-                    height: 80px;
-                    background: url(../../assets/arrow.svg) no-repeat center center;
-                    transition: opacity 0.8s ease-in-out;
+                    position: absolute;
+                    // top: -12px;
+                    width: 40px;
+                    height: 1px;
+                    background-color: rgb(51, 51, 51);
+                    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1), width 0.25s ease,
+                        opacity 0.25s ease;
+                    opacity: 1;
+                    pointer-events: none;
+                }
+
+                &::before {
+                    // background: url(../../assets/arrow_active.svg) no-repeat left center;
+                    // width: 80px;
+                    // height: 80px;
+                    // transition: opacity 0.4s ease-in-out;
+                    // left: -170px;
+                    transform: rotate(-90deg);
+                    transform-origin: center;
+                }
+
+                &::after {
+                    right: 50%;
+                    transform-origin: right center;
                 }
 
                 &:hover {
                     &::before {
-                        background: url(../../assets/arrow_active.svg) no-repeat left center;
-                        width: 80px;
-                        height: 80px;
-                        transition: opacity 0.4s ease-in-out;
+                        // background: url(../../assets/arrow_active.svg) no-repeat left center;
+                        // width: 80px;
+                        // height: 80px;
+                        // transition: opacity 0.4s ease-in-out;
+                        transform: rotate(45deg);
+                    }
+
+                    &::after {
+                        transform: rotate(-45deg);
                     }
                 }
             }
