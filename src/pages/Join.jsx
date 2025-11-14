@@ -8,13 +8,9 @@ const Join = () => {
     return (
         <div className="sub_page">
             <div className="inner">
-<<<<<<< HEAD
-                <Title title="join" />
-=======
                 <Title title="Join" />
                 <LoginSns />
                 <JoinForm />
->>>>>>> 7e8c2c77746530933c16fbb40c876986979575d2
             </div>
         </div>
     );
