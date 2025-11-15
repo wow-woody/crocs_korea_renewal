@@ -30,7 +30,6 @@ const CrocsClubPopup = () => {
                         </div>
                         <div className="crocs_club_popup_right">
                             {/* 생일 옵션 , 이메일, 체크박스, 동의*/}
-                            생일 이메일
                             <CrocsClubOption />
                         </div>
                     </div>
