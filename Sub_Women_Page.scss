@@ -1,0 +1,23 @@
+// app.scss와 index.css 가져오기
+@import './src/app.scss';
+@import './src/index.css';
+
+.breadcrumbs {
+    .breadcrumbs__list {
+        &--home_link {
+            height: 2.5rem;
+            width: 2.5rem;
+            position: relative;
+            border-radius: 0.4rem;
+            background-color: #f6faeb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 1.3rem;
+                border: 1px solid red;
+            }
+        }
+    }
+}
