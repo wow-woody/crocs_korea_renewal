@@ -107,8 +107,19 @@
         @include g.flex($gap: 2rem, $jc: center);
         padding: 2.4rem 0;
         li {
-            img {
-                width: 6rem;
+            @include g.flex($fd: column, $gap: 0.5rem);
+            font-size: 1.2rem;
+            font-weight: 500;
+            span {
+                display: block;
+                width: fit-content;
+                height: fit-content;
+                padding: 1rem;
+                border-radius: 50px;
+                background: g.$mainColor;
+                img {
+                    width: 3rem;
+                }
             }
         }
     }
