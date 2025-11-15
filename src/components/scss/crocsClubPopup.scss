@@ -9,8 +9,6 @@
     @include g.flex($fd: column, $jc: center, $gap: none);
 
     .title_wrap {
-        padding-bottom: 5rem;
-
         .section_title {
             padding-bottom: 2rem;
         }
@@ -18,7 +16,8 @@
     .popup_wrap {
         width: 100%;
         // margin: 0 auto;
-        @include g.flex($gap: 20rem);
+        @include g.flex($gap: 10rem);
+        padding: 5rem 0;
 
         > div {
             flex: 1;
@@ -26,6 +25,7 @@
 
         .crocs_club_popup_left {
             text-align: start;
+            @include g.flex($fd: column, $gap: 5rem);
             p {
                 span {
                     display: inline-block;
@@ -42,17 +42,82 @@
             @include g.flex($fd: column, $jc: center, $gap: none);
 
             .crocs_club_option {
-                text-align: center;
+                .join_option_wrap {
+                    .birthday_select_wrap {
+                        @include g.flex($jc: center, $gap: 2rem);
 
-                select {
-                    width: 6rem;
-                    gap: 2rem;
-                    text-align: center;
+                        select {
+                            width: 100px;
+                            padding: 12px 14px;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            background: #fff;
+                            font-size: 14px;
+                            cursor: pointer;
+
+                            /* 기본 select 화살표 제거 */
+                            appearance: none;
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+
+                            /* 커스텀 화살표 추가 */
+                            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+                            background-repeat: no-repeat;
+                            background-position: right 12px center;
+                            background-size: 14px;
+
+                            &:focus {
+                                border-color: #111;
+                            }
+                        }
+                    }
+
+                    input[type='email'] {
+                        margin-top: 15px;
+                        width: 100%;
+                        padding: 12px 14px;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        font-size: 14px;
+
+                        &:focus {
+                            border-color: #111;
+                        }
+                    }
+
+                    label {
+                        display: flex;
+                        align-items: start;
+                        gap: 8px;
+                        font-size: 14px;
+                        margin-top: 12px;
+                        cursor: pointer;
+
+                        input {
+                            margin-top: 3px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .text_box {
+                        margin-top: 20px;
+                        font-size: 13px;
+                        line-height: 1.4;
+                        color: #555;
+
+                        strong {
+                            display: block;
+                            margin-top: 10px;
+                            font-weight: 600;
+                        }
+                    }
                 }
             }
         }
-
+    }
+    p {
         a {
+            @include g.flex($jc: center, $gap: 2rem);
             width: 40rem;
             height: 4rem;
             border-radius: 50px;
