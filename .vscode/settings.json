@@ -17,3 +17,8 @@
     "editor.selectionHighlightBackground": "#90caf980"
   }
 }
+{
+  "[scss]": {
+    "editor.semanticHighlighting.enabled": false
+  }
+}
