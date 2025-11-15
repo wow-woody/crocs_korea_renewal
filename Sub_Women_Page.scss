@@ -1,22 +1,211 @@
 // app.scss와 index.css 가져오기
-@import './src/app.scss';
-@import './src/index.css';
+@use './src/App.scss' as g;
+@use './src/index.css';
+@use './src/font/Paperlogy.css';
+// 공통 링크 스타일
+%link-base {
+    @include g.flex($jc: center, $ai: center, $gap: 0.4rem);
+    height: 100%;
+    background-color: #f6faeb;
+    border-radius: 0.4rem;
+}
 
-.breadcrumbs {
-    .breadcrumbs__list {
-        &--home_link {
+section {
+    max-width: 184rem;
+    margin: 0 auto;
+    margin-top: 8rem;
+    color: g.$subColor;
+
+    .breadcrumbs {
+        &__list {
+            @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
+            font-size: 1.2rem;
+            font-weight: 400;
+
             height: 2.5rem;
-            width: 2.5rem;
-            position: relative;
-            border-radius: 0.4rem;
-            background-color: #f6faeb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
 
-            img {
-                width: 1.3rem;
-                border: 1px solid red;
+            // 섹션 구분자 스타일
+            &--section {
+                width: 0.8rem;
+                height: 2.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            &--home,
+            &--women,
+            &--Fur-lined {
+                &_link {
+                    @extend %link-base;
+                    width: fit-content;
+                    height: 100%;
+                    padding: 0 10px;
+                    background-color: #f6faeb;
+                    border-radius: 0.4rem;
+                    img {
+                        width: 0.8rem;
+                    }
+                }
+            }
+            &--home {
+                &_link {
+                    @extend %link-base;
+                    width: 2.5rem;
+                    padding: 0;
+                    img {
+                        width: 1.3rem;
+                    }
+                }
+            }
+
+            &--Fur-lined {
+                &_link {
+                    @extend %link-base;
+                    gap: 0.6rem;
+                }
+            }
+        }
+
+        &__title {
+            width: 26.8rem;
+            margin-top: 1.6rem;
+            margin-bottom: 2.4rem;
+
+            h2 {
+                width: 100%;
+                font-size: 3.2rem;
+                font-weight: 600;
+            }
+        }
+    }
+    .left_nav {
+        width: 32.4rem;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 2.8rem;
+        padding: 2.8rem 1.6rem;
+        border-radius: 1rem;
+        background-color: #fafafd;
+        .size-menu {
+            &__wrap {
+                @include g.flex($jc: null, $ai: center, $fd: column, $fw: null, $gap: 2.4rem);
+                width: 100%;
+
+                &--title_wrap,
+                .title--wrap {
+                    @include g.flex(
+                        $jc: space-between,
+                        $ai: center,
+                        $fd: null,
+                        $fw: null,
+                        $gap: 2rem
+                    );
+                    width: 100%;
+
+                    &--title .title {
+                        font-size: 1.8rem;
+                        font-weight: 600;
+                    }
+
+                    &--title__toggle .title--toggle {
+                        width: 2.4rem;
+                        height: 2.4rem;
+                    }
+                }
+
+                &--size {
+                    @include g.flex(
+                        $jc: space-between,
+                        $ai: center,
+                        $fd: row,
+                        $fw: wrap,
+                        $gap: 0.8rem
+                    );
+
+                    .size-menu__item {
+                        width: 5.2rem;
+                        height: 2.8rem;
+
+                        .size-menu__link {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                            border: 1px solid #ebebeb;
+                            border-radius: 4px;
+                            background-color: #fff;
+                            transition: all 0.2s ease;
+                            color: #ccc;
+
+                            .size-menu__button {
+                                width: 100%;
+                                height: 100%;
+                                font-size: 1rem;
+                                font-weight: 600;
+                                line-height: 2.8rem;
+                                transition: color 0.2s ease;
+                            }
+
+                            // 호버 상태
+                            &:hover {
+                                border: 1px solid g.$mainColor;
+                                color: g.$mainColor;
+                            }
+
+                            // 선택된 상태 (JS로 .active 클래스 토글)
+                            &.active {
+                                background-color: g.$mainColor;
+                                border: 1px solid g.$mainColor;
+                                color: g.$subColor;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .breadcrumbs__line {
+        width: 29.2rem;
+        height: 0.1rem;
+        background-color: #ebebeb;
+        text-align: center;
+    }
+    .filter-menu {
+        width: 5.8rem;
+        height: 2.4rem;
+        height: fit-content;
+        &__wrap {
+            &--color {
+                width: 100%;
+                height: 100%;
+                background-color: #f5f5f5;
+                border-radius: 0.4rem;
+
+                .filter-menu__item {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem;
+                    padding: 0.8rem;
+                    
+                    .filter-menu__color {
+                        width: 1.6rem;
+                        height: 1.6rem;
+                        border-radius: 50%;
+                        background-color: #000;
+                    }
+                    
+                    .filter-menu__close-link {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        
+                        .close-btn {
+                            display: block;
+                            width: 1rem;
+                        }
+                    }
+                }
             }
         }
     }
