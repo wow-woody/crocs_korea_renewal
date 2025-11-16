@@ -37,9 +37,9 @@ const JibbitzCollaboSwiper = () => {
                     >
                         {disneyItems.map((item) => (
                             <SwiperSlide>
-                                <Link>
-                                    <JibbitzProductCard sendItem={item} />
-                                </Link>
+                                {/* <Link> */}
+                                <JibbitzProductCard sendItem={item} />
+                                {/* </Link> */}
                             </SwiperSlide>
                         ))}
                     </Swiper>
