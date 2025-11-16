@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState } from 'react';
 // import './scss/WomenComponents.scss';
 
@@ -69,21 +70,35 @@ export default function SizeMenu({ sizes = [], selectedSize, onSizeSelect }) {
         onSizeSelect?.(newSize); // 상위로 선택 사이즈 전달
     };
 
+=======
+import React from 'react';
+
+const SizeMenu = ({ sizes = ['210', '220', '230', '240', '250', '260', '265', '270', '280', '290', '300', '310'] }) => {
+>>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
     return (
         <div className="size-menu">
             <div className="size-menu__wrap">
                 <div className="size-menu__wrap--title_wrap title--wrap">
                     <h3 className="size-menu__wrap--title title">사이즈</h3>
+<<<<<<< HEAD
                     <button className="size-menu--title__toggle title--toggle">
                         <img
                             src="/images/Sub_Women_Images/icon-minus.svg"
                             alt="줄이기/더보기 버튼"
                         />
                     </button>
+=======
+                    <a href="#" className="size-menu--title__toggle title--toggle">
+                        <button>
+                            <img src="/images/Sub_Women_Images/icon-minus.svg" alt="줄이기/더보기 버튼" />
+                        </button>
+                    </a>
+>>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
                 </div>
                 <ul className="size-menu__wrap size-menu__wrap--size">
                     {sizes.map((size) => (
                         <li key={size} className="size-menu__item">
+<<<<<<< HEAD
                             <a
                                 href="#"
                                 className={`size-menu__link btn-menu-style ${
@@ -94,6 +109,10 @@ export default function SizeMenu({ sizes = [], selectedSize, onSizeSelect }) {
                                 <button className="size-menu__button btn-menu__button">
                                     {size}
                                 </button>
+=======
+                            <a href="#" className="size-menu__link btn-menu-style">
+                                <button className="size-menu__button btn-menu__button">{size}</button>
+>>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
                             </a>
                         </li>
                     ))}
@@ -101,4 +120,10 @@ export default function SizeMenu({ sizes = [], selectedSize, onSizeSelect }) {
             </div>
         </div>
     );
+<<<<<<< HEAD
 }
+=======
+};
+
+export default SizeMenu;
+>>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)

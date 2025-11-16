@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import './scss/WomenComponents.scss';
 
 export default function FilterMenu({
@@ -7,6 +8,10 @@ export default function FilterMenu({
         { color: 'black', class: 'select-black' },
     ],
 }) {
+=======
+
+const FilterMenu = ({ filters = [{ color: 'pink', class: 'select-pink' }, { color: 'black', class: 'select-black' }] }) => {
+>>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
     return (
         <div className="filter-menu">
             <div className="filter-menu__wrap menu_wrap-style">
@@ -23,11 +28,15 @@ export default function FilterMenu({
                         <li key={index} className="filter-menu__item">
                             <div className={`filter-menu__select_color ${filter.class}`}></div>
                             <a href="#" className="filter-menu__close-link">
+<<<<<<< HEAD
                                 <img
                                     src="/images/Sub_Women_Images/icon-close_cross.svg"
                                     alt="필터 닫기 버튼"
                                     className="close-btn"
                                 />
+=======
+                                <img src="/images/Sub_Women_Images/icon-close_cross.svg" alt="필터 닫기 버튼" className="close-btn" />
+>>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
                             </a>
                         </li>
                     ))}
@@ -35,4 +44,10 @@ export default function FilterMenu({
             </div>
         </div>
     );
+<<<<<<< HEAD
 }
+=======
+};
+
+export default FilterMenu;
+>>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
