@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { collaboAuthStore } from '../store/collaboAuthStore';
 import Title from '../components/Title';
+import JibbitzCollaboProductDetailCard from '../components/JibbitzCollaboProductDetailCard';
 
 const JibbitzCollaboProductDetail = () => {
     const { id } = useParams();
-    const { disneyItems } = collaboAuthStore();
+    const { disneyItems, onAddWishList } = collaboAuthStore();
     console.log('jibbitzItems:', disneyItems);
 
     //찾은 상품을 저장할 변수
@@ -30,12 +31,11 @@ const JibbitzCollaboProductDetail = () => {
                 <Title title="ProductDeatil" />
                 <div className="product-detail-wrap">
                     <p>상품 예시입니당 💚</p>
-                    <button>위시버튼💚</button>
-                    <p>
-                        <img src={product.imageUrl} alt={product.title} />
-                    </p>
-                    <p>{product.title}</p>
-                    <p>{product.price}</p>
+                    <button onClick={() => onAddWishList(product)}>위시버튼💚</button>
+                    <Link to="/wishlist" product={product}>
+                        위시리스트 이동
+                    </Link>
+                    <JibbitzCollaboProductDetailCard product={product} />
                 </div>
             </div>
         </div>

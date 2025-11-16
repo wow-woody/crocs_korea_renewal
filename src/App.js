@@ -17,6 +17,7 @@ import Header from './components/Header';
 import CrocsClubPopup from './components/CrocsClubPopup';
 import UserInfo from './pages/UserInfo';
 import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
+import WishList from './pages/WishList';
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/crocsclub" element={<CrocsClubPopup />} />
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} />
+                <Route path="/wishlist" element={<WishList />} />
             </Routes>
             <Footer />
         </div>
