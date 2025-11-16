@@ -31,6 +31,39 @@
     }
 }
 
+%btn-menu-style {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    color: #ccc;
+
+    .btn-menu__button {
+        width: 100%;
+        height: 100%;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 2.8rem;
+        transition: color 0.2s ease;
+    }
+
+    // 호버 상태
+    &:hover {
+        border: 1px solid g.$mainColor;
+        color: g.$mainColor;
+    }
+
+    // 선택된 상태 (JS로 .active 클래스 토글)
+    &.active {
+        background-color: g.$mainColor;
+        border: 1px solid g.$mainColor;
+        color: g.$subColor;
+    }
+}
+
 section {
     max-width: 184rem;
     margin: 0 auto;
@@ -116,7 +149,7 @@ section {
 
                 &--size {
                     @include g.flex(
-                        $jc: space-between,
+                        $jc: flex-start,
                         $ai: center,
                         $fd: row,
                         $fw: wrap,
@@ -128,37 +161,41 @@ section {
                         height: 2.8rem;
 
                         .size-menu__link {
-                            display: block;
-                            width: 100%;
-                            height: 100%;
-                            border: 1px solid #ebebeb;
-                            border-radius: 4px;
-                            background-color: #fff;
-                            transition: all 0.2s ease;
-                            color: #ccc;
-
-                            .size-menu__button {
-                                width: 100%;
-                                height: 100%;
-                                font-size: 1rem;
-                                font-weight: 600;
-                                line-height: 2.8rem;
-                                transition: color 0.2s ease;
-                            }
-
-                            // 호버 상태
-                            &:hover {
-                                border: 1px solid g.$mainColor;
-                                color: g.$mainColor;
-                            }
-
-                            // 선택된 상태 (JS로 .active 클래스 토글)
-                            &.active {
-                                background-color: g.$mainColor;
-                                border: 1px solid g.$mainColor;
-                                color: g.$subColor;
-                            }
+                            @extend %btn-menu-style;
                         }
+
+                        // .size-menu__link {
+                        //     display: block;
+                        //     width: 100%;
+                        //     height: 100%;
+                        //     border: 1px solid #ebebeb;
+                        //     border-radius: 4px;
+                        //     background-color: #fff;
+                        //     transition: all 0.2s ease;
+                        //     color: #ccc;
+
+                        //     .size-menu__button {
+                        //         width: 100%;
+                        //         height: 100%;
+                        //         font-size: 1rem;
+                        //         font-weight: 600;
+                        //         line-height: 2.8rem;
+                        //         transition: color 0.2s ease;
+                        //     }
+
+                        //     // 호버 상태
+                        //     &:hover {
+                        //         border: 1px solid g.$mainColor;
+                        //         color: g.$mainColor;
+                        //     }
+
+                        //     // 선택된 상태 (JS로 .active 클래스 토글)
+                        //     &.active {
+                        //         background-color: g.$mainColor;
+                        //         border: 1px solid g.$mainColor;
+                        //         color: g.$subColor;
+                        //     }
+                        // }
                     }
                 }
             }
@@ -232,20 +269,14 @@ section {
                 $ai: center,
                 $fd: row,
                 $fw: wrap,
-                $gap: 1.5rem 2rem
+                $gap: 1.5rem 3rem
             );
-            border: 1px solid blue;
 
             &_list {
                 gap: 0.6rem;
-                border: 1px solid blue;
                 .select__color--link {
                     @include g.flex($jc: null, $ai: center, $fd: column, $fw: null, $gap: 0.6rem);
                     width: 3.2rem;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 0.6em;
                     font-size: 11px;
                     font-weight: 400;
 
@@ -265,41 +296,87 @@ section {
                         border: 1px solid #ccc;
                     }
                     .red {
-                        background-color: #FF0000;
+                        background-color: #ff0000;
                     }
                     .pink {
                         background-color: #ff69b4;
                     }
                     .brown {
-                        background-color: #AA6400;
+                        background-color: #aa6400;
                     }
                     .orange {
-                        background-color: #FFCC00;
+                        background-color: #ffcc00;
                     }
                     .purple {
-                        background-color: #DBB2FF;
+                        background-color: #dbb2ff;
                     }
                     .yellow {
-                        background-color: #FFFF00;
+                        background-color: #ffff00;
                     }
                     .mint {
-                        background-color: #AAF0D1;
+                        background-color: #aaf0d1;
                     }
                     .light-green {
-                        background-color: #CCFF99;
+                        background-color: #ccff99;
                     }
                     .green {
-                        background-color: #00CD00;
+                        background-color: #00cd00;
                     }
                     .sky-blue {
-                        background-color: #9AD2FF;
+                        background-color: #9ad2ff;
                     }
                     .blue {
-                        background-color: #0000FF;
+                        background-color: #0000ff;
                     }
                     .navy {
                         background-color: #043896;
                     }
+                }
+            }
+        }
+        .price-menu {
+            &__wrap {
+                @extend %menu_wrap-style;
+                gap: 1.2rem;
+
+                .price-menu__item {
+                    width: 100%;
+                    height: 2.8rem;
+
+                    .price-menu__link {
+                        @extend %btn-menu-style;
+                    }
+
+                    // .price-menu__link {
+                    //     display: block;
+                    //     width: 100%;
+                    //     height: 100%;
+                    //     border: 1px solid #ebebeb;
+                    //     border-radius: 4px;
+                    //     background-color: #fff;
+                    //     transition: all 0.2s ease;
+                    //     color: #ccc;
+                    //     .price-menu__button {
+                    //         width: 100%;
+                    //         height: 100%;
+                    //         font-size: 1rem;
+                    //         font-weight: 600;
+                    //         line-height: 2.8rem;
+                    //         transition: color 0.2s ease;
+                    //     }
+                    //     // 호버 상태
+                    //     &:hover {
+                    //         border: 1px solid g.$mainColor;
+                    //         color: g.$mainColor;
+                    //     }
+
+                    //     // 선택된 상태 (JS로 .active 클래스 토글)
+                    //     &.active {
+                    //         background-color: g.$mainColor;
+                    //         border: 1px solid g.$mainColor;
+                    //         color: g.$subColor;
+                    //     }
+                    // }
                 }
             }
         }
