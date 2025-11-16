@@ -211,13 +211,14 @@ section .breadcrumbs__list--home_link, section .breadcrumbs__list--women_link, s
   border-radius: 0.4rem;
 }
 
-section .left_nav .color-menu__wrap, section .left_nav .filter-menu__wrap, section .left_nav .size-menu__wrap {
+section .left_nav .price-menu__wrap, section .left_nav .color-menu__wrap, section .left_nav .filter-menu__wrap, section .left_nav .size-menu__wrap {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 2.4rem;
   width: 100%;
 }
+section .left_nav .price-menu__wrap .title--wrap,
 section .left_nav .color-menu__wrap .title--wrap,
 section .left_nav .filter-menu__wrap .title--wrap,
 section .left_nav .size-menu__wrap .title--wrap {
@@ -227,17 +228,47 @@ section .left_nav .size-menu__wrap .title--wrap {
   gap: 2rem;
   width: 100%;
 }
+section .left_nav .price-menu__wrap .title--wrap--title .title,
 section .left_nav .color-menu__wrap .title--wrap--title .title,
 section .left_nav .filter-menu__wrap .title--wrap--title .title,
 section .left_nav .size-menu__wrap .title--wrap--title .title {
   font-size: 1.8rem;
   font-weight: 600;
 }
+section .left_nav .price-menu__wrap .title--wrap--title__toggle .title--toggle,
 section .left_nav .color-menu__wrap .title--wrap--title__toggle .title--toggle,
 section .left_nav .filter-menu__wrap .title--wrap--title__toggle .title--toggle,
 section .left_nav .size-menu__wrap .title--wrap--title__toggle .title--toggle {
   width: 2.4rem;
   height: 2.4rem;
+}
+
+section .left_nav .price-menu__wrap .price-menu__item .price-menu__link, section .left_nav .size-menu__wrap--size .size-menu__item .size-menu__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: all 0.2s ease;
+  color: #ccc;
+}
+section .left_nav .price-menu__wrap .price-menu__item .price-menu__link .btn-menu__button, section .left_nav .size-menu__wrap--size .size-menu__item .size-menu__link .btn-menu__button {
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 2.8rem;
+  transition: color 0.2s ease;
+}
+section .left_nav .price-menu__wrap .price-menu__item .price-menu__link:hover, section .left_nav .size-menu__wrap--size .size-menu__item .size-menu__link:hover {
+  border: 1px solid #66de1b;
+  color: #66de1b;
+}
+section .left_nav .price-menu__wrap .price-menu__item .active.price-menu__link, section .left_nav .size-menu__wrap--size .size-menu__item .active.size-menu__link {
+  background-color: #66de1b;
+  border: 1px solid #66de1b;
+  color: #444444;
 }
 
 section {
@@ -304,7 +335,7 @@ section .left_nav {
 }
 section .left_nav .size-menu__wrap--size {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
@@ -313,33 +344,6 @@ section .left_nav .size-menu__wrap--size {
 section .left_nav .size-menu__wrap--size .size-menu__item {
   width: 5.2rem;
   height: 2.8rem;
-}
-section .left_nav .size-menu__wrap--size .size-menu__item .size-menu__link {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 1px solid #ebebeb;
-  border-radius: 4px;
-  background-color: #fff;
-  transition: all 0.2s ease;
-  color: #ccc;
-}
-section .left_nav .size-menu__wrap--size .size-menu__item .size-menu__link .size-menu__button {
-  width: 100%;
-  height: 100%;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 2.8rem;
-  transition: color 0.2s ease;
-}
-section .left_nav .size-menu__wrap--size .size-menu__item .size-menu__link:hover {
-  border: 1px solid #66de1b;
-  color: #66de1b;
-}
-section .left_nav .size-menu__wrap--size .size-menu__item .size-menu__link.active {
-  background-color: #66de1b;
-  border: 1px solid #66de1b;
-  color: #444444;
 }
 section .left_nav .breadcrumbs__line {
   width: 29.2rem;
@@ -393,12 +397,10 @@ section .left_nav .select__color--wrap {
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1.5rem 2rem;
-  border: 1px solid blue;
+  gap: 1.5rem 3rem;
 }
 section .left_nav .select__color--wrap_list {
   gap: 0.6rem;
-  border: 1px solid blue;
 }
 section .left_nav .select__color--wrap_list .select__color--link {
   display: flex;
@@ -406,10 +408,6 @@ section .left_nav .select__color--wrap_list .select__color--link {
   flex-direction: column;
   gap: 0.6rem;
   width: 3.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6em;
   font-size: 11px;
   font-weight: 400;
 }
@@ -429,38 +427,45 @@ section .left_nav .select__color--wrap_list .select__color--link .white {
   border: 1px solid #ccc;
 }
 section .left_nav .select__color--wrap_list .select__color--link .red {
-  background-color: #FF0000;
+  background-color: #ff0000;
 }
 section .left_nav .select__color--wrap_list .select__color--link .pink {
   background-color: #ff69b4;
 }
 section .left_nav .select__color--wrap_list .select__color--link .brown {
-  background-color: #AA6400;
+  background-color: #aa6400;
 }
 section .left_nav .select__color--wrap_list .select__color--link .orange {
-  background-color: #FFCC00;
+  background-color: #ffcc00;
 }
 section .left_nav .select__color--wrap_list .select__color--link .purple {
-  background-color: #DBB2FF;
+  background-color: #dbb2ff;
 }
 section .left_nav .select__color--wrap_list .select__color--link .yellow {
-  background-color: #FFFF00;
+  background-color: #ffff00;
 }
 section .left_nav .select__color--wrap_list .select__color--link .mint {
-  background-color: #AAF0D1;
+  background-color: #aaf0d1;
 }
 section .left_nav .select__color--wrap_list .select__color--link .light-green {
-  background-color: #CCFF99;
+  background-color: #ccff99;
 }
 section .left_nav .select__color--wrap_list .select__color--link .green {
-  background-color: #00CD00;
+  background-color: #00cd00;
 }
 section .left_nav .select__color--wrap_list .select__color--link .sky-blue {
-  background-color: #9AD2FF;
+  background-color: #9ad2ff;
 }
 section .left_nav .select__color--wrap_list .select__color--link .blue {
-  background-color: #0000FF;
+  background-color: #0000ff;
 }
 section .left_nav .select__color--wrap_list .select__color--link .navy {
   background-color: #043896;
+}
+section .left_nav .price-menu__wrap {
+  gap: 1.2rem;
+}
+section .left_nav .price-menu__wrap .price-menu__item {
+  width: 100%;
+  height: 2.8rem;
 }/*# sourceMappingURL=Sub_Women_Page.css.map */
