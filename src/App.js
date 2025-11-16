@@ -16,7 +16,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import CrocsClubPopup from './components/CrocsClubPopup';
 import UserInfo from './pages/UserInfo';
-import ProductDetail from './pages/ProductDetail';
+import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
 
 function App() {
     return (
@@ -37,7 +37,7 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/crocsclub" element={<CrocsClubPopup />} />
                 <Route path="/userinfo" element={<UserInfo />} />
-                <Route path="/product/:ID" element={<ProductDetail />} />
+                <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} />
             </Routes>
             <Footer />
         </div>
