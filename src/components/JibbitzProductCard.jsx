@@ -1,5 +1,5 @@
 import React from 'react';
-import { collaboAuthStore } from '../store/authStore';
+import { collaboAuthStore } from '../store/collaboAuthStore';
 import { useNavigate } from 'react-router-dom';
 
 const JibbitzProductCard = ({ sendItem }) => {

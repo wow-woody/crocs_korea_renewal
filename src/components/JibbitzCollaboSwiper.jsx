@@ -1,5 +1,5 @@
 import React from 'react';
-import { collaboAuthStore } from '../store/authStore';
+import { collaboAuthStore } from '../store/collaboAuthStore';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom';
 import { EffectCoverflow, Navigation, Scrollbar } from 'swiper/modules';

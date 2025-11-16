@@ -1,5 +1,5 @@
 import React from 'react';
-import { collaboAuthStore } from '../store/authStore';
+import { collaboAuthStore } from '../store/collaboAuthStore';
 
 const WishList = () => {
     const { onAddWishList } = collaboAuthStore();

@@ -1,6 +1,6 @@
 import React from 'react';
 import JibbitzProductCard from './JibbitzProductCard';
-import { collaboAuthStore } from '../store/authStore';
+import { collaboAuthStore } from '../store/collaboAuthStore';
 
 const JibbitzCollaboSlide = () => {
     const { disneyItems } = collaboAuthStore();

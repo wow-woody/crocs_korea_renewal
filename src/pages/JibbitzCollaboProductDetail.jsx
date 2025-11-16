@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { collaboAuthStore } from '../store/authStore';
-// import Title from '../components/Title';
+import { collaboAuthStore } from '../store/collaboAuthStore';
+import Title from '../components/Title';
 
 const JibbitzCollaboProductDetail = () => {
     const { id } = useParams();
-    const { jibbitzItems } = collaboAuthStore();
-    console.log('jibbitzItems:', jibbitzItems);
+    const { disneyItems } = collaboAuthStore();
+    console.log('jibbitzItems:', disneyItems);
 
     //찾은 상품을 저장할 변수
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        if (!id || jibbitzItems.length === 0) return;
+        if (!id || disneyItems.length === 0) return;
         //뿌려질 제품 찾기
-        const findItem = jibbitzItems.find((item) => String(item.id) === String(id));
+        const findItem = disneyItems.find((item) => String(item.id) === String(id));
         console.log('findItem:', findItem);
         setProduct(findItem);
         console.log('들어왔나?');
-    }, [id, jibbitzItems]);
+    }, [id, disneyItems]);
 
     if (!product) {
         return <div>상품 정보를 불러오고 있으니 기다리라 ㅡㅡ </div>;
@@ -27,9 +27,15 @@ const JibbitzCollaboProductDetail = () => {
     return (
         <div className="sub_page">
             <div className="inner">
+                <Title title="ProductDeatil" />
                 <div className="product-detail-wrap">
-                    {/* <Title title="women" /> */}
-                    <h2>상품 예시입니당 💚</h2>
+                    <p>상품 예시입니당 💚</p>
+                    <button>위시버튼💚</button>
+                    <p>
+                        <img src={product.imageUrl} alt={product.title} />
+                    </p>
+                    <p>{product.title}</p>
+                    <p>{product.price}</p>
                 </div>
             </div>
         </div>
