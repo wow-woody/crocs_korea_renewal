@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { collaboAuthStore } from '../store/collaboAuthStore';
 import { wishListStore } from '../store/wishListStore';
 import Title from '../components/Title';
+import WishAddPopup from '../components/WishAddPopup';
 import JibbitzCollaboProductDetailCard from '../components/JibbitzCollaboProductDetailCard';
 
 const JibbitzCollaboProductDetail = () => {
@@ -34,6 +35,7 @@ const JibbitzCollaboProductDetail = () => {
                 <div className="product-detail-wrap">
                     <p>상품 예시입니당 💚</p>
                     <button onClick={() => onAddWishList(product)}>위시버튼💚</button>
+                    <WishAddPopup />
                     <Link to="/wishlist" product={product}>
                         위시리스트 이동
                     </Link>
