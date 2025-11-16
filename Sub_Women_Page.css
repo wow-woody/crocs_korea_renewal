@@ -100,7 +100,7 @@ button {
   display: inline-flex; /* 버튼 안의 텍스트나 아이콘을 정렬하기 쉽게 flex 사용 */
   align-items: center; /* 수직 가운데 정렬 */
   justify-content: center; /* 수평 가운데 정렬 */
-  /* padding: 0.5em 1em; 내부 여백: 상하 0.5em, 좌우 1em */
+  padding: 0.5em 1em; /* 내부 여백: 상하 0.5em, 좌우 1em */
   /* background-color: #000; 기본 배경색: 검정 */
   /* color: #fff; 기본 텍스트 색상: 흰색 */
   font: inherit; /* 부모 요소의 폰트 스타일 상속 */
@@ -280,7 +280,6 @@ textarea {
 .section__wrap .left_nav__section_wrap {
   margin-top: 8rem;
   color: #444444;
-  border: 1px solid red;
 }
 .section__wrap .left_nav__section_wrap .breadcrumbs__list {
   display: flex;
