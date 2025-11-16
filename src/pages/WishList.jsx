@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { wishListStore } from '../store/wishListStore';
 
 const WishList = () => {
-    const { wishLists } = wishListStore();
+    const { wishLists, onRemoveWish } = wishListStore();
 
     return (
         <div className="sub_page">
@@ -12,7 +12,7 @@ const WishList = () => {
                     <li key={item.id}>
                         {item.title} <span>{item.price}</span>
                         <button>장바구니 추가</button>
-                        <button>삭제</button>
+                        <button onClick={() => onRemoveWish(item)}>삭제</button>
                     </li>
                 ))}
             </ul>

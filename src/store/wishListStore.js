@@ -33,7 +33,15 @@ export const wishListStore = create((set, get) => ({
         return true;
     },
 
+    // 위시 추가 팝업창 끄기
+
     hidePopup: () => set({ popUp: { show: false, message: '' } }),
 
-    // ========= 위시 저장 팝업 =========
+    // 위시리스트 데이터 삭제
+    onRemoveWish: (item) => {
+        console.log('위시삭제');
+        const wish = get().wishLists;
+        const updateWish = wish.filter((wish) => wish.id !== item.id);
+        set({ wishLists: updateWish });
+    },
 }));
