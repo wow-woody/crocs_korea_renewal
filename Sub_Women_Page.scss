@@ -72,7 +72,7 @@
     .left_nav__section_wrap {
         margin-top: 8rem;
         color: g.$subColor;
-        border: 1px solid red;
+        // border: 1px solid red;
         .breadcrumbs {
             &__list {
                 @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
