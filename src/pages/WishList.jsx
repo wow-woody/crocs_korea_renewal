@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { collaboAuthStore } from '../store/collaboAuthStore';
+import { wishListStore } from '../store/wishListStore';
 
 const WishList = () => {
-    const { wishLists, onAddWishList } = collaboAuthStore();
+    const { wishLists, onAddWishList } = wishListStore();
 
     return (
         <div className="sub_page">

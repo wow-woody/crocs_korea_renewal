@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { collaboAuthStore } from '../store/collaboAuthStore';
+import { wishListStore } from '../store/wishListStore';
 import Title from '../components/Title';
 import JibbitzCollaboProductDetailCard from '../components/JibbitzCollaboProductDetailCard';
 
 const JibbitzCollaboProductDetail = () => {
     const { id } = useParams();
-    const { disneyItems, onAddWishList } = collaboAuthStore();
+    const { disneyItems } = collaboAuthStore();
+    const { onAddWishList } = wishListStore();
     console.log('jibbitzItems:', disneyItems);
 
     //찾은 상품을 저장할 변수
