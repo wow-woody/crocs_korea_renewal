@@ -83,6 +83,7 @@ body.open {
 
     #contents {
         position: relative;
+        height: 100%;
 
         .title_wrap {
             @include g.flex($fd: column);
@@ -848,10 +849,10 @@ _:-ms-fullscreen,
 // ==========================================
 // Responsive Design
 // ==========================================
-@media all and (max-width: 1680px) {
-    #wrap .wrap {
-        max-width: 1400px;
-    }
+@media all and (max-width: 1400px) {
+    // #wrap .wrap {
+    //     max-width: 1400px;
+    // }
 
     .circle_slide_wrap {
         padding-top: 80px;

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import JibbitzCollaboSwiper from "../components/JibbitzCollaboSwiper";
 // import Join from './Join';
 // import { Link } from 'react-router-dom';
@@ -13,6 +13,7 @@ import FullPageScroll from "../components/FullPageScroll";
 import Footer from "../components/Footer";
 
 const Main = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   return (
     <main>
       <FullPageScroll onSectionChange={setCurrentIndex}>
