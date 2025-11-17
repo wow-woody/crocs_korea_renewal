@@ -9,6 +9,7 @@
     height: fit-content;
     border-radius: 10px;
     padding: 2rem 2rem;
+<<<<<<< HEAD
     // transition: all 0.3s ease;
 
     .product-card__color,
@@ -23,10 +24,14 @@
         margin-top: 1rem; /* 필요하면 추가 */
         transition: none;
     }
+=======
+    transition: all 0.3s ease;
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
 
     &:hover {
         outline: 1px solid #cccccc;
         box-shadow: 0 0 12px 2.5px rgba(0, 0, 0, 0.08);
+<<<<<<< HEAD
         // transform: translateY(-0.4rem);
 
         // .product-card__color,
@@ -35,6 +40,9 @@
         //     opacity: 1;
         //     margin-top: 0;
         // }
+=======
+        transform: translateY(-0.4rem);
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
     }
 
     &__img_info_wrap {
@@ -42,7 +50,11 @@
         width: 32.8rem;
         height: fit-content;
         background-color: #fff;
+<<<<<<< HEAD
         border-radius: 0.8rem;
+=======
+        border-radius: 0.80rem;
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
         display: flex;
         flex-direction: column;
         align-items: center;

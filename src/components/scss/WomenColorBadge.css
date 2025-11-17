@@ -1,0 +1,56 @@
+.color-badge {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.color-badge:hover {
+  transform: scale(1.2);
+}
+.color-badge--black {
+  background-color: #000;
+}
+.color-badge--brown {
+  background-color: rgb(150, 105, 74);
+}
+.color-badge--navy {
+  background-color: #043896;
+}
+.color-badge--pink {
+  background-color: #ff69b4;
+}
+.color-badge--gray {
+  background-color: #cccccc;
+}
+.color-badge--white {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+.color-badge--red {
+  background-color: #ff0000;
+}
+.color-badge--orange {
+  background-color: #ffcc00;
+}
+.color-badge--purple {
+  background-color: #dbb2ff;
+}
+.color-badge--yellow {
+  background-color: #ffff00;
+}
+.color-badge--mint {
+  background-color: #aaf0d1;
+}
+.color-badge--light-green {
+  background-color: #ccff99;
+}
+.color-badge--green {
+  background-color: #00cd00;
+}
+.color-badge--sky-blue {
+  background-color: #9ad2ff;
+}
+.color-badge--blue {
+  background-color: #0000ff;
+}/*# sourceMappingURL=WomenColorBadge.css.map */

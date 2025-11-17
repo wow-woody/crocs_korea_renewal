@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
-import PriceRange from './PriceRange';
-import './scss/WomenComponents.scss';
+import WomenPriceRange from './WomenPriceRange';
+import './scss/WomenPriceMenu.scss';
 
 export default function WomenPriceMenu({ onPriceSelect }) {
     const [activeRange, setActiveRange] = useState(null);
@@ -21,20 +20,6 @@ export default function WomenPriceMenu({ onPriceSelect }) {
         onPriceSelect && onPriceSelect(range);
     };
 
-=======
-import React from 'react';
-
-const PriceMenu = () => {
-    const priceRanges = [
-        '0 ~ 20,000',
-        '20,000 ~ 40,000',
-        '40,000 ~ 60,000',
-        '60,000 ~ 80,000',
-        '80,000 ~ 100,000',
-        '100,000 ~'
-    ];
-
->>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
     return (
         <div className="price-menu">
             <div className="price-menu__wrap menu_wrap-style">
@@ -47,32 +32,17 @@ const PriceMenu = () => {
                     </a>
                 </div>
                 <ul className="price-menu__wrap price-menu__wrap--price-range">
-<<<<<<< HEAD
                     {priceRanges.map((range, index) => (
-                        <PriceRange
+                        <WomenPriceRange
                             key={index}
                             min={range.min}
                             max={range.max}
                             isActive={activeRange === `${range.min}-${range.max}`}
                             onClick={handlePriceClick}
                         />
-=======
-                    {priceRanges.map((price, index) => (
-                        <li key={index} className="price-menu__item">
-                            <a href="#" className="price-menu__link btn-menu-style">
-                                <button className="price-menu__button btn-menu__button">{price}</button>
-                            </a>
-                        </li>
->>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
                     ))}
                 </ul>
             </div>
         </div>
     );
-<<<<<<< HEAD
 }
-=======
-};
-
-export default PriceMenu;
->>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)

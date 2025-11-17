@@ -486,10 +486,12 @@ main {
   height: fit-content;
   border-radius: 10px;
   padding: 2rem 2rem;
+  transition: all 0.3s ease;
 }
 .product-card__section_wrap .product-card__wrap .product-card__item_list .product-card:hover {
   outline: 1px solid #cccccc;
-  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 12px 2.5px rgba(0, 0, 0, 0.08);
+  transform: translateY(-0.4rem);
 }
 .product-card__section_wrap .product-card__wrap .product-card__item_list .product-card__img_info_wrap {
   display: block;

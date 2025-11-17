@@ -72,9 +72,14 @@ export default function SizeMenu({ sizes = [], selectedSize, onSizeSelect }) {
 
 =======
 import React from 'react';
+import './scss/WomenSizeMenu.scss';
 
+<<<<<<< HEAD:src/components/SizeMenu.jsx
 const SizeMenu = ({ sizes = ['210', '220', '230', '240', '250', '260', '265', '270', '280', '290', '300', '310'] }) => {
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
+=======
+export default function WomenSizeMenu({ sizes = ['210', '220', '230', '240', '250', '260', '265', '270', '280', '290', '300', '310'] }) {
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenSizeMenu.jsx
     return (
         <div className="size-menu">
             <div className="size-menu__wrap">
@@ -120,6 +125,7 @@ const SizeMenu = ({ sizes = ['210', '220', '230', '240', '250', '260', '265', '2
             </div>
         </div>
     );
+<<<<<<< HEAD:src/components/SizeMenu.jsx
 <<<<<<< HEAD
 }
 =======
@@ -127,3 +133,6 @@ const SizeMenu = ({ sizes = ['210', '220', '230', '240', '250', '260', '265', '2
 
 export default SizeMenu;
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
+=======
+}
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenSizeMenu.jsx

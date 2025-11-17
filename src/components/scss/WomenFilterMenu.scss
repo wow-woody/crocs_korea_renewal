@@ -30,7 +30,17 @@
             @include g.flex($jc: start, $ai: center, $fd: row, $fw: null, $gap: 1.6rem);
 
             .filter-menu__item {
+<<<<<<< HEAD
                 @include g.flex($jc: center, $ai: center, $fd: row, $fw: null, $gap: 1.8rem);
+=======
+                @include g.flex(
+                    $jc: center,
+                    $ai: center,
+                    $fd: row,
+                    $fw: null,
+                    $gap: 1.8rem
+                );
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
                 width: 6.2rem;
                 height: 3.2rem;
                 background-color: #f5f5f5;
@@ -45,11 +55,19 @@
                 .select-pink {
                     background-color: #ff69b4;
                 }
+<<<<<<< HEAD
 
                 .select-black {
                     background-color: #000;
                 }
 
+=======
+                
+                .select-black {
+                    background-color: #000;
+                }
+                
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
                 .filter-menu__close-link {
                     border-radius: 0.4rem;
                     display: flex;

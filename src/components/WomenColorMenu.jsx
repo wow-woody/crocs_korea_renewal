@@ -253,8 +253,9 @@ export default function ColorMenu() {
 // }
 =======
 import React from 'react';
+import './scss/WomenColorMenu.scss';
 
-const ColorMenu = () => {
+export default function WomenColorMenu() {
     const colors = [
         { name: '블랙', class: 'black' },
         { name: '그레이', class: 'gray' },
@@ -297,7 +298,11 @@ const ColorMenu = () => {
             </div>
         </div>
     );
+<<<<<<< HEAD:src/components/ColorMenu.jsx
 };
 
 export default ColorMenu;
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
+=======
+}
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenColorMenu.jsx

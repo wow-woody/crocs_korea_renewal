@@ -1,0 +1,24 @@
+// WomenLeftNavigation 컴포넌트 스타일
+@use '../../App.scss' as g;
+
+.left_nav__section_wrap {
+    color: g.$subColor;
+}
+
+.left_nav {
+    width: 32.4rem;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 2.8rem;
+    padding: 2.8rem 1.6rem;
+    border-radius: 1rem;
+    background-color: #fafafd;
+}
+
+.breadcrumbs__line {
+    width: 29.2rem;
+    height: 0.1rem;
+    background-color: #ebebeb;
+    text-align: center;
+}

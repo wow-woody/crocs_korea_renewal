@@ -1,0 +1,86 @@
+// WomenProductCardSwiper 컴포넌트 스타일
+@use '../../App.scss' as g;
+
+.product-card__img_wrap {
+    @include g.flex($jc: center, $ai: center, $fd: null, $fw: null, $gap: null);
+    position: relative;
+    width: 32.8rem;
+    height: 38rem;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    .swiper-wrapper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        @include g.flex($jc: center, $ai: center, $fd: null, $fw: null, $gap: null);
+        width: 100%;
+        height: 100%;
+    }
+
+    .product-card__link {
+        @include g.flex(
+            $jc: center,
+            $ai: center,
+            $fd: null,
+            $fw: null,
+            $gap: null
+        );
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 1rem;
+        background: #fcfcff
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0) 60%,
+                rgba(0, 0, 0, 0.035) 100%
+            );
+
+        .product-card__img {
+            display: block;
+            width: 22rem;
+            height: auto;
+        }
+    }
+
+    // Swiper Navigation Arrows
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 2.4rem;
+        height: 2.4rem;
+        color: #B5D766;
+        
+        &::after {
+            font-size: 2.4rem;
+            font-weight: bold;
+        }
+    }
+
+    .swiper-button-prev.product-card__arrow_left {
+        left: 1.5rem;
+    }
+
+    .swiper-button-next.product-card__arrow_right {
+        right: 1.5rem;
+    }
+
+    // Swiper Pagination Progress Bar
+    .swiper-pagination.product-card__pagination {
+        bottom: 1.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 28rem;
+        height: 0.2rem;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 0.2rem;
+        top: auto;
+
+        .swiper-pagination-progressbar-fill {
+            background-color: #B5D766;
+            border-radius: 0.2rem;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD:src/components/FilterMenu.jsx
 <<<<<<< HEAD
 import './scss/WomenComponents.scss';
 
@@ -12,6 +13,11 @@ export default function FilterMenu({
 
 const FilterMenu = ({ filters = [{ color: 'pink', class: 'select-pink' }, { color: 'black', class: 'select-black' }] }) => {
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
+=======
+import './scss/WomenFilterMenu.scss';
+
+export default function WomenFilterMenu({ filters = [{ color: 'pink', class: 'select-pink' }, { color: 'black', class: 'select-black' }] }) {
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenFilterMenu.jsx
     return (
         <div className="filter-menu">
             <div className="filter-menu__wrap menu_wrap-style">
@@ -44,6 +50,7 @@ const FilterMenu = ({ filters = [{ color: 'pink', class: 'select-pink' }, { colo
             </div>
         </div>
     );
+<<<<<<< HEAD:src/components/FilterMenu.jsx
 <<<<<<< HEAD
 }
 =======
@@ -51,3 +58,6 @@ const FilterMenu = ({ filters = [{ color: 'pink', class: 'select-pink' }, { colo
 
 export default FilterMenu;
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
+=======
+}
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenFilterMenu.jsx

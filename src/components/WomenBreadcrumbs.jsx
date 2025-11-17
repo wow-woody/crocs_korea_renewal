@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD:src/components/Breadcrumbs.jsx
 <<<<<<< HEAD
 import { Link, useNavigate } from 'react-router-dom';
 import './scss/breadcrumbs.scss';
@@ -20,6 +21,11 @@ export default function Breadcrumbs({ category, subcategory }) {
 
 const Breadcrumbs = ({ category, subcategory }) => {
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
+=======
+import './scss/WomenBreadcrumbs.scss';
+
+export default function WomenBreadcrumbs({ category, subcategory }) {
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenBreadcrumbs.jsx
     return (
         <div className="breadcrumbs">
             <ul className="breadcrumbs__list">
@@ -107,7 +113,11 @@ const Breadcrumbs = ({ category, subcategory }) => {
             </div>
         </div>
     );
+<<<<<<< HEAD:src/components/Breadcrumbs.jsx
 };
 
 export default Breadcrumbs;
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
+=======
+}
+>>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenBreadcrumbs.jsx
