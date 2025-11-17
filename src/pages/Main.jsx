@@ -9,7 +9,7 @@ import MainCategory from "../components/MainCategory";
 import MainInstagram from "../components/MainInstagram";
 import SlideCircle from "../components/SlideCircle";
 import CrocsSection from "../components/CrocsSectionFinal";
-import FullPageScroll from "../components/FullPageScroll";
+import FullPageScroll from "../components/FullPageScroll2";
 import Footer from "../components/Footer";
 
 const Main = () => {

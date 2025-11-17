@@ -9,7 +9,12 @@ const SlideCircle = () => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const intervalRef = useRef(null);
-  const { items } = useNewProductStore();
+  const { items, onFetchItem } = useNewProductStore();
+
+  // 상품 불러오기
+  useEffect(() => {
+  onFetchItem();
+}, []);
 
   // 모든 슬라이드의 기본 컬러 이름을 미리 저장
   const defaultColor = items.map((s) =>

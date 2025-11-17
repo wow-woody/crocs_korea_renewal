@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./scss/FullPageScroll.scss";
 
-const FullPageScroll = ({  children, onSectionChange }) => {
+const FullPageScroll = ({ children }) => {
   const containerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sections, setSections] = useState([]);
@@ -15,13 +15,12 @@ const FullPageScroll = ({  children, onSectionChange }) => {
     }
   }, [children]);
 
-  // ✔ currentIndex 변하면 부모(Main.jsx)에 알려주기
+  // footer offsetTop 찍기 (디버그용)
   useEffect(() => {
-    if (typeof onSectionChange === "function") {
-      onSectionChange(currentIndex);
-    }
-  }, [currentIndex, onSectionChange]);
-
+    if (!footerRef) return;
+    if (!footerRef.current) return;
+    console.log("footer offsetTop:", footerRef.current.offsetTop);
+  }, [footerRef]);
 
   const scrollToSection = (index) => {
     if (!sections[index]) return;
@@ -88,6 +87,9 @@ const FullPageScroll = ({  children, onSectionChange }) => {
 
   return (
     <div className="fullpage-container" ref={containerRef}>
+      {/* {React.Children.map(children, (child, index) => (
+        <div className="fullpage-section">{child}</div>
+      ))} */}
       {children}
     </div>
   );

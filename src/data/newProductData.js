@@ -1,4 +1,4 @@
-﻿[
+﻿export const newProducts = [
 
     {
         "id":  "212106",
