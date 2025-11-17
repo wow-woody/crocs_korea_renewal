@@ -12,7 +12,10 @@ const MainInstagram = () => {
     const videoRef3 = useRef(null);
 
     const videoRefs = [videoRef1, videoRef2, videoRef3];
+<<<<<<< HEAD
 
+=======
+>>>>>>> fbc239f (2025-11-17(월)  컴포넌트 작업 v01 & MainInstagram.jsx 파일 수정)
     const [playStates, setPlayStates] = useState([false, false, false]);
 
     // 비디오 재생/정지 핸들러
