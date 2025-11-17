@@ -7,7 +7,11 @@ import InstagramVideoList from './InstagramVideoList';
 import instagramData from '../data/instagramData.json';
 
 const MainInstagram = () => {
-    const videoRefs = [useRef(null), useRef(null), useRef(null)];
+    const videoRef1 = useRef(null);
+    const videoRef2 = useRef(null);
+    const videoRef3 = useRef(null);
+
+    const videoRefs = [videoRef1, videoRef2, videoRef3];
     const [playStates, setPlayStates] = useState([false, false, false]);
 
     // 비디오 재생/정지 핸들러

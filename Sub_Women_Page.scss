@@ -403,7 +403,7 @@
                 width: 36rem;
                 height: fit-content;
                 border-radius: 10px;
-                border: 1px solid red;
+                // border: 1px solid red;
                 padding: 1.6rem 1.6rem;
 
                 &__img_info_wrap {
@@ -411,7 +411,6 @@
                     height: fit-content;
                     background-color: #fff;
                     border-radius: 10px;
-                    border: 1px solid blue;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -458,7 +457,7 @@
                             justify-content: space-between;
                             transform: translateY(-50%);
                             z-index: 10;
-                            padding: 0 2.8rem;
+                            padding: 0 1.5rem;
 
                             .product-card__arrow_left_link,
                             .product-card__arrow_right_link {
@@ -487,6 +486,7 @@
                         }
                     }
 
+                    // 상품 가격
                     .product-card__price_wrap {
                         width: 32.8rem;
                         font-family: 'all-round-gothic', sans-serif;
@@ -523,11 +523,13 @@
                             }
                         }
                     }
+
+                    // 상품 카드 - 색상 및 사이즈 그룹
                     .product-card__color,
                     .product-card__size {
                         justify-content: flex-start;
                         width: 100%;
-                        &__title--wrap {
+                        &-title-wrap {
                             p {
                                 font-size: 1.1rem;
                                 font-weight: 500;
@@ -535,7 +537,9 @@
                                 margin-bottom: 1.2rem;
                             }
                         }
-                        &--btns__wrap {
+
+                        // 상품 카드 - 사이즈 스타일
+                        &-btns-wrap {
                             width: 100%;
                             display: flex;
                             justify-content: space-between;
@@ -551,27 +555,51 @@
                                 color: #cccccc;
                                 font-family: 'all-round-gothic', sans-serif;
 
-                                // border: 1px solid blue;
                                 a {
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
                                     width: 100%;
                                     height: 100%;
-                                    border: 1px solid #EBEBEB;
+                                    border: 1px solid #ebebeb;
                                     border-radius: 4px;
                                     color: #cccccc;
-                                    background-color: #FFFFFF
+                                    background-color: #ffffff;
+
+                                    // 호버 상태
+                                    &:hover {
+                                        border: 1px solid g.$mainColor;
+                                        color: g.$mainColor;
+                                    }
+
+                                    // 선택된 상태 (JS로 .active 클래스 토글)
+                                    &.active {
+                                        background-color: g.$mainColor;
+                                        border: 1px solid g.$mainColor;
+                                        color: g.$subColor;
+                                    }
                                 }
                                 .sold-out {
-                                    display: flex;
+                                    display: inline-flex;
                                     justify-content: center;
                                     align-items: center;
                                     width: 100%;
                                     height: 100%;
-                                    border: 1px solid #EBEBEB;
+                                    border: 1px solid #ebebeb;
                                     border-radius: 4px;
-                                    background-color: #fbfbfb;
+                                    color: #ebebeb;
+                                    background-color: #f9f9f9;
+                                    position: relative;
+
+                                    p {
+                                        position: absolute;
+                                        text-align: center;
+                                        line-height: 2.3rem;
+                                        width: 2.5rem;
+                                        height: 0.15rem;
+                                        background-color: #ebebeb;
+                                    }
+                                    display: none; // 품절된 사이즈는 보이지 않도록 설정
                                 }
                             }
                         }
