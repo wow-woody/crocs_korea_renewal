@@ -32,7 +32,12 @@ const Main = () => {
         <section>
           <CrocsSection />
         </section>
-        <Monthly />
+        <section>
+          <Monthly />
+        </section>
+        <section>
+          <MainInstagram />
+        </section>
         <Footer />
       </FullPageScroll>
     </main>
