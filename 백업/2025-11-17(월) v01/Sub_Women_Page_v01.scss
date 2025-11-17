@@ -430,21 +430,7 @@ main {
                     .product-card__img_wrap {
                         @include g.flex($jc: center, $ai: center, $fd: null, $fw: null, $gap: null);
                         position: relative;
-                        width: 32.8rem;
-                        height: 38rem;
-                        border-radius: 1rem;
-                        overflow: hidden;
-
-                        .swiper-wrapper {
-                            width: 100%;
-                            height: 100%;
-                        }
-
-                        .swiper-slide {
-                            @include g.flex($jc: center, $ai: center, $fd: null, $fw: null, $gap: null);
-                            width: 100%;
-                            height: 100%;
-                        }
+                        // margin-top: 1.6rem;
 
                         .product-card__link {
                             @include g.flex(
@@ -455,8 +441,8 @@ main {
                                 $gap: null
                             );
                             position: relative;
-                            width: 100%;
-                            height: 100%;
+                            width: 32.8rem;
+                            height: 38rem;
                             border-radius: 1rem;
                             background: #fcfcff
                                 linear-gradient(
@@ -470,56 +456,33 @@ main {
                                 width: 22rem;
                                 height: auto;
                             }
-                        }
 
-                        // Swiper Navigation Arrows
-                        .swiper-button-prev,
-                        .swiper-button-next {
-                            width: 2.4rem;
-                            height: 2.4rem;
-                            background-image: none;
-                            
-                            &::after {
-                                content: '';
-                                display: block;
-                                width: 100%;
-                                height: 100%;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                background-position: center;
+                            .product-card__img:nth-child(2) {
+                                display: none;
                             }
                         }
 
-                        .swiper-button-prev.product-card__arrow_left {
-                            left: 1.5rem;
-                            
-                            &::after {
-                                background-image: url('./public/images/Sub_Women_Images/icon-arrow-left-green.svg');
-                            }
-                        }
+                        .product-card_arrow {
+                            position: absolute;
+                            top: 50%;
+                            left: 0;
+                            right: 0;
+                            display: flex;
+                            justify-content: space-between;
+                            transform: translateY(-50%);
+                            z-index: 10;
+                            padding: 0 1.5rem;
 
-                        .swiper-button-next.product-card__arrow_right {
-                            right: 1.5rem;
-                            
-                            &::after {
-                                background-image: url('./public/images/Sub_Women_Images/icon-arrow-right-green.svg');
-                            }
-                        }
+                            .product-card__arrow_left_link,
+                            .product-card__arrow_right_link {
+                                width: 2.4rem;
+                                height: 2.4rem;
 
-                        // Swiper Pagination Progress Bar
-                        .swiper-pagination.product-card__pagination {
-                            bottom: 1.6rem;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            width: 28rem;
-                            height: 0.2rem;
-                            background-color: rgba(0, 0, 0, 0.1);
-                            border-radius: 0.2rem;
-                            top: auto;
-
-                            .swiper-pagination-progressbar-fill {
-                                background-color: #B5D766;
-                                border-radius: 0.2rem;
+                                img {
+                                    display: block;
+                                    width: 100%;
+                                    height: auto;
+                                }
                             }
                         }
                     }

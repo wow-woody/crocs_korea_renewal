@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./Sub_Women_Page.css">
     <link rel="stylesheet" href="https://use.typekit.net/evj6nlr.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <title>Document</title>
 </head>
 
@@ -314,24 +313,23 @@
                     <ul class="product-card__item_list">
                         <li class="product-card">
                             <div class="product-card__img_info_wrap">
-                                <div class="product-card__img_wrap swiper">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <a href="#" class="product-card__link">
-                                                <img src="./public/images/Sub_Women_Images/1_클래식_언퍼게터블_스웨이드_클로그_1.jpg"
-                                                    alt="상품 이미지" class="product-card__img">
-                                            </a>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <a href="#" class="product-card__link">
-                                                <img src="./public/images/Sub_Women_Images/1_클래식_언퍼게터블_스웨이드_클로그_2.jpg"
-                                                    alt="상품 이미지" class="product-card__img">
-                                            </a>
-                                        </div>
+                                <div class="product-card__img_wrap">
+                                    <a href="#" class="product-card__link">
+                                        <img src="./public/images/Sub_Women_Images/1_클래식_언퍼게터블_스웨이드_클로그_1.jpg"
+                                            alt="상품 이미지" class="product-card__img">
+                                        <img src="./public/images/Sub_Women_Images/1_클래식_언퍼게터블_스웨이드_클로그_2.jpg"
+                                            alt="상품 이미지" class="product-card__img">
+                                    </a>
+                                    <div class="product-card_arrow">
+                                        <a href="#" class="product-card__arrow_left_link">
+                                            <img src="./public/images/Sub_Women_Images/icon-arrow-left-green.svg"
+                                                alt="왼쪽 버튼" class="icon__arrow_left">
+                                        </a>
+                                        <a href="#" class="product-card__arrow_right_link">
+                                            <img src="./public/images/Sub_Women_Images/icon-arrow-right-green.svg"
+                                                alt="오른쪽 버튼" class="icon__arrow_right">
+                                        </a>
                                     </div>
-                                    <div class="swiper-button-prev product-card__arrow_left"></div>
-                                    <div class="swiper-button-next product-card__arrow_right"></div>
-                                    <div class="swiper-pagination product-card__pagination"></div>
                                 </div>
                                 <div class="product-card__name--warp">
                                     <p class="product-card__name">클래식 언퍼게터블 스웨이드<br>클로그</p>
@@ -481,7 +479,6 @@
             </section>
         </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         // 필터 메뉴의 버튼들 (사이즈, 가격)
         document.querySelectorAll('.btn-menu-style').forEach(btn => {
@@ -491,18 +488,16 @@
             });
         });
 
-        // Swiper 초기화
-        const swiper = new Swiper('.product-card__img_wrap', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'progressbar',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
+        // // 상품 카드의 사이즈 버튼들
+        // document.querySelectorAll('.product-card__size-btns-wrap li a').forEach(btn => {
+        //     btn.addEventListener('click', function (e) {
+        //         e.preventDefault();
+        //         // sold-out 클래스가 있으면 클릭 무시
+        //         if (!this.classList.contains('sold-out')) {
+        //             this.classList.toggle('active');
+        //         }
+        //     });
+        // });
     </script>
 
 
