@@ -1,3 +1,5 @@
+'use no memo';
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { collaboAuthStore } from '../store/collaboAuthStore';

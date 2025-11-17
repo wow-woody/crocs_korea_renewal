@@ -1,3 +1,5 @@
+'use no memo';
+
 import React, { useState } from 'react';
 import Title from '../components/Title';
 import { Link, useNavigate } from 'react-router-dom';

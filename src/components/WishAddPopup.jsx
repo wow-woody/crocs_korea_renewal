@@ -1,3 +1,5 @@
+'use no memo';
+
 import React from 'react';
 import { wishListStore } from '../store/wishListStore';
 import { Link } from 'react-router-dom';

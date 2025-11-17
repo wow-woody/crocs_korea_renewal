@@ -1,3 +1,5 @@
+'use no memo';
+
 import React, { useState } from 'react';
 import { joinStore } from '../store/joinStore';
 import { useNavigate } from 'react-router-dom';
