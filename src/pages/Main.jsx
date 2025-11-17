@@ -20,37 +20,19 @@ const Main = () => {
         <section>
           <MainSlider />
         </section>
-        <div className="container">
-          {/* 두 번째 섹션 */}
-          <section style={{ position: "relative" }}>
-            {/* currentIndex가 1일 때만 TopPopup 렌더 */}
-            {currentIndex === 1 && (
-              <div
-                style={{
-                  position: "fixed",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  zIndex: 9999,
-                }}
-              >
-                <TopPopup />
-              </div>
-            )}
-            <MainCategory />
-          </section>
-          <section>
-            <SlideCircle />
-          </section>
-          <section>
-            <JibbitzCollaboSwiper />
-          </section>
-          <section>
-            <CrocsSection />
-          </section>
-          <Monthly />
-          <MainInstagram />
-        </div>
+        <section style={{ position: "relative" }}>
+          <MainCategory showTopPopup={currentIndex === 1} />
+        </section>
+        <section>
+          <SlideCircle showDot={currentIndex === 2} />
+        </section>
+        <section>
+          <JibbitzCollaboSwiper />
+        </section>
+        <section>
+          <CrocsSection />
+        </section>
+        <Monthly />
         <Footer />
       </FullPageScroll>
     </main>

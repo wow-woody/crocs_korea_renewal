@@ -10,10 +10,12 @@ const FullPageScroll = ({ children, onSectionChange }) => {
   // 모든 요소(section, footer 포함) 수집 후 "묶어서" 섹션으로 정리
   useEffect(() => {
     if (!containerRef.current) return;
-
-    const sec = containerRef.current.querySelectorAll("section, footer");
-    setSections(Array.from(sec));
-
+    const sec = Array.from(containerRef.current.children).filter(
+      (el) =>
+        el.tagName.toLowerCase() === "section" ||
+        el.tagName.toLowerCase() === "footer"
+    );
+    setSections(sec);
     // 처음들어왔을때 스크롤 초기화
     window.scrollTo(0, 0);
   }, [children]);
@@ -21,16 +23,8 @@ const FullPageScroll = ({ children, onSectionChange }) => {
   // 스크롤 이동 함수
   const scrollToSection = (index) => {
     if (!sections[index]) return;
-
     isScrolling.current = true;
-
-    const targetTop = sections[index].offsetTop;
-
-    window.scrollTo({
-      top: targetTop,
-      behavior: "smooth",
-    });
-
+    sections[index].scrollIntoView({ behavior: "smooth" });
     // 스크롤 중복 방지 (300~500ms 사이)
     setTimeout(() => {
       isScrolling.current = false;
@@ -40,9 +34,7 @@ const FullPageScroll = ({ children, onSectionChange }) => {
   // currentIndex 변경되면 섹션 이동
   useEffect(() => {
     if (sections.length === 0) return;
-
     scrollToSection(currentIndex);
-
     // 부모(Main.jsx)에게 현재 섹션 전달
     if (onSectionChange) onSectionChange(currentIndex);
   }, [currentIndex, sections]);
@@ -50,51 +42,46 @@ const FullPageScroll = ({ children, onSectionChange }) => {
   // Wheel 이벤트
   useEffect(() => {
     const handleWheel = (e) => {
+      e.preventDefault();
       if (isScrolling.current) return;
-
-      if (e.deltaY > 0) {
+      if (e.deltaY > 0 && currentIndex < sections.length - 1) {
         // 아래로 스크롤
-        setCurrentIndex((prev) => Math.min(prev + 1, sections.length - 1));
-      } else {
+        setCurrentIndex((prev) => prev + 1);
+      } else if (e.deltaY < 0 && currentIndex > 0) {
         // 위로 스크롤
-        setCurrentIndex((prev) => Math.max(prev - 1, 0));
+        setCurrentIndex((prev) => prev - 1);
       }
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => window.removeEventListener("wheel", handleWheel);
-  }, [sections]);
+  }, [currentIndex, sections]);
 
   // Touch 스크롤 (모바일)
   useEffect(() => {
     let startY = 0;
-
-    const start = (e) => (startY = e.touches[0].clientY);
-
-    const end = (e) => {
+    const handleTouchStart = (e) => (startY = e.touches[0].clientY);
+    const handleTouchEnd = (e) => {
       if (isScrolling.current) return;
-
       const diff = startY - e.changedTouches[0].clientY;
-
       if (Math.abs(diff) < 50) return;
-
-      if (diff > 0) {
+      if (diff > 0 && currentIndex < sections.length - 1) {
         // 아래 방향
-        setCurrentIndex((prev) => Math.min(prev + 1, sections.length - 1));
-      } else {
-        setCurrentIndex((prev) => Math.max(prev - 1, 0));
+        setCurrentIndex((prev) => prev + 1);
+      } else if (diff < 0 && currentIndex > 0) {
+        setCurrentIndex((prev) => prev - 1);
       }
     };
 
-    window.addEventListener("touchstart", start, { passive: true });
-    window.addEventListener("touchend", end, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     return () => {
-      window.removeEventListener("touchstart", start);
-      window.removeEventListener("touchend", end);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [sections]);
+  }, [currentIndex, sections]);
 
   return (
     <div className="fullpage-container" ref={containerRef}>

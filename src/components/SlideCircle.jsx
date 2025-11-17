@@ -3,7 +3,7 @@ import { useNewProductStore } from "../store/useNewProductStore";
 import Title from "./Title";
 import "./scss/SlideCircle.scss";
 
-const SlideCircle = () => {
+const SlideCircle = ({ showDot }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState(0);
@@ -13,8 +13,8 @@ const SlideCircle = () => {
 
   // 상품 불러오기
   useEffect(() => {
-  onFetchItem();
-}, []);
+    onFetchItem();
+  }, []);
 
   // 모든 슬라이드의 기본 컬러 이름을 미리 저장
   const defaultColor = items.map((s) =>
@@ -89,9 +89,7 @@ const SlideCircle = () => {
             subTitle={`당신의 스타일에 맞는 완벽한 크록스를 찾아보세요`}
           />
           <div className="circle_main">
-            <div
-              className="circle_slider"
-            >
+            <div className="circle_slider">
               <div className="circle_slides">
                 {items.map((slide, index) => {
                   const position = getSlidePosition(index);
@@ -199,37 +197,38 @@ const SlideCircle = () => {
               </div>
 
               {/* Dots */}
-              <div className="circle_dots">
-                {items.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`circle_dot ${
-                      currentSlide === index ? "active" : ""
-                    }`}
-                  >
-                    <span></span>
-                    {currentSlide === index && (
-                      <div
-                        className={`circular ${
-                          currentSlide === index ? "active" : ""
-                        }`}
-                      >
-                        <div className="inner"></div>
-                        <div className="circle">
-                          <div className="bar left">
-                            <div className="progress"></div>
-                          </div>
-                          <div className="bar right">
-                            <div className="progress"></div>
+              {showDot && (
+                <div className="circle_dots">
+                  {items.slice(0, 9).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      className={`circle_dot ${
+                        currentSlide === index ? "active" : ""
+                      }`}
+                    >
+                      <span></span>
+                      {currentSlide === index && (
+                        <div
+                          className={`circular ${
+                            currentSlide === index ? "active" : ""
+                          }`}
+                        >
+                          <div className="inner"></div>
+                          <div className="circle">
+                            <div className="bar left">
+                              <div className="progress"></div>
+                            </div>
+                            <div className="bar right">
+                              <div className="progress"></div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </button>
-                ))}
-              </div>
-
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
               {/* Play/Pause Button */}
               <button
                 onClick={togglePlay}
