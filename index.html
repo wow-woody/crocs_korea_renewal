@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Product Card Swiper</title>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'>
+  <link rel='stylesheet' href='style.scss'>
+</head>
+<body>
+  <div class='product-card__img_wrap'>
+    <div class='swiper product-swiper'>
+      <div class='swiper-wrapper'>
+        <div class='swiper-slide'><img class='product-card__img' src='img/product1.jpg' alt='상품 이미지 1'></div>
+        <div class='swiper-slide'><img class='product-card__img' src='img/product2.jpg' alt='상품 이미지 2'></div>
+        <div class='swiper-slide'><img class='product-card__img' src='img/product3.jpg' alt='상품 이미지 3'></div>
+      </div>
+      <div class='swiper-pagination'></div>
+      <div class='product-card_arrow'>
+        <div class='product-card__arrow_left_link swiper-button-prev'><img src='img/arrow-left.svg' alt='이전'></div>
+        <div class='product-card__arrow_right_link swiper-button-next'><img src='img/arrow-right.svg' alt='다음'></div>
+      </div>
+    </div>
+  </div>
+
+  <script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
+  <script>
+    new Swiper('.product-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'progressbar'
+      }
+    });
+  </script>
+</body>
+</html>
