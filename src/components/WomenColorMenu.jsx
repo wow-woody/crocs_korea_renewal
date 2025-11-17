@@ -1,6 +1,7 @@
 import React from 'react';
+import './scss/WomenColorMenu.scss';
 
-const ColorMenu = () => {
+export default function WomenColorMenu() {
     const colors = [
         { name: '블랙', class: 'black' },
         { name: '그레이', class: 'gray' },
@@ -43,6 +44,4 @@ const ColorMenu = () => {
             </div>
         </div>
     );
-};
-
-export default ColorMenu;
+}

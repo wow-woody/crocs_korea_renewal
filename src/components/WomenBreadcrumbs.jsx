@@ -1,6 +1,7 @@
 import React from 'react';
+import './scss/WomenBreadcrumbs.scss';
 
-const Breadcrumbs = ({ category, subcategory }) => {
+export default function WomenBreadcrumbs({ category, subcategory }) {
     return (
         <div className="breadcrumbs">
             <ul className="breadcrumbs__list">
@@ -37,6 +38,4 @@ const Breadcrumbs = ({ category, subcategory }) => {
             </div>
         </div>
     );
-};
-
-export default Breadcrumbs;
+}

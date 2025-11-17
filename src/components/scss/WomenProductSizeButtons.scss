@@ -1,0 +1,25 @@
+// WomenProductSizeButtons 컴포넌트 스타일
+@use '../../App.scss' as g;
+
+.product-card__size {
+    justify-content: flex-start;
+    width: 100%;
+    
+    &__title--wrap {
+        p {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: g.$subColor;
+            margin-bottom: 0.8rem;
+        }
+    }
+
+    .product-card__size--btns__wrap {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+}

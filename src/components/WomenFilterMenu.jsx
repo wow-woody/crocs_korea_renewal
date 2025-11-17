@@ -1,6 +1,7 @@
 import React from 'react';
+import './scss/WomenFilterMenu.scss';
 
-const FilterMenu = ({ filters = [{ color: 'pink', class: 'select-pink' }, { color: 'black', class: 'select-black' }] }) => {
+export default function WomenFilterMenu({ filters = [{ color: 'pink', class: 'select-pink' }, { color: 'black', class: 'select-black' }] }) {
     return (
         <div className="filter-menu">
             <div className="filter-menu__wrap menu_wrap-style">
@@ -25,6 +26,4 @@ const FilterMenu = ({ filters = [{ color: 'pink', class: 'select-pink' }, { colo
             </div>
         </div>
     );
-};
-
-export default FilterMenu;
+}
