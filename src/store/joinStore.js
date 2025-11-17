@@ -4,7 +4,7 @@ import { auth, db, googleProvider } from '../firebase/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export const joinStore = create((set, get) => ({
-    onJoin: async ({ name, phnoe, email, password, birthday, gender }) => {
+    onJoin: async ({ name, phone, email, password, birthday, gender }) => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             set({ user: userCredential.user });

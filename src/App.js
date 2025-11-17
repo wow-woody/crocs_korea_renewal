@@ -40,6 +40,7 @@ function App() {
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} />
                 <Route path="/wishlist" element={<WishList />} />
+                <Route path="/userinfo" element={<UserInfo />} />
             </Routes>
             <Footer />
         </div>
