@@ -42,7 +42,17 @@
         // }
 =======
         transform: translateY(-0.4rem);
+<<<<<<< HEAD
 >>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
+=======
+        
+        .product-card__color,
+        .product-card__size {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0;
+        }
+>>>>>>> ab0e3cd (2025-11-17(월) 아이템 카드 스르륵 효과 추가)
     }
 
     &__img_info_wrap {

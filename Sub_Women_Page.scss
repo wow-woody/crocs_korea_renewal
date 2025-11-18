@@ -411,18 +411,18 @@ main {
                 padding: 2rem 2rem;
                 transition: all 0.3s ease;
 
-                &:hover {
-                    outline:1px solid #cccccc;
-                    box-shadow: 0 0 12px 2.5px rgba(0, 0, 0, 0.08);
-                    transform: translateY(-0.4rem);
-                }
+                // &:hover {
+                //     outline: 1px solid #cccccc;
+                //     box-shadow: 0 0 12px 2.5px rgba(0, 0, 0, 0.08);
+                //     transform: translateY(-0.4rem);
+                // }
 
                 &__img_info_wrap {
                     display: block;
                     width: 32.8rem;
                     height: fit-content;
                     background-color: #fff;
-                    border-radius: 0.80rem;
+                    border-radius: 0.8rem;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -442,7 +442,13 @@ main {
                         }
 
                         .swiper-slide {
-                            @include g.flex($jc: center, $ai: center, $fd: null, $fw: null, $gap: null);
+                            @include g.flex(
+                                $jc: center,
+                                $ai: center,
+                                $fd: null,
+                                $fw: null,
+                                $gap: null
+                            );
                             width: 100%;
                             height: 100%;
                         }
@@ -479,7 +485,7 @@ main {
                             width: 2.4rem;
                             height: 2.4rem;
                             background-image: none;
-                            
+
                             &::after {
                                 content: '';
                                 display: block;
@@ -493,7 +499,7 @@ main {
 
                         .swiper-button-prev.product-card__arrow_left {
                             left: 1.5rem;
-                            
+
                             &::after {
                                 background-image: url('./public/images/Sub_Women_Images/icon-arrow-left-green.svg');
                             }
@@ -501,7 +507,7 @@ main {
 
                         .swiper-button-next.product-card__arrow_right {
                             right: 1.5rem;
-                            
+
                             &::after {
                                 background-image: url('./public/images/Sub_Women_Images/icon-arrow-right-green.svg');
                             }
@@ -519,12 +525,12 @@ main {
                             top: auto;
 
                             .swiper-pagination-progressbar-fill {
-                                background-color: #B5D766;
+                                background-color: #b5d766;
                                 border-radius: 0.2rem;
                             }
                         }
                     }
-                    
+
                     .product-card__name--warp {
                         width: 32.8rem;
                         height: 4.5rem;
@@ -535,9 +541,8 @@ main {
                             // font-size: 1.8rem;
                             font-weight: 400;
                             color: g.$subColor;
-                            line-height:2.9rem;
+                            line-height: 2.9rem;
                         }
-
                     }
 
                     // 상품 가격
@@ -583,6 +588,12 @@ main {
                     .product-card__size {
                         justify-content: flex-start;
                         width: 100%;
+                        
+                        max-height: 0;
+                        opacity: 0;
+                        overflow: hidden;
+                        transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+                        
                         &-title-wrap {
                             p {
                                 font-size: 1.3rem;
@@ -592,7 +603,6 @@ main {
                             }
                         }
                     }
-
 
                     // 상품 카드 - 색상 스타일
                     .product-card__color {
@@ -612,20 +622,14 @@ main {
                                 cursor: pointer;
                                 // margin-bottom: 1.6rem;
                             }
-                            .color-badge--black{
-                                background-color: rgba(0, 0, 0, 1)
+                            .color-badge--black {
+                                background-color: rgba(0, 0, 0, 1);
                             }
-                            .color-badge--brown{
-                                background-color: rgba(150, 105, 74, 1)
+                            .color-badge--brown {
+                                background-color: rgba(150, 105, 74, 1);
                             }
-
-
-
-
-
-                        }   
+                        }
                     }
-
 
                     // 상품 카드 - 사이즈 스타일
                     .product-card__size {
@@ -693,6 +697,20 @@ main {
                                 }
                             }
                         }
+                    }
+                }
+            }
+            .product-card {
+                &:hover {
+                    outline: 1px solid #cccccc;
+                    box-shadow: 0 0 12px 2.5px rgba(0, 0, 0, 0.08);
+                    transform: translateY(-0.4rem);
+                    
+                    .product-card__color,
+                    .product-card__size {
+                        max-height: 200px;
+                        opacity: 1;
+                        margin-top: 0;
                     }
                 }
             }
