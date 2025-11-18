@@ -1,19 +1,28 @@
 @use '../../App.scss' as g;
 
 .wish_card_wrap {
-    @include g.flex($jc: flex-start);
-    // border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 2rem;
+    padding: 8rem 4rem;
+    max-width: 1140px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #eee;
+    border-radius: 2rem;
 
     .wish_card {
-        // border: 1px solid blue;
         @include g.flex($fd: column, $ai: unset);
+        max-width: 20rem;
 
         .wish_card_imgbox {
             @include g.flex($jc: center, $ai: center);
-            width: 20rem;
-            height: 20rem;
+            width: 25rem;
+            height: 25rem;
             border-radius: 1rem;
             border: 1px solid #eee;
+            background: white;
             overflow: hidden;
             cursor: pointer;
 
@@ -22,12 +31,15 @@
             }
 
             img {
-                width: 70%;
-                height: 70%;
+                width: 50%;
+                height: 50%;
                 object-fit: contain;
             }
         }
         .wish_card_textbox {
+            width: 25rem;
+            padding: 0 1rem;
+            cursor: pointer;
             .wish_card_price {
                 @include g.flex();
             }
