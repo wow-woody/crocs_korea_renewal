@@ -1,3 +1,5 @@
+export function CursorEffect() {
+
 const canvas = document.querySelector(".product_card");
 const ctx = canvas.getContext("2d");
 
@@ -90,4 +92,6 @@ function update(t) {
 function setupCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+}
+
 }

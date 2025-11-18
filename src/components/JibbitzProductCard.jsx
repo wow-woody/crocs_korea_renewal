@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { use, useEffect } from 'react';
 import { collaboAuthStore } from '../store/authStore';
+import { CursorEffect } from './CursorEffect';
+import './CursorEffect.scss';
 
 const JibbitzProductCard = ({ sendItem }) => {
+    useEffect(() => {
+        const cleanup = CursorEffect();
+        return () => {
+            if (cleanup) cleanup();
+        };
+    })
     return (
         <div className="product_card">
             <div className="img-box">
