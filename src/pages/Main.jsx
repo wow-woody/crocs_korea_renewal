@@ -21,10 +21,13 @@ const Main = () => {
           <MainSlider />
         </section>
         <section style={{ position: "relative" }}>
-          <MainCategory showTopPopup={currentIndex === 1} />
+          {/* <section> */}
+          {/* <MainCategory showTopPopup={currentIndex === 1} /> */}
+          <MainCategory />
         </section>
-        <section>
+        <section className="showDot">
           <SlideCircle showDot={currentIndex === 2} />
+          {/* <SlideCircle /> */}
         </section>
         <section>
           <JibbitzCollaboSwiper />

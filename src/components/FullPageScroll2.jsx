@@ -28,7 +28,7 @@ const FullPageScroll = ({ children, onSectionChange }) => {
     // 스크롤 중복 방지 (300~500ms 사이)
     setTimeout(() => {
       isScrolling.current = false;
-    }, 300);
+    }, 400);
   };
 
   // currentIndex 변경되면 섹션 이동

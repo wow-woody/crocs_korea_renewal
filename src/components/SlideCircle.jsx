@@ -17,27 +17,58 @@ const SlideCircle = ({ showDot }) => {
     }, []);
 
     // 모든 슬라이드의 기본 컬러 이름을 미리 저장
-    const defaultColor = items.map((s) =>
-        Array.isArray(s.color) ? s.color[s.color.length - 1] : ""
-    );
+    // const defaultColor = items.map((s) =>
+    //     Array.isArray(s.color) ? s.color[s.color.length - 1] : ""
+    // );
 
     //  각 슬라이드별 선택 상태를 관리하는 state (배열)
-    const [selectedColorNames, setSelectedColorNames] = useState(defaultColor);
+    const [selectedColorNames, setSelectedColorNames] = useState([]);
 
-    // 슬라이드 하나의 색을 변경할 때 호출
+    // selectedColorNames 초기화
+    useEffect(() => {
+        if (items.length > 0) {
+            const defaultColor = items.map((s) =>
+                Array.isArray(s.color) ? s.color[s.color.length - 1] : ""
+            );
+            setSelectedColorNames(defaultColor);
+
+            // 디버깅: 컬러 리스트 확인
+            console.log("Items color data:", items.map(item => ({
+                product: item.product,
+                color: item.color
+            })));
+        }
+    }, [items]);
+
+    // 슬라이드 하나씩 색을 변경할 때 호출
     const changeColor = (slideIndex, colorName) => {
         setSelectedColorNames((prev) => {
             const updated = [...prev];
 
-            // 문자열 양끝 공백 제거
             updated[slideIndex] = colorName.trim();
             return updated;
         });
     };
 
+    // 컬러선택 함수로 바꿔서
+    const getSelectedColor = (slide, index) => {
+        // 1) selectedColorNames가 초기화 안 된 경우
+        if (selectedColorNames.length === 0) {
+            // slide.color가 있는 경우 → 기본값 반환
+            if (Array.isArray(slide.color)) {
+                return slide.color[slide.color.length - 1];
+            }
+            // 기본값 없음 → fallback
+            return "#444444";
+        }
+
+        // 2) selectedColorNames가 초기화된 후 → 변경된 값 사용
+        return selectedColorNames[index] || "#444444";
+    };
+
     // 자동 재생
     useEffect(() => {
-        if (isPlaying) {
+        if (isPlaying && items.length > 0) {
             intervalRef.current = setInterval(() => {
                 setCurrentSlide((prev) => (prev + 1) % items.length);
             }, 5000);
@@ -106,13 +137,17 @@ const SlideCircle = ({ showDot }) => {
                                             : Math.abs(position) <= 1
                                             ? 1 - Math.abs(position) * 0.5
                                             : 0;
-
-                                    // 컬러선택 이름변경
-                                    const selectedColor = selectedColorNames[index];
+                                    //컬러선택 이름변경
+                                    // const selectedColor =
+                                    //     (selectedColorNames.length > 0 &&
+                                    //         selectedColorNames[index]) ||
+                                    //     slide.color?.[slide.color.length - 1] ||
+                                    //     "#444444";
+                                    const selectedColor = getSelectedColor(slide, index);
 
                                     // 컬러 순서 바꾸기
                                     const sortedColors = Array.isArray(slide.color)
-                                        ? slide.color
+                                        ? [...slide.color].sort(() => Math.random() - 0.5) // 간단 버전
                                         : [];
 
                                     return (
@@ -153,7 +188,7 @@ const SlideCircle = ({ showDot }) => {
                                                         </strong>
                                                         {/* 컬러설정 */}
                                                         <div className='s_color'>
-                                                            {/* {selectedColor} */}
+                                                            {/* 신발컬러 선택 */}
                                                             <div className='swatches'>
                                                                 <ul className='swatches_list'>
                                                                     {Array.isArray(slide.color) &&

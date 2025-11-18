@@ -25,25 +25,9 @@ const MainCategory = ({ showTopPopup }) => {
 
   return (
     <section className="category category_wrap">
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          zIndex: 9999,
-        }}
-      >
+      <div style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 9999,}}>
         {showTopPopup && (
-          <div
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100%",
-              zIndex: 9999,
-            }}
-          >
+          <div style={{ position: "relative" }}>
             <TopPopup />
           </div>
         )}
