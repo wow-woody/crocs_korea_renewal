@@ -1,95 +1,88 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./scss/FullPageScroll.scss";
 
-const FullPageScroll = ({ children }) => {
+const FullPageScroll = ({ children, onSectionChange }) => {
   const containerRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [sections, setSections] = useState([]);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const isScrolling = useRef(false);
 
-  // mount 후 각 section 찾아서 배열로 저장
+  // 모든 요소(section, footer 포함) 수집 후 "묶어서" 섹션으로 정리
   useEffect(() => {
-    if (containerRef.current) {
-      const sec = containerRef.current.querySelectorAll("section, footer");
-      setSections(Array.from(sec));
-    }
+    if (!containerRef.current) return;
+    const sec = Array.from(containerRef.current.children).filter(
+      (el) =>
+        el.tagName.toLowerCase() === "section" ||
+        el.tagName.toLowerCase() === "footer"
+    );
+    setSections(sec);
+    // 처음들어왔을때 스크롤 초기화
+    window.scrollTo(0, 0);
   }, [children]);
 
-  // footer offsetTop 찍기 (디버그용)
-  useEffect(() => {
-    if (!footerRef) return;
-    if (!footerRef.current) return;
-    console.log("footer offsetTop:", footerRef.current.offsetTop);
-  }, [footerRef]);
-
+  // 스크롤 이동 함수
   const scrollToSection = (index) => {
     if (!sections[index]) return;
-    setIsScrolling(true);
-
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-
-    window.scrollTo({
-      top: Math.min(sections[index].offsetTop, maxScroll),
-      behavior: "smooth",
-    });
-
-    setTimeout(() => setIsScrolling(false), 300);
+    isScrolling.current = true;
+    sections[index].scrollIntoView({ behavior: "smooth" });
+    // 스크롤 중복 방지 (300~500ms 사이)
+    setTimeout(() => {
+      isScrolling.current = false;
+    }, 400);
   };
 
+  // currentIndex 변경되면 섹션 이동
   useEffect(() => {
-    if (sections.length > 0) {
-      scrollToSection(currentIndex);
-    }
+    if (sections.length === 0) return;
+    scrollToSection(currentIndex);
+    // Main.jsx 현재 섹션 전달
+     if (onSectionChange) {onSectionChange(currentIndex, sections[currentIndex]);}
   }, [currentIndex, sections]);
 
-  // Wheel Event
+  // 마우스휠 이벤트
   useEffect(() => {
     const handleWheel = (e) => {
-      if (isScrolling) return;
-
+      e.preventDefault();
+      if (isScrolling.current) return;
       if (e.deltaY > 0 && currentIndex < sections.length - 1) {
+        // 스크롤 아래로
         setCurrentIndex((prev) => prev + 1);
       } else if (e.deltaY < 0 && currentIndex > 0) {
+        // 스크롤 위로
         setCurrentIndex((prev) => prev - 1);
       }
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
-  }, [currentIndex, isScrolling, sections]);
+  }, [currentIndex, sections]);
 
-  // Touch Event
+  // 터치 스크롤 (모바일)
   useEffect(() => {
     let startY = 0;
-
-    const handleTouchStart = (e) => {
-      startY = e.touches[0].clientY;
-    };
+    const handleTouchStart = (e) => (startY = e.touches[0].clientY);
     const handleTouchEnd = (e) => {
-      if (isScrolling) return;
+      if (isScrolling.current) return;
       const diff = startY - e.changedTouches[0].clientY;
-
       if (Math.abs(diff) < 50) return;
-
-      if (diff > 0 && currentIndex < sections.length - 1)
+      if (diff > 0 && currentIndex < sections.length - 1) {
         setCurrentIndex((prev) => prev + 1);
-      else if (diff < 0 && currentIndex > 0)
+      } else if (diff < 0 && currentIndex > 0) {
         setCurrentIndex((prev) => prev - 1);
+      }
     };
 
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [currentIndex, isScrolling, sections]);
+  }, [currentIndex, sections]);
 
   return (
     <div className="fullpage-container" ref={containerRef}>
-      {/* {React.Children.map(children, (child, index) => (
-        <div className="fullpage-section">{child}</div>
-      ))} */}
       {children}
     </div>
   );
