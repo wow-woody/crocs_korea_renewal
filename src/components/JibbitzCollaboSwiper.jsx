@@ -8,6 +8,9 @@ import 'swiper/css';
 import './scss/jibbitzcollaboswiper.scss';
 import Title from './Title';
 
+import './CursorEffect.js';
+import './CursorEffect.scss'
+
 const JibbitzCollaboSwiper = () => {
     const { disneyItems } = collaboAuthStore();
     return (
