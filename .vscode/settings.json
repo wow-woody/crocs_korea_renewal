@@ -42,5 +42,7 @@
         "*.gif": "image",
         "*.mp4": "video"
     },
-    "editor.largeFileOptimizations": false
+    "editor.largeFileOptimizations": false,
+    "prettier.jsxSingleQuote": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
