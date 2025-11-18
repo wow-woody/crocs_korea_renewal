@@ -1,0 +1,47 @@
+@use '../../App.scss' as g;
+
+.wish_card_wrap {
+    @include g.flex($jc: flex-start);
+    // border: 1px solid red;
+
+    .wish_card {
+        // border: 1px solid blue;
+        @include g.flex($fd: column, $ai: unset);
+
+        .wish_card_imgbox {
+            @include g.flex($jc: center, $ai: center);
+            width: 20rem;
+            height: 20rem;
+            border-radius: 1rem;
+            border: 1px solid #eee;
+            overflow: hidden;
+            cursor: pointer;
+
+            &:hover {
+                border: 1px solid g.$mainColor;
+            }
+
+            img {
+                width: 70%;
+                height: 70%;
+                object-fit: contain;
+            }
+        }
+        .wish_card_textbox {
+            .wish_card_price {
+                @include g.flex();
+            }
+            p {
+                :nth-child(2) {
+                    color: #9e9e9e;
+                    text-decoration: line-through;
+                    font-size: 1.4rem;
+                }
+            }
+            .price_bottom {
+                color: g.$mainColor;
+                font-weight: 600;
+            }
+        }
+    }
+}

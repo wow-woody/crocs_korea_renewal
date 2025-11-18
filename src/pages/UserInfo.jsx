@@ -3,6 +3,7 @@ import Title from '../components/Title';
 import UserInfoTop from '../components/UserInfoTop';
 import './scss/userinfo.scss';
 import { Link } from 'react-router-dom';
+import WishListCard from '../components/WishListCard';
 
 const UserInfo = () => {
     return (
@@ -24,7 +25,7 @@ const UserInfo = () => {
                     <div className="user_menu_top">
                         {/* 주문 처리 현황 */}
                         <h4>주문 처리 현황</h4>
-                        <Link>더보기</Link>
+                        <Link to="/orderhistory">더보기</Link>
                     </div>
                     <hr />
                     <div className="user_menu_bottom">주문 처리 현황 영역</div>
@@ -42,10 +43,14 @@ const UserInfo = () => {
                     <div className="user_menu_top">
                         {/* 위시리스트 */}
                         <h4>WishList</h4>
-                        <Link>더보기</Link>
+                        <Link to="/wishlist">더보기</Link>
                     </div>
                     <hr />
-                    <div className="user_menu_bottom">wishlist 영역</div>
+                    <div className="user_menu_bottom">
+                        <ul>
+                            <WishListCard />
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
