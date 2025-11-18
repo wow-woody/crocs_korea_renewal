@@ -15,6 +15,13 @@
         outline: 1px solid #cccccc;
         box-shadow: 0 0 12px 2.5px rgba(0, 0, 0, 0.08);
         transform: translateY(-0.4rem);
+        
+        .product-card__color,
+        .product-card__size {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0;
+        }
     }
 
     &__img_info_wrap {
