@@ -33,10 +33,10 @@ const SlideCircle = ({ showDot }) => {
             setSelectedColorNames(defaultColor);
 
             // 디버깅: 컬러 리스트 확인
-            console.log("Items color data:", items.map(item => ({
-                product: item.product,
-                color: item.color
-            })));
+            // console.log("Items color data:", items.map(item => ({
+            //     product: item.product,
+            //     color: item.color
+            // })));
         }
     }, [items]);
 
