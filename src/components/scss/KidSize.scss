@@ -1,16 +1,19 @@
+@use '../../App.scss' as g;
+
 .crocs_kid_size_table {
   max-width: 700px;
   height: 100vh;
-  margin: 300px auto;
+  margin: 0 auto;
   padding: 2.4rem;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 0.8rem;
   font-size: 1.6rem;
 
   .size_table_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    @include g.flex();
     margin-bottom: 2rem;
     padding-bottom: 1.6rem;
 
@@ -21,7 +24,8 @@
       color: black;
 
       .mini_title {
-        color: #97C24E;
+        // color: #97C24E;
+        color: g.$mainColor;
         font-size: 3.2rem;
       }
     }
@@ -120,6 +124,7 @@
           background-color: #63ec07;
         }
         &.kids_header {
+          // color: g.$mainColor;
           background-color: #97C24E;
         }
       }
@@ -227,14 +232,16 @@
     }
 
     .measure_steps {
-      display: flex;
-      flex-direction: column;
+      // display: flex;
+      // flex-direction: column;
+      @include g.flex($fd:column);
       gap: 2.4rem;
 
       .step_item {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
+        // display: flex;
+        // gap: 2rem;
+        // align-items: center;
+        @include g.flex($gap: 2rem, $ai: center);
         padding: 2rem;
         background-color: #f8f9fa;
         border-radius: 0.8rem;
@@ -243,9 +250,10 @@
           flex-shrink: 0;
           width: 20rem;
           height: 15rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          // display: flex;
+          // align-items: center;
+          // justify-content: center;
+          @include g.flex($jc: center, $ai: center);
           background-color: #fff;
           border-radius: 0.6rem;
           padding: 1rem;

@@ -1,0 +1,38 @@
+// WomenProductPrice 컴포넌트 스타일
+@use '../../App.scss' as g;
+
+.product-card__price_wrap {
+    width: 32.8rem;
+    font-family: 'all-round-gothic', sans-serif;
+
+    .product-card__price {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+
+        &_dc_rate {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: g.$subColor;
+        }
+
+        &_slel {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #d70000;
+        }
+
+        &_breadcrumbs__line {
+            width: 0.13rem;
+            height: 0.9rem;
+            background-color: #d9d9d9;
+        }
+
+        &_cost {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #ebebeb;
+            text-decoration: line-through;
+        }
+    }
+}

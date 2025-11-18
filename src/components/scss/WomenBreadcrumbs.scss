@@ -1,0 +1,73 @@
+// WomenBreadcrumbs 컴포넌트 스타일
+@use '../../App.scss' as g;
+
+%link-base {
+    @include g.flex($jc: center, $ai: center, $gap: 0.4rem);
+    height: 100%;
+    background-color: #f6faeb;
+    border-radius: 0.4rem;
+}
+
+.breadcrumbs {
+    &__list {
+        @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
+        font-size: 1.2rem;
+        font-weight: 400;
+        height: 2.5rem;
+
+        // 섹션 구분자 스타일
+        &--section {
+            width: 0.8rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &--home,
+        &--women,
+        &--Fur-lined {
+            &_link {
+                @extend %link-base;
+                width: fit-content;
+                height: 100%;
+                padding: 0 10px;
+                background-color: #f6faeb;
+                border-radius: 0.4rem;
+                img {
+                    width: 0.8rem;
+                }
+            }
+        }
+        
+        &--home {
+            &_link {
+                @extend %link-base;
+                width: 2.5rem;
+                padding: 0;
+                img {
+                    width: 1.3rem;
+                }
+            }
+        }
+
+        &--Fur-lined {
+            &_link {
+                @extend %link-base;
+                gap: 0.6rem;
+            }
+        }
+    }
+
+    &__title {
+        width: 26.8rem;
+        margin-top: 1.6rem;
+        margin-bottom: 2.4rem;
+
+        h2 {
+            width: 100%;
+            font-size: 3.2rem;
+            font-weight: 600;
+        }
+    }
+}
