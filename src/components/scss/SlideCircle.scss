@@ -528,8 +528,8 @@ body.open {
 
 .circle_dots {
   position: fixed;
-  top: 60%;
-  right: 50px; // 오른쪽 끝 기준
+  top: 50%;
+  right: 30px; // 오른쪽 끝 기준
   transform: translateY(-50%);
   padding: 30px 15px; // dot 수가 늘어나면 자동으로 커짐
   width: 50px;
@@ -540,7 +540,8 @@ body.open {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 30px; // ← 위, 아래 둥글게 (정사각/직사각 자동)
   z-index: 50;
-  height: calc(var(--vh, 1vh) * 100);
+  // height: calc(var(--vh, 1vh) * 100);
+
 
   //   &.off {
   //     opacity: 0;
