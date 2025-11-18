@@ -12,7 +12,6 @@ const WishList = () => {
         <div className="sub_page">
             <div className="inner">
                 <Title title="WishList" />
-                위시리스트 목록 테스트여용
                 <WishListCard />
             </div>
         </div>
