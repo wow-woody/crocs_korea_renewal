@@ -1,0 +1,32 @@
+@use '../../App.scss' as g;
+
+.order_list_card {
+    border: 1px solid #eee;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: grid;
+
+    .order_list_top {
+        @include g.flex();
+        .order_list_top_left {
+            @include g.flex();
+        }
+    }
+    .order_list_middle {
+        @include g.flex($jc: flex-start, $gap: 4rem);
+        .order_list_imgbox {
+            max-width: 10rem;
+            max-height: 10rem;
+            border-radius: 1rem;
+            border: 1px solid #eee;
+            text-align: center;
+            line-height: 10rem;
+            img {
+                width: 70%;
+            }
+        }
+    }
+    .order_list_bottom {
+        @include g.flex();
+    }
+}
