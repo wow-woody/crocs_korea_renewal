@@ -1,12 +1,17 @@
 'use no memo';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { wishListStore } from '../store/wishListStore';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './scss/wishAddPopup.scss';
 
 const WishAddPopup = () => {
     const { popUp, hidePopup } = wishListStore();
+    const location = useLocation();
+
+    useEffect(() => {
+        hidePopup();
+    }, [location.pathname, hidePopup]);
 
     if (!popUp.show) return null;
 
