@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // import React, { useState } from 'react';
 // import './scss/WomenComponents.scss';
 
@@ -72,6 +73,9 @@ export default function SizeMenu({ sizes = [], selectedSize, onSizeSelect }) {
 
 =======
 import React from 'react';
+=======
+import React, { useState } from 'react';
+>>>>>>> fea44c2 (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v04)
 import './scss/WomenComponents.scss';
 
 <<<<<<< HEAD:src/components/SizeMenu.jsx
@@ -79,7 +83,17 @@ const SizeMenu = ({ sizes = ['210', '220', '230', '240', '250', '260', '265', '2
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
 =======
 export default function WomenSizeMenu({ sizes = ['210', '220', '230', '240', '250', '260', '265', '270', '280', '290', '300', '310'] }) {
+<<<<<<< HEAD
 >>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenSizeMenu.jsx
+=======
+    const [activeSize, setActiveSize] = useState(null);
+
+    const handleClick = (size, e) => {
+        e.preventDefault();
+        setActiveSize(activeSize === size ? null : size);
+    };
+
+>>>>>>> fea44c2 (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v04)
     return (
         <div className="size-menu">
             <div className="size-menu__wrap">
@@ -104,6 +118,7 @@ export default function WomenSizeMenu({ sizes = ['210', '220', '230', '240', '25
                     {sizes.map((size) => (
                         <li key={size} className="size-menu__item">
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <a
                                 href="#"
                                 className={`size-menu__link btn-menu-style ${
@@ -116,6 +131,13 @@ export default function WomenSizeMenu({ sizes = ['210', '220', '230', '240', '25
                                 </button>
 =======
                             <a href="#" className="size-menu__link btn-menu-style">
+=======
+                            <a 
+                                href="#" 
+                                className={`size-menu__link btn-menu-style ${activeSize === size ? 'active' : ''}`}
+                                onClick={(e) => handleClick(size, e)}
+                            >
+>>>>>>> fea44c2 (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v04)
                                 <button className="size-menu__button btn-menu__button">{size}</button>
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
                             </a>
