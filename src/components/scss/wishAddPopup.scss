@@ -1,0 +1,21 @@
+@use '../../App.scss' as g;
+
+.wish_popup_wrap {
+    @include g.flex($jc: center, $fd: column);
+    width: 40rem;
+    height: 20rem;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    .popup_btn_wrap {
+        @include g.flex();
+        button {
+            background: g.$subColor;
+            border-radius: 5rem;
+            color: g.$mainColor;
+            &:hover {
+                background: g.$mainColor;
+                color: g.$subColor;
+            }
+        }
+    }
+}

@@ -1,0 +1,815 @@
+@use "../../../App.scss" as g;
+
+.order-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.main-title{
+  text-align: center;
+}
+
+.order-content {
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  gap: 4rem;
+}
+
+.order-left {
+  width: 100%;
+}
+
+.order-right {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+
+.order-progress {
+  max-width: 600px;
+  margin: 8rem auto;
+  padding: 1rem 0;
+}
+
+.progress-bar {
+  @include g.flex($jc: center, $ai: flex-start);
+  position: relative;
+}
+
+.progress-step {
+  @include g.flex($jc: center, $ai: center, $fd: column);
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  
+  &.completed,
+  &.current {
+    .step-circle {
+      background-color: g.$mainColor;
+      border-color: g.$mainColor;
+    }
+    
+    .step-label {
+      color: #000;
+      font-weight: 700;
+    }
+  }
+  
+  &.pending {
+    .step-circle {
+      background-color: #fff;
+      border-color: #ccc;
+    }
+    
+    .step-label {
+      color: #ccc;
+      font-weight: 400;
+    }
+  }
+}
+
+.step-circle {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  border: 0.3rem solid g.$mainColor;
+  background-color: g.$mainColor;
+  transition: all 0.3s ease;
+}
+
+.step-label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  white-space: nowrap;
+  margin-top: 0.8rem;
+}
+
+.progress-line {
+  flex: 0 0 18rem;
+  height: 0.3rem;
+  margin: 0 1rem;
+  margin-top: 0.6rem;
+  
+  &.active {
+    background-color: g.$mainColor;
+  }
+  
+  &.inactive {
+    background-color: #ccc;
+  }
+}
+
+.order-form {
+  width: 100%;
+}
+
+.form-section {
+  height: auto !important;
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #e0e0e0;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+.section-description {
+  font-size: 1.4rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.label-row {
+  @include g.flex($jc: space-between, $ai: center);
+}
+
+.form-label {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.8rem;
+
+  
+  &.required::after {
+    content: ' *';
+    color: g.$mainColor;
+  }
+}
+
+.mandatory {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #666;
+  margin-bottom: 0.8rem;
+  
+  span {
+    color: g.$mainColor;
+  }
+}
+
+.form-input {
+  width: 100%;
+  height: 4rem;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.4rem;
+  border: 1px solid #ddd;
+  border-radius: 5rem;
+  transition: border-color 0.2s;
+  
+  &:focus {
+    outline: none;
+    border-color: g.$mainColor;
+  }
+  
+  &::placeholder {
+    color: #aaa;
+  }
+}
+
+.form-select {
+  padding: 1rem;
+  font-size: 1.3rem;
+  border: 1px solid #ddd;
+  border-radius: 5rem;
+  background-color: white;
+  cursor: pointer;
+  
+  &:focus {
+    outline: none;
+    border-color: g.$mainColor;
+  }
+}
+
+// Email
+.email-input-group {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.email-separator {
+  color: #333;
+  font-weight: 500;
+}
+
+.email-select {
+  width: 12rem;
+  padding: 1.2rem 1.5rem;
+}
+
+// Phone
+.phone-input-group {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.phone-input {
+  width: 100%;
+  text-align: center;
+}
+
+.phone-separator {
+  color: #333;
+  font-weight: 500;
+}
+
+
+.delivery-type-group {
+  @include g.flex($jc: flex-start, $ai: center, $gap: 3rem);
+  margin-bottom: 2.5rem;
+}
+
+.radio-label {
+  @include g.flex($jc: flex-start, $ai: center, $gap: 0.8rem);
+  cursor: pointer;
+  font-size: 1.4rem;
+  
+  input[type="radio"] {
+    cursor: pointer;
+  }
+}
+
+.radio-text {
+  color: #333;
+}
+
+// Address
+.address-input-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-postcode {
+  padding: 1.2rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  white-space: nowrap;
+  
+  &:hover {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+.address-input {
+  margin-bottom: 1rem;
+}
+
+.detail-address-input {
+  margin-bottom: 0.5rem;
+}
+
+.address-notice {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #999;
+  margin-top: 0.5rem;
+  text-indent: 1rem;
+}
+
+// Password
+.password-message {
+  font-size: 1.3rem;
+  margin-top: 0.8rem;
+  
+  &.valid {
+    color: #27ae60;
+  }
+  
+  &.invalid {
+    color: #e74c3c;
+  }
+}
+
+// Coupon
+.coupon-input-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.btn-coupon {
+  padding: 1.2rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  white-space: nowrap;
+  
+  &:hover {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+.coupon-message {
+  font-size: 1.3rem;
+  color: #27ae60;
+  margin-top: 0.8rem;
+}
+
+.discount-amount {
+  @include g.flex($jc: space-between, $ai: center);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+  font-size: 1.4rem;
+}
+
+.discount-label {
+  color: #666;
+}
+
+.discount-value {
+  font-weight: 500;
+  color: #e74c3c;
+}
+
+// Pay
+.payment-methods {
+  margin-bottom: 1.5rem;
+}
+
+.payment-btn {
+  padding: 1.2rem 3rem;
+  font-size: 1.4rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &.active {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
+  }
+}
+
+.payment-notice {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #999;
+  line-height: 1.5;
+}
+
+// Terms Agreement
+.terms-agreement {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 0.8rem;
+}
+
+.checkbox-label {
+  @include g.flex($jc: flex-start, $ai: flex-start, $gap: 0.8rem);
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  
+  input[type="checkbox"] {
+    margin-top: 0.3rem;
+    cursor: pointer;
+  }
+}
+
+.checkbox-text {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.terms-content {
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 0.4rem;
+}
+
+.terms-description {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.terms-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.3rem;
+  
+  th,
+  td {
+    padding: 1.2rem;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    width: 15rem;
+  }
+  
+  td {
+    color: #666;
+    line-height: 1.5;
+  }
+}
+
+// order
+
+.order-summary {
+  background-color: #f8f9fa;
+  padding: 2.5rem;
+  border-radius: 0.8rem;
+  position: sticky;
+  top: 2rem;
+}
+
+.summary-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+// Product
+.product-list {
+  margin-bottom: 2.5rem;
+}
+
+.product-item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  
+  &:first-child {
+    padding-top: 0;
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.product-image {
+  width: 10rem;
+  height: 10rem;
+  @include g.flex($jc: center, $ai: center);
+  background-color: white;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.5rem;
+  }
+}
+
+.product-info {
+  @include g.flex($jc: center, $ai: flex-start, $fd: column);
+}
+
+.product-name {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 0.5rem;
+  
+  // 제품명을 한 줄로 제한하고 넘치면 말줄임표 표시
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.product-option {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+// 수량조절
+.quantity-control {
+  @include g.flex($jc: flex-start, $ai: center, $gap: 1rem);
+  margin-top: 0.8rem;
+}
+
+.quantity-btn {
+  width: 2.8rem;
+  height: 2.8rem;
+  @include g.flex($jc: center, $ai: center);
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.2s;
+    
+  &:hover:not(:disabled) {
+    background-color: g.$mainColor;
+    color: white;
+    border-color: g.$mainColor;
+  }
+  
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+  
+  &:disabled {
+    background-color: #f5f5f5;
+    color: #ccc;
+    cursor: not-allowed;
+    border-color: #e0e0e0;
+  }
+}
+
+.quantity-display {
+  font-size: 1.3rem;
+  color: #666;
+  min-width: 6rem;
+  text-align: center;
+}
+
+.product-price {
+  @include g.flex($jc: flex-end, $ai: flex-end, $fd: column);
+}
+
+.price {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #000;
+  white-space: nowrap;
+}
+
+// 삭제버튼
+.remove-btn {
+  width: 2.4rem;
+  height: 2.4rem;
+  @include g.flex($jc: center, $ai: center);
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #999;
+  transition: all 0.2s;
+  margin-top: 0.8rem;
+    
+  &:hover {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 가격
+.price-summary {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.price-row {
+  @include g.flex($jc: space-between, $ai: center);
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.price-label {
+  color: #666;
+}
+
+.price-value {
+  font-weight: 500;
+  color: #000;
+}
+
+.shipping-fee {
+  .free-shipping {
+    color: black;
+    font-weight: 600;
+  }
+}
+
+.shipping-notice {
+  font-size: 1.2rem;
+  color: #999;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  text-align: right;
+}
+
+.discount {
+  color: red;
+}
+
+.total-row {
+  padding-top: 1.5rem;
+  border-top: 2px solid #333;
+  margin-top: 0.5rem;
+}
+
+.total-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #000;
+}
+
+.total-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: g.$mainColor;
+}
+
+// Checkout
+.btn-checkout {
+  width: 100%;
+  padding: 1.8rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, g.$mainColor 0%, #B0D96E 100%);
+  border: none;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 15px rgba(102, 222, 27, 0.3);
+  cursor: pointer;
+  transition: all 0.2s;
+    
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 222, 27, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.order-complete-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: white;
+  border-radius: 0.8rem;
+}
+
+.complete-icon {
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto 1.5rem;
+  background-color: #27ae60;
+  color: white;
+  font-size: 3.6rem;
+  border-radius: 50%;
+  @include g.flex($jc: center, $ai: center);
+}
+
+.complete-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+//반응형
+@media (max-width: 1024px) {
+  .order-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .order-right {
+    position: static;
+  }
+  
+  .email-input-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .email-separator {
+    display: none;
+  }
+  
+  .email-select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .order-title {
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+  }
+    
+  .address-input-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .btn-postcode {
+    width: 100%;
+  }
+  
+  .coupon-input-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .btn-coupon {
+    width: 100%;
+  }
+  
+  .label-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+    
+  .product-item {
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+  }
+  
+  .product-image {
+    width: 8rem;
+    height: 8rem;
+  }
+  
+  .product-price {
+    grid-column: 2;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .remove-btn {
+    margin-top: 0;
+  }
+.order-progress {
+    margin: 4rem auto;
+    padding: 0.5rem 0;
+  }
+  
+  .progress-step {
+    .step-circle {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-width: 0.2rem;
+    }
+    
+    .step-label {
+      font-size: 1.1rem;
+      margin-top: 0.6rem;
+    }
+  }
+  
+  .progress-line {
+    flex: 0 0 9rem;
+    height: 0.3rem;
+    margin: 0 0.4rem;
+  }
+}  

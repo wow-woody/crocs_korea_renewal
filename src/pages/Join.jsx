@@ -1,3 +1,5 @@
+'use no memo';
+
 import React from 'react';
 import Title from '../components/Title';
 import LoginSns from '../components/LoginSns';

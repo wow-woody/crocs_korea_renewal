@@ -1,3 +1,5 @@
+@use '../../App.scss' as g;
+
 .crocs_size_table {
     max-width: 700px;
     height: 100vh;
@@ -8,9 +10,10 @@
     font-size: 1.6rem;
 
     .size_table_header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        // display: flex;
+        // justify-content: space-between;
+        // align-items: center;
+        @include g.flex();
         margin-bottom: 2rem;
         padding-bottom: 1.6rem;
         border-bottom: 0.2rem solid #ccc;
@@ -19,10 +22,11 @@
             margin: 0;
             font-size: 2.4rem;
             font-weight: 700;
-            color: #333;
+            color: #222;
 
             .mini_title {
-                color: #97c24e;
+                // color: #97c24e;
+                color: g.$mainColor;
                 font-size: 3.2rem;
             }
         }
@@ -36,9 +40,10 @@
             padding: 0;
             width: 3.2rem;
             height: 3.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+            @include g.flex($jc: center, $ai: center);
             transition: color 0.2s ease;
 
             &:hover {
