@@ -1,7 +1,3 @@
-// ============================================
-// Women 컴포넌트 통합 스타일 시트
-// ============================================
-
 @use '../../App.scss' as g;
 
 // ============================================
@@ -699,7 +695,7 @@
     
     max-height: 0;
     opacity: 0;
-    overflow: hidden;
+    overflow: visible;
     transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
     
     &__title--wrap {
@@ -718,6 +714,7 @@
         align-items: center;
         flex-direction: row;
         gap: 0.8rem;
+        overflow: visible;
     }
 }
 
