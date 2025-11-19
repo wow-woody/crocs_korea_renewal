@@ -28,6 +28,10 @@ body {
   font-size: 1.6rem;
   color: #222;
   margin: 0;
+}
+
+// 메인에서 스크롤바숨기기
+body.no-scroll {
   overflow: hidden;
 }
 
