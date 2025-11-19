@@ -14,7 +14,7 @@ const WishListCard = () => {
     const [currentPage, setCurrentpage] = useState(1);
     // 전체 페이지수 계산하기 - 보여질 아이템개수 / 전체아이템개수의 올림 Math.ceil
     const totalPage = Math.ceil(wishLists.length / itemPerPage);
-    // 4개 보여주기 // 특정위치를 잘라서 보여주기
+    // 특정위치를 잘라서 보여주기
     const start = (currentPage - 1) * itemPerPage;
     const currentItems = wishLists.slice(start, start + itemPerPage);
 

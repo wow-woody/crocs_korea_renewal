@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Title from '../components/Title';
 import UserInfoTop from '../components/UserInfoTop';
 import './scss/userinfo.scss';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import WishListCard from '../components/WishListCard';
+import { wishListStore } from '../store/wishListStore';
 
 const UserInfo = () => {
+    const { wishLists } = wishListStore();
+
     return (
         <div className="sub_page">
             <div className="inner">
@@ -30,14 +33,38 @@ const UserInfo = () => {
                     <hr />
                     <div className="user_menu_bottom">주문 처리 현황 영역</div>
                 </div>
-                <div className="userinfo_order_wrap">
+                <div className="userinfo_recentOrder_wrap">
                     <div className="user_menu_top">
-                        {/* 최근 주문 내역 */}
-                        <h4>최근 주문 내역</h4>
-                        <Link>더보기</Link>
+                        {/* 최근 본 상품 */}
+                        <h4>최근 본 상품</h4>
+                        <Link to="/wishlist">더보기</Link>
                     </div>
                     <hr />
-                    <div className="user_menu_bottom">최근 주문 내역 영역</div>
+                    <div className="user_menu_bottom">
+                        {wishLists.slice(0, 4).map((item) => (
+                            <div key={item.id} className="wish_card">
+                                <div className="wish_card_imgbox">
+                                    <img src={item.imageUrl} alt={item.title} />
+                                </div>
+                                <div className="wish_card_textbox">
+                                    <p>{item.title}</p>
+                                    <div className="wish_card_price">
+                                        <p>
+                                            <span>{item.price}</span>
+                                            <span>{item.price}</span>
+                                        </p>
+                                        <p className="price_bottom">
+                                            {(
+                                                (Number(item.price) / Number(item.price)) *
+                                                100
+                                            ).toFixed(0)}
+                                            %
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className="userinfo_wishlist_wrap">
                     <div className="user_menu_top">
@@ -47,9 +74,29 @@ const UserInfo = () => {
                     </div>
                     <hr />
                     <div className="user_menu_bottom">
-                        <ul>
-                            <WishListCard />
-                        </ul>
+                        {wishLists.slice(0, 4).map((item) => (
+                            <div key={item.id} className="wish_card">
+                                <div className="wish_card_imgbox">
+                                    <img src={item.imageUrl} alt={item.title} />
+                                </div>
+                                <div className="wish_card_textbox">
+                                    <p>{item.title}</p>
+                                    <div className="wish_card_price">
+                                        <p>
+                                            <span>{item.price}</span>
+                                            <span>{item.price}</span>
+                                        </p>
+                                        <p className="price_bottom">
+                                            {(
+                                                (Number(item.price) / Number(item.price)) *
+                                                100
+                                            ).toFixed(0)}
+                                            %
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
