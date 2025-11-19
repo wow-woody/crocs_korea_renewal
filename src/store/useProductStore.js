@@ -1,38 +1,41 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { Prouducts } from "../data/CrocsProductsData.js";
 
 export const useProductStore = create(
     persist((set, get) => ({
+
 
         // 삼품목록을 저장할 배열 // 새로고침하면 빈칸이 될수잇음
         items: [],
 
         //검색어를 저장할 변수 - zustant 전역변수로 만들기
         searchWord: "",
-
         // 2. 메서드
         // 검색어를 변경할 메서드 
         setSearchWord: (word) => set({ searchWord: word }),
         clearSearch: () => set({ searchWord: "" }),
 
+
+
         // ==== 외부 데이터를 불러서 ====
         onFetchItems: async () => {
-            // 저장을 하기전에 items데이터를 부르면 에러발생
-            // 그래서 배열에 데이터가 들어 있는지를 체크하여 있으면 배열 데이터를 그냥 사용
+            //     // 저장을 하기전에 items데이터를 부르면 에러발생
+            //     // 그래서 배열에 데이터가 들어 있는지를 체크하여 있으면 배열 데이터를 그냥 사용
             const existing = get().items;
             if (existing.length > 0) return;
 
-            // 없으면 외부 데이터 불러와서 items 배열에 넣기
-            // fetch('https://fakestoreapi.com/products')
-            //     .then(response => response.json())
-            //     .then(data => console.log(data));
-            // 데이터를 다 불러올때까지 기다리기 위해서 await를 넣어서 바꿔주기
-            const res = await fetch('https://fakestoreapi.com/products');
+            // 상품 불러오기
+            const res = {
+                json: async () => Prouducts,
+            };
+
             const data = await res.json();
             console.log(data);
-            set({ items: data }) // items안에 data를 넣어라
-            // set ({items: jacksonproduct})
+
+            set({ items: data })
         },
+
 
         // ==========================================
         // 불러진 데이터를 카테고리별로 분리하기 - filter
@@ -66,13 +69,13 @@ export const useProductStore = create(
             // // 사이즈 다른 요소를 담기로 새로 담기
             // set((state) => {
             //     const existing = state.cartItems.find(
-            //         (item) => item.id === product.id && item.size === product.size
+            //         (item) => item.id === product.id && item.color === product.color
             //     )
             //     if (existing) {
             //         // 다른 제품은 그냥 담고, 같은 제품은 개수를 변경
             //         // set을 생략하면 state. 사용
             //         updateCart = state.cartItems.map((item) =>
-            //             (item.id === product.id && item.size === product.size) ?
+            //             (item.id === product.id && item.color === product.color) ?
             //                 // 기존의 있는 아이템복사, 카운트 속성은 기존카운트값+새로운카운트값
             //                 { ...item, count: item.count + product.count }
             //                 : item
@@ -95,7 +98,7 @@ export const useProductStore = create(
             // 배열조작 3가지 map, filter(조건에 맞는 요소를 찾아서 새로운 배열만들기), find
             // find :조건에 맞는 요소가 있으면 true, 없으면 false
             const existing = cart.find((item) =>
-                item.id === product.id && item.size === product.size
+                item.id === product.id && item.color === product.color
                 // 조건에 만족하면 existing에 true값, 만족하지않으면 false값이 들어감
             )
             let updateCart;
@@ -103,9 +106,9 @@ export const useProductStore = create(
             // 같은 제품이 아닌 경우만 카트에 담기
             if (existing) {
                 updateCart = cart.map((item) =>
-                    item.id === product.id && item.size === product.size ?
+                    item.id === product.id && item.color === product.color ?
                         { ...item, count: item.count + product.count } : item
-                    // 아이템의 id가 product의 id가 같고 && 아이템의 size와 product의 size가 같으면?
+                    // 아이템의 id가 product의 id가 같고 && 아이템의 color와 product의 color가 같으면?
                     // 기존의 아이템이랑 카운트값 (아이템카운트+product카운트값을 더한값)을 넣어주기 - 수량만 증가
                     // 같지않으면 그냥 아이템만 담기
                 )
@@ -136,11 +139,11 @@ export const useProductStore = create(
         // ==========================================
         // 장바구니 제품 삭제
         // 같은 id값이 잇는 지 비교한후에 있으면 제거를 하고 남은 item을 다시 넣어주기
-        onRemoveCart: (id, size) => {
-            console.log(id, size);
+        onRemoveCart: (id, color) => {
+            console.log(id, color);
             // get, set 방식
             const cart = get().cartItems;
-            const updateCart = cart.filter((ca) => !(ca.id === id && ca.size === size))
+            const updateCart = cart.filter((ca) => !(ca.id === id && ca.color === color))
 
             // 총금액 계산
             let total = 0;
@@ -158,12 +161,12 @@ export const useProductStore = create(
 
         // ==========================================
         // 장바구니의 +
-        onPlusCount: (id, size) => {
+        onPlusCount: (id, color) => {
             console.log("증가")
             // 같은 상품만 카운트 증가 - 필요한 조건에 맞는 얘만.
             const cart = get().cartItems;
             const updateCart = cart.map((item) =>
-                item.id === id && item.size === size ? { ...item, count: item.count + 1 } : item
+                item.id === id && item.color === color ? { ...item, count: item.count + 1 } : item
             )
 
             // 총금액 계산
@@ -182,12 +185,12 @@ export const useProductStore = create(
 
         // ==========================================
         // 장바구니의 -
-        onMinusCount: (id, size) => {
+        onMinusCount: (id, color) => {
             console.log("감소")
 
             const cart = get().cartItems;
             const updateCart = cart.map((item) =>
-                item.id === id && item.size === size ?
+                item.id === id && item.color === color ?
                     { ...item, count: Math.max(1, item.count - 1) } : item
             )
 
