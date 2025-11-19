@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import WomenSizeButton from './WomenSizeButton';
-import './scss/WomenProductSizeButtons.scss';
+import SizeButton from './SizeButton';
+import './scss/WomenComponents.scss';
 
 export default function WomenProductSizeButtons({ 
     sizes = ['210', '220', '230', '240', '250', '260', '265', '270', '280', '290', '300', '310'],
@@ -21,7 +21,7 @@ export default function WomenProductSizeButtons({
             </div>
             <ul className="product-card__size--btns__wrap size-menu__wrap--size">
                 {sizes.map((size) => (
-                    <WomenSizeButton
+                    <SizeButton
                         key={size}
                         size={size}
                         isActive={activeSize === size}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/WomenPriceRange.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenPriceRange({ min, max, isActive, onClick }) {
     const formatPrice = (price) => {

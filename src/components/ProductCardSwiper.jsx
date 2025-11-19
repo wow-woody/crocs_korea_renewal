@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './scss/WomenProductCardSwiper.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenProductCardSwiper({ images = [] }) {
     const swiperRef = useRef(null);

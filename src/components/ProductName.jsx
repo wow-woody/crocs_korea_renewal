@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/WomenProductName.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenProductName({ name }) {
     return (

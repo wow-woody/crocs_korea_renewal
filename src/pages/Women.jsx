@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import WomenLeftNavigation from '../components/WomenLeftNavigation';
-import WomenProductList from '../components/WomenProductList';
+import LeftNavigation from '../components/LeftNavigation';
+import ProductList from '../components/ProductList';
 import './scss/Women.scss';
 
 const Women = () => {
@@ -59,13 +59,13 @@ const Women = () => {
     return (
         <main>
             <div className="section__wrap">
-                <WomenLeftNavigation 
+                <LeftNavigation 
                     category="여성"
                     subcategory="털안감 라인드 클로그"
                     sizes={sizes}
                     filters={filters}
                 />
-                <WomenProductList products={products} />
+                <ProductList products={products} />
             </div>
         </main>
     );

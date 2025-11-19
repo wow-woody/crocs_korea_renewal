@@ -1,6 +1,6 @@
 import React from 'react';
-import WomenProductCard from './WomenProductCard';
-import './scss/WomenProductList.scss';
+import ProductCard from './ProductCard';
+import './scss/WomenComponents.scss';
 
 export default function WomenProductList({ products = [] }) {
     return (
@@ -8,7 +8,7 @@ export default function WomenProductList({ products = [] }) {
             <div className="product-card__wrap">
                 <ul className="product-card__item_list">
                     {products.map((product) => (
-                        <WomenProductCard key={product.id} product={product} />
+                        <ProductCard key={product.id} product={product} />
                     ))}
                 </ul>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/WomenSizeMenu.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenSizeMenu({ sizes = ['210', '220', '230', '240', '250', '260', '265', '270', '280', '290', '300', '310'] }) {
     return (

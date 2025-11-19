@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/WomenColorBadge.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenColorBadge({ color, onClick }) {
     return (
