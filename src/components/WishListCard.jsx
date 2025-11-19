@@ -5,7 +5,7 @@ import { wishListStore } from '../store/wishListStore';
 import './scss/wishlistcard.scss';
 
 const WishListCard = () => {
-    const { wishLists, onRemoveWish } = wishListStore();
+    const { wishLists, onRemoveWish, removeWish, toggleRemoveWish } = wishListStore();
 
     // 페이징 처리
     // 한페이지에 보여질 개수
@@ -50,6 +50,7 @@ const WishListCard = () => {
                     <div key={item.id} className="wish_card">
                         <div className="wish_card_imgbox">
                             <img src={item.imageUrl} alt={item.title} />
+                            <span onClick={() => toggleRemoveWish(item)}>체크박스</span>
                         </div>
                         <div className="wish_card_textbox">
                             <p>{item.title}</p>
@@ -74,7 +75,9 @@ const WishListCard = () => {
                 <button onClick={() => handleGoPage(currentPage + 1)}>다음</button>
             </div>
             <div className="wish_select">
-                <button className="wish_remove_btn">선택상품 삭제</button>
+                <button className="wish_remove_btn" onClick={() => onRemoveWish()}>
+                    선택상품 삭제
+                </button>
                 <button className="wish_add_btn">장바구니 추가</button>
             </div>
         </div>

@@ -37,11 +37,42 @@ export const wishListStore = create((set, get) => ({
 
     hidePopup: () => set({ popUp: { show: false, message: '' } }),
 
-    // 위시리스트 데이터 삭제
+    // ======== 위시리스트 데이터 삭제 ========
+
+    // 위시리스트 중 선택된 내역을 저장할 배열
+    removeWish: [],
+
+    // 체크박스 체크했을 때 담기
+
+    toggleRemoveWish: (item) => {
+        const currentRemoveWish = get().removeWish;
+        const findSelectWish = currentRemoveWish.find((w) => w.id === item.id);
+
+        if (findSelectWish) {
+            //이미 있으면 제거
+            set({ removeWish: currentRemoveWish.filter((w) => w.id !== item.id) });
+        } else {
+            //없으면 추가
+            const newRemoveWish = [...currentRemoveWish, item];
+            set({ removeWish: [...currentRemoveWish, item] });
+            console.log(newRemoveWish);
+        }
+    },
+
     onRemoveWish: (item) => {
+        // console.log('위시삭제');
+        // const wish = get().removeWish;
+        // const updateWish = wish.filter((wish) => wish.id !== item.id);
+        // set({ removeWish: updateWish });
         console.log('위시삭제');
-        const wish = get().wishLists;
-        const updateWish = wish.filter((wish) => wish.id !== item.id);
-        set({ wishLists: updateWish });
+        const currentRemoveWish = get().removeWish;
+        const currentWishLists = get().wishLists;
+
+        const updateWishLists = currentWishLists.filter(
+            (wish) => !currentRemoveWish.some((r) => r.id === wish.id)
+        );
+
+        set({ wishLists: updateWishLists, removeWish: [] });
+        console.log(currentRemoveWish);
     },
 }));
