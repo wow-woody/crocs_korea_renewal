@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React from 'react';
 // import ProductCard from './ProductCard';
 // import './scss/WomenComponents.scss';
@@ -26,6 +27,13 @@ export default function ProductList() {
     // ⭐ store에서 컬러 필터 포함된 최종 필터링 결과 가져오기
     const products = useCrocsProductStore((s) => s.filteredItems());
 
+=======
+import React from 'react';
+import ProductCard from './ProductCard';
+import './scss/WomenComponents.scss';
+
+export default function WomenProductList({ products = [] }) {
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     return (
         <section className="product-card__section_wrap">
             <div className="product-card__wrap">

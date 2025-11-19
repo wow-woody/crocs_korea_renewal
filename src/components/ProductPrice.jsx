@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/WomenProductPrice.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenProductPrice({ price }) {
     const { discountedPrice, discountRate, originalPrice } = price;

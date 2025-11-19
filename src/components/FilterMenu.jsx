@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD:src/components/WomenFilterMenu.jsx
 <<<<<<< HEAD:src/components/FilterMenu.jsx
 <<<<<<< HEAD
 import './scss/WomenComponents.scss';
@@ -15,6 +16,9 @@ const FilterMenu = ({ filters = [{ color: 'pink', class: 'select-pink' }, { colo
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
 =======
 import './scss/WomenFilterMenu.scss';
+=======
+import './scss/WomenComponents.scss';
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01):src/components/FilterMenu.jsx
 
 export default function WomenFilterMenu({ filters = [{ color: 'pink', class: 'select-pink' }, { color: 'black', class: 'select-black' }] }) {
 >>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenFilterMenu.jsx

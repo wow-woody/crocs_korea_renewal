@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD:src/components/WomenBreadcrumbs.jsx
 <<<<<<< HEAD:src/components/Breadcrumbs.jsx
 <<<<<<< HEAD
 import { Link, useNavigate } from 'react-router-dom';
@@ -23,6 +24,9 @@ const Breadcrumbs = ({ category, subcategory }) => {
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
 =======
 import './scss/WomenBreadcrumbs.scss';
+=======
+import './scss/WomenComponents.scss';
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01):src/components/Breadcrumbs.jsx
 
 export default function WomenBreadcrumbs({ category, subcategory }) {
 >>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02):src/components/WomenBreadcrumbs.jsx

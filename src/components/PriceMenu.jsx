@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import WomenPriceRange from './WomenPriceRange';
-import './scss/WomenPriceMenu.scss';
+import PriceRange from './PriceRange';
+import './scss/WomenComponents.scss';
 
 export default function WomenPriceMenu({ onPriceSelect }) {
     const [activeRange, setActiveRange] = useState(null);
@@ -33,7 +33,7 @@ export default function WomenPriceMenu({ onPriceSelect }) {
                 </div>
                 <ul className="price-menu__wrap price-menu__wrap--price-range">
                     {priceRanges.map((range, index) => (
-                        <WomenPriceRange
+                        <PriceRange
                             key={index}
                             min={range.min}
                             max={range.max}

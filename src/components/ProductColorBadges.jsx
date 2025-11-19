@@ -1,6 +1,6 @@
 import React from 'react';
-import WomenColorBadge from './WomenColorBadge';
-import './scss/WomenProductColorBadges.scss';
+import ColorBadge from './ColorBadge';
+import './scss/WomenComponents.scss';
 
 export default function WomenProductColorBadges({ colors = [], onColorClick }) {
     return (
@@ -10,7 +10,7 @@ export default function WomenProductColorBadges({ colors = [], onColorClick }) {
             </div>
             <div className="color-badge__wrap">
                 {colors.map((color, index) => (
-                    <WomenColorBadge 
+                    <ColorBadge 
                         key={index} 
                         color={color}
                         onClick={() => onColorClick && onColorClick(color)}

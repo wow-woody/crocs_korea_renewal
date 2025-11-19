@@ -253,7 +253,7 @@ export default function ColorMenu() {
 // }
 =======
 import React from 'react';
-import './scss/WomenColorMenu.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenColorMenu() {
     const colors = [

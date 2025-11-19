@@ -72,8 +72,8 @@ const Women = () => {
         </main>
 =======
 import React, { useEffect } from 'react';
-import WomenLeftNavigation from '../components/WomenLeftNavigation';
-import WomenProductList from '../components/WomenProductList';
+import LeftNavigation from '../components/LeftNavigation';
+import ProductList from '../components/ProductList';
 import './scss/Women.scss';
 
 const Women = () => {
@@ -132,12 +132,13 @@ const Women = () => {
     return (
         <main>
             <div className="section__wrap">
-                <WomenLeftNavigation 
+                <LeftNavigation 
                     category="여성"
                     subcategory="털안감 라인드 클로그"
                     sizes={sizes}
                     filters={filters}
                 />
+<<<<<<< HEAD
 <<<<<<< HEAD
                 <div className="left_nav">
                     <SizeMenu />
@@ -214,6 +215,9 @@ const Women = () => {
 >>>>>>> 82841dc (2025-11-16(일) 컴포넌트 - v01)
 =======
                 <WomenProductList products={products} />
+=======
+                <ProductList products={products} />
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
             </div>
         </main>
 >>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)

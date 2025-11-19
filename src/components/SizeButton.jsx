@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/WomenSizeButton.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenSizeButton({ size, isActive, onClick, isSoldOut = false }) {
     if (isSoldOut) {

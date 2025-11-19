@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+// ============================================
+// Women 컴포넌트 통합 스타일 시트
+// ============================================
+
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
 @use '../../App.scss' as g;
 
 // ============================================
@@ -5,15 +12,40 @@
 // ============================================
 
 %link-base {
+<<<<<<< HEAD
     @include g.flex($jc: center, $gap: 0.4rem);
+=======
+    @include g.flex($jc: center, $ai: center, $gap: 0.4rem);
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     height: 100%;
     background-color: #f6faeb;
     border-radius: 0.4rem;
 }
 
 %menu_wrap-style {
+<<<<<<< HEAD
     @include g.flex($jc: null, $fd: column, $gap: 2.4rem);
     width: 100%;
+=======
+    @include g.flex($jc: null, $ai: center, $fd: column, $fw: null, $gap: 2.4rem);
+    width: 100%;
+
+    &--title_wrap,
+    .title--wrap {
+        @include g.flex($jc: space-between, $ai: center, $fd: null, $fw: null, $gap: 2rem);
+        width: 100%;
+
+        &--title .title {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        &--title__toggle .title--toggle {
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+    }
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
 }
 
 %btn-menu-style {
@@ -51,6 +83,7 @@
 // Breadcrumbs 컴포넌트
 // ============================================
 
+<<<<<<< HEAD
 // .breadcrumbs {
 //     &__list {
 //         @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
@@ -121,6 +154,78 @@
 //         text-align: center;
 //     }
 // }
+=======
+.breadcrumbs {
+    &__list {
+        @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
+        font-size: 1.2rem;
+        font-weight: 400;
+        height: 2.5rem;
+
+        // 섹션 구분자 스타일
+        &--section {
+            width: 0.8rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &--home,
+        &--women,
+        &--Fur-lined {
+            &_link {
+                @extend %link-base;
+                width: fit-content;
+                height: 100%;
+                padding: 0 10px;
+                background-color: #f6faeb;
+                border-radius: 0.4rem;
+                img {
+                    width: 0.8rem;
+                }
+            }
+        }
+        
+        &--home {
+            &_link {
+                @extend %link-base;
+                width: 2.5rem;
+                padding: 0;
+                img {
+                    width: 1.3rem;
+                }
+            }
+        }
+
+        &--Fur-lined {
+            &_link {
+                @extend %link-base;
+                gap: 0.6rem;
+            }
+        }
+    }
+
+    &__title {
+        width: 26.8rem;
+        margin-top: 1.6rem;
+        margin-bottom: 2.4rem;
+
+        h2 {
+            width: 100%;
+            font-size: 3.2rem;
+            font-weight: 600;
+        }
+    }
+
+    &__line {
+        width: 29.2rem;
+        height: 0.1rem;
+        background-color: #ebebeb;
+        text-align: center;
+    }
+}
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
 
 // ============================================
 // LeftNavigation 컴포넌트
@@ -145,6 +250,7 @@
 // ColorBadge 컴포넌트
 // ============================================
 
+<<<<<<< HEAD
 // .color-badge {
 //     width: 1rem;
 //     height: 1rem;
@@ -203,11 +309,72 @@
 //         background-color: #0000ff;
 //     }
 // }
+=======
+.color-badge {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    
+    &:hover {
+        transform: scale(1.2);
+    }
+    
+    &--black {
+        background-color: #000;
+    }
+    &--brown {
+        background-color: rgba(150, 105, 74, 1);
+    }
+    &--navy {
+        background-color: #043896;
+    }
+    &--pink {
+        background-color: #ff69b4;
+    }
+    &--gray {
+        background-color: #cccccc;
+    }
+    &--white {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+    }
+    &--red {
+        background-color: #ff0000;
+    }
+    &--orange {
+        background-color: #ffcc00;
+    }
+    &--purple {
+        background-color: #dbb2ff;
+    }
+    &--yellow {
+        background-color: #ffff00;
+    }
+    &--mint {
+        background-color: #aaf0d1;
+    }
+    &--light-green {
+        background-color: #ccff99;
+    }
+    &--green {
+        background-color: #00cd00;
+    }
+    &--sky-blue {
+        background-color: #9ad2ff;
+    }
+    &--blue {
+        background-color: #0000ff;
+    }
+}
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
 
 // ============================================
 // ColorMenu 컴포넌트
 // ============================================
 
+<<<<<<< HEAD
 // .color-menu {
 //     &__wrap {
 //         @extend %menu_wrap-style;
@@ -449,6 +616,91 @@
         .color_select {
             transform: scale(1.05);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+=======
+.color-menu {
+    &__wrap {
+        @extend %menu_wrap-style;
+    }
+}
+
+.select__color--wrap {
+    width: 100%;
+    @include g.flex(
+        $jc: space-between,
+        $ai: center,
+        $fd: row,
+        $fw: wrap,
+        $gap: 1.5rem 3rem
+    );
+
+    &_list {
+        gap: 0.6rem;
+        
+        .select__color--link {
+            @include g.flex(
+                $jc: null,
+                $ai: center,
+                $fd: column,
+                $fw: null,
+                $gap: 0.6rem
+            );
+            width: 3.2rem;
+            font-size: 11px;
+            font-weight: 400;
+
+            .color_select {
+                width: 2.4rem;
+                height: 2.4rem;
+                border-radius: 50%;
+            }
+            
+            .black {
+                background-color: #000;
+            }
+            .gray {
+                background-color: #cccccc;
+            }
+            .white {
+                background-color: #ffffff;
+                border: 1px solid #ccc;
+            }
+            .red {
+                background-color: #ff0000;
+            }
+            .pink {
+                background-color: #ff69b4;
+            }
+            .brown {
+                background-color: #aa6400;
+            }
+            .orange {
+                background-color: #ffcc00;
+            }
+            .purple {
+                background-color: #dbb2ff;
+            }
+            .yellow {
+                background-color: #ffff00;
+            }
+            .mint {
+                background-color: #aaf0d1;
+            }
+            .light-green {
+                background-color: #ccff99;
+            }
+            .green {
+                background-color: #00cd00;
+            }
+            .sky-blue {
+                background-color: #9ad2ff;
+            }
+            .blue {
+                background-color: #0000ff;
+            }
+            .navy {
+                background-color: #043896;
+            }
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
         }
     }
 }
@@ -457,6 +709,7 @@
 // FilterMenu 컴포넌트
 // ============================================
 
+<<<<<<< HEAD
 // .filter-menu {
 //     &__wrap {
 //         @extend %menu_wrap-style;
@@ -645,6 +898,56 @@
         opacity: 1;
         transform: scale(1);
     }
+=======
+.filter-menu {
+    &__wrap {
+        @extend %menu_wrap-style;
+
+        &--color {
+            @include g.flex($jc: start, $ai: center, $fd: row, $fw: null, $gap: 1.6rem);
+
+            .filter-menu__item {
+                @include g.flex(
+                    $jc: center,
+                    $ai: center,
+                    $fd: row,
+                    $fw: null,
+                    $gap: 1.8rem
+                );
+                width: 6.2rem;
+                height: 3.2rem;
+                background-color: #f5f5f5;
+                border-radius: 4px;
+
+                .filter-menu__select_color {
+                    width: 1.6rem;
+                    height: 1.6rem;
+                    border-radius: 50%;
+                }
+
+                .select-pink {
+                    background-color: #ff69b4;
+                }
+                
+                .select-black {
+                    background-color: #000;
+                }
+                
+                .filter-menu__close-link {
+                    border-radius: 0.4rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .close-btn {
+                        display: block;
+                        width: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
 }
 
 // ============================================
@@ -656,7 +959,17 @@
         @extend %menu_wrap-style;
 
         &--size {
+<<<<<<< HEAD
             @include g.flex($jc: flex-start, $ai: center, $fd: row, $fw: wrap, $gap: 0.8rem);
+=======
+            @include g.flex(
+                $jc: flex-start,
+                $ai: center,
+                $fd: row,
+                $fw: wrap,
+                $gap: 0.8rem
+            );
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
 
             .size-menu__item {
                 width: 5.2rem;
@@ -689,7 +1002,11 @@
     .title--toggle {
         width: 2.4rem;
         height: 2.4rem;
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
         button {
             width: 100%;
             height: 100%;
@@ -699,7 +1016,11 @@
             background: transparent;
             border: none;
             cursor: pointer;
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
             img {
                 width: 100%;
                 height: 100%;
@@ -785,6 +1106,7 @@
     flex-direction: column;
     align-items: center;
     width: fit-content;
+<<<<<<< HEAD
     height: 60rem;
     border-radius: 10px;
     padding: 2rem 2rem;
@@ -797,10 +1119,17 @@
         opacity: 1;
         margin-top: 0;
     }
+=======
+    height: fit-content;
+    border-radius: 10px;
+    padding: 2rem 2rem;
+    transition: all 0.3s ease;
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
 
     &:hover {
         outline: 1px solid #cccccc;
         box-shadow: 0 0 12px 2.5px rgba(0, 0, 0, 0.08);
+<<<<<<< HEAD
         // transform: translateY(-0.4rem);
 
         // .product-card__color,
@@ -809,6 +1138,16 @@
         //     opacity: 1;
         //     margin-top: 0;
         // }
+=======
+        transform: translateY(-0.4rem);
+        
+        .product-card__color,
+        .product-card__size {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0;
+        }
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     }
 
     &__img_info_wrap {
@@ -816,7 +1155,11 @@
         width: 32.8rem;
         height: fit-content;
         background-color: #fff;
+<<<<<<< HEAD
         border-radius: 0.8rem;
+=======
+        border-radius: 0.80rem;
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -829,36 +1172,65 @@
 // ============================================
 
 .product-card__img_wrap {
+<<<<<<< HEAD
     @include g.flex($jc: center, $gap: null);
+=======
+    @include g.flex($jc: center, $ai: center, $fd: null, $fw: null, $gap: null);
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     position: relative;
     width: 32.8rem;
     height: 38rem;
     border-radius: 1rem;
     overflow: hidden;
 
+<<<<<<< HEAD
     img {
         width: 20rem;
     }
 
+=======
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     .swiper-wrapper {
         width: 100%;
         height: 100%;
     }
 
     .swiper-slide {
+<<<<<<< HEAD
         @include g.flex($jc: center, $gap: null);
+=======
+        @include g.flex($jc: center, $ai: center, $fd: null, $fw: null, $gap: null);
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
         width: 100%;
         height: 100%;
     }
 
     .product-card__link {
+<<<<<<< HEAD
         @include g.flex($jc: center, $gap: null);
+=======
+        @include g.flex(
+            $jc: center,
+            $ai: center,
+            $fd: null,
+            $fw: null,
+            $gap: null
+        );
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
         position: relative;
         width: 100%;
         height: 100%;
         border-radius: 1rem;
         background: #fcfcff
+<<<<<<< HEAD
             linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.035) 100%);
+=======
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0) 60%,
+                rgba(0, 0, 0, 0.035) 100%
+            );
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
 
         .product-card__img {
             display: block;
@@ -872,8 +1244,13 @@
     .swiper-button-next {
         width: 2.4rem;
         height: 2.4rem;
+<<<<<<< HEAD
         color: #b5d766;
 
+=======
+        color: #B5D766;
+        
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
         &::after {
             font-size: 2.4rem;
             font-weight: bold;
@@ -900,7 +1277,11 @@
         top: auto;
 
         .swiper-pagination-progressbar-fill {
+<<<<<<< HEAD
             background-color: #b5d766;
+=======
+            background-color: #B5D766;
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
             border-radius: 0.2rem;
         }
     }
@@ -913,7 +1294,11 @@
 .product-card__name--warp {
     width: 32.8rem;
     height: 4.5rem;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     p {
         width: 100%;
         font-size: 2.4rem;
@@ -930,6 +1315,7 @@
 .product-card__price_wrap {
     width: 32.8rem;
     font-family: 'all-round-gothic', sans-serif;
+<<<<<<< HEAD
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -939,6 +1325,11 @@
     .product-card__price {
         display: flex;
 
+=======
+
+    .product-card__price {
+        display: flex;
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
         align-items: center;
         gap: 0.8rem;
 
@@ -976,12 +1367,21 @@
 .product-card__color {
     justify-content: flex-start;
     width: 100%;
+<<<<<<< HEAD
 
     max-height: 0;
     opacity: 0;
     overflow: visible;
     transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
 
+=======
+    
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+    
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     &__title--wrap {
         p {
             font-size: 1.3rem;
@@ -992,12 +1392,17 @@
     }
 
     .color-badge__wrap {
+<<<<<<< HEAD
         // width: 100%;
+=======
+        width: 100%;
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
         display: flex;
         justify-content: flex-start;
         align-items: center;
         flex-direction: row;
         gap: 0.8rem;
+<<<<<<< HEAD
         overflow: visible;
 
         > .color-badge {
@@ -1005,6 +1410,8 @@
             height: 1rem;
             border-radius: 50px;
         }
+=======
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     }
 }
 
@@ -1015,12 +1422,20 @@
 .product-card__size {
     justify-content: flex-start;
     width: 100%;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     max-height: 0;
     opacity: 0;
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a61aa1d (2025-11-19(수) 여성 페이지 파일명 변경 및 scss 파일 한개의 파일로 통합 -  v01)
     &__title--wrap {
         p {
             font-size: 1.3rem;
