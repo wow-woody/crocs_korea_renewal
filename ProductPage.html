@@ -4,19 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./ProductPage.css">
+    <link rel="stylesheet" href="ProductPage.css">
+    <link rel="stylesheet" href="https://use.typekit.net/evj6nlr.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <title>Document</title>
 </head>
 
 <body>
     <main>
-        <section class="product-img__wrap">
+        <section class="product-img-info__wrap">
             <div class="product-img">
+
+                <!-- Breadcrumbs -->
                 <div class="product-img__crumbs-wrap">
                     <ul class="product-img__crumbs">
                         <li class="product-img__crumb product-img__crumb--home">
                             <a href="../pages/Main.jsx" class="product-img__link">
-                                <img class="product-img__icon" src="./public/images/Sub_Women_Images/icon-home.svg"
+                                <img class="product-img__icon" src="public/images/Sub_Women_Images/icon-home.svg"
                                     alt="홈 버튼">
                             </a>
                         </li>
@@ -26,8 +30,8 @@
                         <li class="product-img__crumb product-img__crumb--category">
                             <a href="#" class="product-img__link">
                                 <span class="product-img__text">여성</span>
-                                <img class="product-img__icon"
-                                    src="./public/images/Sub_Women_Images/icon-arrow-right.svg" alt="여성 버튼">
+                                <img class="product-img__icon" src="public/images/Sub_Women_Images/icon-arrow-right.svg"
+                                    alt="여성 버튼">
                             </a>
                         </li>
 
@@ -36,71 +40,290 @@
                         <li class="product-img__crumb product-img__crumb--current">
                             <a href="#" class="product-img__link" aria-current="page">
                                 <span class="product-img__text">털안감 라인드 클로그</span>
-                                <img class="product-img__icon"
-                                    src="./public/images/Sub_Women_Images/icon-close_cross.svg" alt="닫기 버튼">
+                                <img class="product-img__icon" src="public/images/Sub_Women_Images/icon-close_cross.svg"
+                                    alt="닫기 버튼">
                             </a>
                         </li>
                     </ul>
                 </div>
+
+                <!-- Main Image -->
                 <div class="product-img__main-wrap">
                     <ul class="product-img__list product-img__list--main">
                         <li class="product-img__item">
-                            <img class="product-img__img" src="./public/images/ProductPage/imgi_53_crocs.avif"
+                            <img class="product-img__img" src="public/images/ProductPage/imgi_53_crocs.avif"
                                 alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
                         </li>
-                        <li class="product-img__item img_box--active">
-                            <img class="product-img__img" src="./public/images/ProductPage/imgi_54_crocs.avif"
+                        <li class="product-img__item product-img__item--none">
+                            <img class="product-img__img" src="public/images/ProductPage/imgi_54_crocs.avif"
                                 alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
                         </li>
-                        <li class="product-img__item img_box--active">
-                            <img class="product-img__img" src="./public/images/ProductPage/imgi_55_crocs.avif"
+                        <li class="product-img__item product-img__item--none">
+                            <img class="product-img__img" src="public/images/ProductPage/imgi_55_crocs.avif"
                                 alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
                         </li>
-                        <li class="product-img__item img_box--active">
-                            <img class="product-img__img" src="./public/images/ProductPage/imgi_56_crocs.avif"
+                        <li class="product-img__item product-img__item--none">
+                            <img class="product-img__img" src="public/images/ProductPage/imgi_56_crocs.avif"
                                 alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
                         </li>
-                        <li class="product-img__item img_box--active">
-                            <img class="product-img__img" src="./public/images/ProductPage/imgi_57_crocs.avif"
+                        <li class="product-img__item product-img__item--none">
+                            <img class="product-img__img" src="public/images/ProductPage/imgi_57_crocs.avif"
                                 alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
                         </li>
-                        <li class="product-img__item img_box--active">
-                            <img class="product-img__img" src="./public/images/ProductPage/imgi_58_crocs.avif"
+                        <li class="product-img__item product-img__item--none">
+                            <img class="product-img__img" src="public/images/ProductPage/imgi_58_crocs.avif"
                                 alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
                         </li>
                     </ul>
                 </div>
-                <!-- <ul class="product-img__list product-img__list--thumbs">
-                    <li class="product-img__item">
-                        <img class="product-img__img" src="./public/images/ProductPage/imgi_53_crocs.avif"
-                            alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
-                    </li>
-                    <li class="product-img__item">
-                        <img class="product-img__img" src="./public/images/ProductPage/imgi_54_crocs.avif"
-                            alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
-                    </li>
-                    <li class="product-img__item">
-                        <img class="product-img__img" src="./public/images/ProductPage/imgi_55_crocs.avif"
-                            alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
-                    </li>
-                    <li class="product-img__item">
-                        <img class="product-img__img" src="./public/images/ProductPage/imgi_56_crocs.avif"
-                            alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
-                    </li>
-                    <li class="product-img__item">
-                        <img class="product-img__img" src="./public/images/ProductPage/imgi_57_crocs.avif"
-                            alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
-                    </li>
-                    <li class="product-img__item">
-                        <img class="product-img__img" src="./public/images/ProductPage/imgi_58_crocs.avif"
-                            alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
-                    </li>
-                </ul> -->
+
+                <!-- Thumbnails -->
+                <div class="product-img__thumbs-wrap">
+                    <!-- Top btns -->
+                    <div class="thumbs__ctrl thumbs__ctrl--top">
+                        <a href="#" class="thumbs__btn thumbs__btn--up">
+                            <img class="thumbs__icon" src="public/images/icon-arrow-up-hairline.svg" alt="위로 이동">
+                        </a>
+                        <a href="#" class="thumbs__btn thumbs__btn--active">
+                            <img class="thumbs__icon" src="public/images/icon-arrow-up-green.svg" alt="위로 이동 활성화">
+                        </a>
+                    </div>
+
+                    <!-- Thumbs List -->
+                    <ul class="product-img__thumbs-list">
+                        <li class="product-img__thumbs-item">
+                            <a href="#" class="product-img__thumbs-link">
+                                <img class="product-img__thumbs-img" src="public/images/ProductPage/imgi_53_crocs.avif"
+                                    alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
+                            </a>
+                        </li>
+                        <li class="product-img__thumbs-item">
+                            <a href="#" class="product-img__thumbs-link">
+                                <img class="product-img__thumbs-img" src="public/images/ProductPage/imgi_54_crocs.avif"
+                                    alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
+                            </a>
+                        </li>
+                        <li class="product-img__thumbs-item">
+                            <a href="#" class="product-img__thumbs-link">
+                                <img class="product-img__thumbs-img" src="public/images/ProductPage/imgi_55_crocs.avif"
+                                    alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
+                            </a>
+                        </li>
+                        <li class="product-img__thumbs-item">
+                            <a href="#" class="product-img__thumbs-link">
+                                <img class="product-img__thumbs-img" src="public/images/ProductPage/imgi_56_crocs.avif"
+                                    alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
+                            </a>
+                        </li>
+                        <li class="product-img__thumbs-item">
+                            <a href="#" class="product-img__thumbs-link">
+                                <img class="product-img__thumbs-img" src="public/images/ProductPage/imgi_57_crocs.avif"
+                                    alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
+                            </a>
+                        </li>
+                        <li class="product-img__thumbs-item">
+                            <a href="#" class="product-img__thumbs-link">
+                                <img class="product-img__thumbs-img" src="public/images/ProductPage/imgi_58_crocs.avif"
+                                    alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Bottom btns -->
+                    <div class="thumbs__ctrl thumbs__ctrl--bottom">
+                        <a href="#" class="thumbs__btn thumbs__btn--down">
+                            <img class="thumbs__icon" src="public/images/icon-arrow-down-hairline.svg" alt="아래로 이동">
+                        </a>
+                        <a href="#" class="thumbs__btn thumbs__btn--active">
+                            <img class="thumbs__icon" src="public/images/icon-arrow-down-green.svg" alt="아래로 이동 활성화">
+                        </a>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="product-info__wrap">
+                <div class="product-info">
+                    <div class="product-info__title_wrap">
+                        <p class="product-info__subtitle">Classic Unforgettable Suede Clog</p>
+                        <h2 class="product-info__title">클래식 언퍼게터블 스웨이드 클로그</h2>
+                        <div class="product-info__price">
+                            <span class="product-info__price_dc_rate">55,900</span>
+                            <span class="product-info__price_breadcrumbs__line"></span>
+                            <span class="product-info__price_sale">20%</span>
+                            <span class="product-info__price_breadcrumbs__line"></span>
+                            <span class="product-info__price_cost">69,900</span>
+                        </div>
+                    </div>
+                    <div class="product-info_breadcrumbs"></div>
+                    <div class="product-info_color">
+                        <div class="product-info__color-title-wrap">
+                            <p class="product-info__color-title">색상</p>
+                            <span class="product-info__price_breadcrumbs__line"></span>
+                            <p class="product-info__color-select">브라운</p>
+                        </div>
+                        <div class="product-info__color-badge-wrap">
+                            <span class="color-badge color-badge--black"></span>
+                            <span class="color-badge color-badge--brown"></span>
+                            <span class="color-badge color-badge--pink"></span>
+                            <span class="color-badge color-badge--green"></span>
+                            <span class="color-badge color-badge--blue"></span>
+                            <span class="color-badge color-badge--black"></span>
+                            <span class="color-badge color-badge--brown"></span>
+                            <span class="color-badge color-badge--pink"></span>
+                            <span class="color-badge color-badge--green"></span>
+                            <span class="color-badge color-badge--blue"></span>
+                        </div>
+                    </div>
+                    <div class="product-info_size">
+                        <div class="product-info_size-title-wrap">
+                            <p class="product-info_size-title">색상</p>
+                            <span class="product-info_size_breadcrumbs__line"></span>
+                            <p class="product-info_size-select">220</p>
+                        </div>
+                        <div class="product-info_size-btns-wrap">
+                            <ul class=" product-info_size-btns">
+                                <li>
+                                    <a href="#">
+                                        <button>210</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button> 210 </button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>220</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>220</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>230</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>230</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>240</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>240</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>250</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>250</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>260</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>260</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>265</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button> 265 </button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>270</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>270</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>280</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>280</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>290</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>290</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>300</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>300</button>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <button>310</button>
+                                    </a>
+                                    <a href="#" class="product-info_size-btn--sold-out sold-out">
+                                        <p class="__size-btn-strikethrough"></p>
+                                        <button>310</button>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="product-info_size-notice-wrap">
+                                <span>원하는 옵션이 없으신가요?</span>
+                                <div>
+                                    <a href="#">
+                                        <img src="./public/images/icon-bell.svg" alt="재입고 알림 아이콘">
+                                        <span>재입고 알림 신청하기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div></div>
+
+            </div>
         </section>
+
+
+      
     </main>
+    <script>
+        // 필터 메뉴의 버튼들 (사이즈 선택 버튼들) 클릭 시 active 클래스 토글
+        document.querySelectorAll('.product-info_size-btns > li').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                this.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 
 </html>
