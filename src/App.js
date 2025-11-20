@@ -11,7 +11,7 @@ import Brand from './pages/Brand';
 import Promotion from './pages/Promotion';
 import Login from './pages/Login';
 import Join from './pages/Join';
-import Cart from './pages/Cart3';
+import Cart from './pages/Cart';
 // import Footer from './components/Footer';
 import Header from './components/Header';
 import CrocsClubPopup from './components/CrocsClubPopup';
