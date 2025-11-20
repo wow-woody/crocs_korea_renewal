@@ -88,17 +88,19 @@
         }
     }
 
-    .product-img__main-wrap {
+    .product-img__list {
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        .product-img__list {
-            width: 60rem;
 
-            .product-img__img {
-            }
+        .product-img__item {
+            
         }
+        .product-img__item--none {
+            .display: none;
+        }
+
         .img_box--active {
             display: none;
         }
