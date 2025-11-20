@@ -73,16 +73,16 @@
                 margin-bottom: 20px;
             }
 
-            .user_menu_bottom {
-                padding: 2rem;
-                height: 160px;
-                width: 100%;
-                background: #eee;
-                border-radius: 10px;
-            }
+            // .user_menu_bottom {
+            //     padding: 2rem;
+            //     height: 160px;
+            //     width: 100%;
+            //     background: #eee;
+            //     border-radius: 10px;
+            // }
         }
         .userinfo_recentOrder_wrap {
-            overflow: hidden;
+            // overflow: hidden;
             .user_menu_bottom {
                 width: 100%;
                 margin: 0 auto;
@@ -192,7 +192,7 @@
             }
         }
         .userinfo_recentOrder_wrap {
-            overflow: hidden;
+            // overflow: hidden;
             .user_menu_bottom {
                 width: 100%;
                 margin: 0 auto;
@@ -200,6 +200,28 @@
                 grid-template-columns: repeat(4, 1fr);
                 grid-template-rows: repeat(2, auto);
                 gap: 2rem;
+
+                &.active {
+                    width: 100%;
+                    height: 24rem;
+                    margin: 0 auto;
+                    position: relative;
+                    @include g.flex($jc: center);
+
+                    &::before {
+                        content: '';
+                        width: 10rem;
+                        height: 10rem;
+                        position: absolute;
+                        top: 50%;
+                        left: 50;
+                        transform: translateY(-50%);
+                        background-image: url(../../assets/images/crocs_page.svg);
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    }
+                }
                 .wish_card {
                     @include g.flex($fd: column, $ai: unset);
                     .wish_card_imgbox {
@@ -247,7 +269,7 @@
             }
         }
         .userinfo_wishlist_wrap {
-            overflow: hidden;
+            // overflow: hidden;
             .user_menu_bottom {
                 width: 100%;
                 margin: 0 auto;
@@ -255,6 +277,28 @@
                 grid-template-columns: repeat(4, 1fr);
                 grid-template-rows: repeat(2, auto);
                 gap: 2rem;
+                &.active {
+                    width: 100%;
+                    height: 24rem;
+                    // background: #eee;
+                    border-bottom: 1px solid gray;
+                    margin: 0 auto;
+                    position: relative;
+                    @include g.flex($jc: center);
+                    &::before {
+                        content: '';
+                        width: 10rem;
+                        height: 10rem;
+                        position: absolute;
+                        top: 50%;
+                        left: 50;
+                        transform: translateY(-50%);
+                        background-image: url(../../assets/images/crocs_page.svg);
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    }
+                }
                 .wish_card {
                     @include g.flex($fd: column, $ai: unset);
                     .wish_card_imgbox {

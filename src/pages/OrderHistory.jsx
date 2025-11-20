@@ -21,15 +21,18 @@ const OrderHistory = () => {
                     <div className="user_menu_top">
                         {/* 주문 처리 현황 */}
                         <h4>주문 처리 현황</h4>
-                        <Link to="/orderhistory">더보기</Link>
                     </div>
                     <hr />
                     <div className="user_menu_bottom">
                         <OrderState />
                     </div>
                 </div>
-                <div className="order-history-top">
-                    <h2>주문배송조회</h2>
+                <div className="order_history_top">
+                    <div className="user_menu_top">
+                        {/* 주문 처리 현황 */}
+                        <h4>주문 내역</h4>
+                    </div>
+                    <hr />
                 </div>
                 <OrderHistoryCard />
             </div>

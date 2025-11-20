@@ -25,6 +25,8 @@ import { auth, db } from './firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { loginAuthStore } from './store/loginStore';
 import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
+import WishList from './pages/WishList';
+import OrderHistory from './pages/OrderHistory';
 // import Order from './components/Order/Order';
 
 function App() {
@@ -75,6 +77,8 @@ function App() {
                 <Route path="/nonmember" element={<Nonmember />} />
                 <Route path="/comaspopup" element={<ComeAsPopup />} />
                 <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} />
+                <Route path="/wishlist" element={<WishList />} />
+                <Route path="/orderhistory" element={<OrderHistory />} />
             </Routes>
         </div>
     );

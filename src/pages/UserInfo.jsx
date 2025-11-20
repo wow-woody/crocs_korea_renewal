@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Title from '../components/Title';
 import UserInfoTop from '../components/UserInfoTop';
 import './scss/userinfo.scss';
@@ -10,6 +10,15 @@ import OrderState from '../components/OrderState';
 
 const UserInfo = () => {
     const { wishLists } = wishListStore();
+    const [active, setActive] = useState(false);
+
+    useEffect(() => {
+        if (wishLists.length === 0) {
+            setActive(true);
+        } else {
+            setActive(false);
+        }
+    }, [wishLists]);
 
     return (
         <div className="sub_page">
@@ -38,17 +47,6 @@ const UserInfo = () => {
                         <OrderState />
                     </div>
                 </div>
-                {/* 최근 주문 내역 */}
-                {/* <div className="userinfo_order_wrap">
-                    <div className="user_menu_top">
-                        <h4>최근 주문 내역</h4>
-                        <Link to="/orderhistory">더보기</Link>
-                    </div>
-                    <hr />
-                    <div className="user_menu_bottom">
-                        <OrderHistoryCard />
-                    </div>
-                </div> */}
                 <div className="userinfo_recentOrder_wrap">
                     <div className="user_menu_top">
                         {/* 최근 본 상품 */}
@@ -56,7 +54,7 @@ const UserInfo = () => {
                         <Link to="/wishlist">더보기</Link>
                     </div>
                     <hr />
-                    <div className="user_menu_bottom">
+                    <div className={`user_menu_bottom ${active ? 'active' : ''}`}>
                         {wishLists.slice(0, 4).map((item) => (
                             <div key={item.id} className="wish_card">
                                 <div className="wish_card_imgbox">
@@ -81,6 +79,7 @@ const UserInfo = () => {
                             </div>
                         ))}
                     </div>
+                    <hr />
                 </div>
                 <div className="userinfo_wishlist_wrap">
                     <div className="user_menu_top">
@@ -89,7 +88,7 @@ const UserInfo = () => {
                         <Link to="/wishlist">더보기</Link>
                     </div>
                     <hr />
-                    <div className="user_menu_bottom">
+                    <div className={`user_menu_bottom ${active ? 'active' : ''}`}>
                         {wishLists.slice(0, 4).map((item) => (
                             <div key={item.id} className="wish_card">
                                 <div className="wish_card_imgbox">
