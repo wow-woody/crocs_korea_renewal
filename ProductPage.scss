@@ -9,8 +9,7 @@
     border-radius: 0.4rem;
 }
 
-------------------------------------------------------------------------------------
-    .product-img__wrap {
+.product-img__wrap {
     width: 112.8rem;
     height: 90.6rem;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%),
@@ -21,9 +20,8 @@
     // align-items: center;
     // // padding: 153px 86px 153px 180px;
     // gap: 167px;
-    //<------------------------------------------------->
+
     // 이미지 메인 영역
-    //<-------------------------------------------------> 
     .product-img__crumbs-wrap {
         width: 100%;
         height: 100%;
@@ -99,30 +97,66 @@
         }
     }
 
-    //<-------------------------------------------------> 
     // 이미지 메인 영역
-    //<-------------------------------------------------> 
     .product-img__main-wrap {
         width: 100%;
         height: 100%;
+        border: 1px solid red;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+        padding: 0 18rem;
 
         // 메인 이미지
         .product-img__list {
             width: 60rem;
             height: auto;
             border: 1px solid blue;
-        }
-        .product-img__item {
-            &--none {
-                display: none;
-            }
-        }
 
-        // 썸네일 리스트
-        .product-img__list--thumbs {
+            .product-img__item {
+                &--none {
+                    display: none;
+                }
+            }
+
+            // // 썸네일 리스트
+            // .product-img__list--thumbs {
+            //
+        }
+    }
+
+    // 썸네일 영역
+    .product-img__thumbs-wrap {
+        .product-img__thumbs-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1.6rem;
+            position: absolute;
+            top: 50%;
+            .product-img__thumbs-item {
+                display: flex;
+                width: 9.2rem;
+                width: 9.2rem;
+
+                .product-img__thumbs-link {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 1rem;
+                    border: 1px solid #ebebeb;
+                    background: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .product-img__thumbs-img {
+                        width: 6.2rem;
+                        height: 6.2rem;
+                        // border: 1px solid green;
+                    }
+                }
+            }
         }
     }
 }
