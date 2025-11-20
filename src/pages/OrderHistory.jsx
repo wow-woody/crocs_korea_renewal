@@ -1,6 +1,5 @@
 import React from 'react';
 import OrderHistoryCard from '../components/OrderHistoryCard';
-import Title from '../components/Title';
 import UserInfoTop from '../components/UserInfoTop';
 
 const OrderHistory = () => {
@@ -16,7 +15,9 @@ const OrderHistory = () => {
                     <button>혜택 정보</button>
                     <button>1 : 1 문의</button>
                 </div>
-                <div className="order-history-top">주문배송조회</div>
+                <div className="order-history-top">
+                    <h2>주문배송조회</h2>
+                </div>
                 <OrderHistoryCard />
             </div>
         </div>

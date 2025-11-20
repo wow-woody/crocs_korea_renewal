@@ -5,6 +5,8 @@ import './scss/userinfo.scss';
 import { Link, useSearchParams } from 'react-router-dom';
 import WishListCard from '../components/WishListCard';
 import { wishListStore } from '../store/wishListStore';
+import OrderHistoryCard from '../components/OrderHistoryCard';
+import OrderState from '../components/OrderState';
 
 const UserInfo = () => {
     const { wishLists } = wishListStore();
@@ -20,18 +22,31 @@ const UserInfo = () => {
                     {/* 마이 페이지 탭 버튼
                 나의 정보 / 주문 정보 / 1:1 문의 /  */}
                     <button>나의 정보</button>
-                    <button>주문 정보</button>
+                    <Link to="/orderhistory">주문 정보</Link>
                     <button>혜택 정보</button>
                     <button>1 : 1 문의</button>
                 </div>
-                <div className="userinfo_order_wrap">
+                <div className="userinfo_current_order_wrap">
                     <div className="user_menu_top">
                         {/* 주문 처리 현황 */}
                         <h4>주문 처리 현황</h4>
                         <Link to="/orderhistory">더보기</Link>
                     </div>
                     <hr />
-                    <div className="user_menu_bottom">주문 처리 현황 영역</div>
+                    <div className="user_menu_bottom">
+                        <OrderState />
+                    </div>
+                </div>
+                <div className="userinfo_order_wrap">
+                    <div className="user_menu_top">
+                        {/* 최근 주문 내역 */}
+                        <h4>최근 주문 내역</h4>
+                        <Link to="/orderhistory">더보기</Link>
+                    </div>
+                    <hr />
+                    <div className="user_menu_bottom">
+                        <OrderHistoryCard />
+                    </div>
                 </div>
                 <div className="userinfo_recentOrder_wrap">
                     <div className="user_menu_top">

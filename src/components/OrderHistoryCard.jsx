@@ -7,8 +7,8 @@ const OrderHistoryCard = () => {
             {/* map 돌릴 것 */}
             <div className="order_list_top">
                 <div className="order_list_top_left">
-                    <p>주문날짜</p>
-                    <p>주문번호</p>
+                    <p>2025-11-18</p>
+                    <p>(20251118-0000302)</p>
                 </div>
                 <div className="order_list_top_right">
                     <button>상세보기</button>
@@ -25,7 +25,12 @@ const OrderHistoryCard = () => {
                 </div>
             </div>
             <div className="order_list_bottom">
-                <div>주문상태 </div>
+                <div className="order_list_pricebox">
+                    <p>주문상태</p>
+                    <p>
+                        상품구매금액 35,000 + 배송비 3,000 - 총 할인금액 5,250 = 총 결제금액 32,750
+                    </p>
+                </div>
             </div>
         </div>
     );
