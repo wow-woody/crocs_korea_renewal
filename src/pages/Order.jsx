@@ -9,7 +9,7 @@ import './scss/Order.scss';
 // import kidsProducts from '../../data/키즈-카테고리-완전통합.json';
 // import newProducts from '../../data/신상품&트렌드-카테고리-완전통합.json';
 // import jibbitzProducts from '../../data/지비츠_참-카테고리-완전통합.json';
-import { Prouducts } from "../data/CrocsProductsData.js";
+import { Products } from "../data/CrocsProductsData.js";
 import OrderProgress from '../components/OrderProgress';
 import Title from '../components/Title';
 
@@ -22,7 +22,7 @@ function Order() {
         const result = [];
 
         // 여성 상품 1개 선택
-        const womenItems = Prouducts.filter((product)=> {
+        const womenItems = Products.filter((product)=> {
             if(!product.cate) return false;
                 // cate 속성비교
                 const cateLower = product.cate.toLowerCase();
@@ -44,7 +44,7 @@ function Order() {
         });
 
         // 남성 상품 1개 추가
-        const menItems = Prouducts.filter((product)=> {
+        const menItems = Products.filter((product)=> {
             if(!product.cate) return false;
                 // cate 속성비교
                 const cateLower = product.cate.toLowerCase();

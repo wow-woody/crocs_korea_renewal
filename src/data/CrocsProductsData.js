@@ -2,7 +2,7 @@
 // 처리 날짜: 2025. 11. 18. 오전 3:05:23
 // 총 273개 항목
 
-export const Prouducts = [
+export const Products = [
     {
         id: '212106',
         cate: '신상품, 클로그, 퍼즈',

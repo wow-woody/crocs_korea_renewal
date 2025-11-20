@@ -6,10 +6,9 @@ export const useProductStore = create(
     persist((set, get) => ({
 
 
-        // 삼품목록을 저장할 배열 // 새로고침하면 빈칸이 될수잇음
+        // 삼품목록을 저장할 배열 
         items: [],
-
-        //검색어를 저장할 변수 - zustant 전역변수로 만들기
+        //검색어를 저장할 변수
         searchWord: "",
         // 2. 메서드
         // 검색어를 변경할 메서드 
