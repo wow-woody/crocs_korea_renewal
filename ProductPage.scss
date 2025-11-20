@@ -9,19 +9,20 @@
     border-radius: 0.4rem;
 }
 
-.product-img__wrap {
-    width: 112.8rem;
-    height: 90.6rem;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
-
+.product-img-info__wrap {
     position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     .product-img {
-        width: 100%;
-        height: 100%;
+        width: 112.8rem;
+        height: 90.6rem;
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%),
+            linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
+        position: relative;
 
         // 이미지 메인 영역
         .product-img__crumbs-wrap {
@@ -196,6 +197,248 @@
                     .thumbs__btn--up,
                     .thumbs__btn--down {
                         display: none;
+                    }
+                }
+            }
+        }
+    }
+    .product-info__wrap {
+        width: 79.2rem;
+        height: 90.6rem;
+        // border: 1px solid blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .product-info {
+            width: 56rem;
+            height: 75.9rem;
+            // border: 1px solid blue;
+            display: flex;
+            flex-direction: column;
+            gap: 3.2rem;
+
+            .product-info__title_wrap {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+
+                .product-info__subtitle {
+                    font-family: 'all-round-gothic', sans-serif;
+                    color: #b5d766;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                }
+
+                .product-info__title {
+                    font-size: 3rem;
+                    font-weight: 600;
+                }
+
+                .product-info__price {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.2rem;
+                    font-family: 'all-round-gothic', sans-serif;
+                    .product-info__price_dc_rate {
+                        font-size: 2.4rem;
+                        font-weight: 700;
+                        color: g.$subColor;
+                    }
+
+                    .product-info__price_sale {
+                        font-size: 2rem;
+                        font-weight: 700;
+                        color: #d70000;
+                    }
+
+                    .product-info__price_cost {
+                        font-size: 1.6rem;
+                        font-weight: 300;
+                        color: #ebebeb;
+                        text-decoration: line-through;
+                    }
+                    .product-info__price_breadcrumbs__line {
+                        width: 0.2rem;
+                        height: 1.2rem;
+                        background-color: #d9d9d9;
+                    }
+                }
+            }
+
+            .product-info_breadcrumbs {
+                width: 100%;
+                height: 0.1rem;
+                background-color: #ebebeb;
+            }
+
+            .product-info_color {
+                display: flex;
+                flex-direction: column;
+                gap: 1.2rem;
+                .product-info__color-title-wrap {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.2rem;
+
+                    .product-info__color-title {
+                        font-size: 1.7rem;
+                        font-weight: 600;
+                        color: g.$subColor;
+                    }
+                    .product-info__price_breadcrumbs__line {
+                        width: 0.2rem;
+                        height: 1.2rem;
+                        background-color: #d9d9d9;
+                    }
+
+                    .product-info__color-select {
+                        font-size: 1.4rem;
+                        font-weight: 400;
+                        color: #ababab;
+                    }
+                }
+
+                .product-info__color-badge-wrap {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+
+                    .color-badge {
+                        width: 1.6rem;
+                        height: 1.6rem;
+                        border-radius: 50%;
+                        border: 1px solid #ebebeb;
+                        &--black {
+                            background-color: #000000;
+                        }
+                        &--brown {
+                            background-color: #8b4513;
+                        }
+                        &--pink {
+                            background-color: #ffc0cb;
+                        }
+                        &--green {
+                            background-color: #008000;
+                        }
+                        &--blue {
+                            background-color: #0000ff;
+                        }
+                    }
+                }
+            }
+
+            .product-info_size {
+                display: flex;
+                flex-direction: column;
+                gap: 1.2rem;
+                .product-info_size-title-wrap {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.2rem;
+
+                    .product-info_size-title {
+                        font-size: 1.7rem;
+                        font-weight: 600;
+                        color: g.$subColor;
+                    }
+                    .product-info_size_breadcrumbs__line {
+                        width: 0.2rem;
+                        height: 1.2rem;
+                        background-color: #d9d9d9;
+                    }
+
+                    .product-info_size-select {
+                        font-size: 1.5rem;
+                        font-weight: 400;
+                        color: #ababab;
+                    }
+                }
+                .product-info_size-btns-wrap {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.2rem;
+
+                    .product-info_size-btns {
+                        width: 100%;
+                        height: fit-content;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                        // border: 1px solid #ebebeb;
+
+                        li {
+                            width: 8.4rem;
+                            height: 3.6rem;
+                            font-size: 1.4rem;
+                            font-weight: 400;
+                            color: #cccccc;
+                            font-family: 'all-round-gothic', sans-serif;
+
+                            a {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 100%;
+                                height: 100%;
+                                border: 1px solid #ebebeb;
+                                border-radius: 4px;
+                                color: #cccccc;
+                                background-color: #ffffff;
+
+                                // 호버 상태
+                                &:hover {
+                                    border: 1px solid g.$mainColor;
+                                    color: g.$mainColor;
+                                }
+
+                                // 선택된 상태 (JS로 .active 클래스 토글)
+                                &.active {
+                                    background-color: g.$mainColor;
+                                    border: 1px solid g.$mainColor;
+                                    color: g.$subColor;
+                                }
+                            }
+                            .sold-out {
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 100%;
+                                height: 100%;
+                                border: 1px solid #ebebeb;
+                                border-radius: 4px;
+                                color: #ebebeb;
+                                background-color: #f9f9f9;
+                                position: relative;
+
+                                p {
+                                    position: absolute;
+                                    text-align: center;
+                                    line-height: 2.3rem;
+                                    width: 2.5rem;
+                                    height: 0.15rem;
+                                    background-color: #ebebeb;
+                                }
+                                display: none; // 품절된 사이즈는 보이지 않도록 설정
+                            }
+                        }
+                    }
+                    .product-info_size-notice-wrap{
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 1.3rem;
+                        font-weight: 400;
+                        color: #cccccc;
+                        
+                        a {
+                            display: flex;
+                            gap: 0.4rem;
+                            img {
+                                width: 1.6rem;
+                            }
+                        }
                     }
                 }
             }
