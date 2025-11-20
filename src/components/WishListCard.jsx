@@ -5,7 +5,7 @@ import { wishListStore } from '../store/wishListStore';
 import './scss/wishlistcard.scss';
 
 const WishListCard = () => {
-    const { wishLists, onRemoveWish, removeWish, toggleRemoveWish } = wishListStore();
+    const { wishLists, onRemoveWish, removeWish, toggleRemoveWish, onAddCartBtn } = wishListStore();
 
     // 페이징 처리
     // 한페이지에 보여질 개수
@@ -78,7 +78,9 @@ const WishListCard = () => {
                 <button className="wish_remove_btn" onClick={() => onRemoveWish()}>
                     선택상품 삭제
                 </button>
-                <button className="wish_add_btn">장바구니 추가</button>
+                <button className="wish_add_btn" onClick={() => onAddCartBtn()}>
+                    장바구니 추가
+                </button>
             </div>
         </div>
     );
