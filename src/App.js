@@ -11,16 +11,49 @@ import Brand from './pages/Brand';
 import Promotion from './pages/Promotion';
 import Login from './pages/Login';
 import Join from './pages/Join';
-import Cart from './pages/Cart';
-import Footer from './components/Footer';
+// import Cart from './pages/Cart3';
+// import Footer from './components/Footer';
 import Header from './components/Header';
 import CrocsClubPopup from './components/CrocsClubPopup';
 import UserInfo from './pages/UserInfo';
+import Nonmember from './pages/Nonmember';
+import ComeAsPopup from './components/ComeAsPopup';
+
+import { useEffect } from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth, db } from './firebase/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { loginAuthStore } from './store/loginStore';
 import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
-import WishList from './pages/WishList';
-import OrderHistory from './pages/OrderHistory';
+// import Order from './components/Order/Order';
 
 function App() {
+    useEffect(() => {
+        const restoreUser = async () => {
+            onAuthStateChanged(auth, async (firebaseUser) => {
+                const loginTime = localStorage.getItem('loginTime');
+                const now = Date.now();
+
+                // 1시간 초과 시 자동 로그아웃
+                if (loginTime && now - parseInt(loginTime) > 3600000) {
+                    await signOut(auth);
+                    loginAuthStore.getState().logout();
+                    return;
+                }
+
+                // 로그인 상태 복원
+                if (firebaseUser) {
+                    const userRef = doc(db, 'users', firebaseUser.uid);
+                    const userDoc = await getDoc(userRef);
+                    if (userDoc.exists()) {
+                        loginAuthStore.getState().user = userDoc.data();
+                    }
+                }
+            });
+        };
+        restoreUser();
+    }, []);
+
     return (
         <div className="App">
             <Header />
@@ -36,16 +69,13 @@ function App() {
                 <Route path="/Brand" element={<Brand />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
-                <Route path="/cart" element={<Cart />} />
+                {/* <Route path="/order" element={<Order />} /> */}
                 <Route path="/crocsclub" element={<CrocsClubPopup />} />
                 <Route path="/userinfo" element={<UserInfo />} />
+                <Route path="/nonmember" element={<Nonmember />} />
+                <Route path="/comaspopup" element={<ComeAsPopup />} />
                 <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} />
-                <Route path="/wishlist" element={<WishList />} />
-                <Route path="/crocsclub" element={<CrocsClubPopup />} />
-                <Route path="/userinfo" element={<UserInfo />} />
-                <Route path="/orderhistory" element={<OrderHistory />} />
             </Routes>
-            <Footer />
         </div>
     );
 }

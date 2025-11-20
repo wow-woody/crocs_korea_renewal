@@ -18,7 +18,6 @@
 
             > .title_wrap {
                 position: absolute;
-                // top: 0;
                 left: 0;
                 @include g.flex($fd: column, $jc: center, $ai: flex-start);
                 padding-top: 25rem;
@@ -74,194 +73,283 @@
         .btn_wrap {
             position: absolute;
             top: 50%;
-            left: 40%;
-            transform: translateY(-50%);
-            .monthly_btn {
-                &::before {
-                    content: '';
-                    display: block;
-                    width: 1.5px;
-                    height: 80px;
-                    background: url(../../assets/arrow.svg) no-repeat center center;
-                    transition: opacity 0.8s ease-in-out;
+            left: 55%;
+            width: 500px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 500;
+
+            button {
+                pointer-events: auto;
+                position: absolute;
+                font-size: 15px;
+                font-weight: 600;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                user-select: none;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                transform: translateY(-50%);
+
+                p {
+                    margin: 0;
+                    transition: transform 0.3s ease, opacity 0.3s ease;
+                    pointer-events: none;
                 }
 
-                &:hover {
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: -12px;
+                    width: 40px;
+                    height: 1px;
+                    background-color: rgb(51, 51, 51);
+                    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1), width 0.25s ease,
+                        opacity 0.25s ease;
+                    opacity: 1;
+                    pointer-events: none;
+                }
+
+                /*왼쪽 */
+                &.monthly_btn {
+                    left: -170px;
+                    transform: rotate(-90deg);
+                    transform-origin: center;
+
                     &::before {
-                        background: url(../../assets/arrow_active.svg) no-repeat left center;
-                        width: 80px;
-                        height: 80px;
-                        transition: opacity 0.4s ease-in-out;
+                        left: 50%;
+                        transform-origin: left center;
+                    }
+                    &::after {
+                        right: 50%;
+                        transform-origin: right center;
+                    }
+
+                    /* hover 45도 회전 — 기존 효과 유지 */
+                    &:hover {
+                        p {
+                            transform: translateY(-6px);
+                            opacity: 0;
+                        }
+
+                        &::before {
+                            transform: rotate(45deg);
+                        }
+                        &::after {
+                            transform: rotate(-45deg);
+                        }
+                    }
+
+                    /* 슬라이드 이동 시 왼쪽으로 밀리며 사라지는 클래스 추가 */
+                    &.slide_exit {
+                        opacity: 0;
+                        transform: rotate(-90deg) translateY(-5rem);
+                        transition: transform 0.8s ease, opacity 0.5s ease;
                     }
                 }
             }
         }
 
         .monthly_right {
+            // position: absolute;
+            // left: 50%;
+            // top: 0;
+            // width: 300rem;
+            // height: 100vh;
+            // background: #eee;
+            // padding-left: 20rem;
+            // transition: left 1s ease-in-out;
+            // transform: translateX(0);
+
+            // &.active {
+            //     left: 0;
+            //     transform: translateX(0);
+            // }
+
+            // position: absolute;
+            // top: 0;
+            // left: 50%;
+            // width: 300rem;
+            // height: 100vh;
+            // background: #eee;
+            // padding-left: 20rem;
+            // transition: transform 1s ease-in-out;
+            // transform: translateX(0);
+
             position: absolute;
-            left: 50%;
             top: 0;
-            width: 300rem;
-            height: 100vh;
+            left: 50%;
+            width: 240rem;
+            // height: 100vh;
             background: #eee;
             padding-left: 20rem;
-            transition: transform 2s ease-in-out;
+            transition: transform 1s ease-in-out;
             transform: translateX(0);
 
+            // &.active {
+            //     left: 0;
+            //     transform: translateX(-50%);
+            // }
+
             &.active {
+                // left: 0;
                 transform: translateX(-50%);
             }
 
             .monthly_card_wrap {
                 @include g.flex($fw: wrap);
                 height: 100vh;
+
                 .monthly_card_list {
-                    @include g.flex($gap: 8rem);
+                    @include g.flex($gap: 12rem);
+                    transition: transform 0.5s ease-in-out;
+                    will-change: transform;
 
-                    .monthly_card {
-                        .card_img {
-                            position: relative;
+                    &.slide-left {
+                        transform: translateX(-50%);
+                    }
+                    &.slide-right {
+                        transform: translateX(0);
+                    }
+                }
 
-                            .main_img {
-                                width: 40rem;
-                                height: 52rem;
-                            }
-                            .a_img {
+                .monthly_card {
+                    position: relative;
+
+                    .card_img {
+                        position: relative;
+
+                        .main_img {
+                            width: 40rem;
+                            height: 52rem;
+                        }
+
+                        .a_img {
+                            position: absolute;
+                            z-index: 100;
+                            max-width: none;
+                            height: 70rem;
+                        }
+
+                        .a_img_1 {
+                            top: 60%;
+                            left: 45%;
+                            transform: translate(-50%, -50%);
+                        }
+                        .a_img_2 {
+                            bottom: 0;
+                            left: 55%;
+                            transform: translateX(-50%);
+                            z-index: 800;
+                        }
+                        .a_img_3 {
+                            top: 45%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            height: 85rem;
+                            z-index: 800;
+                        }
+                        .a_img_4 {
+                            top: 55%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+
+                        .item_card {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+
+                            .item_box {
+                                @include g.flex($gap: null);
                                 position: absolute;
-                                z-index: 100;
-                                max-width: none;
-                                height: 70rem;
-                            }
+                                z-index: 700; // 이미지 위로
+                                border: 0.5px solid #ccc;
+                                border-radius: 1rem;
+                                opacity: 0;
+                                // visibility: hidden;
+                                transform: translateY(10px);
+                                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 
-                            .a_img_1 {
-                                top: 60%;
-                                left: 45%;
-                                transform: translate(-50%, -50%);
+                                .img_box {
+                                    width: 15rem;
+                                    height: 15rem;
+                                    background: rgba($color: #fff, $alpha: 0.6);
+                                    text-align: center;
+                                    border-radius: 1rem 0 0 1rem;
+                                    line-height: 15rem;
 
-                                &:hover ~ .item_card .item_box_1 {
-                                    opacity: 1;
-                                    visibility: visible;
-                                }
-                            }
-
-                            .a_img_2 {
-                                bottom: 0;
-                                left: 50%;
-                                transform: translateX(-50%);
-                                z-index: 600;
-
-                                &:hover ~ .item_card .item_box_2 {
-                                    opacity: 1;
-                                    visibility: visible;
-                                }
-                            }
-
-                            .a_img_3 {
-                                top: 45%;
-                                left: 50%;
-                                transform: translate(-50%, -50%);
-                                height: 85rem;
-                                z-index: 600;
-
-                                &:hover ~ .item_card .item_box_3 {
-                                    opacity: 1;
-                                    visibility: visible;
-                                }
-                            }
-
-                            .a_img_4 {
-                                top: 55%;
-                                left: 50%;
-                                transform: translate(-50%, -50%);
-
-                                &:hover ~ .item_card .item_box_4 {
-                                    opacity: 1;
-                                    visibility: visible;
-                                }
-                            }
-
-                            .item_card {
-                                .item_box {
-                                    @include g.flex($gap: null);
-                                    position: absolute;
-                                    z-index: 500;
-                                    border: 0.5px solid #ccc;
-                                    border-radius: 1rem;
-                                    opacity: 0;
-                                    visibility: hidden;
-                                    transition: opacity 0.3s ease-in-out,
-                                        visibility 0.3s ease-in-out;
-
-                                    .img_box {
-                                        width: 15rem;
-                                        height: 15rem;
-                                        background: rgba($color: #fff, $alpha: 0.6);
-                                        text-align: center;
-                                        border-radius: 1rem 0 0 1rem;
-                                        line-height: 15rem;
-                                        img {
-                                            width: 12rem;
-                                        }
+                                    img {
+                                        width: 12rem;
                                     }
+                                }
 
-                                    .text_box {
-                                        width: 15rem;
-                                        height: 15rem;
-                                        background: rgba($color: g.$subColor, $alpha: 0.7);
-                                        border-radius: 0 1rem 1rem 0;
-                                        @include g.flex($fd: column, $jc: center, $gap: 1rem);
+                                .text_box {
+                                    width: 15rem;
+                                    height: 15rem;
+                                    background: rgba($color: g.$subColor, $alpha: 0.7);
+                                    border-radius: 0 1rem 1rem 0;
+                                    @include g.flex($fd: column, $jc: center, $gap: 1rem);
 
-                                        .title {
-                                            font-weight: 500;
-                                            color: #fff;
-                                        }
-
-                                        .dc_wrap {
-                                            @include g.flex($gap: 1rem);
-                                            > span {
-                                                font-weight: bold;
-                                                color: g.$mainColor;
-                                            }
-                                            strong {
-                                                color: #fff;
-                                            }
-                                        }
-
-                                        .price {
+                                    .title {
+                                        font-weight: 500;
+                                        color: #fff;
+                                    }
+                                    .dc_wrap {
+                                        @include g.flex($gap: 1rem);
+                                        > span {
                                             font-weight: bold;
                                             color: g.$mainColor;
                                         }
-
-                                        .price_d {
-                                            color: #ccc;
-                                            font-size: 1.4rem;
-                                            text-decoration: line-through;
+                                        strong {
+                                            color: #fff;
                                         }
                                     }
-
-                                    &.item_box_1 {
-                                        bottom: 5%;
-                                        left: 0;
-                                        transform: translate(-50%, 0);
+                                    .price {
+                                        font-weight: bold;
+                                        color: g.$mainColor;
                                     }
-
-                                    &.item_box_2 {
-                                        top: -10%;
-                                        left: 0;
-                                        transform: translate(-50%, 0);
-                                    }
-
-                                    &.item_box_3 {
-                                        top: -20%;
-                                        left: 65%;
-                                    }
-
-                                    &.item_box_4 {
-                                        top: 40%;
-                                        left: 70%;
+                                    .price_d {
+                                        color: #ccc;
+                                        font-size: 1.4rem;
+                                        text-decoration: line-through;
                                     }
                                 }
+
+                                &.item_box_1 {
+                                    bottom: 10%;
+                                    left: -30%;
+                                }
+                                &.item_box_2 {
+                                    top: -25%;
+                                    left: -20%;
+                                }
+                                &.item_box_3 {
+                                    top: -25%;
+                                    left: 60%;
+                                }
+                                &.item_box_4 {
+                                    top: 40%;
+                                    left: 70%;
+                                }
                             }
+
+                            // 카드 호버 시 상세 박스 표시
+                            .item_box {
+                                pointer-events: auto;
+                            }
+                        }
+
+                        // 카드 호버 시 아이템 카드 나타나도록
+                        &:hover .item_card .item_box {
+                            opacity: 1;
+                            visibility: visible;
+                            transform: translateY(0);
                         }
                     }
                 }

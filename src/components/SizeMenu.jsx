@@ -1,7 +1,14 @@
-import React from 'react';
-import './scss/WomenSizeMenu.scss';
+import React, { useState } from 'react';
+import './scss/WomenComponents.scss';
 
 export default function WomenSizeMenu({ sizes = ['210', '220', '230', '240', '250', '260', '265', '270', '280', '290', '300', '310'] }) {
+    const [activeSize, setActiveSize] = useState(null);
+
+    const handleClick = (size, e) => {
+        e.preventDefault();
+        setActiveSize(activeSize === size ? null : size);
+    };
+
     return (
         <div className="size-menu">
             <div className="size-menu__wrap">
@@ -16,7 +23,11 @@ export default function WomenSizeMenu({ sizes = ['210', '220', '230', '240', '25
                 <ul className="size-menu__wrap size-menu__wrap--size">
                     {sizes.map((size) => (
                         <li key={size} className="size-menu__item">
-                            <a href="#" className="size-menu__link btn-menu-style">
+                            <a 
+                                href="#" 
+                                className={`size-menu__link btn-menu-style ${activeSize === size ? 'active' : ''}`}
+                                onClick={(e) => handleClick(size, e)}
+                            >
                                 <button className="size-menu__button btn-menu__button">{size}</button>
                             </a>
                         </li>

@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import './scss/login.scss';
 import { loginAuthStore } from '../store/loginStore';
+import CrocsClubJion from '../components/CrocsClubJion';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ const Login = () => {
         e.preventDefault();
         console.log('전송.');
         await onLogin(email, password);
-        navigate('/');
+        navigate('/userinfo');
     };
 
     // 2. 구글 로그인
@@ -45,24 +46,9 @@ const Login = () => {
                         onGoogleLogin={handleGoogleLogin}
                     />
                     <p>
-                        <Link>비회원 주문조회</Link>
+                        <Link to="/nonmember">비회원 주문조회</Link>
                     </p>
-                </div>
-                <div className="crocsclub_wrap">
-                    <Title subTitle="CrocsClub Benefit" />
-                    <ul className="benefit_list">
-                        <li>
-                            <img src="./images/benefit_img_01.svg" alt="benefit" />
-                        </li>
-                        <li>
-                            <img src="./images/benefit_img_02.svg" alt="benefit" />
-                        </li>
-                        <li>
-                            <img src="./images/benefit_img_03.svg" alt="benefit" />
-                        </li>
-                    </ul>
-                    {/* <button>CrocsClub Join</button> */}
-                    <Link to="/crocsclub">CrocsClub Join</Link>
+                    <CrocsClubJion />
                 </div>
             </div>
         </div>

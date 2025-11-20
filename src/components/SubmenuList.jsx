@@ -1,18 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const submenus = [
-    { key: 'new', label: 'NEW', imgUrl: './images/item_01.png' },
-    { key: 'women', label: 'WOMEN', imgUrl: './images/item_01.png' },
-    { key: 'men', label: 'MEN', imgUrl: './images/item_01.png' },
-    { key: 'kids', label: 'KIDS', imgUrl: './images/item_01.png' },
-    { key: 'jibbitz', label: 'JIBBITZ', imgUrl: './images/item_01.png' },
-    { key: 'collabs', label: 'COLLABS', imgUrl: './images/item_01.png' },
-];
-
-const SubmenuList = () => {
+const SubmenuList = ({ mainmenu, submenus }) => {
+    if (!submenus) return;
     return (
         <div className="submenu_wrap">
+            <p className="menu_title">{mainmenu?.label}</p>
             <ul className="submenu">
                 {submenus.map((submenu) => (
                     <li key={submenu.key}>

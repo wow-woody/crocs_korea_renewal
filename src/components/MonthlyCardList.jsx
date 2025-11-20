@@ -64,7 +64,7 @@ const MonthlyCardList = () => {
                                 src={card.aImg}
                                 alt={card.dec}
                             />
-                            <Link className="item_card">
+                            <div className="item_card">
                                 <div className={`item_box item_box_${card.id}`}>
                                     <div className="img_box">
                                         <img src={card.itemImg} alt={card.item} />
@@ -81,7 +81,7 @@ const MonthlyCardList = () => {
                                         </p>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         </div>
                     </Link>
                 </li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/WomenFilterMenu.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenFilterMenu({ filters = [{ color: 'pink', class: 'select-pink' }, { color: 'black', class: 'select-black' }] }) {
     return (

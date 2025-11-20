@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/WomenBreadcrumbs.scss';
+import './scss/WomenComponents.scss';
 
 export default function WomenBreadcrumbs({ category, subcategory }) {
     return (

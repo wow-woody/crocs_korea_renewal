@@ -17,6 +17,7 @@ const UserInfo = () => {
                 <Title title="My Page" />
                 {/* 마이 페이지 회원정보
                 이름 / 크록스 클럽 가입 여부 / 쿠폰 정보 */}
+                <button className="logout_btn">Logout</button>
                 <UserInfoTop />
                 <div className="user_btn_wrap">
                     {/* 마이 페이지 탭 버튼

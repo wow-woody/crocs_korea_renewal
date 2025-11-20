@@ -1,22 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { menuList } from '../store/menuList';
 
-const depthmenus = [
-    { key: 'all', label: 'All' },
-    { key: 'new', label: 'NEW' },
-    { key: 'women', label: 'WOMEN' },
-    { key: 'men', label: 'MEN' },
-    { key: 'kids', label: 'KIDS' },
-    { key: 'jibbitz', label: 'JIBBITZ' },
-    { key: 'collabs', label: 'COLLABS' },
-];
-
-const DepthmenuList = () => {
+const DepthmenuList = ({ activeMenu, setActiveMenu }) => {
     return (
         <ul className="depthmenu">
-            {depthmenus.map((depthmenu) => (
-                <li key={depthmenu.key} className={depthmenu.key}>
-                    <Link to={`/${depthmenu.key}`}>{depthmenu.label}</Link>
+            {menuList.map((menu) => (
+                <li
+                    key={menu.key}
+                    className={`${menu.key} ${activeMenu === menu.key ? 'active' : ''}`}
+                    onClick={() => setActiveMenu(menu.key)}
+                >
+                    <Link>{menu.label}</Link>
+                    {/* <SubmenuList submenus={depthmenu.submenu_list} /> */}
                 </li>
             ))}
         </ul>

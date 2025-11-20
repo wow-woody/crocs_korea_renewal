@@ -1,10 +1,12 @@
 @use '../../App.scss' as g;
 
 .login_wrap {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    // box-shadow: ;
     text-align: center;
+    box-shadow: 0 30px 60px rgba(20, 20, 21, 0.06);
+    border-radius: 1rem;
+    padding: 5rem 10rem 20rem;
 
     .login_form {
         padding-top: 2rem;
@@ -107,8 +109,19 @@
         @include g.flex($gap: 2rem, $jc: center);
         padding: 2.4rem 0;
         li {
-            img {
-                width: 6rem;
+            @include g.flex($fd: column, $gap: 0.5rem);
+            font-size: 1.2rem;
+            font-weight: 500;
+            span {
+                display: block;
+                width: fit-content;
+                height: fit-content;
+                padding: 1rem;
+                border-radius: 50px;
+                background: g.$mainColor;
+                img {
+                    width: 3rem;
+                }
             }
         }
     }
