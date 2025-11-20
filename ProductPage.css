@@ -201,7 +201,7 @@ textarea {
   font-display: swap;
   src: url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.woff2") format("woff2"), url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.woff") format("woff"), url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.otf") format("opentype"), url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.ttf") format("truetype");
 }
-.product-img__crumb.product-img__crumb--current .product-img__link, .product-img__crumb.product-img__crumb--home .product-img__link, .product-img__crumb .product-img__link {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb.product-img__crumb--current .product-img__link, ------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb.product-img__crumb--home .product-img__link, ------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb .product-img__link {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -211,37 +211,30 @@ textarea {
   border-radius: 0.4rem;
 }
 
-.product-img__wrap {
+------------------------------------------------------------------------------------ .product-img__wrap {
   width: 112.8rem;
   height: 90.6rem;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%), linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
-  border: 1px solid green;
-  /* .breadcrumbs__list  -> .product-img__crumbs (클래스명 일치) */
+  position: relative;
 }
-
-.product-img {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap {
   width: 100%;
   height: 100%;
 }
-
-.product-img__crumbs-wrap {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.product-img__crumbs {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs {
   display: flex;
   gap: 0.4rem;
   font-size: 1.2rem;
   font-weight: 400;
   height: 2.5rem;
   align-items: center; /* ul 자체에 수직 정렬 기준 제공 */
+  position: absolute;
+  top: 4rem;
+  left: 8.8rem;
+  /* 구분자 ':' 요소 (HTML: <li class="product-img__sep">) */
+  /* crumb 항목 전체 (HTML: <li class="product-img__crumb ...">) */
 }
-
-/* 구분자 ':' 요소 (HTML: <li class="product-img__sep">) */
-.product-img__sep {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__sep {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,9 +243,7 @@ textarea {
   margin: 0;
   padding: 0;
 }
-
-/* crumb 항목 전체 (HTML: <li class="product-img__crumb ...">) */
-.product-img__crumb {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb {
   display: flex;
   align-items: center;
   height: 100%;
@@ -260,7 +251,7 @@ textarea {
   padding: 0;
   /* 내부 링크 정렬 */
 }
-.product-img__crumb .product-img__link {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb .product-img__link {
   display: inline-flex;
   align-items: center;
   height: 100%;
@@ -268,41 +259,36 @@ textarea {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
   border-radius: 0.4rem;
 }
-.product-img__crumb .product-img__link .product-img__icon {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb .product-img__link .product-img__icon {
   width: 0.8rem;
   display: inline-block;
 }
-.product-img__crumb .product-img__link .product-img__text {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb .product-img__link .product-img__text {
   display: inline-block;
   vertical-align: middle;
 }
-.product-img__crumb.product-img__crumb--home .product-img__link {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb.product-img__crumb--home .product-img__link {
   width: 2.5rem;
   padding: 0;
 }
-.product-img__crumb.product-img__crumb--home .product-img__link .product-img__icon {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb.product-img__crumb--home .product-img__link .product-img__icon {
   width: 1.3rem;
 }
-.product-img__crumb.product-img__crumb--current .product-img__link {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb.product-img__crumb--current .product-img__link {
   gap: 0.6rem;
 }
-
-.product-img__main-wrap {
-  width: 50rem;
-  height: 60rem;
-  border: 1px solid blue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.product-img__list {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__main-wrap {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.product-img__list .product-img__item--none {
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__main-wrap .product-img__list {
+  width: 60rem;
+  height: auto;
+  border: 1px solid blue;
+}
+------------------------------------------------------------------------------------ .product-img__wrap .product-img__main-wrap .product-img__item--none {
   display: none;
 }/*# sourceMappingURL=ProductPage.css.map */

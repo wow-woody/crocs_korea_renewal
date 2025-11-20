@@ -9,117 +9,120 @@
     border-radius: 0.4rem;
 }
 
-.product-img__wrap {
+------------------------------------------------------------------------------------
+    .product-img__wrap {
     width: 112.8rem;
     height: 90.6rem;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%),
         linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
-    border: 1px solid green;
+
+    position: relative;
     // display: flex;
     // align-items: center;
     // // padding: 153px 86px 153px 180px;
     // gap: 167px;
-
-    /* .breadcrumbs__list  -> .product-img__crumbs (클래스명 일치) */
-}
-.product-img {
-    width: 100%;
-    height: 100%;
-}
-
-.product-img__crumbs-wrap {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-start;
-}
-.product-img__crumbs {
-    @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
-    font-size: 1.2rem;
-    font-weight: 400;
-    height: 2.5rem;
-    align-items: center; /* ul 자체에 수직 정렬 기준 제공 */
-}
-/* 구분자 ':' 요소 (HTML: <li class="product-img__sep">) */
-.product-img__sep {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 0.8rem;
-    margin: 0;
-    padding: 0;
-}
-
-/* crumb 항목 전체 (HTML: <li class="product-img__crumb ...">) */
-
-.product-img__crumb {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-
-    /* 내부 링크 정렬 */
-    .product-img__link {
-        @extend %link-base;
-        display: inline-flex;
-        align-items: center;
+    //<------------------------------------------------->
+    // 이미지 메인 영역
+    //<-------------------------------------------------> 
+    .product-img__crumbs-wrap {
+        width: 100%;
         height: 100%;
-        padding: 0 10px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-        border-radius: 0.4rem;
+        .product-img__crumbs {
+            @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
+            font-size: 1.2rem;
+            font-weight: 400;
+            height: 2.5rem;
+            align-items: center; /* ul 자체에 수직 정렬 기준 제공 */
+            position: absolute;
+            top: 4rem;
+            left: 8.8rem;
 
-        .product-img__icon {
-            width: 0.8rem;
-            display: inline-block;
-        }
+            /* 구분자 ':' 요소 (HTML: <li class="product-img__sep">) */
+            .product-img__sep {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 0.8rem;
+                margin: 0;
+                padding: 0;
+            }
 
-        .product-img__text {
-            display: inline-block;
-            vertical-align: middle;
-        }
-    }
+            /* crumb 항목 전체 (HTML: <li class="product-img__crumb ...">) */
+            .product-img__crumb {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                margin: 0;
+                padding: 0;
 
-    &.product-img__crumb--home {
-        .product-img__link {
-            @extend %link-base;
-            width: 2.5rem;
-            padding: 0;
+                /* 내부 링크 정렬 */
+                .product-img__link {
+                    @extend %link-base;
+                    display: inline-flex;
+                    align-items: center;
+                    height: 100%;
+                    padding: 0 10px;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+                    border-radius: 0.4rem;
 
-            .product-img__icon {
-                width: 1.3rem;
+                    .product-img__icon {
+                        width: 0.8rem;
+                        display: inline-block;
+                    }
+
+                    .product-img__text {
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                }
+
+                &.product-img__crumb--home {
+                    .product-img__link {
+                        @extend %link-base;
+                        width: 2.5rem;
+                        padding: 0;
+
+                        .product-img__icon {
+                            width: 1.3rem;
+                        }
+                    }
+                }
+
+                &.product-img__crumb--current {
+                    .product-img__link {
+                        @extend %link-base;
+                        gap: 0.6rem;
+                    }
+                }
             }
         }
     }
 
-    &.product-img__crumb--current {
-        .product-img__link {
-            @extend %link-base;
-            gap: 0.6rem;
+    //<-------------------------------------------------> 
+    // 이미지 메인 영역
+    //<-------------------------------------------------> 
+    .product-img__main-wrap {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        // 메인 이미지
+        .product-img__list {
+            width: 60rem;
+            height: auto;
+            border: 1px solid blue;
         }
-    }
-}
+        .product-img__item {
+            &--none {
+                display: none;
+            }
+        }
 
-.product-img__main-wrap {
-    width: 50rem;
-    height: 60rem;
-    border: 1px solid blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.product-img__list {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .product-img__item {
-        &--none {
-            display: none;
+        // 썸네일 리스트
+        .product-img__list--thumbs {
         }
     }
 }
