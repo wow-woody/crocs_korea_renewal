@@ -10,18 +10,18 @@ import JibbitzCollaboProductDetailCard from '../components/JibbitzCollaboProduct
 
 const JibbitzCollaboProductDetail = () => {
     const { id } = useParams();
-    const { disneyItems } = collaboAuthStore();
+    const { disneyItems, jibbitzItems } = collaboAuthStore();
     const { onAddWishList } = wishListStore();
 
     //찾은 상품을 저장할 변수
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        if (!id || disneyItems.length === 0) return;
+        if (!id || jibbitzItems.length === 0) return;
         //뿌려질 제품 찾기
-        const findItem = disneyItems.find((item) => String(item.id) === String(id));
+        const findItem = jibbitzItems.find((item) => String(item.id) === String(id));
         setProduct(findItem);
-    }, [id, disneyItems]);
+    }, [id, jibbitzItems]);
 
     if (!product) {
         return <div>상품 정보를 불러오고 있으니 기다리</div>;

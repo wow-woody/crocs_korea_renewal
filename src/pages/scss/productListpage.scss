@@ -1,0 +1,13 @@
+@use '../../App.scss' as g;
+
+.product_list_wrap {
+    @include g.flex($ai: unset);
+
+    .list_right {
+        width: 80%;
+        .product-card__item_list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}
