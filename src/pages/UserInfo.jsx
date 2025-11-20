@@ -37,9 +37,9 @@ const UserInfo = () => {
                         <OrderState />
                     </div>
                 </div>
-                <div className="userinfo_order_wrap">
+                {/* 최근 주문 내역 */}
+                {/* <div className="userinfo_order_wrap">
                     <div className="user_menu_top">
-                        {/* 최근 주문 내역 */}
                         <h4>최근 주문 내역</h4>
                         <Link to="/orderhistory">더보기</Link>
                     </div>
@@ -47,7 +47,7 @@ const UserInfo = () => {
                     <div className="user_menu_bottom">
                         <OrderHistoryCard />
                     </div>
-                </div>
+                </div> */}
                 <div className="userinfo_recentOrder_wrap">
                     <div className="user_menu_top">
                         {/* 최근 본 상품 */}
