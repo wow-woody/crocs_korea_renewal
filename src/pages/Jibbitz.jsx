@@ -1,6 +1,5 @@
 import React from 'react';
 import Title from '../components/Title';
-import ProductListPage from './ProductListPage';
 import JibbitzProductListPage from '../components/JibbitzProductListPage';
 import './scss/productListpage.scss';
 
