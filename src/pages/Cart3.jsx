@@ -223,14 +223,14 @@ function Cart() {
                 </div>
               ) : (
                 products.map((product) => (
-                  <div key={product.id} className="product-item">
+                  <div className="product-item-wrap">
                     <input
                       type="checkbox"
                       className="product-checkbox"
                       checked={selectedProducts.has(product.id)}
                       onChange={() => handleSelectProduct(product.id)}
                     />
-                    
+                    <div key={product.id} className="product-item">
                     <div className="product-image">
                       <img src={product.image} alt={product.name} />
                     </div>
@@ -269,6 +269,7 @@ function Cart() {
                       >
                         ✕
                       </button>
+                    </div>
                     </div>
                   </div>
                 ))

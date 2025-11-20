@@ -3,38 +3,60 @@ import { Prouducts } from "../data/CrocsProductsData.js";
 
 function CartPage() {
   // 초기 상품 데이터
-  const initialProducts = useMemo(() => [
-    {
-      id: 1,
-      name: '클래식 클로그',
-      color: '블랙',
-      size: 'W7/W8',
-      price: 59900,
-      quantity: 1,
-      image: 'https://images.unsplash.com/photo-1603487742131-4160ec999306?w=200&h=200&fit=crop',
-      category: '여성'
-    },
-    {
-      id: 2,
-      name: '라이트라이드 클로그',
-      color: '화이트',
-      size: 'M9/M10',
-      price: 79900,
-      quantity: 2,
-      image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=200&h=200&fit=crop',
-      category: '남성'
-    },
-    {
-      id: 3,
-      name: '베이야 클로그',
-      color: '핑크',
-      size: 'W6/W7',
-      price: 49900,
-      quantity: 1,
-      image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=200&h=200&fit=crop',
-      category: '여성'
-    }
-  ], []);
+  // 초기 상품 데이터 생성 (useMemo로 한 번만 생성)
+    const initialProducts = useMemo(() => {
+      const result = [];
+  
+      // 여성 상품 1개 선택
+      const womenItems = Prouducts.filter((product) => {
+        if (!product.cate) return false;
+        // cate 속성비교
+        const cateLower = product.cate.toLowerCase();
+        return cateLower.includes("여성");
+      });
+      const randomWomen = getRandomItems(womenItems, 1);
+  
+      randomWomen.forEach((item) => {
+        result.push({
+          id: result.length + 1,
+          name: item.product || "상품명 없음",
+          color: parseColor(item.color),
+          size: "W7/W8",
+          quantity: 1,
+          price: parsePrice(item.price_dc_rate || item.price),
+          image: Array.isArray(item.product_img)
+            ? item.product_img[0]
+            : item.product_img,
+          category: "여성",
+        });
+      });
+  
+      // 남성 상품 1개 추가
+      const menItems = Prouducts.filter((product) => {
+        if (!product.cate) return false;
+        // cate 속성비교
+        const cateLower = product.cate.toLowerCase();
+        return cateLower.includes("남성");
+      });
+      const randomMen = getRandomItems(menItems, 1);
+  
+      randomMen.forEach((item) => {
+        result.push({
+          id: result.length + 1,
+          name: item.product || "상품명 없음",
+          color: parseColor(item.color),
+          size: "M9/M10",
+          quantity: 1,
+          price: parsePrice(item.price_dc_rate || item.price),
+          image: Array.isArray(item.product_img)
+            ? item.product_img[0]
+            : item.product_img,
+          category: "남성",
+        });
+      });
+      return result;
+      
+    }, []);
 
   const [products, setProducts] = useState(initialProducts);
   const [selectedProducts, setSelectedProducts] = useState(new Set(initialProducts.map(p => p.id)));
