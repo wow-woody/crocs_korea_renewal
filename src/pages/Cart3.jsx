@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import './scss/Cart.scss';
 import Title from "../components/Title";
 import { Prouducts } from "../data/CrocsProductsData.js";
+import CartProgress from '../components/CartProgress';
 
 function Cart() {
   // 초기 상품 데이터
@@ -197,6 +198,7 @@ function Cart() {
     <div className="cart-container">
       <div className="inner">
         <Title title="Cart" />
+        <CartProgress />
         <div className="cart-content">
           {/* 왼쪽: 상품 목록 */}
           <div className="cart-left">
