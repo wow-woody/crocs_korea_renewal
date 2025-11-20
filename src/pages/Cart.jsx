@@ -164,7 +164,7 @@ function Cart() {
     }
     setIsOrderComplete(true);
     setTimeout(() => {
-      alert(`선택한 ${selectedProducts.size}개 상품 주문이 완료되었습니다!`);
+      alert(`선택한 ${selectedProducts.size}개 상품만 주문하시겠습니까?`);
     }, 100);
   };
 
@@ -259,14 +259,6 @@ function Cart() {
                   </div>
                 ))
               )}
-            </div>
-
-            <div className="coupon-info">
-              <p>
-                💡 사용 가능한 테스트 쿠폰:<br />
-                • WELCOME10 (10% 할인)<br />
-                • SAVE5000 (5,000원 할인)
-              </p>
             </div>
           </div>
 

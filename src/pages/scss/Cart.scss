@@ -17,7 +17,7 @@ $white: #fff;
 
     .inner {
         width: 100%;
-  margin-top: 10rem;
+        margin-top: 10rem;
     }
 
     .cart-title {
@@ -50,6 +50,7 @@ $white: #fff;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+        margin-top: -20px;
 
         .select-all {
             label {
@@ -58,10 +59,11 @@ $white: #fff;
                 cursor: pointer;
 
                 input[type="checkbox"] {
-                    width: 18px;
-                    height: 18px;
+                    width: 1.8rem;
+                    height: 1.8rem;
                     cursor: pointer;
                     margin-right: 8px;
+                    accent-color: $primary-color;
                 }
 
                 span {
@@ -73,6 +75,7 @@ $white: #fff;
 
         .btn-remove-selected {
             padding: 8px 16px;
+            margin-right: -5px;
             background-color: $white;
             border: 1px solid #ddd;
             border-radius: 5rem;
@@ -82,7 +85,8 @@ $white: #fff;
             transition: all 0.2s;
 
             &:hover {
-                background-color: $light-gray;
+                background-color: $primary-color;
+                color: #f0f0f0;
             }
         }
     }
@@ -102,19 +106,51 @@ $white: #fff;
         }
     }
 
-    .product-item {
-        display: flex !important;
-        gap: 15px;
-        padding: 20px 0;
-        border-bottom: 1px solid #f0f0f0;
+    .product-item-wrap {
+        // display: flex;
+        // justify-content: space-between;
 
-        .product-checkbox {
-            width: 18px;
-            height: 18px;
+        input[type="checkbox"] {
+            width: 1.6rem;
+            height: 1.6rem;
+            align-items: flex-start;
             cursor: pointer;
+            margin-right: 8px;
             margin-top: 30px;
             flex-shrink: 0;
+            accent-color: $primary-color;
         }
+
+        // .cart-product-checkbox {
+        //     align-items: flex-start;
+        //     width: 1.8rem;
+        //     height: 1.8rem;
+        //     cursor: pointer;
+        //     margin-top: 30px;
+        //     flex-shrink: 0;
+        // }
+        .cart-remove-btn {
+            align-items: flex-end;
+            width: 2.4rem;
+            height: 2.4rem;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 20px;
+            color: #999;
+            transition: color 0.2s;
+
+            &:hover {
+                color: $danger-color;
+            }
+        }
+    }
+
+    .product-item {
+        gap: 20px;
+        padding: 20px 0;
+        border-bottom: 1px solid #f0f0f0;
+        justify-content: space-between;
 
         .product-image {
             width: 100px;
@@ -126,12 +162,12 @@ $white: #fff;
             img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
+                // object-fit: cover;
             }
         }
 
         .product-info {
-            flex: 1;
+            @include g.flex($jc: center, $ai: flex-start, $fd: column);
 
             .product-name {
                 font-size: 16px;
@@ -163,7 +199,8 @@ $white: #fff;
                     transition: all 0.2s;
 
                     &:hover:not(:disabled) {
-                        background-color: $light-gray;
+                        background-color: $primary-color;
+                        color:$white
                     }
 
                     &:disabled {
@@ -181,44 +218,14 @@ $white: #fff;
         }
 
         .product-price {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: space-between;
+            @include g.flex($jc: flex-end, $ai: flex-end, $fd: column);
 
             .price {
-                font-size: 18px;
+                font-size: 1.6rem;
                 font-weight: 600;
                 color: $primary-color;
+                white-space: nowrap;
             }
-
-            .remove-btn {
-                width: 28px;
-                height: 28px;
-                border: none;
-                background-color: transparent;
-                cursor: pointer;
-                font-size: 20px;
-                color: #999;
-                transition: color 0.2s;
-
-                &:hover {
-                    color: $danger-color;
-                }
-            }
-        }
-    }
-
-    .coupon-info {
-        padding: 20px;
-        background-color: $light-gray;
-        border-radius: 4px;
-        font-size: 13px;
-        line-height: 1.6;
-        color: $text-gray;
-
-        p {
-            margin: 0;
         }
     }
 }
@@ -236,89 +243,10 @@ $white: #fff;
     }
 
     .section-title {
-        font-size: 18px;
+        font-size: 1.8rem;
         font-weight: 600;
         margin-bottom: 15px;
         color: $primary-color;
-    }
-}
-
-// 쿠폰 섹션
-.coupon-section {
-    margin-bottom: 30px;
-
-    .coupon-form {
-        margin-bottom: 15px;
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: #555;
-        }
-
-        .coupon-input-group {
-            display: flex;
-            gap: 8px;
-
-            .coupon-input {
-                flex: 1;
-                padding: 10px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                font-size: 13px;
-                transition: border-color 0.2s;
-
-                &:focus {
-                    outline: none;
-                    border-color: $primary-color;
-                }
-            }
-
-            .btn-coupon {
-                padding: 10px 20px;
-                background-color: $primary-color;
-                color: $white;
-                border: none;
-                border-radius: 5rem;
-                font-size: 13px;
-                font-weight: 500;
-                cursor: pointer;
-                white-space: nowrap;
-                transition: background-color 0.2s;
-
-                &:hover {
-                    background-color: #000;
-                }
-            }
-        }
-
-        .coupon-message {
-            margin-top: 8px;
-            font-size: 12px;
-            color: $success-color;
-        }
-    }
-
-    .discount-amount {
-        display: flex;
-        justify-content: space-between;
-        padding: 12px;
-        background-color: #f5f5f5;
-        border-radius: 4px;
-
-        .discount-label {
-            font-size: 13px;
-            font-weight: 500;
-            color: #555;
-        }
-
-        .discount-value {
-            font-size: 15px;
-            font-weight: 600;
-            color: $danger-color;
-        }
     }
 }
 
@@ -426,7 +354,7 @@ $white: #fff;
             padding: 14px;
             background-color: $white;
             color: $primary-color;
-            border: 1px solid $primary-color;
+            // border: 1px solid $primary-color;
             border-radius: 5rem;
             font-size: 14px;
             font-weight: 600;
@@ -436,6 +364,11 @@ $white: #fff;
             &:hover {
                 background-color: $primary-color;
                 color: $white;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(68, 68, 68, 0.4);
+            }
+            &:active {
+                transform: translateY(0);
             }
         }
     }
