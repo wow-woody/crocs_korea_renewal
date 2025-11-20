@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="_레이어_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-	 y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#C1DD82;}
-</style>
-<g id="_01_align_center">
-	<path class="st0" d="M481.8,387.2L271.1,176.4c-8.4-8.1-21.7-8.1-30.2,0L30.3,387L0.1,356.9l210.6-210.6
-		c25.3-24.2,65.2-24.2,90.5,0L512,357L481.8,387.2z"/>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" data-name="레이어_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+  <!-- Generator: Adobe Illustrator 29.8.3, SVG Export Plug-In . SVG Version: 2.1.1 Build 3)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #c1dd82;
+      }
+    </style>
+  </defs>
+  <g id="_01_align_center">
+    <path class="st0" d="M481.83,387.16l-210.75-210.75c-8.43-8.09-21.74-8.09-30.17,0L30.29,387.03.13,356.86l210.62-210.62c25.33-24.17,65.19-24.17,90.52,0l210.73,210.75-30.17,30.17Z"/>
+  </g>
 </svg>
