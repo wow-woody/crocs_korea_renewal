@@ -212,14 +212,14 @@ textarea {
 }
 
 .product-img-info__wrap {
-  position: relative;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  width: 100%;
+  max-width: 100%;
 }
 .product-img-info__wrap .product-img {
   width: 112.8rem;
   height: 90.6rem;
+  margin: 0 auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -229,6 +229,7 @@ textarea {
 .product-img-info__wrap .product-img .product-img__crumbs-wrap {
   width: 100%;
   height: 100%;
+  max-width: 40%;
 }
 .product-img-info__wrap .product-img .product-img__crumbs-wrap .product-img__crumbs {
   display: flex;
@@ -347,7 +348,7 @@ textarea {
   width: 2.6rem;
   height: 2.6rem;
   border: 1px solid #ebebeb;
-  border-radius: 4px;
+  border-radius: 4rem;
 }
 .product-img-info__wrap .product-img .product-img__thumbs-wrap .thumbs__ctrl .thumbs__btn {
   width: 100%;
@@ -465,10 +466,18 @@ textarea {
   gap: 1rem;
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info_color .product-info__color-badge-wrap .color-badge {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0;
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
   border: 1px solid #ebebeb;
+  transition: all 0.3s ease;
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info_color .product-info__color-badge-wrap .color-badge--black {
   background-color: #000000;
@@ -484,6 +493,11 @@ textarea {
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info_color .product-info__color-badge-wrap .color-badge--blue {
   background-color: #0000ff;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_color .product-info__color-badge-wrap .color-badge:hover {
+  transform: scale(1.25);
+  border-color: white;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.15);
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info_size {
   display: flex;
@@ -565,6 +579,9 @@ textarea {
   background-color: #f9f9f9;
   position: relative;
   display: none;
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info_size .product-info_size-btns-wrap .product-info_size-btns li .sold-out p {
   position: absolute;
@@ -587,4 +604,92 @@ textarea {
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info_size .product-info_size-btns-wrap .product-info_size-notice-wrap a img {
   width: 1.6rem;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select {
+  width: 100%;
+  height: 5.2rem;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  background-color: #fafafd;
+  justify-content: flex-start;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info__wrap {
+  display: flex;
+  gap: 1.2rem;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info__wrap .info__color-badge {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info__wrap .info__color-badge--black {
+  background-color: #000000;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info__wrap .product-info-select_chose-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info__price_breadcrumbs__line {
+  width: 0.2rem;
+  height: 1rem;
+  background-color: #d9d9d9;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__count-value {
+  width: 5.5rem;
+  height: 3.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+  font-weight: 600;
+  border-left: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  border-top: 1px solid #ebebeb;
+  background-color: #fff;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__count-value span {
+  font-size: 1.6rem;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__wrap {
+  display: flex;
+  flex-direction: column;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__wrap .product-info-select__count-btn {
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid #ebebeb;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__wrap .product-info-select__count-btn .product-info-select__count-link {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__wrap .product-info-select__count-btn .product-info-select__count-link img {
+  width: 0.7rem;
+  height: auto;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__wrap .product-info-select__count-link--disabled-1 {
+  display: none;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__wrap:hover .product-info-select__count-link--disabled-1 {
+  display: flex;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info_select .product-info-select__count-wrap .product-info-select__count .product-info-select__count-value-wrap .product-info-select__wrap:hover .product-info-select__count-link--disabled-2 {
+  display: none;
 }/*# sourceMappingURL=ProductPage.css.map */

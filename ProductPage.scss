@@ -2,21 +2,27 @@
 @use './src/index.css';
 @use './src/font/Paperlogy.css';
 
-%link-base {
-    @include g.flex($jc: center, $ai: center, $gap: 0.4rem);
-    height: 100%;
-    background-color: #ffffff;
-    border-radius: 0.4rem;
-}
+// %link-base {
+//     @include g.flex($jc: center, $ai: center, $gap: 0.4rem);
+//     height: 100%;
+//     background-color: #ffffff;
+//     border-radius: 0.4rem;
+// }
 
 .product-img-info__wrap {
-    position: relative;
+    // position: relative;
+    // display: flex;
+    // justify-content: flex-start;
+    // align-items: center;
+
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    width: 100%;
+    max-width: 100%;
+
     .product-img {
         width: 112.8rem;
         height: 90.6rem;
+        margin: 0 auto;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -24,10 +30,15 @@
             linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
         position: relative;
 
+        // flex: 1 1 60%;
+
         // 이미지 메인 영역
         .product-img__crumbs-wrap {
             width: 100%;
             height: 100%;
+
+            max-width: 40%;
+
             .product-img__crumbs {
                 @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
                 font-size: 1.2rem;
@@ -173,7 +184,7 @@
                 width: 2.6rem;
                 height: 2.6rem;
                 border: 1px solid #ebebeb;
-                border-radius: 4px;
+                border-radius: 4rem;
 
                 .thumbs__btn {
                     width: 100%;
@@ -305,10 +316,19 @@
                     gap: 1rem;
 
                     .color-badge {
+                        // 기본 태그 혼용(button/span)으로 인한 원형 왜곡 방지
+                        // span은 inline 기본이라 width/height 미적용되고 button은 기본 padding 있음
+                        display: inline-block; // span에도 크기 적용
+                        box-sizing: border-box; // border 포함한 정사각 유지
+                        padding: 0; // button 기본 padding 제거
+                        appearance: none; // 브라우저 기본 버튼 스타일 제거
+                        -webkit-appearance: none;
+                        flex-shrink: 0; // flex 수축 방지
                         width: 1.6rem;
                         height: 1.6rem;
                         border-radius: 50%;
                         border: 1px solid #ebebeb;
+                        transition: all 0.3s ease;
                         &--black {
                             background-color: #000000;
                         }
@@ -323,6 +343,11 @@
                         }
                         &--blue {
                             background-color: #0000ff;
+                        }
+                        &:hover {
+                            transform: scale(1.25);
+                            border-color: #ffff;
+                            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.15);
                         }
                     }
                 }
@@ -422,21 +447,127 @@
                                     background-color: #ebebeb;
                                 }
                                 display: none; // 품절된 사이즈는 보이지 않도록 설정
+
+                                //sold-out 버튼 클릭 방지 스타일
+                                pointer-events: none;
+                                cursor: not-allowed; // 시각적으로 클릭 불가 표시
+                                opacity: 0.6; // 비활성화 느낌
                             }
                         }
                     }
-                    .product-info_size-notice-wrap{
+                    .product-info_size-notice-wrap {
                         display: flex;
                         justify-content: space-between;
                         font-size: 1.3rem;
                         font-weight: 400;
                         color: #cccccc;
-                        
+
                         a {
                             display: flex;
                             gap: 0.4rem;
                             img {
                                 width: 1.6rem;
+                            }
+                        }
+                    }
+                }
+            }
+            .product-info_select {
+                width: 100%;
+                height: 5.2rem;
+                border-radius: 0.8rem;
+                display: flex;
+                align-items: center;
+                background-color: #fafafd;
+                // border: 1px solid blue;
+                justify-content: flex-start;
+
+                .product-info__wrap {
+                    display: flex;
+                    gap: 1.2rem;
+                    .info__color-badge {
+                        width: 1.6rem;
+                        height: 1.6rem;
+                        border-radius: 50%;
+                    }
+                    .info__color-badge--black {
+                        background-color: #000000;
+                    }
+
+                    .product-info-select_chose-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.8rem;
+                    }
+                }
+
+                .product-info__price_breadcrumbs__line {
+                    width: 0.2rem;
+                    height: 1rem;
+                    background-color: #d9d9d9;
+                }
+
+                .product-info-select__count-wrap {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    .product-info-select__count {
+                        .product-info-select__count-value-wrap {
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+
+                            .product-info-select__count-value {
+                                // width: 6.2rem;
+                                width: 5.5rem;
+                                height: 3.6rem;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 1.9rem;
+                                font-weight: 600;
+                                border-left: 1px solid #ebebeb;
+                                border-bottom: 1px solid #ebebeb;
+                                border-top: 1px solid #ebebeb;
+                                background-color: #fff;
+                                // border-radius: 10px 0px 0px 10px;
+
+                                span {
+                                    font-size: 1.6rem;
+                                }
+                            }
+                            .product-info-select__wrap {
+                                display: flex;
+                                flex-direction: column;
+                                .product-info-select__count-btn {
+                                    width: 1.6rem;
+                                    height: 1.6rem;
+                                    border: 1px solid #ebebeb;
+                                    display: flex;
+                                    justify-content: center;
+                                    background-color: #fff;
+                                    .product-info-select__count-link {
+                                        width: 100%;
+                                        height: 100%;
+                                        align-items: center;
+                                        justify-content: center;
+                                        img {
+                                            width: 0.7rem;
+                                            height: auto;
+                                        }
+                                    }
+                                }
+                                .product-info-select__count-link--disabled-1 {
+                                    display: none;
+                                }
+                                &:hover {
+                                    .product-info-select__count-link--disabled-1 {
+                                        display: flex;
+                                    }
+                                    .product-info-select__count-link--disabled-2 {
+                                        display: none;
+                                    }
+                                }
                             }
                         }
                     }
