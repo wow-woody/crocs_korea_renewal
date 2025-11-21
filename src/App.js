@@ -19,6 +19,7 @@ import UserInfo from './pages/UserInfo';
 import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
 import WishList from './pages/WishList';
 import OrderHistory from './pages/OrderHistory';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
     return (
@@ -40,9 +41,8 @@ function App() {
                 <Route path="/crocsclub" element={<CrocsClubPopup />} />
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} />
+                <Route path="/product-detail" element={<ProductDetail />} />
                 <Route path="/wishlist" element={<WishList />} />
-                <Route path="/crocsclub" element={<CrocsClubPopup />} />
-                <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/orderhistory" element={<OrderHistory />} />
             </Routes>
             <Footer />

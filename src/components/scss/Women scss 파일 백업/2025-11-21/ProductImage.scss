@@ -1,0 +1,232 @@
+@use '../App.scss' as g;
+
+.product-img {
+    width: 112.8rem;
+    height: 90.6rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
+    position: relative;
+
+    // 이미지 메인 영역
+    .product-img__crumbs-wrap {
+        width: 100%;
+        height: 100%;
+        max-width: 40%;
+
+        .product-img__crumbs {
+            @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
+            font-size: 1.2rem;
+            font-weight: 400;
+            height: 2.5rem;
+            align-items: center;
+            position: absolute;
+            top: 4rem;
+            left: 8.8rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            .product-img__sep {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 0.8rem;
+                margin: 0;
+                padding: 0;
+            }
+
+            .product-img__crumb {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+
+                .product-img__link {
+                    @include g.flex($jc: center, $ai: center, $gap: 0.4rem);
+                    display: inline-flex;
+                    align-items: center;
+                    height: 100%;
+                    padding: 0 10px;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+                    border-radius: 0.4rem;
+                    background-color: #ffffff;
+                    text-decoration: none;
+                    color: inherit;
+
+                    .product-img__icon {
+                        width: 0.8rem;
+                        display: inline-block;
+                    }
+
+                    .product-img__text {
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                }
+
+                .product-img__close-btn {
+                    background: none;
+                    border: none;
+                    padding: 0;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    &:hover {
+                        opacity: 0.7;
+                    }
+                }
+
+                &.product-img__crumb--home {
+                    .product-img__link {
+                        width: 2.5rem;
+                        padding: 0;
+
+                        .product-img__icon {
+                            width: 1.3rem;
+                        }
+                    }
+                }
+
+                &.product-img__crumb--current {
+                    .product-img__link {
+                        gap: 0.6rem;
+                    }
+                }
+            }
+        }
+    }
+
+    // 이미지 메인 영역
+    .product-img__main-wrap {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 18rem;
+
+        .product-img__list {
+            width: 60rem;
+            height: fit-content;
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            .product-img__item {
+                &--none {
+                    display: none;
+                }
+                
+                .product-img__img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }
+
+    // 썸네일 영역
+    .product-img__thumbs-wrap {
+        margin-right: 8.6rem;
+        right: 8.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.6rem;
+        
+        .product-img__thumbs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            
+            .product-img__thumbs-item {
+                width: 9.2rem;
+                height: 9.2rem;
+
+                .product-img__thumbs-link {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 1rem;
+                    border: 1px solid #ebebeb;
+                    background: #fff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 0;
+
+                    .product-img__thumbs-img {
+                        width: 6.2rem;
+                        height: auto;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    &:hover {
+                        border: 1px solid #c1dd82;
+                        
+                        .product-img__thumbs-img {
+                            width: 7.2rem;
+                            height: auto;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 썸네일 버튼
+        .thumbs__ctrl {
+            width: 2.6rem;
+            height: 2.6rem;
+            border: 1px solid #ebebeb;
+            border-radius: 4rem;
+            position: relative;
+
+            .thumbs__btn {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                
+                .thumbs__icon {
+                    width: 1.2rem;
+                    height: auto;
+                }
+            }
+            
+            .thumbs__btn--active {
+                display: none;
+            }
+            
+            &:hover {
+                border: 1px solid #c1dd82;
+                
+                .thumbs__btn--active {
+                    display: flex;
+                }
+                
+                .thumbs__btn--up,
+                .thumbs__btn--down {
+                    display: none;
+                }
+            }
+        }
+    }
+}

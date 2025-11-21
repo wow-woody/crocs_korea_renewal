@@ -1,0 +1,12 @@
+@use '../App.scss' as g;
+
+.product-detail-page {
+    width: 100%;
+    min-height: 100vh;
+    
+    .product-img-info__wrap {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+    }
+}
