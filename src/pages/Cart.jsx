@@ -3,10 +3,9 @@ import "./scss/Cart.scss";
 import Title from "../components/Title";
 import { Products } from "../data/CrocsProductsData.js";
 import CartProgress from "../components/CartProgress";
-import { useCartStore } from "../store/useCartStore"; 
+import { useCartStore } from "../store/useCartStore";
 
 function Cart() {
-    
     const {
         cartProducts,
         selectedProducts,
@@ -99,6 +98,9 @@ function Cart() {
                                                 <p className='product-option'>
                                                     사이즈: {product.size}
                                                 </p>
+                                                {/* <p className='product-color'>
+                                                    컬러: {product.color}
+                                                </p> */}
 
                                                 <div className='quantity-control'>
                                                     <button
@@ -152,22 +154,27 @@ function Cart() {
                                 <span className='price-label'>주문상품</span>
                                 <span className='price-value'>{formatPrice(subtotal)}원</span>
                             </div>
+                            {cartProducts.length > 0 && (
+                                <>
+                                    <div className='price-row'>
+                                        <span className='price-label'>배송비</span>
+                                        <span
+                                            className={`price-value ${
+                                                shipping === 0 ? "free-shipping" : ""
+                                            }`}
+                                        >
+                                            {shipping === 0
+                                                ? "무료배송"
+                                                : `+${formatPrice(shipping)}원`}
+                                        </span>
+                                    </div>
 
-                            <div className='price-row'>
-                                <span className='price-label'>배송비</span>
-                                <span
-                                    className={`price-value ${
-                                        shipping === 0 ? "free-shipping" : ""
-                                    }`}
-                                >
-                                    {shipping === 0 ? "무료배송" : `+${formatPrice(shipping)}원`}
-                                </span>
-                            </div>
-
-                            {shipping > 0 && (
-                                <p className='shipping-notice'>
-                                    {formatPrice(freeShippingThreshold)}원 이상 구매 시 무료배송
-                                </p>
+                                    {shipping > 0 && (
+                                        <p className='shipping-notice'>
+                                            {formatPrice(freeShippingThreshold)}원 이상 구매 시 무료배송
+                                        </p>
+                                    )}
+                                </>
                             )}
 
                             <div className='price-row total-row'>

@@ -67,14 +67,26 @@ export const useCartStore = create(
             },
 
             getTotal: () => {
+                const { cartProducts } = get();
+
+                // 장바구니가 비어있으면 총금액 0
+                if (cartProducts.length === 0) {
+                    return 0;
+                }
                 const subtotal = get().getSubtotal();
                 const shipping = get().getShipping();
                 return subtotal + shipping;
             },
 
             getSelectedTotal: () => {
-                const { freeShippingThreshold, shippingFee } = get();
+                const { freeShippingThreshold, shippingFee, cartProducts } = get();
                 const selectedSubtotal = get().getSelectedSubtotal();
+
+                // 장바구니가 비어있으면 배송비도 0
+                if (cartProducts.length === 0 || selectedSubtotal === 0) {
+                    return 0;
+                }
+
                 const selectedShipping = selectedSubtotal >= freeShippingThreshold ? 0 : shippingFee;
                 return selectedSubtotal + selectedShipping;
             },
