@@ -1,7 +1,6 @@
 import React from 'react';
 import Title from '../components/Title';
 import JibbitzProductListPage from '../components/JibbitzProductListPage';
-import './scss/productListpage.scss';
 
 const Jibbitz = () => {
     return (
