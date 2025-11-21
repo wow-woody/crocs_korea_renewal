@@ -18,9 +18,6 @@ const GnbRight = ({ onSearchClick }) => {
                 <Link to="/cart">
                     <img src="./images/cart_icon.svg" alt="cart_icon" />
                 </Link>
-                {/* <button >
-                    <img src="./images/cart_icon.svg" alt="cart_icon" />
-                </button> */}
             </li>
         </ul>
     );

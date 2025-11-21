@@ -1,5 +1,6 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Main from "./pages/Main";
 import New from "./pages/New";
 import Women from "./pages/Women";
@@ -19,11 +20,17 @@ import UserInfo from "./UserInfo";
 import Order from "./pages/Order";
 import JibbitzCollaboProductDetail from "./pages/JibbitzCollaboProductDetail";
 import WishList from "./pages/WishList";
-import { useState } from "react";
 import CartSidebar from "./components/CartSidebar";
 
 function App() {
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const location = useLocation();
+
+    // 페이지 이동 시 장바구니 닫기
+    useEffect(() => {
+        setIsCartOpen(false);
+    }, [location.pathname]);
+
     return (
         <div className='App'>
             <Header onCartClick={() => setIsCartOpen(true)} />

@@ -29,14 +29,14 @@ const Header = ({ onCartClick }) => {
                         </nav>
                     </div>
                     <div className='header_right'>
-                        <GnbWrap onSearchClick={onOpenSearch}/>
+                        <GnbWrap onSearchClick={onOpenSearch} />
                     </div>
                     {/* 장바구니 최근본상품 슬라이드 버튼 */}
                     <div className='header_slide_buttons'>
-                        <button className="cart-button" onClick={onCartClick}>
+                        <button className='cart-button' onClick={onCartClick}>
                             <img src='./images/cart-slide-icon.svg' alt='' />
                         </button>
-                        <button className="recently-button">
+                        <button className='recently-button'>
                             <img src='./images/recently-slide-icon.svg' alt='' />
                         </button>
                     </div>
