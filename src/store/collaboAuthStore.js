@@ -1,11 +1,16 @@
 import { create } from 'zustand';
-import jibbitzAll from '../data/jibbitzAll.json';
+import { jibbitzs } from '../data/jibbitzs';
 
 export const collaboAuthStore = create((set, get) => ({
-    //메인//
-    //section3_CollaboJibbitz 상품 목록을 저장할 배열
-    jibbitzItems: jibbitzAll,
-    disneyItems: jibbitzAll.filter(
+    jibbitzItems: [],
+
+    onFetchJibbitz: async () => {
+        const items = get().jibbitzItems;
+        if (items.length > 0) return;
+        set({ jibbitzItems: jibbitzs });
+    },
+
+    disneyItems: jibbitzs.filter(
         (item) =>
             (item.title.includes('디즈니') || item.title.includes('동물')) && item.price !== ''
     ),
