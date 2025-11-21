@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const GnbRight = ({ onSearchClick }) => {
+const GnbRight = ({ onSearchClick, onCartClick }) => {
     return (
         <ul className="gnb_right">
             <li>
@@ -15,9 +15,12 @@ const GnbRight = ({ onSearchClick }) => {
                 </Link>
             </li>
             <li>
-                <Link to="/cart">
+                {/* <Link to="/cart">
                     <img src="./images/cart_icon.svg" alt="cart_icon" />
-                </Link>
+                </Link> */}
+                <button onClick={onCartClick}>
+                    <img src="./images/cart_icon.svg" alt="cart_icon" />
+                </button>
             </li>
         </ul>
     );

@@ -1,6 +1,6 @@
 @use "../../App.scss" as g;
 // 변수 정의
-$primary-color: #444;
+$primary-color: #333;
 $border-color: #e0e0e0;
 $light-gray: #f9f9f9;
 $text-gray: #666;
@@ -10,36 +10,73 @@ $danger-color: #d32f2f;
 $white: #fff;
 
 // 장바구니 컨테이너
-.cart-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+.cart-side-container {
+    position: relative;
+    display: block;
+    margin-top: 0rem;
+    z-index: 9999;
 
-    .inner {
-        width: 100%;
-        margin-top: 10rem;
-    }
+    // margin: 0 auto;
+    // padding: 100px 20px;
 
-    .cart-title {
+    // .inner {
+    //     width: 100%;
+    //     margin-top: 10rem;
+    // }
+
+    .cart-inner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        max-width: 600px;
+        width: 70%;
+        height: 100vh;
         font-size: 28px;
+        padding: 2rem ;;
         font-weight: bold;
-        margin-bottom: 30px;
         color: $primary-color;
+        text-align: center;
+        background: #fff;
+        // background-color: rgba(102, 222, 27, 0.4);
+        // border:1px solid #777;
+        border: none;
+        box-shadow: 0 4px 20px rgba(68, 68, 68, 0.3);
+        transition: all 0.2s;
+        @media (max-width: 758px) {
+            width: 100%;
+            min-width: 500px;
+            padding: 2rem 0 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2.4rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
     }
 
-    .cart-content {
-        display: grid;
-        grid-template-columns: 1fr 500px;
-        gap: 4rem;
+    
 
-        @media (max-width: 1024px) {
-            grid-template-columns: 1fr;
-        }
+    .cart-side-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        height: 100%;
     }
 }
 
 // 왼쪽: 상품 목록
-.cart-left {
+.cart-side-top {
     background-color: $white;
     // border: 1px solid $border-color;
     border-radius: 8px;
@@ -95,9 +132,11 @@ $white: #fff;
         margin-bottom: 25px;
 
         .empty-cart {
+            align-items: center;
             text-align: center;
             padding: 60px 20px;
             color: #999;
+            
 
             p {
                 font-size: 16px;
@@ -121,7 +160,7 @@ $white: #fff;
             accent-color: $primary-color;
         }
 
-        // .cart-product-checkbox {
+        // .cart-side-product-checkbox {
         //     align-items: flex-start;
         //     width: 1.8rem;
         //     height: 1.8rem;
@@ -129,7 +168,7 @@ $white: #fff;
         //     margin-top: 30px;
         //     flex-shrink: 0;
         // }
-        .cart-remove-btn {
+        .cart-side-remove-btn {
             align-items: flex-end;
             width: 2.4rem;
             height: 2.4rem;
@@ -240,24 +279,14 @@ $white: #fff;
     }
 }
 
-// 오른쪽: 주문 요약
-.cart-right {
+// 아래 - 주문 요약
+.cart-side-bottom {
     background-color: #f8f9fa;
-    padding: 2.5rem;
+    padding: 2.5rem 2.5rem 0;
     border-radius: 0.8rem;
-    position: sticky;
+    position: relative;
+    // position: static;
     top: 2rem;
-
-    @media (max-width: 1024px) {
-        position: static;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-        font-weight: 600;
-        margin-bottom: 15px;
-        color: $primary-color;
-    }
 }
 
 // 가격 요약
@@ -362,13 +391,14 @@ $white: #fff;
         button {
             flex: 1;
             padding: 14px;
-            background-color: $white;
+            background-color: $light-gray;
             color: $primary-color;
             // border: 1px solid $primary-color;
             border-radius: 5rem;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
+            box-shadow: 0 6px 20px rgba(68, 68, 68, 0.2);
             transition: all 0.2s;
 
             &:hover {
