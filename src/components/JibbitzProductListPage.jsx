@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { collaboAuthStore } from '../store/collaboAuthStore';
-import Breadcrumbs from './Breadcrumbs';
 import './scss/JibbitzProductListPage.scss';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ const JibbitzProductListPage = () => {
 
     const JibbitzLeftNavigation = {
         category: '지비츠',
-        subcategory: '콜라보',
+        subcategory: '',
         filters: [],
     };
 
@@ -67,30 +66,36 @@ const JibbitzProductListPage = () => {
         <div className="product_list_wrap">
             <div className="list_left">
                 <div className="left_nav_wrap">
-                    <Breadcrumbs
-                        category={JibbitzLeftNavigation.category}
-                        subcategory={JibbitzLeftNavigation.subcategory}
-                    />
+                    <div className="breadcrumbs--section">
+                        <ul className="breadcrumbs__list">
+                            <li className="breadcrumbs__list--home">
+                                <a href="/" className="breadcrumbs__list--home_link">
+                                    <img
+                                        src="/images/Sub_Women_Images/icon-home.svg"
+                                        alt="홈 버튼"
+                                    />
+                                </a>
+                            </li>
+                            <li className="breadcrumbs__list--section">
+                                <span>:</span>
+                            </li>
+                            <li className="breadcrumbs__list--women">
+                                <a href="/jibbitz" className="breadcrumbs__list--women_link">
+                                    <span>지비츠</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div className="breadcrumbs__title">
+                            <h2>지비츠</h2>
+                        </div>
+                    </div>
                     <nav className="left_nav">
                         <div className="filter-menu">
                             <div className="filter-menu__wrap menu_wrap-style">
                                 <div className="filter-menu__wrap--title_wrap title--wrap">
                                     <h3 className="filter-menu__wrap--title title">필터</h3>
-                                    {/* <a
-                                        href="#"
-                                        className="filter-menu--title__toggle title--toggle"
-                                    >
-                                        <button>
-                                            <img
-                                                src="/images/Sub_Women_Images/icon-minus.svg"
-                                                alt=""
-                                            />
-                                        </button>
-                                    </a> */}
                                 </div>
                                 <div className="filter_list_menu">
-                                    {/* <ul className="filter-menu__wrap filter-menu__wrap--color"> */}
-                                    {/* <li className="filter-menu__item filter_list_menu"> */}
                                     <button className="filter_menu_btn">
                                         {selectFilter}
                                         <img
@@ -99,8 +104,6 @@ const JibbitzProductListPage = () => {
                                             className="close-btn"
                                         />
                                     </button>
-                                    {/* </li> */}
-                                    {/* </ul> */}
                                 </div>
                             </div>
                         </div>
