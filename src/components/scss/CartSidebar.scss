@@ -9,12 +9,50 @@ $success-color: #2e7d32;
 $danger-color: #d32f2f;
 $white: #fff;
 
+// 장바구니 최근본상품 슬라이드 버튼
+.header_slide_buttons {
+    position: fixed;
+    top: 90px;
+    right:-40px;
+    // right: -40px;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    // gap: 1px;
+
+    button {
+        background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(102, 222, 27, 0.3);   
+        transition: all 0.2s; 
+
+        img {
+            width: 45px;
+            height: 45px;
+            align-items: center;
+        }
+
+        &:hover {
+            transform: translateY(-2px) translateX(-30px);
+            box-shadow: 0 6px 20px rgba(102, 222, 27, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
 // 장바구니 컨테이너
 .cart-side-container {
     position: relative;
     display: block;
     margin-top: 0rem;
     z-index: 9999;
+    transition: all 0.2s;
 
     // margin: 0 auto;
     // padding: 100px 20px;
@@ -26,13 +64,13 @@ $white: #fff;
 
     .cart-inner {
         position: absolute;
-        top: 0;
+        // top: 0;
         right: 0;
         max-width: 600px;
         width: 70%;
         height: 100vh;
         font-size: 28px;
-        padding: 2rem ;;
+        padding: 2rem;
         font-weight: bold;
         color: $primary-color;
         text-align: center;
@@ -41,7 +79,6 @@ $white: #fff;
         // border:1px solid #777;
         border: none;
         box-shadow: 0 4px 20px rgba(68, 68, 68, 0.3);
-        transition: all 0.2s;
         @media (max-width: 758px) {
             width: 100%;
             min-width: 500px;
@@ -64,8 +101,6 @@ $white: #fff;
             }
         }
     }
-
-    
 
     .cart-side-content {
         display: grid;
@@ -136,7 +171,6 @@ $white: #fff;
             text-align: center;
             padding: 60px 20px;
             color: #999;
-            
 
             p {
                 font-size: 16px;

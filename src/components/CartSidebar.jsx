@@ -4,6 +4,7 @@ import Title from "../components/Title";
 import { Products } from "../data/CrocsProductsData.js";
 import { useCartStore } from "../store/useCartStore";
 
+
 function CartSidebar({ isOpen, onClose }) {
     const {
         cartProducts,
@@ -68,6 +69,9 @@ function CartSidebar({ isOpen, onClose }) {
 
     return (
         <>
+        {/* <div className="cart-button">
+            <button><img src="./public/imagescart-icon.svg" alt="" /></button>
+        </div> */}
             <div className={`cart-side-container ${isOpen ? "open" : ""}`}>
                 <div className='cart-inner'>
                     <Title title='Cart' />
