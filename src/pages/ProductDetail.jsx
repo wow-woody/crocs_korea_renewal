@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { useCrocsProductStore } from '../store/useCrocsProductStore';
 import LeftNavigation from '../components/LeftNavigation';
@@ -254,3 +255,22 @@ const ProductListPage = () => {
 };
 
 export default ProductListPage;
+=======
+import React from 'react';
+import ProductImage from '../components/ProductImage';
+import ProductInfo from '../components/ProductInfo';
+import '../components/scss/ProductDetail.scss';
+
+const ProductDetail = () => {
+    return (
+        <main className="product-detail-page">
+            <section className="product-img-info__wrap">
+                <ProductImage />
+                <ProductInfo />
+            </section>
+        </main>
+    );
+};
+
+export default ProductDetail;
+>>>>>>> 664d07f (2025-11-21(금) 워크트리 정우 - 머지 - v03)
