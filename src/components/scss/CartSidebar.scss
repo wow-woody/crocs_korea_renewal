@@ -180,8 +180,8 @@ $white: #fff;
     }
 
     .product-item-wrap {
-        // display: flex;
-        // justify-content: space-between;
+        display: flex;
+        justify-content: flex-start;;
 
         input[type="checkbox"] {
             width: 1.6rem;
@@ -224,6 +224,7 @@ $white: #fff;
         padding: 20px 0;
         border-bottom: 1px solid #f0f0f0;
         justify-content: space-between;
+        width: 100%;
 
         .product-image {
             width: 100px;

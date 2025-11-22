@@ -50,7 +50,7 @@ const JibbitzProductListPage = () => {
                 <div className="product-card__section_wrap">
                     <ul className="product-card__item_list">
                         {currentItems.map((product) => (
-                            <li
+                            <li key={product.id}
                                 className="product-card"
                                 onClick={() => onOpenProductDetail(product)}
                             >

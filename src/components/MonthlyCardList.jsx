@@ -56,7 +56,7 @@ const MonthlyCardList = () => {
         <ul className="monthly_card_list">
             {monthlyCards.map((card) => (
                 <li key={card.id}>
-                    <Link className="monthly_card">
+                    <div className="monthly_card">
                         <div className="card_img">
                             <img className="main_img" src={card.mainImg} alt={card.dec} />
                             <img
@@ -83,7 +83,7 @@ const MonthlyCardList = () => {
                                 </div>
                             </Link>
                         </div>
-                    </Link>
+                    </div>
                 </li>
             ))}
         </ul>
