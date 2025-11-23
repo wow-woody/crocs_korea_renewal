@@ -1,0 +1,26 @@
+@use '../../App.scss' as g;
+
+.policy_popup_bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    .policy_popup_textbox {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 82rem;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        overflow: hidden;
+        .policy_popup_scroll {
+            max-height: 80vh;
+            overflow-y: auto;
+            white-space: normal;
+        }
+    }
+}

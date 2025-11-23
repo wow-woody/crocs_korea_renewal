@@ -1,10 +1,11 @@
 @use '../../App.scss' as g;
 
 .policy_wrap {
-    grid-column: 2/3;
-    grid-row: 1;
     .policy_top {
-        margin-bottom: 2rem;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 0.8rem 0 0.8rem;
         font-weight: 600;
     }
     .policy_middle {
