@@ -14,23 +14,37 @@ export const wishListStore = create((set, get) => ({
     // 위시리스트 저장 메서드
     onAddWishList: (product) => {
         console.log('선택상품 들어왔나?:', product);
-        const wish = get().wishLists;
+        // const wish = get().wishLists;
 
-        const existing = wish.find((wish) => wish.id === product.id);
-        let updateWish;
+        // const existing = wish.find((wish) => wish.id === product.id);
+        // let updateWish;
+        // if (existing) {
+        //     set({ popUp: { show: true, message: "이미 위시리스트에 담긴 상품입니다 💚" } });
+        //     return false;
+        // } else {
+        //     updateWish = [...wish, { ...product }];
+
+        //     console.log('선택상품 담겼나?:', wish);
+        // }
+
+        // set({ wishLists: updateWish });
+
+        // // set({ popUp: { show: true, message: '장바구니에 담겼습니다! 💚' } });
+        // console.log('wishLists에 담긴 것 확인:', get().wishLists);
+        // console.log('찜완💚되었으니 계속 개발을 하시어요');
+        // return true;
+        const wish = get().wishLists;
+        const existing = wish.find((item) => item.id === product.id);
+
         if (existing) {
-            alert('이미 당신의 위시 속에 쏘옥💚');
-            return false;
-        } else {
-            updateWish = [...wish, { ...product }];
-            console.log('선택상품 담겼나?:', wish);
+            set({ popUp: { show: true, message: '이미 위시리스트에 담긴 상품입니다 💚' } });
+            return;
         }
 
-        set({ wishLists: updateWish });
-        set({ popUp: { show: true, message: '장바구니에 담겼습니다! 💚' } });
-        console.log('wishLists에 담긴 것 확인:', get().wishLists);
-        console.log('찜완💚되었으니 계속 개발을 하시어요');
-        return true;
+        set({
+            wishLists: [...wish, product],
+            popUp: { show: true, message: '위시리스트에 추가되었습니다! 💚' },
+        });
     },
 
     // 위시 추가 팝업창 끄기
@@ -116,6 +130,75 @@ export const wishListStore = create((set, get) => ({
             removeWish: [], // 체크 초기화
         });
     },
+
+    cartItems: [],
+
+    // //진짜 장바구니 버튼 클릭 시 장바구니 추가 메서드 (위시리스트랑 합쳐)
+
+    onProductAddCart: (product, count = 1) => {
+        const cartItems = get().cartItems;
+        const existing = cartItems.find((item) => item.id === product.id);
+
+        let updated;
+        if (existing) {
+            updated = cartItems.map((item) =>
+                item.id === product.id ? { ...item, count: item.count + count } : item
+            );
+        } else {
+            updated = [...cartItems, { ...product, count }];
+        }
+
+        set({
+            cartItems: updated,
+            cartCount: updated.reduce((sum, item) => sum + item.count, 0),
+            popUp: { show: true, message: '장바구니에 담겼습니다! 🛒' },
+        });
+    },
+
+    hidePopup: () => set({ popUp: { show: false, message: '' } }),
+
+    // addToCart: (product, count = 1) => {
+    //     const cartItems = get().cartItems;
+    //     const existing = cartItems.find((item) => item.id === product.id);
+
+    //     let updatedCart;
+    //     if (existing) {
+    //         updatedCart = cartItems.map((item) =>
+    //             item.id === product.id ? { ...item, count: item.count + count } : item
+    //         );
+    //     } else {
+    //         updatedCart = [...cartItems, { ...product, count }];
+    //     }
+
+    //     set({
+    //         cartItems: updatedCart,
+    //         cartCount: updatedCart.reduce((sum, item) => sum + item.count, 0),
+    //     });
+    //     set({ popUp: { show: true, message: '장바구니에 담겼습니다! 💚' } });
+
+    //     console.log('장바구니 상태:', get().cartItems);
+
+    //     // if (existing) {
+    //     //     // 이미 장바구니에 있는 경우 팝업만 띄우고 종료
+    //     //     set({ popUp: { show: true, message: '이미 장바구니에 담긴 상품입니다! 🛒' } });
+    //     //     return;
+    //     // }
+
+    //     // const updatedCart = [...cartItems, { ...product, count }];
+
+    //     // set({
+    //     //     cartItems: updatedCart,
+    //     //     cartCount: updatedCart.reduce((sum, item) => sum + (item.count || 1), 0),
+    //     //     popUp: { show: true, message: '장바구니에 추가되었습니다! 💚' },
+    //     // });
+
+    //     // console.log('장바구니 상태:', get().cartItems);
+    // },
+
+    // onProductAddCart: (product, count = 1) => {
+    //     console.log('상품 상세에서 장바구니:', product);
+    //     get().addToCart(product, count);
+    // },
 
     // 장바구니 추가 버튼 메서드(위시리스트 목록에서 지우기 )
     // onAddCartBtn: () => {
