@@ -51,9 +51,9 @@ const JibbitzProductListPage = () => {
 
     // 페이징 처리
     const itemsPerPage = 12;
+    const list = displayList();
+    const totalPage = Math.ceil(list.length / itemsPerPage);
     const [currentPage, setCurrentPage] = useState(1);
-    const list = displayList(selectFilter);
-    const totalPage = Math.ceil(displayList.length / itemsPerPage);
     const start = (currentPage - 1) * itemsPerPage;
     const currentItems = list.slice(start, start + itemsPerPage);
 
@@ -61,6 +61,10 @@ const JibbitzProductListPage = () => {
         if (pageNum < 1 || pageNum > totalPage) return;
         setCurrentPage(pageNum);
     };
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectFilter]);
 
     return (
         <div className="product_list_wrap">
@@ -97,7 +101,7 @@ const JibbitzProductListPage = () => {
                                 </div>
                                 <div className="filter_list_menu">
                                     <button className="filter_menu_btn">
-                                        {selectFilter}
+                                        {selectFilter} 지비츠 참
                                         <img
                                             src="/images/Sub_Women_Images/icon-close_cross.svg"
                                             alt="필터 닫기 버튼"

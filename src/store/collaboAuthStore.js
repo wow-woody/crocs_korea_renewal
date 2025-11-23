@@ -24,6 +24,7 @@ export const collaboAuthStore = create((set, get) => ({
         (item) =>
             item.title.includes('디즈니') ||
             item.title.includes('동물') ||
+            item.title.includes('미키') ||
             (item.title.includes('산리오') && item.price !== '')
     ),
 

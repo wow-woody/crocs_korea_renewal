@@ -14,4 +14,18 @@ export const joinStore = create((set, get) => ({
             alert(err.message);
         }
     },
+
+    // 이용약관 팝업창
+    popUp: {
+        show: false,
+        // message: '',
+    },
+
+    onPolicyPopup: () => {
+        set({ popUp: { show: true } });
+    },
+
+    // 이용약관 팝업창 끄기
+
+    hidePopup: () => set({ popUp: { show: false, message: '' } }),
 }));

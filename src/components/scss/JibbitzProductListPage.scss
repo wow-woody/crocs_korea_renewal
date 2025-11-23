@@ -1,8 +1,5 @@
 @use '../../App.scss' as g;
 
-.filter_list_menu {
-    width: 0;
-}
 .product_list_wrap {
     @include g.flex($ai: unset);
     .list_left {
@@ -21,7 +18,17 @@
             .filter-menu__wrap {
             }
             .filter_list_menu {
-                // flex-direction: column;
+                width: 100%;
+                .filter_menu_btn {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.6rem;
+                    cursor: pointer;
+                    .close-btn {
+                        width: 1.2rem;
+                        height: 1.2rem;
+                    }
+                }
             }
         }
     }
