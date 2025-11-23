@@ -46,6 +46,15 @@ section {
   margin: 0 auto;
 }
 
+.product-info_breadcrumbs {
+  width: 100%;
+  height: 0.1rem;
+  background-color: #ebebeb;
+  display: block;
+  border: none;
+  margin: 0;
+}
+
 .product-detail-page {
   width: 100%;
   min-height: 100vh;
@@ -252,7 +261,7 @@ section {
 }
 
 .product-info__wrap {
-  width: 79.2rem;
+  width: 79.8rem;
   height: 90.6rem;
   display: flex;
   justify-content: center;

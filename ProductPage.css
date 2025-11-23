@@ -201,6 +201,14 @@ textarea {
   font-display: swap;
   src: url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.woff2") format("woff2"), url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.woff") format("woff"), url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.otf") format("opentype"), url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy-9Black.ttf") format("truetype");
 }
+.product-info_breadcrumbs {
+  width: 100%;
+  height: 0.1rem;
+  background-color: #ebebeb;
+  display: block;
+  flex-shrink: 0;
+}
+
 .product-img-info__wrap .product-img .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb.product-img__crumb--current .product-img__link, .product-img-info__wrap .product-img .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb.product-img__crumb--home .product-img__link, .product-img-info__wrap .product-img .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb .product-img__link {
   display: flex;
   justify-content: center;
@@ -242,7 +250,7 @@ textarea {
   top: 4rem;
   left: 8.8rem;
   /* 구분자 ':' 요소 (HTML: <li class="product-img__sep">) */
-  /* crumb 항목 전체 (HTML: <li class="product-img__crumb ...">) */
+  /* crumb 항목 전체 */
 }
 .product-img-info__wrap .product-img .product-img__crumbs-wrap .product-img__crumbs .product-img__sep {
   display: flex;
@@ -259,7 +267,6 @@ textarea {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* 내부 링크 정렬 */
 }
 .product-img-info__wrap .product-img .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb .product-img__link {
   display: inline-flex;
@@ -429,11 +436,6 @@ textarea {
   width: 0.2rem;
   height: 1.2rem;
   background-color: #d9d9d9;
-}
-.product-img-info__wrap .product-info__wrap .product-info .product-info_breadcrumbs {
-  width: 100%;
-  height: 0.1rem;
-  background-color: #ebebeb;
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info_color {
   display: flex;
@@ -643,11 +645,6 @@ textarea {
   align-items: center;
   gap: 0.8rem;
 }
-.product-img-info__wrap .product-info__wrap .product-info .product-info_selected--wrap .product-info_select .product-info__price_breadcrumbs__line {
-  width: 0.2rem;
-  height: 1rem;
-  background-color: #d9d9d9;
-}
 .product-img-info__wrap .product-info__wrap .product-info .product-info_selected--wrap .product-info_select .product-info-select__count-wrap {
   display: flex;
   align-items: center;
@@ -758,4 +755,53 @@ textarea {
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info_selected--wrap .product-info_select .product-info-select__count-wrap .product-info-select__del .product-info-select__del-btn:hover .del-btn--hover {
   display: block;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info__total-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid red;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info__total-wrap .product-info__total-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info__total-wrap .product-info__total-content {
+  display: flex;
+  gap: 1.2rem;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info__total-wrap .product-info__total-content .product-info__total-number-wrap {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  color: #cccccc;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info__total-wrap .product-info__total-content .product-info__total-number-wrap .total-number-text {
+  margin-right: 0.8rem;
+}
+.product-img-info__wrap .product-info__wrap .product-info .product-info__total-wrap .product-info__total-content .product-info__total-price-wrap {
+  display: flex;
+  align-items: center;
+  color: #d70000;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+.product-img-info__wrap .product-info__buy-btns-wrap {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 1.6rem;
+}
+.product-img-info__wrap .product-info__buy-btns-wrap .product-info__buy-btn--add-cart {
+  width: 13.6rem;
+  height: 5.2rem;
+  border: 1px solid #ebebeb;
+  border-radius: 0.4rem;
+  color: #cccccc;
+}
+.product-img-info__wrap .product-info__buy-btns-wrap .product-info__buy-btn--buy-now {
+  width: 41.2rem;
+  height: 5.2rem;
+  border-radius: 0.4rem;
+  color: #fff;
+  background: #b5d766;
 }/*# sourceMappingURL=ProductPage.css.map */
