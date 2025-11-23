@@ -219,12 +219,6 @@ textarea {
   border-radius: 0.4rem;
 }
 
-main {
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
 .product-img-info__wrap {
   max-width: -moz-fit-content;
   max-width: fit-content;
@@ -299,6 +293,7 @@ main {
   width: 1.3rem;
 }
 .product-img-info__wrap .product-img .product-img__crumbs-wrap .product-img__crumbs .product-img__crumb.product-img__crumb--current .product-img__link {
+  border-radius: 0.4rem;
   gap: 0.6rem;
 }
 .product-img-info__wrap .product-img .product-img__main-wrap {
@@ -767,7 +762,6 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid red;
 }
 .product-img-info__wrap .product-info__wrap .product-info .product-info__total-wrap .product-info__total-title {
   font-size: 1.6rem;
