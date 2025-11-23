@@ -329,6 +329,8 @@
                         border-radius: 50%;
                         border: 1px solid #ebebeb;
                         transition: all 0.3s ease;
+                        cursor: pointer;
+
                         &--black {
                             background-color: #000000;
                         }
@@ -344,10 +346,11 @@
                         &--blue {
                             background-color: #0000ff;
                         }
+
                         &:hover {
-                            transform: scale(1.25);
-                            border-color: #ffff;
-                            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.15);
+                            transform: scale(1.25) !important;
+                            border-color: #ffffff !important;
+                            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.15) !important;
                         }
                     }
                 }
@@ -472,135 +475,181 @@
                     }
                 }
             }
-            .product-info_select {
-                width: 100%;
-                height: 5.2rem;
-                border-radius: 0.8rem;
+
+            .product-info_selected--wrap {
                 display: flex;
-                align-items: center;
-                background-color: #fafafd;
-                // border: 1px solid blue;
-                justify-content: flex-start;
+                flex-direction: column;
+                gap: 0.8rem;
 
-                .product-info__wrap {
-                    display: flex;
-                    gap: 1.2rem;
-                    .info__color-badge {
-                        width: 1.6rem;
-                        height: 1.6rem;
-                        border-radius: 50%;
-                    }
-                    .info__color-badge--black {
-                        background-color: #000000;
-                    }
-
-                    .product-info-select_chose-item {
-                        display: flex;
-                        align-items: center;
-                        gap: 0.8rem;
-                    }
-                }
-
-                .product-info__price_breadcrumbs__line {
-                    width: 0.2rem;
-                    height: 1rem;
-                    background-color: #d9d9d9;
-                }
-
-                .product-info-select__count-wrap {
+                .product-info_select {
+                    width: 100%;
+                    height: 5.2rem;
+                    border-radius: 0.8rem;
                     display: flex;
                     align-items: center;
-                    justify-content: flex-start;
-                    .product-info-select__count {
-                        .product-info-select__count-value-wrap {
+                    background-color: #fafafd;
+                    // border: 1px solid blue;
+                    justify-content: space-between;
+
+                    .product-info__select-wrap {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        gap: 1.2rem;
+                        margin-left: 2rem;
+                        .info__color-badge {
+                            width: 1.6rem;
+                            height: 1.6rem;
+                            border-radius: 50%;
+                        }
+                        .info__color-badge--black {
+                            background-color: #000000;
+                        }
+                        .info__color-badge--brown {
+                            background-color: #8b4513;
+                        }
+
+                        .product-info-select_chose-item {
                             display: flex;
                             align-items: center;
-                            justify-content: flex-start;
+                            gap: 0.8rem;
+                        }
+                    }
 
-                            .product-info-select__count-value {
-                                // width: 6.2rem;
-                                width: 5.5rem;
-                                height: 3.6rem;
+                    .product-info__price_breadcrumbs__line {
+                        width: 0.2rem;
+                        height: 1rem;
+                        background-color: #d9d9d9;
+                    }
+
+                    .product-info-select__count-wrap {
+                        display: flex;
+                        align-items: center;
+                        gap: 14px;
+
+                        .product-info-select__count {
+                            .product-info-select__count-value-wrap {
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-start;
+
+                                .product-info-select__count-value {
+                                    // width: 6.2rem;
+                                    width: 5.5rem;
+                                    height: 3.6rem;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 1.9rem;
+                                    font-weight: 600;
+                                    border-left: 1px solid #ebebeb;
+                                    border-bottom: 1px solid #ebebeb;
+                                    border-top: 1px solid #ebebeb;
+                                    background-color: #fff;
+                                    border-radius: 0.4rem 0 0 0.4rem;
+                                    span {
+                                        font-size: 1.2rem;
+                                    }
+                                }
+                                .product-info-select__wrap {
+                                    display: flex;
+                                    flex-direction: column;
+                                    border-right: 1px solid #ebebeb;
+                                    border-top: 1px solid #ebebeb;
+                                    border-bottom: 1px solid #ebebeb;
+
+                                    .product-info-select__count-btn {
+                                        width: 1.7rem;
+                                        height: 1.7rem;
+                                        display: flex;
+                                        border: none;
+                                        border-left: 1px solid #ebebeb;
+                                        justify-content: center;
+                                        align-items: center;
+                                        background-color: #fff;
+                                        padding: 0;
+                                        margin: 0;
+                                        flex-shrink: 0;
+                                        position: relative;
+                                        cursor: pointer;
+
+                                        // 증가 버튼 (첫 번째) - 오른쪽 상단만 둥글게
+                                        &.product-info-select__count-btn--increase {
+                                            border-radius: 0 0.4rem 0 0;
+                                            border-bottom: 1px solid #ebebeb;
+                                        }
+
+                                        // 감소 버튼 (두 번째) - 오른쪽 하단만 둥글게
+                                        &.product-info-select__count-btn--decrease {
+                                            border-radius: 0 0 4px 0;
+                                        }
+
+                                        .product-info-select__count-link {
+                                            width: 100%;
+                                            height: 100%;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+
+                                            img {
+                                                width: 1rem;
+                                                height: auto;
+                                            }
+                                        }
+
+                                        .product-info-select__count-link--disabled-1 {
+                                            display: none;
+                                        }
+
+                                        .product-info-select__count-link--disabled-2 {
+                                            display: flex;
+                                        }
+
+                                        &:hover {
+                                            .product-info-select__count-link--disabled-1 {
+                                                display: flex;
+                                            }
+                                            .product-info-select__count-link--disabled-2 {
+                                                display: none;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .product-info-select__del {
+                            padding: 0;
+                            margin-right: 2rem;
+
+                            .product-info-select__del-btn {
+                                padding: 0; // 버튼 기본 패딩 제거
+                                line-height: 0; // 버튼 내부 라인 높이 제거
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                font-size: 1.9rem;
-                                font-weight: 600;
-                                border-left: 1px solid #ebebeb;
-                                border-bottom: 1px solid #ebebeb;
-                                border-top: 1px solid #ebebeb;
-                                background-color: #fff;
-                                border-radius: 0.4rem 0 0 0.4rem
-                                
+                                background: none; // 버튼 기본 배경 제거
+                                cursor: pointer;
 
-                                span {
-                                    font-size: 1.6rem;
+                                img {
+                                    display: block;
+                                    padding: 0; // 이미지 패딩 제거
+                                    margin: 0; // 이미지 마진 제거
+                                    width: 1.6rem; // 필요 시 크기 지정
+                                    height: auto;
                                 }
-                            }
-                            .product-info-select__wrap {
-                                display: flex;
-                                flex-direction: column;
-                                border-right: 1px solid #ebebeb;
-                                border-top: 1px solid #ebebeb;
-                                border-bottom: 1px solid #ebebeb;
-
-                                .product-info-select__count-btn {
-                                    width: 1.7rem;
-                                    height: 1.7rem;
-                                    display: flex;
-                                    border: none;
-                                    border-left: 1px solid #ebebeb;
-                                    justify-content: center;
-                                    align-items: center;
-                                    background-color: #fff;
-                                    padding: 0;
-                                    margin: 0;
-                                    flex-shrink: 0;
-                                    position: relative;
-                                    cursor: pointer;
-
-                                    // 증가 버튼 (첫 번째) - 오른쪽 상단만 둥글게
-                                    &.product-info-select__count-btn--increase {
-                                        border-radius: 0 0.4rem 0 0;
-                                        border-bottom: 1px solid #ebebeb;
-                                    }
-
-                                    // 감소 버튼 (두 번째) - 오른쪽 하단만 둥글게
-                                    &.product-info-select__count-btn--decrease {
-                                        border-radius: 0 0 4px 0;
-                                    }
-
-                                    .product-info-select__count-link {
-                                        width: 100%;
-                                        height: 100%;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        position: absolute;
-                                        top: 0;
-                                        left: 0;
-
-                                        img {
-                                            width: 1rem;
-                                            height: auto;
-                                        }
-                                    }
-
-                                    .product-info-select__count-link--disabled-1 {
+                                .del-btn--hover {
+                                    display: none;
+                                }
+                                &:hover {
+                                    .del-btn--normal {
                                         display: none;
                                     }
-
-                                    .product-info-select__count-link--disabled-2 {
-                                        display: flex;
-                                    }
-
-                                    &:hover {
-                                        .product-info-select__count-link--disabled-1 {
-                                            display: flex;
-                                        }
-                                        .product-info-select__count-link--disabled-2 {
-                                            display: none;
-                                        }
+                                    .del-btn--hover {
+                                        display: block;
                                     }
                                 }
                             }
