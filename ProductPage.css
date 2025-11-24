@@ -269,6 +269,7 @@ main {
   margin-bottom: 0;
   height: auto;
   min-height: 100%;
+  border-right: 1px solid #ebebeb;
 }
 
 .product-img {
@@ -445,7 +446,8 @@ main {
   display: flex;
   max-width: 112.8rem;
   height: auto;
-  border: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
   padding: 0 4.4rem;
 }
 .product-detail__title-wrap {
@@ -947,7 +949,6 @@ main {
   display: flex;
   max-width: 120rem;
   height: auto;
-  border: 1px solid #ebebeb;
 }
 .product-detail__title-wrap {
   width: 100%;
@@ -969,25 +970,116 @@ main {
   margin-left: 1.2rem;
   white-space: nowrap;
 }
-.product-detail .product-detail__toggle {
+.product-detail__title-wrap .product-detail__toggle {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 0;
 }
-.product-detail .product-detail__toggle-btn--open {
+.product-detail__title-wrap .product-detail__toggle-btn--open {
   padding: 0;
 }
-.product-detail .product-detail__toggle-btn--open .product-detail__toggle-btn__icon-open--hover {
+.product-detail__title-wrap .product-detail__toggle-btn--open .product-detail__toggle-btn__icon-open--hover {
   display: none;
 }
-.product-detail .product-detail__toggle:hover .product-detail__toggle-btn__icon-open {
+.product-detail__title-wrap .product-detail__toggle:hover .product-detail__toggle-btn__icon-open {
   display: none;
 }
-.product-detail .product-detail__toggle:hover .product-detail__toggle-btn__icon-open--hover {
+.product-detail__title-wrap .product-detail__toggle:hover .product-detail__toggle-btn__icon-open--hover {
   display: block;
 }
-.product-detail .product-detail__toggle-btn--close {
+.product-detail__title-wrap .product-detail__toggle-btn--close {
   display: none;
+}
+.product-detail__jibbitz {
+  width: 17.6rem;
+  height: 21.8rem;
+  border: 1px solid red;
+  border-radius: 10px;
+}
+.product-detail__jibbitz-item-wrap {
+  width: 100%;
+  height: 100%;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list {
+  width: 100%;
+  height: 100%;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item {
+  width: 14.4rem;
+  height: 14.4rem;
+  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%), linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
+  border-radius: 0.8rem;
+  position: relative;
+  margin-top: 1.6rem;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item-img {
+  width: 7.5rem;
+  height: auto;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item-icon-wrap {
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0.8rem;
+  top: 0.8rem;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item-icon-wrap .icon-like {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item-icon-wrap .icon-like img {
+  width: 100%;
+  height: 100%;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item-icon-wrap .icon-like-fill {
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 1px solid orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item-icon-wrap .icon-like-fill img {
+  width: 100%;
+  height: 100%;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item-icon-wrap:hover .icon-like {
+  display: none;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item-icon-wrap:hover .icon-like-fill {
+  display: flex;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item .icon-cart {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0.4rem;
+  top: 0.4rem;
+}
+.product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item .icon-cart img {
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=ProductPage.css.map */
