@@ -993,14 +993,20 @@ main {
   display: none;
 }
 .product-detail__jibbitz {
+  padding: 1.6rem 2rem;
+  border-right: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+}
+.product-detail__jibbitz-item-wrap {
   width: 17.6rem;
   height: 21.8rem;
   border: 1px solid red;
   border-radius: 10px;
-}
-.product-detail__jibbitz-item-wrap {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.6rem;
 }
 .product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list {
   width: 100%;
@@ -1082,4 +1088,33 @@ main {
 .product-detail__jibbitz-item-wrap .product-detail__jibbitz-item-list .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item .icon-cart img {
   width: 100%;
   height: 100%;
+}
+.product-detail__jibbitz-item-wrap .product-detail__desc-item-title-wrap {
+  width: 14.4rem;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.product-detail__jibbitz-item-wrap .product-detail__desc-item-title-wrap h3 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+}
+.product-detail__jibbitz-item-wrap .product-detail__desc-item-price-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.6rem;
+}
+.product-detail__jibbitz-item-wrap .product-detail__desc-item-price-wrap .dc_pride {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.product-detail__jibbitz-item-wrap .product-detail__desc-item-price-wrap .dc_rate {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.product-detail__jibbitz-item-wrap .product-detail__desc-item-price-wrap .breadcrumbs__line {
+  width: 0.1rem;
+  height: 0.6rem;
+  background-color: #d9d9d9;
 }/*# sourceMappingURL=ProductPage.css.map */
