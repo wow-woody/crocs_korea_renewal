@@ -7,7 +7,7 @@ import Depth1 from "./Depth1";
 import Search from "./Search";
 import { useSearchStore } from "../store/useSearchStore";
 
-const Header = ({ onCartClick }) => {
+const Header = ({ onCartClick, onRecentClick }) => {
     // const [searchOpen, setSearchOpen] = useState(false);
     const searchOpen = useSearchStore((state) => state.searchOpen);
     const onOpenSearch = useSearchStore((state) => state.onOpenSearch);
@@ -36,7 +36,7 @@ const Header = ({ onCartClick }) => {
                         <button className='cart-button' onClick={onCartClick}>
                             <img src='./images/cart-slide-icon.svg' alt='' />
                         </button>
-                        <button className='recently-button'>
+                        <button className='recently-button'onClick={onRecentClick}>
                             <img src='./images/recently-slide-icon.svg' alt='' />
                         </button>
                     </div>

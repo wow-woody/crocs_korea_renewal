@@ -21,9 +21,11 @@ import Order from "./pages/Order";
 import JibbitzCollaboProductDetail from "./pages/JibbitzCollaboProductDetail";
 import WishList from "./pages/WishList";
 import CartSidebar from "./components/CartSidebar";
+import RecentProducts from "./pages/RecentProducts";
 
 function App() {
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isRecentOpen, setIsRecentOpen] = useState(false);
     const location = useLocation();
 
     // 페이지 이동 시 장바구니 닫기
@@ -33,8 +35,9 @@ function App() {
 
     return (
         <div className='App'>
-            <Header onCartClick={() => setIsCartOpen(true)} />
+            <Header onCartClick={() => setIsCartOpen(true)} onRecentClick={() => setIsRecentOpen(true)} />
             <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+            <RecentProducts isOpen={isRecentOpen} onClose={() => setIsRecentOpen(false)} /> 
             <Routes>
                 <Route index element={<Main />} />
                 <Route path='/new' element={<New />} />
@@ -54,6 +57,7 @@ function App() {
                 <Route path='/product/:id' element={<JibbitzCollaboProductDetail />} />
                 <Route path='/jibbitz/:id' element={<JibbitzCollaboProductDetail />} />
                 <Route path='/wishlist' element={<WishList />} />
+                <Route path='./recent' element={<RecentProducts />} />
             </Routes>
         </div>
     );
