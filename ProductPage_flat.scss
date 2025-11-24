@@ -814,7 +814,7 @@ main {
 }
 
 .select-buy__buy-btn--add-cart {
-    width: 13.6rem;
+    width: 19.6rem;
     height: 5.2rem;
     border: 1px solid #ebebeb;
     border-radius: 0.4rem;
@@ -822,7 +822,7 @@ main {
 }
 
 .select-buy__buy-btn--buy-now {
-    width: 41.2rem;
+    width: 39.2rem;
     height: 5.2rem;
     border-radius: 0.4rem;
     color: #fff;
@@ -1060,24 +1060,24 @@ main {
 }
 
 .product-detail_desc,
-.product-detail_notes{
+.product-detail_notes {
     padding: 3.6rem 4.4rem;
     border-right: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
 }
 
 .product-detail_desc__wrap,
-.product-detail_notes__wrap{
+.product-detail_notes__wrap {
     font-family: 'Paperlogy';
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
 }
 .product-detail_desc__item,
-.product-detail_notes__item{
+.product-detail_notes__item {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem; 
+    gap: 0.5rem;
 }
 .product-detail_desc__item-title,
 .product-detail_notes__item-title {
@@ -1086,7 +1086,7 @@ main {
 }
 
 .product-detail_desc__item-text,
-.product-detail_notes__item-text{
+.product-detail_notes__item-text {
     font-size: 1.4rem;
     font-weight: 300;
     line-height: 1.5;

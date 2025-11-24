@@ -1016,7 +1016,7 @@ main {
 }
 
 .select-buy__buy-btn--add-cart {
-  width: 13.6rem;
+  width: 19.6rem;
   height: 5.2rem;
   border: 1px solid #ebebeb;
   border-radius: 0.4rem;
@@ -1024,7 +1024,7 @@ main {
 }
 
 .select-buy__buy-btn--buy-now {
-  width: 41.2rem;
+  width: 39.2rem;
   height: 5.2rem;
   border-radius: 0.4rem;
   color: #fff;
