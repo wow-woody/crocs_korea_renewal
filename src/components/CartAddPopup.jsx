@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { wishListStore } from '../store/wishListStore';
+// import { wishListStore } from '../store/wishListStore';
 import { Link, useLocation } from 'react-router-dom';
 import './scss/wishAddPopup.scss';
+import { useCartStore } from '../store/useCartStore';
 
-const WishAddPopup = () => {
-    const { popUp, hidePopup } = wishListStore();
+const CartAddPopup = () => {
+    const { popUp, hidePopup } = useCartStore();
     const location = useLocation();
 
     useEffect(() => {
@@ -19,8 +20,8 @@ const WishAddPopup = () => {
                 <div className="popup_text">{popUp.message}</div>
                 <div className="popup_btn_wrap">
                     <button onClick={hidePopup}>쇼핑 계속하기</button>
-                    <Link to="/wishlist">
-                        <button>위시리스트 이동</button>
+                    <Link to="/cart">
+                        <button>장바구니 이동</button>
                     </Link>
                 </div>
             </div>
@@ -28,4 +29,4 @@ const WishAddPopup = () => {
     );
 };
 
-export default WishAddPopup;
+export default CartAddPopup;
