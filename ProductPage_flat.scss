@@ -1137,8 +1137,6 @@ main {
     font-weight: 500;
 }
 
-
-
 .product-detail_review--write {
     width: 100%;
     height: 5.2rem;
@@ -1193,7 +1191,7 @@ main {
     font-weight: 700;
 }
 .product-detail__rating-score-wrap,
-.product-detail__size-score-wrap{
+.product-detail__size-score-wrap {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -1206,6 +1204,7 @@ main {
 }
 .product-detail__rating-value,
 .product-detail__size-value {
+    width: 4.7rem;
     font-size: 1.2rem;
     font-weight: 700;
 }
@@ -1229,7 +1228,42 @@ main {
         border-radius: 999px;
     }
 }
+
+.product-detail__size-bar {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 2rem;
+    .product-detail__size-bar-fill {
+        width: 32rem;
+        height: 0.8rem;
+        background-color: #b5d766;
+        border-radius: 999px;
+        position: absolute;
+    }
+    .product-detail__size-bar-bg {
+        display: block;
+        width: 39.4rem;
+        height: 0.8rem;
+        background-color: #fafafd;
+        border-radius: 999px;
+    }
+}
+
 .product-detail__probability {
+    width: 3rem;
+}
+
+.product-detail__review-list {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: 1fr 1fr; // 고정 600px 대신 비율로
+    max-width: 100%; // 뷰포트 넘지 않도록
+    height: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: auto;
+    overflow: visible;
 }
 
 // border: 1px solid #ebebeb;

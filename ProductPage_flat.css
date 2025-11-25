@@ -1410,6 +1410,7 @@ main {
 
 .product-detail__rating-value,
 .product-detail__size-value {
+  width: 4.7rem;
   font-size: 1.2rem;
   font-weight: 700;
 }
@@ -1433,4 +1434,41 @@ main {
   height: 0.8rem;
   background-color: #fafafd;
   border-radius: 999px;
+}
+
+.product-detail__size-bar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 2rem;
+}
+.product-detail__size-bar .product-detail__size-bar-fill {
+  width: 32rem;
+  height: 0.8rem;
+  background-color: #b5d766;
+  border-radius: 999px;
+  position: absolute;
+}
+.product-detail__size-bar .product-detail__size-bar-bg {
+  display: block;
+  width: 39.4rem;
+  height: 0.8rem;
+  background-color: #fafafd;
+  border-radius: 999px;
+}
+
+.product-detail__probability {
+  width: 3rem;
+}
+
+.product-detail__review-list {
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 100%;
+  height: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: auto;
+  overflow: visible;
 }/*# sourceMappingURL=ProductPage_flat.css.map */
