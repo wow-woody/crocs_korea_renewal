@@ -52,41 +52,43 @@ const RecentProducts = () => {
       </div>
 
       <div className="recent-products__list">
-        {recentProducts.map((product) => (
-          <div key={product.id} className="product-item">
-            <div className="product-image">
-              <img src={product.image} alt={product.name} />
-            </div>
-            
-            <div className="product-info">
-              <h3 className="product-name">{product.name}</h3>
-              <p className="product-category">{product.category}</p>
-              <div className="product-price">
-                <span className="price">{formatPrice(product.price)}원</span>
-                {product.discount && (
-                  <span className="discount">{product.discount}%</span>
-                )}
-              </div>
-              <div className="product-meta">
-                <span className="viewed-time">{formatDate(product.viewedAt)}</span>
-                {product.rating && (
+        {recentProducts.map((item) => (
+          <div key={item.id} className="product-item">
+            <div className="product-meta">
+                <span className="viewed-time">{formatDate(item.viewedAt)}</span>
+                {item.rating && (
                   <span className="rating">
-                    ⭐ {product.rating} ({product.reviewCount})
+                    ⭐ {item.rating} ({item.reviewCount})
                   </span>
                 )}
               </div>
+            <div className="product_imgbox">
+              <img src={item.image} alt={item.name} />
+            </div>
+            
+            <div className="product_textbox">
+              <h3 className="product-name">{item.name}</h3>
+              <p className="product-category">{item.category}</p>
+              <div className="product-price-wrap">
+                <span className="price-text">{formatPrice(item.price)}원</span>
+                <span className="price-text">{item.price}</span>
+                {item.discount && (
+                  <span className="discount">{item.discount}%</span>
+                )}
+              </div>
+              
             </div>
 
             <div className="product-actions">
-              <button 
+              {/* <button 
                 className="remove-btn"
                 onClick={() => removeProduct(product.id)}
                 aria-label="삭제"
               >
                 ✕
-              </button>
-              <button className="cart-btn">장바구니</button>
-              <button className="buy-btn">구매하기</button>
+              </button> */}
+              {/* <button className="cart-btn">장바구니</button> */}
+              {/* <button className="buy-btn">구매하기</button> */}
             </div>
           </div>
         ))}

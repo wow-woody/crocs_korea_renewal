@@ -39,7 +39,7 @@ function App() {
             <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
             <RecentProducts isOpen={isRecentOpen} onClose={() => setIsRecentOpen(false)} /> 
             <Routes>
-                <Route index element={<Main />} />
+                {/* <Route index element={<Main />} /> */}
                 <Route path='/new' element={<New />} />
                 <Route path='/women' element={<Women />} />
                 <Route path='/men' element={<Men />} />
