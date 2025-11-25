@@ -64,7 +64,7 @@
             // @include g.flex($fd: column, $ai: unset, $jc: unset, $gap: 4rem);
             // background: #eee;
             // border-radius: 2rem;
-            display: grid;
+            // display: grid;
             grid-template-columns: 4 / 1fr;
             gap: 4rem;
             height: 100%;
@@ -75,7 +75,7 @@
                 // align-items: center;
                 margin-top: 1.5rem;
                 // padding-bottom: 20px;
-                border-bottom: 2px solid #eee;
+                // border-bottom: 2px solid #eee;
                 //임시
 
                 // h1 {
