@@ -1359,7 +1359,6 @@ main {
 }
 
 .product-detail__review-summary {
-  border: 1px solid red;
   display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 100%;
@@ -1373,7 +1372,6 @@ main {
 .product-detail__rating {
   width: 100%;
   height: auto;
-  border: 1px solid blue;
 }
 
 .product-detail__rating,
@@ -1388,11 +1386,10 @@ main {
   height: auto;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
   gap: 2.8rem;
 }
 
-.product-detail__rating-title {
+.product-detail__title {
   font-size: 1.6rem;
   font-weight: 700;
 }
@@ -1404,10 +1401,17 @@ main {
   gap: 1.2rem;
 }
 
-.product-detail__rating-score {
+.product-detail__rating-score,
+.product-detail__size-score {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.product-detail__rating-value,
+.product-detail__size-value {
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .product-detail__bar {
