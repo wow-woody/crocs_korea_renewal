@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { collaboAuthStore } from '../store/collaboAuthStore';
+import Breadcrumbs from './Breadcrumbs';
 import './scss/JibbitzProductListPage.scss';
 import { useNavigate } from 'react-router-dom';
 
@@ -43,7 +44,7 @@ const JibbitzProductListPage = ({onProductClick}) => {
 
     const JibbitzLeftNavigation = {
         category: '지비츠',
-        subcategory: '',
+        subcategory: '콜라보',
         filters: [],
     };
 
@@ -66,8 +67,8 @@ const JibbitzProductListPage = ({onProductClick}) => {
 
     // 페이징 처리
     const itemsPerPage = 12;
-    const list = displayList();
-    const totalPage = Math.ceil(list.length / itemsPerPage);
+    const list = displayList(selectFilter);
+    const totalPage = Math.ceil(displayList.length / itemsPerPage);
     const [currentPage, setCurrentPage] = useState(1);
     const start = (currentPage - 1) * itemsPerPage;
     const currentItems = list.slice(start, start + itemsPerPage);
@@ -85,6 +86,10 @@ const JibbitzProductListPage = ({onProductClick}) => {
         <div className="product_list_wrap">
             <div className="list_left">
                 <div className="left_nav_wrap">
+                     <Breadcrumbs
+                        category={JibbitzLeftNavigation.category}
+                        subcategory={JibbitzLeftNavigation.subcategory}
+                    />
                     <div className="breadcrumbs--section">
                         <ul className="breadcrumbs__list">
                             <li className="breadcrumbs__list--home">
