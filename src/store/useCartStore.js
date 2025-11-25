@@ -70,65 +70,65 @@ export const useCartStore = create(
         });
 
         // wishListStore의 cartWishItems도 추가
-        const wishProducts = wishCartItems.map((item) => {
-          const price_dc = parsePrice(item.price_dc_rate || item.price);
-          const price_original = parsePrice(item.price);
-          return {
-            ...item,
-            quantity: item.count || 1,
-            price: price_dc > 0 ? price_dc : price_original,
-            product_img: item.imageUrl || item.product_img,
-            name: item.title || item.name,
-            // size가 있는 경우에만 추가
-            ...(item.size && { size: item.size }),
-          };
-        });
+        // const wishProducts = wishCartItems.map((item) => {
+        //   const price_dc = parsePrice(item.price_dc_rate || item.price);
+        //   const price_original = parsePrice(item.price);
+        //   return {
+        //     ...item,
+        //     quantity: item.count || 1,
+        //     price: price_dc > 0 ? price_dc : price_original,
+        //     product_img: item.imageUrl || item.product_img,
+        //     name: item.title || item.name,
+        //     // size가 있는 경우에만 추가
+        //     ...(item.size && { size: item.size }),
+        //   };
+        // });
 
         // 중복 제거하고 합치기 (wishProducts 우선)
-        const allProducts = [...wishProducts];
-        productsWithPrice.forEach((product) => {
-          const existing = allProducts.find((p) => p.id === product.id);
-          if (!existing) {
-            allProducts.push(product);
-          }
-        });
+      //   const allProducts = [...wishProducts];
+      //   productsWithPrice.forEach((product) => {
+      //     const existing = allProducts.find((p) => p.id === product.id);
+      //     if (!existing) {
+      //       allProducts.push(product);
+      //     }
+      //   });
 
-        set({
-          cartProducts: allProducts,
-          selectedProducts: new Set(allProducts.map((p) => p.id)),
-        });
-      },
+      //   set({
+      //     cartProducts: allProducts,
+      //     selectedProducts: new Set(allProducts.map((p) => p.id)),
+      //   });
+      // },
 
       // 위시리스트에서 상품 추가
-      addFromWishlist: (Products, wishCartItems) => {
-        const { cartProducts } = get();
+      // addFromWishlist: (Products, wishCartItems) => {
+      //   const { cartProducts } = get();
 
-        // wishListStore의 cartWishItems 처리
-        const wishProducts = wishCartItems.map((item) => {
-          const price_dc = parsePrice(item.price_dc_rate || item.price);
-          const price_original = parsePrice(item.price);
-          return {
-            ...item,
-            quantity: item.count || 1,
-            price: price_dc > 0 ? price_dc : price_original,
-            product_img: item.imageUrl || item.product_img,
-            name: item.title || item.name,
-          };
-        });
+      //   // wishListStore의 cartWishItems 처리
+      //   const wishProducts = wishCartItems.map((item) => {
+      //     const price_dc = parsePrice(item.price_dc_rate || item.price);
+      //     const price_original = parsePrice(item.price);
+      //     return {
+      //       ...item,
+      //       quantity: item.count || 1,
+      //       price: price_dc > 0 ? price_dc : price_original,
+      //       product_img: item.imageUrl || item.product_img,
+      //       name: item.title || item.name,
+      //     };
+      //   });
 
-        // 기존 장바구니에 없는 상품만 추가
-        const newProducts = wishProducts.filter(
-          (newItem) =>
-            !cartProducts.some((existing) => existing.id === newItem.id)
-        );
+      //   // 기존 장바구니에 없는 상품만 추가
+      //   const newProducts = wishProducts.filter(
+      //     (newItem) =>
+      //       !cartProducts.some((existing) => existing.id === newItem.id)
+      //   );
 
-        if (newProducts.length > 0) {
-          const updatedProducts = [...cartProducts, ...newProducts];
-          set({
-            cartProducts: updatedProducts,
-            selectedProducts: new Set(updatedProducts.map((p) => p.id)),
-          });
-        }
+      //   if (newProducts.length > 0) {
+      //     const updatedProducts = [...cartProducts, ...newProducts];
+      //     set({
+      //       cartProducts: updatedProducts,
+      //       selectedProducts: new Set(updatedProducts.map((p) => p.id)),
+      //     });
+      //   }
       },
 
       // 상품 직접 추가 (새로운 기능)
