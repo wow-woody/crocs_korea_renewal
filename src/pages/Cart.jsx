@@ -68,10 +68,23 @@ function Cart() {
     let orderData;
 
     if (type === 'all') {
-      orderData = handleOrderAll();
-    } else {
-      orderData = handleOrderSelected();
+      if (cartProducts.length === 0) {
+      alert("장바구니에 상품이 없습니다.");
+      return;
     }
+    orderData = handleOrderAll();
+  } else {
+    if (selectedProducts.size === 0) {
+      alert("선택된 상품이 없습니다.");
+      return;
+    }
+    orderData = handleOrderSelected();
+  }
+
+  // orderData가 null이면 멈추기
+  if (!orderData) {
+    return;
+  }
 
     navigate('/order', {
       state: {

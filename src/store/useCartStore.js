@@ -1,14 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-// 가격설정
-function parsePrice(priceStr) {
-  if (!priceStr) return 0;
-  let price = String(priceStr).replace(/₩|,/g, "").trim();
-  price = price.replace(/\([^)]*\)/g, "").trim();
-  const numbers = price.match(/\d+/);
-  return numbers ? parseInt(numbers[0]) : 0;
-}
+import { parsePrice } from "../components/parsePrice";
 
 export const useCartStore = create(
   persist(
@@ -24,35 +16,10 @@ export const useCartStore = create(
 
       // 초기화 -  localstorage에서 불러오기
       initializeCart: (Products, wishCartItems = []) => {
-        const { cartProducts } = get();
-
-        // 이미 장바구니에 상품이 있으면 건너뜀
-        if (cartProducts.length > 0) return;
-
-        // 가격 파싱 헬퍼 함수
-        // const parsePrice = (price) => {
-        //   if (typeof price === "number") return price;
-        //   if (typeof price === "string") {
-        //     return parseInt(price.replace(/[^0-9]/g, "")) || 0;
-        //   }
-        //   return 0;
-        // };
-
         const cartIds = JSON.parse(localStorage.getItem("cartIds")) || [];
 
-        // wishCartItems가 있으면 추가
-        //   if (wishCartItems && wishCartItems.length > 0) {
-        //     const wishProducts = wishCartItems.map((item) => {
-        //       const product = Products.find((p) => p.id === item.id);
-        //       return {
-        //         ...product,
-        //         quantity: item.quantity || 1,
-        //         ...(item.size && { size: item.size }),
-        //       };
-        //     });
-        //     set({ cartProducts: wishProducts });
-        //   }
-        // },
+        // 이미 장바구니에 상품이 있으면 건너뜀
+        // if (cartProducts.length > 0) return;
 
         // Products에서 가져온 상품
         const productsWithPrice = Products.filter((item) =>
@@ -69,7 +36,7 @@ export const useCartStore = create(
           };
         });
 
-        // wishListStore의 cartWishItems도 추가
+        // wishCartItems가 있으면 추가
         const wishProducts = wishCartItems.map((item) => {
           const price_dc = parsePrice(item.price_dc_rate || item.price);
           const price_original = parsePrice(item.price);
@@ -100,14 +67,15 @@ export const useCartStore = create(
         });
       },
 
-      // 위시리스트에서 상품 추가
-      addFromWishlist: (Products, wishCartItems) => {
+      // 위시리스트에서 장바구니로 추가
+      addFromWishlist: (Products, wishCartItems = []) => {
         const { cartProducts } = get();
 
         // wishListStore의 cartWishItems 처리
         const wishProducts = wishCartItems.map((item) => {
           const price_dc = parsePrice(item.price_dc_rate || item.price);
           const price_original = parsePrice(item.price);
+
           return {
             ...item,
             quantity: item.count || 1,
@@ -132,31 +100,46 @@ export const useCartStore = create(
         }
       },
 
-      // 상품 직접 추가 (새로운 기능)
-      addProduct: (product, quantity = 1, size = null) => {
+      // 상품 상세에서 장바구니에 직접 추가 (새로 추가)
+      addProductToCart: (product, count = 1) => {
         const { cartProducts } = get();
+        const cartIds = JSON.parse(localStorage.getItem("cartIds")) || [];
 
-        // 이미 있는 상품인지 확인
-        const existingProduct = cartProducts.find((p) => p.id === product.id);
-
-        if (existingProduct) {
-          // 이미 있으면 수량만 증가
-          const newProducts = cartProducts.map((p) =>
-            p.id === product.id ? { ...p, quantity: p.quantity + quantity } : p
-          );
-          set({ cartProducts: newProducts });
-        } else {
-          // 없으면 새로 추가
-          // 변경: size가 있을 때만 포함
-          const newProduct = { ...product, quantity };
-          if (size) newProduct.size = size;
-
-          set({
-            cartProducts: [...cartProducts, newProduct],
-          });
+        // 중복 체크
+        if (cartIds.includes(product.id)) {
+          alert("이미 장바구니에 담긴 상품입니다.");
+          return false;
         }
+
+        const price_dc = parsePrice(product.price_dc_rate || product.discountPrice);
+        const price_original = parsePrice(product.price);
+        const finalPrice = price_dc > 0 ? price_dc : price_original;
+
+        // 새 상품 객체 생성
+        const newProduct = {
+          ...product,
+          quantity: count,
+          price: finalPrice,
+          product_img: product.imageUrl || product.product_img,
+          name: product.title || product.name || product.product,
+        };
+
+        // localStorage에 추가
+        cartIds.push(product.id);
+        localStorage.setItem("cartIds", JSON.stringify(cartIds));
+
+        // cartProducts에 추가
+        const updatedProducts = [...cartProducts, newProduct];
+
+        set({
+          cartProducts: updatedProducts,
+          selectedProducts: new Set(updatedProducts.map((p) => p.id)),
+        });
+
+        return true;
       },
 
+     
       // 개별 선택
       handleSelectProduct: (id) => {
         const { selectedProducts } = get();
@@ -300,20 +283,23 @@ export const useCartStore = create(
 
         if (cartProducts.length === 0) {
           alert("장바구니에 상품이 없습니다.");
-          return;
+          return null;
         }
 
-        set({ isOrderComplete: true });
-
-        // 1초후 장바구니 비우기
-        setTimeout(() => {
-          set({
-            cartProducts: [],
-            selectedProducts: new Set(),
-            isOrderComplete: false,
-          });
-          alert(`전체 ${cartProducts.length}개 상품 주문이 완료되었습니다!`);
-        }, 1000);
+        return {
+          products: cartProducts.map((item) => ({
+            name: item.name,
+            color: item.color,
+            size: item.size,
+            quantity: item.quantity,
+            price: item.price,
+            product_img: item.product_img,
+            cate: item.cate,
+          })),
+          subtotal: get().getSubtotal(),
+          shipping: get().getShipping(),
+          total: get().getTotal(),
+        };
       },
 
       // 선택 상품 주문
@@ -325,19 +311,36 @@ export const useCartStore = create(
           return;
         }
 
-        set({ isOrderComplete: true });
+        const selected = cartProducts.filter((p) => selectedProducts.has(p.id));
 
-        setTimeout(() => {
-          const newProducts = cartProducts.filter(
-            (p) => !selectedProducts.has(p.id)
-          );
-          set({
-            cartProducts: newProducts,
-            selectedProducts: new Set(),
-            isOrderComplete: false,
-          });
-          alert(`선택한 ${selectedProducts.size}개 상품만 주문하시겠습니까?`);
-        }, 1000);
+        return {
+          products: selected.map((item) => ({
+            name: item.name,
+            color: item.color,
+            size: item.size,
+            quantity: item.quantity,
+            price: item.price,
+            product_img: item.product_img,
+            cate: item.cate,
+          })),
+          subtotal: get().getSelectedSubtotal(),
+          shipping: get().getShipping(),
+          total: get().getSelectedTotal(),
+        };
+
+        // set({ isOrderComplete: true });
+
+        // setTimeout(() => {
+        //   const newProducts = cartProducts.filter(
+        //     (p) => !selectedProducts.has(p.id)
+        //   );
+        //   set({
+        //     cartProducts: newProducts,
+        //     selectedProducts: new Set(),
+        //     isOrderComplete: false,
+        //   });
+        //   alert(`선택한 ${selectedProducts.size}개 상품만 주문하시겠습니까?`);
+        // }, 1000);
       },
 
       // 선택 상품 선물
@@ -380,15 +383,4 @@ export const useCartStore = create(
       },
     }
   ),
-
-  {
-    name: "cart-storage", // localStorage 키 이름
-
-    // localStorage에 저장할 데이터 선택
-    partialize: (state) => ({
-      cartProducts: state.cartProducts, // 전체 상품 정보 저장
-      freeShippingThreshold: state.freeShippingThreshold,
-      // selectedProducts는 저장 안 함 (새로고침 시 선택 초기화)
-    }),
-  }
 );

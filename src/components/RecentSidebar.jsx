@@ -53,7 +53,7 @@ const RecentSidebar = ({isOpen, onClose}) => {
             <div className={`recent-side-container ${isOpen ? "open" : ""}`}>
                 <div className='recent-inner'>
                     <div className='recent-side-products'>
-                        <div className='recent-side-products__header'>
+                        <div className='recent-side-productsc'>
                             <Title title='최근 본 상품' />
                             <button className='close-btn' onClick={onClose}>
                                 ✕
@@ -94,7 +94,7 @@ const RecentSidebar = ({isOpen, onClose}) => {
 
                                         <div className='product_textbox'>
                                             <h3 className='product-name'>{item.name}</h3>
-                                            <p className='product-category'>{item.category}</p>
+                                            {/* <p className='product-category'>{item.category}</p> */}
                                             <div className='product-price-wrap'>
                                                 <span className='price-text'>
                                                     {item.discountPrice == ""
