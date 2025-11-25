@@ -33,7 +33,6 @@ const RecentProducts = () => {
                 <div className='recent-products__empty'>
                     <div className='empty-icon'>👀</div>
                     <p>최근 본 상품이 없습니다</p>
-                    <span>상품을 둘러보고 여기서 다시 확인해보세요</span>
                 </div>
             </div>
         );

@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useRef } from 'react';
-import OrderForm from '../OrderForm.jsx';
-import OrderSummary from '../OrderSummary.jsx';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import OrderForm from './OrderForm.jsx';
+import OrderSummary from './OrderSummary.jsx';
 import './style/Order.scss';
 
 // JSON
@@ -10,60 +10,78 @@ import './style/Order.scss';
 // import newProducts from '../../data/신상품&트렌드-카테고리-완전통합.json';
 // import jibbitzProducts from '../../data/지비츠_참-카테고리-완전통합.json';
 import { Products } from "../../data/CrocsProductsData.js";
-import OrderProgress from '../OrderProgress.jsx';
+import OrderProgress from './OrderProgress.jsx';
 import Title from '../Title.jsx';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Order() {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [isOrderComplete, setIsOrderComplete] = useState(false);
     const orderFormRef = useRef(null);
 
+    // 장바구니에서 받은 주문데이터
+    const cartOrderData = location.state || null;
+
     // 초기 상품 데이터 생성 (useMemo로 한 번만 생성)
     const initialProducts = useMemo(() => {
-        const result = [];
+        // Cart에서 전달받은 데이터가 있으면 사용
+        if (cartOrderData && cartOrderData.orderProducts) {
+            return cartOrderData.orderProducts.map((item, index) => ({
+                id: index + 1,
+                name: item.name || '상품명 없음',
+                color: parseColor(item.color),
+                size: item.size || 'ONE SIZE',
+                quantity: item.quantity || 1,
+                price: item.price,
+                image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
+                category: item.cate || '일반',
+            }));
+        }
 
         // 여성 상품 1개 선택
-        const womenItems = Products.filter((product)=> {
-            if(!product.cate) return false;
-                // cate 속성비교
-                const cateLower = product.cate.toLowerCase();
-                return cateLower.includes("여성")
-        });
-        const randomWomen = getRandomItems(womenItems, 1);
+        // const womenItems = Products.filter((product)=> {
+        //     if(!product.cate) return false;
+        //         // cate 속성비교
+        //         const cateLower = product.cate.toLowerCase();
+        //         return cateLower.includes("여성")
+        // });
+        // const randomWomen = getRandomItems(womenItems, 1);
 
-        randomWomen.forEach((item) => {
-            result.push({
-                id: result.length + 1,
-                name: item.product || '상품명 없음',
-                color: parseColor(item.color),
-                size: 'W7/W8',
-                quantity: 1,
-                price: parsePrice(item.price_dc_rate || item.price),
-                image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
-                category: '여성',
-            });
-        });
+        // randomWomen.forEach((item) => {
+        //     result.push({
+        //         id: result.length + 1,
+        //         name: item.product || '상품명 없음',
+        //         color: parseColor(item.color),
+        //         size: 'W7/W8',
+        //         quantity: 1,
+        //         price: parsePrice(item.price_dc_rate || item.price),
+        //         image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
+        //         category: '여성',
+        //     });
+        // });
 
         // 남성 상품 1개 추가
-        const menItems = Products.filter((product)=> {
-            if(!product.cate) return false;
-                // cate 속성비교
-                const cateLower = product.cate.toLowerCase();
-                return cateLower.includes("남성")
-        });
-        const randomMen = getRandomItems(menItems, 1);
+        // const menItems = Products.filter((product)=> {
+        //     if(!product.cate) return false;
+        //         // cate 속성비교
+        //         const cateLower = product.cate.toLowerCase();
+        //         return cateLower.includes("남성")
+        // });
+        // const randomMen = getRandomItems(menItems, 1);
 
-        randomMen.forEach((item) => {
-            result.push({
-                id: result.length + 1,
-                name: item.product || '상품명 없음',
-                color: parseColor(item.color),
-                size: 'M9/M10',
-                quantity: 1,
-                price: parsePrice(item.price_dc_rate || item.price),
-                image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
-                category: '남성',
-            });
-        });
+        // randomMen.forEach((item) => {
+        //     result.push({
+        //         id: result.length + 1,
+        //         name: item.product || '상품명 없음',
+        //         color: parseColor(item.color),
+        //         size: 'M9/M10',
+        //         quantity: 1,
+        //         price: parsePrice(item.price_dc_rate || item.price),
+        //         image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
+        //         category: '남성',
+        //     });
+        // });
 
         // // 키즈 상품 1개 추가
         // const kidsItems = kidsProducts.products || [];
@@ -116,8 +134,8 @@ function Order() {
         //     });
         // });
 
-        return result;
-    }, []);
+        return
+    }, [cartOrderData]);
 
     // 상품 목록을 state로 관리 (동적 변경 가능)
     const [products, setProducts] = useState(initialProducts);
@@ -127,8 +145,17 @@ function Order() {
         shippingFee: 2500,
     };
 
+    // Cart에서 받은 데이터가 없으면 Cart로 리다이렉트
+    useEffect(() => {
+        if (!cartOrderData && (!products || products.length === 0)) {
+            alert("주문할 상품이 없습니다. 장바구니로 이동합니다.");
+            navigate('/cart');
+        }
+    }, [cartOrderData, navigate]);
+
     // 총 상품 금액 계산
     const calculateSubtotal = () => {
+        if (!products || products.length === 0) return 0;
         return products.reduce((sum, product) => sum + product.price * product.quantity, 0);
     };
 
@@ -145,6 +172,7 @@ function Order() {
 
     // 상품 삭제
     const handleRemoveProduct = (productId) => {
+        if (!products) return;
         setProducts(products.filter((product) => product.id !== productId));
     };
 
@@ -175,6 +203,16 @@ function Order() {
         }
 
         setIsOrderComplete(true);
+
+        // 주문 완료 후 장바구니 비우기
+        if (cartOrderData) {
+            localStorage.setItem('cartIds', JSON.stringify([]));
+        }
+        
+        // 3초 후 주문완료 페이지로 이동 // 임시로 메인페이지
+        setTimeout(() => {
+            navigate('/');
+        }, 3000);
     };
 
     return (
@@ -183,8 +221,7 @@ function Order() {
                 <Title title="Order" />
             </div>
             {/* <h1 className="order-title">Order</h1> */}
-            <OrderProgress />
-
+            <OrderProgress />            
             <div className="order-content">
                 <div className="order-left">
                     <OrderForm ref={orderFormRef} />

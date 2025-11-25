@@ -16,10 +16,11 @@ import Cart from "./pages/Cart";
 import Header from "./components/Header";
 import CrocsClubPopup from "./components/CrocsClubPopup";
 import UserInfo from "./UserInfo";
-import Order from "./pages/Order";
+import Order from "./components/Order/Order";
 import WishList from "./pages/WishList";
 import CartSidebar from "./components/CartSidebar";
-import RecentProducts from "./pages/RecentProducts";
+// import RecentProducts from "./pages/RecentProducts";
+import RecentSidebar from "./components/RecentSidebar";
 import JibbitzProductDetail from './pages/JibbitzProductDetail';
 import JibbitzProductListPage from './pages/JibbitzProductListPage';
 
@@ -28,18 +29,19 @@ function App() {
     const [isRecentOpen, setIsRecentOpen] = useState(false);
     const location = useLocation();
 
-    // 페이지 이동 시 장바구니 닫기
+    // 페이지 이동 시 장바구니 닫기 + 최근본상품 닫기
     useEffect(() => {
         setIsCartOpen(false);
+         setIsRecentOpen(false);
     }, [location.pathname]);
 
     return (
         <div className='App'>
             <Header onCartClick={() => setIsCartOpen(true)} onRecentClick={() => setIsRecentOpen(true)} />
             <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-            <RecentProducts isOpen={isRecentOpen} onClose={() => setIsRecentOpen(false)} /> 
+            <RecentSidebar isOpen={isRecentOpen} onClose={() => setIsRecentOpen(false)} /> 
             <Routes>
-                {/* <Route index element={<Main />} /> */}
+                <Route index element={<Main />} />
                 <Route path='/new' element={<New />} />
                 <Route path='/women' element={<Women />} />
                 <Route path='/men' element={<Men />} />
@@ -57,7 +59,7 @@ function App() {
                 <Route path="/product/:id" element={<JibbitzProductDetail />} />
                 <Route path="/jibbitz/:id" element={<JibbitzProductDetail />} />
                 <Route path='/wishlist' element={<WishList />} />
-                <Route path='./recent' element={<RecentProducts />} />
+                {/* <Route path='./recent' element={<RecentProducts />} /> */}
             </Routes>
         </div>
     );

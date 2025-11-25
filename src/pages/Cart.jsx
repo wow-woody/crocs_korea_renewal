@@ -5,11 +5,13 @@ import { Products } from "../data/CrocsProductsData.js";
 import CartProgress from "../components/CartProgress";
 import { useCartStore } from "../store/useCartStore";
 import { wishListStore } from "../store/wishListStore";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const cartStore = useCartStore();
   // console.log('cartStore:', cartStore);
   const wishStore = wishListStore();
+  const navigate = useNavigate();
 
   const {
     cartProducts,
@@ -61,6 +63,26 @@ function Cart() {
   const formatPrice = (price) => {
     return price.toLocaleString("ko-KR");
   };
+
+  const handleToOrder = (type) => {
+    let orderData;
+
+    if (type === 'all') {
+      orderData = handleOrderAll();
+    } else {
+      orderData = handleOrderSelected();
+    }
+
+    navigate('/order', {
+      state: {
+        orderProducts: orderData.products,
+        subtotal: orderData.subtotal,
+        shipping: orderData.shipping,
+        total: orderData.total,
+      },
+    });
+  }
+    
 
   return (
     <div className='cart-container'>
