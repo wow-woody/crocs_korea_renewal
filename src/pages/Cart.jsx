@@ -82,7 +82,7 @@ function Cart() {
       },
     });
   }
-    
+
 
   return (
     <div className='cart-container'>
@@ -199,9 +199,8 @@ function Cart() {
                   <div className='price-row'>
                     <span className='price-label'>배송비</span>
                     <span
-                      className={`price-value ${
-                        shipping === 0 ? "free-shipping" : ""
-                      }`}
+                      className={`price-value ${shipping === 0 ? "free-shipping" : ""
+                        }`}
                     >
                       {shipping === 0
                         ? "무료배송"
@@ -239,21 +238,18 @@ function Cart() {
             {/* 주문 버튼들 */}
             {!isOrderComplete ? (
               <div className='order-buttons'>
-                <button className='btn-order-all' onClick={handleOrderAll}>
+                <button className='btn-order-all' onClick={() => handleToOrder('all')}>
                   전체상품주문하기
                 </button>
 
                 <div className='btn-group'>
                   <button
-                    className='btn-order-selected'
-                    onClick={handleOrderSelected}
-                  >
+                    className='btn-order-selected' onClick={() => handleToOrder('selected')}>
                     선택상품주문
                   </button>
 
                   <button
-                    className='btn-gift-selected'
-                    onClick={handleGiftSelected}
+                    className='btn-gift-selected' onClick={handleGiftSelected}
                   >
                     선택상품선물
                   </button>
@@ -268,7 +264,7 @@ function Cart() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
