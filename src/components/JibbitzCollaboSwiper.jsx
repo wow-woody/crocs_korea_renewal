@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { collaboAuthStore } from '../store/collaboAuthStore';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,13 @@ import './scss/jibbitzcollaboswiper.scss';
 import Title from './Title';
 
 const JibbitzCollaboSwiper = () => {
-    const { disneyItems } = collaboAuthStore();
+    const { disneyItems, onFetchJibbitz } = collaboAuthStore();
+
+    // 상품 불러오기
+    useEffect(() => {
+        onFetchJibbitz();
+    }, []);
+
     return (
         <section className="jibbitz_wrap">
             <div className="inner">

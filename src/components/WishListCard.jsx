@@ -56,11 +56,20 @@ const WishListCard = () => {
                             <p>{item.title}</p>
                             <div className="wish_card_price">
                                 <p>
-                                    <span>{item.price}</span>
-                                    <span>{item.price}</span>
+                                    <span>
+                                        {item.discountPrice == '' ? item.price : item.discountPrice}
+                                    </span>
+                                    <span>{item.discountPrice == '' ? '' : item.originPrice}</span>
                                 </p>
                                 <p className="price_bottom">
-                                    {((Number(item.price) / Number(item.price)) * 100).toFixed(0)}%
+                                    {/* {(
+                                        (1 -
+                                            Number(item.discountPrice.replace(/,/g, '')) /
+                                                Number(item.originPrice.replace(/,/g, ''))) *
+                                        100
+                                    ).toFixed(0)}
+                                    % */}
+                                    {item.discountPercent}
                                 </p>
                             </div>
                         </div>

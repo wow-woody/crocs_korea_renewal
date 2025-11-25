@@ -6,7 +6,6 @@ import New from "./pages/New";
 import Women from "./pages/Women";
 import Men from "./pages/Men";
 import Kids from "./pages/Kids";
-import Jibbitz from "./pages/Jibbitz";
 import Collabs from "./pages/Collabs";
 import Brand from "./pages/Brand";
 import Promotion from "./pages/Promotion";
@@ -18,10 +17,11 @@ import Header from "./components/Header";
 import CrocsClubPopup from "./components/CrocsClubPopup";
 import UserInfo from "./UserInfo";
 import Order from "./pages/Order";
-import JibbitzCollaboProductDetail from "./pages/JibbitzCollaboProductDetail";
 import WishList from "./pages/WishList";
 import CartSidebar from "./components/CartSidebar";
 import RecentProducts from "./pages/RecentProducts";
+import JibbitzProductDetail from './pages/JibbitzProductDetail';
+import JibbitzProductListPage from './pages/JibbitzProductListPage';
 
 function App() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -44,7 +44,7 @@ function App() {
                 <Route path='/women' element={<Women />} />
                 <Route path='/men' element={<Men />} />
                 <Route path='/kids' element={<Kids />} />
-                <Route path='/jibbitz' element={<Jibbitz />} />
+                <Route path="/jibbitz" element={<JibbitzProductListPage />} />
                 <Route path='/collabs' element={<Collabs />} />
                 <Route path='/promotion' element={<Promotion />} />
                 <Route path='/Brand' element={<Brand />} />
@@ -54,8 +54,8 @@ function App() {
                 <Route path='/order' element={<Order />} />
                 <Route path='/crocsclub' element={<CrocsClubPopup />} />
                 <Route path='/userinfo' element={<UserInfo />} />
-                <Route path='/product/:id' element={<JibbitzCollaboProductDetail />} />
-                <Route path='/jibbitz/:id' element={<JibbitzCollaboProductDetail />} />
+                <Route path="/product/:id" element={<JibbitzProductDetail />} />
+                <Route path="/jibbitz/:id" element={<JibbitzProductDetail />} />
                 <Route path='/wishlist' element={<WishList />} />
                 <Route path='./recent' element={<RecentProducts />} />
             </Routes>

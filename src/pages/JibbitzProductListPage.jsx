@@ -3,7 +3,7 @@ import { collaboAuthStore } from '../store/collaboAuthStore';
 import './scss/JibbitzProductListPage.scss';
 import { useNavigate } from 'react-router-dom';
 
-const JibbitzProductListPage = ({onProductClick}) => {
+const JibbitzProductListPage = () => {
     const {
         jibbitzItems,
         jibbitzFilterList,
@@ -24,21 +24,6 @@ const JibbitzProductListPage = ({onProductClick}) => {
         console.log('확인1', product.id);
         navigate(`/jibbitz/${product.id}`);
         // e.preventDefault();
-
-         // 최근 본 상품에 추가
-        if (onProductClick) {
-            onProductClick({
-                id: product.id,
-                name: product.title,
-                category: '지비츠',
-                price: parseInt(product.price.replace(/[^0-9]/g, '')), // "5,900원" -> 5900
-                image: product.imageUrl,
-                rating: 4.5, // 기본값 (실제 데이터가 있다면 product.rating 사용)
-                reviewCount: 0 // 기본값 (실제 데이터가 있다면 product.reviewCount 사용)
-            });
-        }
-        
-        navigate(`/jibbitz/${product.id}`);
     };
 
     const JibbitzLeftNavigation = {

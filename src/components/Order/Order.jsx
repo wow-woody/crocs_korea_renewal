@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react';
-import OrderForm from '../components/OrderForm';
-import OrderSummary from '../components/OrderSummary';
-import './scss/Order.scss';
+import OrderForm from '../OrderForm.jsx';
+import OrderSummary from '../OrderSummary.jsx';
+import './style/Order.scss';
 
 // JSON
 // import womenProducts from '../../data/여성-카테고리-완전통합.json';
@@ -9,9 +9,9 @@ import './scss/Order.scss';
 // import kidsProducts from '../../data/키즈-카테고리-완전통합.json';
 // import newProducts from '../../data/신상품&트렌드-카테고리-완전통합.json';
 // import jibbitzProducts from '../../data/지비츠_참-카테고리-완전통합.json';
-import { Products } from "../data/CrocsProductsData.js";
-import OrderProgress from '../components/OrderProgress';
-import Title from '../components/Title';
+import { Products } from "../../data/CrocsProductsData.js";
+import OrderProgress from '../OrderProgress.jsx';
+import Title from '../Title.jsx';
 
 function Order() {
     const [isOrderComplete, setIsOrderComplete] = useState(false);
