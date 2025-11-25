@@ -1,13 +1,13 @@
 import React from 'react';
 import Title from '../components/Title';
-import JibbitzProductListPage from '../components/JibbitzProductListPage';
+// import JibbitzProductListPage from '../components/JibbitzProductListPage';
 
 const Jibbitz = () => {
     return (
         <div className="sub_page">
             <div className="inner">
                 <Title title="jibbitz" />
-                <JibbitzProductListPage />
+                {/* <JibbitzProductListPage /> */}
             </div>
         </div>
     );
