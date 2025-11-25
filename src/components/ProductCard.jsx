@@ -15,7 +15,7 @@ const ProductCardSwiper = ({ images = [] }) => {
             modules: [Navigation, Pagination],
             loop: true,
             pagination: { el: '.swiper-pagination', type: 'progressbar' },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         });
         return () => swiper.destroy(true, true);
     }, []);
@@ -26,7 +26,11 @@ const ProductCardSwiper = ({ images = [] }) => {
                 {images.map((img, i) => (
                     <div className="swiper-slide" key={i}>
                         <a href="#" className="product-card__link">
-                            <img src={img.src} alt={img.alt || `상품 이미지 ${i + 1}`} className="product-card__img" />
+                            <img
+                                src={img.src}
+                                alt={img.alt || `상품 이미지 ${i + 1}`}
+                                className="product-card__img"
+                            />
                         </a>
                     </div>
                 ))}
@@ -46,17 +50,24 @@ const ProductName = ({ name }) => (
 );
 
 // 가격
-const ProductPrice = ({ price: { discountedPrice, discountRate, originalPrice } }) => (
-    <div className="product-card__price_wrap">
-        <div className="product-card__price">
-            <span className="product-card__price_dc_rate">{discountedPrice.toLocaleString()}</span>
-            <span className="product-card__price_breadcrumbs__line" />
-            <span className="product-card__price_slel">{discountRate}%</span>
-            <span className="product-card__price_breadcrumbs__line" />
-            <span className="product-card__price_cost">{originalPrice.toLocaleString()}</span>
-        </div>
-    </div>
-);
+// const ProductPrice = ({ price: { discountedPrice, discountRate, originalPrice } }) => (
+//     <div className="product-card__price_wrap">
+//         <div className="product-card__price">
+//             <span className="product-card__price_dc_rate">{discountedPrice.toLocaleString()}</span>
+//             <span className="product-card__price_breadcrumbs__line" />
+//             <span className="product-card__price_slel">{discountRate}%</span>
+//             <span className="product-card__price_breadcrumbs__line" />
+//             <span className="product-card__price_cost">{originalPrice.toLocaleString()}</span>
+//         </div>
+//     </div>
+// );
+const ProductPrice = ({ product }) => {
+    if (!product) return null; // product 없으면 렌더 안 함
+
+    const discounted = product.discountedPrice ?? product.price ?? 0;
+
+    return <div className="product_price">{discounted.toLocaleString()}원</div>;
+};
 
 // 색상 선택
 const ProductColorBadges = ({ colors = [], onColorClick }) => (
@@ -66,7 +77,7 @@ const ProductColorBadges = ({ colors = [], onColorClick }) => (
         </div>
         <div className="color-badge__wrap">
             {colors.map((color, i) => (
-                <span 
+                <span
                     key={i}
                     className={`color-badge color-badge--${color}`}
                     onClick={() => onColorClick?.(color)}
@@ -88,10 +99,10 @@ const ProductSizeButtons = ({ sizes, soldOutSizes = [], onSizeSelect }) => {
                 <p>사이즈</p>
             </div>
             <ul className="product-card__size--btns__wrap">
-                {sizes.map(size => {
+                {sizes.map((size) => {
                     const soldOut = soldOutSizes.includes(size);
                     const isActive = active === size;
-                    
+
                     return (
                         <li key={size} className="size--btns__item">
                             {soldOut ? (
@@ -100,16 +111,20 @@ const ProductSizeButtons = ({ sizes, soldOutSizes = [], onSizeSelect }) => {
                                     <span className="sold-out-line" />
                                 </span>
                             ) : (
-                                <a 
-                                    href="#" 
-                                    className={`size--btns__link btn-menu-style ${isActive ? 'active' : ''}`}
+                                <a
+                                    href="#"
+                                    className={`size--btns__link btn-menu-style ${
+                                        isActive ? 'active' : ''
+                                    }`}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setActive(size);
                                         onSizeSelect?.(size);
                                     }}
                                 >
-                                    <button className="size--btns__button btn-menu__button">{size}</button>
+                                    <button className="size--btns__button btn-menu__button">
+                                        {size}
+                                    </button>
                                 </a>
                             )}
                         </li>
@@ -121,20 +136,39 @@ const ProductSizeButtons = ({ sizes, soldOutSizes = [], onSizeSelect }) => {
 };
 
 // 상품 카드
+// const WomenProductCard = ({ product }) => (
+//     <li className="product-card">
+//         <div className="product-card__img_info_wrap">
+//             <ProductCardSwiper images={product.images} />
+//             <ProductName name={product.name} />
+//             <ProductPrice price={product.price} />
+//             <ProductColorBadges
+//                 colors={product.colors}
+//                 onColorClick={(c) => console.log('색상:', c)}
+//             />
+//             <ProductSizeButtons
+//                 sizes={product.sizes}
+//                 soldOutSizes={product.soldOutSizes || []}
+//                 onSizeSelect={(s) => console.log('사이즈:', s)}
+//             />
+//         </div>
+//     </li>
+// );
+
 const WomenProductCard = ({ product }) => (
     <li className="product-card">
         <div className="product-card__img_info_wrap">
-            <ProductCardSwiper images={product.images} />
-            <ProductName name={product.name} />
-            <ProductPrice price={product.price} />
-            <ProductColorBadges 
-                colors={product.colors} 
-                onColorClick={(c) => console.log('색상:', c)} 
+            <ProductCardSwiper images={product?.images ?? []} />
+            <ProductName name={product?.name ?? ''} />
+            <ProductPrice product={product} />
+            <ProductColorBadges
+                colors={product?.colors ?? []}
+                onColorClick={(c) => console.log('색상:', c)}
             />
-            <ProductSizeButtons 
-                sizes={product.sizes} 
-                soldOutSizes={product.soldOutSizes || []} 
-                onSizeSelect={(s) => console.log('사이즈:', s)} 
+            <ProductSizeButtons
+                sizes={product?.sizes ?? []}
+                soldOutSizes={product?.soldOutSizes ?? []}
+                onSizeSelect={(s) => console.log('사이즈:', s)}
             />
         </div>
     </li>

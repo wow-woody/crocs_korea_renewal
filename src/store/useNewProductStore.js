@@ -1,6 +1,6 @@
 import React from 'react';
 import { create } from 'zustand';
-import { Prouducts } from '../data/CrocsProductsData.js';
+import { Products } from '../data/CrocsProductsData.js';
 // import { newProducts } from "../data/newProductData.js";
 
 export const useNewProductStore = create((set, get) => ({
@@ -10,7 +10,7 @@ export const useNewProductStore = create((set, get) => ({
         if (currentItems.length > 0) return;
 
         // 신상품, 출시 예정 상품 데이터만 필터링
-        const filteredProuducts = Prouducts.filter((product) => {
+        const filteredProuducts = Products.filter((product) => {
             if (!product.cate) return false;
             // cate 속성비교
             const cateLower = product.cate.toLowerCase();
