@@ -2,6 +2,10 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import OrderForm from './OrderForm.jsx';
 import OrderSummary from './OrderSummary.jsx';
 import './style/Order.scss';
+import { Products } from "../../data/CrocsProductsData.js";
+import OrderProgress from './OrderProgress.jsx';
+import Title from '../Title.jsx';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // JSON
 // import womenProducts from '../../data/여성-카테고리-완전통합.json';
@@ -9,10 +13,7 @@ import './style/Order.scss';
 // import kidsProducts from '../../data/키즈-카테고리-완전통합.json';
 // import newProducts from '../../data/신상품&트렌드-카테고리-완전통합.json';
 // import jibbitzProducts from '../../data/지비츠_참-카테고리-완전통합.json';
-import { Products } from "../../data/CrocsProductsData.js";
-import OrderProgress from './OrderProgress.jsx';
-import Title from '../Title.jsx';
-import { useLocation, useNavigate } from 'react-router-dom';
+
 
 function Order() {
     const location = useLocation();
