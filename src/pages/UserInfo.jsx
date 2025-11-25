@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Title from '../components/Title';
 import UserInfoTop from '../components/UserInfoTop';
 import './scss/userinfo.scss';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import WishListCard from '../components/WishListCard';
 import { wishListStore } from '../store/wishListStore';
 import OrderHistoryCard from '../components/OrderHistoryCard';
@@ -11,7 +11,6 @@ import OrderState from '../components/OrderState';
 const UserInfo = () => {
     const { wishLists } = wishListStore();
     const [active, setActive] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (wishLists.length === 0) {
@@ -33,7 +32,7 @@ const UserInfo = () => {
                     {/* 마이 페이지 탭 버튼
                 나의 정보 / 주문 정보 / 1:1 문의 /  */}
                     <button>나의 정보</button>
-                    <button onClick={() => navigate('/orderhistory')}>주문 정보</button>
+                    <Link to="/orderhistory">주문 정보</Link>
                     <button>혜택 정보</button>
                     <button>1 : 1 문의</button>
                 </div>
