@@ -36,6 +36,74 @@ $white: #fff;
             grid-template-columns: 1fr;
         }
     }
+
+    // 장바구니 프로그레스바
+    .cart-progress {
+        max-width: 600px;
+        margin: 8rem auto;
+        padding: 1rem 0;
+    }
+    .progress-bar {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        position: relative;
+    }
+    .progress-step {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+        flex: 0 0 auto;
+    }
+    .progress-step.completed .step-circle,
+    .progress-step.current .step-circle {
+        background-color: #66de1b;
+        border-color: #66de1b;
+    }
+    .progress-step.completed .step-label,
+    .progress-step.current .step-label {
+        color: #000;
+        font-weight: 700;
+    }
+    .progress-step.pending .step-circle {
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    .progress-step.pending .step-label {
+        color: #ccc;
+        font-weight: 400;
+    }
+    .step-circle {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        border: 0.3rem solid #66de1b;
+        background-color: #66de1b;
+        transition: all 0.3s ease;
+    }
+    .step-label {
+        font-size: 1.4rem;
+        font-weight: bold;
+        white-space: nowrap;
+        margin-top: 0.8rem;
+    }
+    .progress-line {
+        flex: 0 0 18rem;
+        height: 0.3rem;
+        margin: 0 1rem;
+        margin-top: 0.6rem;
+    }
+    .progress-line.active {
+        background-color: #66de1b;
+    }
+    .progress-line.inactive {
+        background-color: #ccc;
+    }
 }
 
 // 왼쪽: 상품 목록

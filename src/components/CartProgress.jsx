@@ -18,7 +18,7 @@ function CartProgress() {
     ];
 
     return (
-        <div className="order-progress">
+        <div className="cart-progress">
             <div className="progress-bar">
                 {steps.map((step, index) => (
                     <React.Fragment key={step.id}>
