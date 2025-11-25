@@ -1,18 +1,3 @@
-// import React from 'react';
-
-// const SearchInput = ({ onSearch, inputText, onInputText }) => {
-//     return (
-//         <div className="search_input">
-//             <input type="text" placeholder="SEARCH" value={inputText} onChange={onInputText} />
-//             <button className="search_btn" onClick={onSearch}>
-//                 <img src="./images/search_icon.svg" alt="search_icon" />
-//             </button>
-//         </div>
-//     );
-// };
-
-// export default SearchInput;
-
 import React from 'react';
 
 const SearchInput = ({ inputText, onChange, onSearch }) => {
@@ -26,7 +11,7 @@ const SearchInput = ({ inputText, onChange, onSearch }) => {
                 onKeyDown={(e) => e.key === 'Enter' && onSearch(e)} // 엔터 입력 시 검색
             />
             <button className="search_btn" onClick={onSearch}>
-                <img src="./images/search_icon.svg" alt="search_icon" />
+                <img src="/images/search_icon.svg" alt="search_icon" />
             </button>
         </div>
     );

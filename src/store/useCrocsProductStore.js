@@ -1,13 +1,15 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Products } from '../data/CrocsProductsData';
-import { getCategoryMap } from '../utils/getCategoryMap';
+// import { getCategoryMap } from '../utils/getCategoryMap';
 
-// 🔥 스토어 버전 - 이 숫자를 변경하면 자동으로 캐시가 초기화됩니다
-const STORE_VERSION = 3; // prices 배열 사용으로 버전 업
+// 🔥 스토어 버전
+const STORE_VERSION = 4;
 
-// 콜라보 키워드
-const AUTO_TAG_KEYWORDS = [
+// 최근 검색어 저장 키
+const RECENT_SEARCHES_KEY = 'recentSearches';
+
+export const AUTO_TAG_KEYWORDS = [
     '디즈니',
     '마블',
     '픽사',
@@ -63,78 +65,51 @@ const isSimilarColor = (c1, c2, threshold = 60) => {
 export const useCrocsProductStore = create(
     persist(
         (set, get) => ({
-            crocsItems: [],
-            searchWord: '',
-            categoryMap: getCategoryMap(),
-            version: STORE_VERSION,
-
-            // ⭐ 추가된 필드
+            // ============================================
+            // 📦 제품 관련 상태
+            // ============================================
+            // 필터 상태
             colorFilter: null,
-            setColorFilter: (color) => set({ colorFilter: color }),
-
             selectedCategory: null,
             selectedSubcategory: null,
 
+            // ============================================
+            // 🔍 검색 관련 상태
+            // ============================================
+            searchWord: '',
+            inputText: '',
+            searchOpen: false,
+            recentSearches: [],
+
+            // ============================================
+            // 📦 제품 관련 액션
+            // ============================================
+            setColorFilter: (color) => set({ colorFilter: color }),
             setSelectedCategory: (cate) => set({ selectedCategory: cate }),
             setSelectedSubcategory: (sub) => set({ selectedSubcategory: sub }),
 
-            // ---------------------------
-            // 📌 상품 로드 + 태그 생성
-            // ---------------------------
-            // onFetchItems: async () => {
-            //     const current = get().crocsItems;
-            //     if (current.length > 0) return;
+            // ============================================
+            // 🔍 해시태그 리스트 생성 (여기에 넣기!)
+            // ============================================
+            getHashtags: () => {
+                const { crocsItems } = get();
+                const hashtagSet = new Set();
 
-            //     const map = get().categoryMap;
+                // 📌 1. 제품에서 실제 등장한 태그들
+                crocsItems.forEach((item) => {
+                    item.tags?.forEach((tag) => hashtagSet.add(tag));
+                });
 
-            //     const parsed = Products.filter((item) => item.prices && item.prices[0]) // 가격 없는 제품 제외
-            //         .map((item) => {
-            //             const cateList = item.cate
-            //                 ? item.cate
-            //                       .split(',')
-            //                       .map((v) => v.trim())
-            //                       .filter(Boolean)
-            //                 : [];
+                // 📌 2. 자동 태그 키워드 중 제품명에 등장하면 추가
+                AUTO_TAG_KEYWORDS.forEach((keyword) => {
+                    const hasKeywordItem = crocsItems.some((item) =>
+                        item.product.includes(keyword)
+                    );
+                    if (hasKeywordItem) hashtagSet.add(keyword);
+                });
 
-            //             const subList = item.subcategory
-            //                 ? item.subcategory
-            //                       .split(',')
-            //                       .map((v) => v.trim())
-            //                       .filter(Boolean)
-            //                 : [];
-
-            //             const allKoreanTags = [...cateList, ...subList];
-
-            //             const englishTags = [
-            //                 ...new Set(
-            //                     allKoreanTags
-            //                         .map((tag) => {
-            //                             if (tag.includes('_')) {
-            //                                 return tag.split('_').map((p) => map[p] || p);
-            //                             }
-            //                             return map[tag] || tag;
-            //                         })
-            //                         .flat()
-            //                         .filter(Boolean)
-            //                 ),
-            //             ];
-
-            //             AUTO_TAG_KEYWORDS.forEach((keyword) => {
-            //                 if (item.product.includes(keyword)) {
-            //                     if (!englishTags.includes(keyword)) englishTags.push(keyword);
-            //                     if (!englishTags.includes('collabs')) englishTags.push('collabs');
-            //                 }
-            //             });
-
-            //             return {
-            //                 ...item,
-            //                 tags: englishTags,
-            //                 tags_ko: allKoreanTags,
-            //             };
-            //         });
-
-            //     set({ crocsItems: parsed });
-            // },
+                return Array.from(hashtagSet);
+            },
 
             onFetchItems: async () => {
                 const current = get().crocsItems;
@@ -225,22 +200,6 @@ export const useCrocsProductStore = create(
                 return items.filter((item) => item.tags?.includes(cate));
             },
 
-            // filterByMenu: (mainKey, subKey = null) => {
-            //     const items = get().crocsItems;
-            //     const hasTag = (item, key) => item?.tags?.includes(key);
-
-            //     if (mainKey === 'all') {
-            //         if (!subKey || subKey === 'all') return items;
-            //         return items.filter((i) => hasTag(i, subKey));
-            //     }
-
-            //     if (!subKey || subKey === 'all') {
-            //         return items.filter((i) => hasTag(i, mainKey));
-            //     }
-
-            //     return items.filter((i) => hasTag(i, mainKey) && hasTag(i, subKey));
-            // },
-
             filterByMenu: (mainKey, subKey = null) => {
                 const items = get().crocsItems;
 
@@ -257,6 +216,18 @@ export const useCrocsProductStore = create(
                 }
 
                 return items.filter((i) => hasTag(i, mainKey) && hasTag(i, subKey));
+            },
+
+            searchFilteredItems: () => {
+                const { crocsItems, searchWord } = get();
+                if (!searchWord) return crocsItems;
+
+                const keyword = searchWord.toLowerCase();
+                return crocsItems.filter(
+                    (item) =>
+                        item.product.toLowerCase().includes(keyword) ||
+                        item.tags.some((tag) => tag.toLowerCase().includes(keyword))
+                );
             },
 
             filteredItems: () => {
@@ -281,21 +252,80 @@ export const useCrocsProductStore = create(
                 });
             },
 
-            // ---------------------------
-            // 📌 검색어 저장
-            // ---------------------------
+            // ============================================
+            // 🔍 검색 관련 액션
+            // ============================================
+
+            // 검색어 설정 (제품 필터링용)
             setSearchWord: (word) => set({ searchWord: word }),
+
+            // 입력 텍스트 설정 (UI용)
+            onInputText: (value) => set({ inputText: value }),
+
+            // 최근 검색어 추가
+            onAddRecentSearches: (searchText) => {
+                const { recentSearches } = get();
+
+                // 전달받은 searchText 사용 (없으면 inputText 사용)
+                const textToSave = searchText || get().inputText;
+
+                if (!textToSave.trim()) return;
+
+                const existing = recentSearches.find((item) => item.inputText === textToSave);
+                let updatedList;
+
+                if (existing) {
+                    // 이미 존재하면 최상단으로 이동
+                    updatedList = [
+                        { ...existing, id: Date.now() },
+                        ...recentSearches.filter((item) => item.inputText !== textToSave),
+                    ];
+                } else {
+                    // 새로운 검색어 추가
+                    updatedList = [{ id: Date.now(), inputText: textToSave }, ...recentSearches];
+                }
+
+                // 최대 7개까지만 유지
+                updatedList = updatedList.slice(0, 7);
+
+                set({ recentSearches: updatedList });
+            },
+
+            // 특정 검색어 삭제
+            onRemoveSearch: (id) => {
+                const { recentSearches } = get();
+                const newRecentSearch = recentSearches.filter((search) => search.id !== id);
+                set({ recentSearches: newRecentSearch });
+            },
+
+            // 모든 최근 검색어 삭제
+            onClearAll: () => {
+                set({ recentSearches: [] });
+            },
+
+            // 검색 모달 열기/닫기
+            onOpenSearch: () => set({ searchOpen: true }),
+            onCloseSearch: () => set({ searchOpen: false }),
         }),
         {
-            name: 'crocs-product-store',
+            name: 'crocs-unified-store',
             version: STORE_VERSION,
+            // ✅ recentSearches만 localStorage에 저장
+            partialize: (state) => ({
+                recentSearches: state.recentSearches,
+            }),
             migrate: (persistedState, version) => {
                 if (version !== STORE_VERSION) {
                     return {
                         crocsItems: [],
                         searchWord: '',
-                        categoryMap: getCategoryMap(),
+                        inputText: '',
+                        searchOpen: false,
+                        recentSearches: persistedState?.recentSearches || [],
                         version: STORE_VERSION,
+                        colorFilter: null,
+                        selectedCategory: null,
+                        selectedSubcategory: null,
                     };
                 }
                 return persistedState;

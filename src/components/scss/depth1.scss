@@ -2,18 +2,6 @@
 
 .depth_wrap {
     .depth1 {
-        // @include g.flex();
-        // background: rgba($color: #eee, $alpha: 0.4);
-        // backdrop-filter: blur(6px);
-        // -webkit-backdrop-filter: blur(6px);
-        // // background-color: aqua;
-        // width: 100%;
-        // height: 44rem;
-        // position: absolute;
-        // left: 0;
-        // top: 7rem;
-        // border-radius: 0 0 1rem 1rem;
-        // z-index: 10;
         @include g.flex();
         background: transparent; // 투명하게 변경
         // backdrop-filter 제거
@@ -41,6 +29,12 @@
                         text-align: center;
                     }
 
+                    &:hover {
+                        a {
+                            background: g.$mainColor;
+                        }
+                    }
+
                     &.active {
                         a {
                             background: g.$mainColor;
@@ -50,6 +44,13 @@
                     &.collabs {
                         a {
                             color: g.$mainColor;
+                        }
+
+                        &:hover {
+                            a {
+                                background: g.$mainColor;
+                                color: g.$subColor;
+                            }
                         }
 
                         &.active {
@@ -89,14 +90,14 @@
 
                     li {
                         a {
-                            @include g.flex($fd: column, $gap: 0.5rem);
+                            @include g.flex($jc: center, $fd: column, $gap: 1.6rem);
                             background: #eee;
                             width: 28rem;
                             height: 16rem;
                             border-radius: 1rem;
 
                             img {
-                                height: 12rem;
+                                height: 8rem;
                             }
                             span {
                                 height: 2.8rem;
@@ -106,6 +107,12 @@
                         }
 
                         &:hover {
+                            a {
+                                background: lightgreen;
+                            }
+                        }
+
+                        &.active {
                             a {
                                 background: lightgreen;
                             }

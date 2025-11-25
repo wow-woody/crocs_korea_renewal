@@ -16,11 +16,15 @@
     &.scrolled,
     &.subpage {
         .header {
-            nav {
+            > nav {
                 li {
                     a {
                         color: #fff;
                     }
+                }
+
+                .collabs {
+                    color: g.$mainColor;
                 }
             }
         }
@@ -79,6 +83,10 @@
                                 font-weight: bold;
                                 padding: 1rem 2rem;
                                 height: 8rem;
+                            }
+
+                            &:hover {
+                                color: g.$mainColor;
                             }
                         }
 

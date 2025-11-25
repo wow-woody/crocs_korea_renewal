@@ -11,8 +11,7 @@ const DepthmenuList = ({ activeMenu, setActiveMenu }) => {
                     className={`${menu.key} ${activeMenu === menu.key ? 'active' : ''}`}
                     onClick={() => setActiveMenu(menu.key)}
                 >
-                    <Link>{menu.label}</Link>
-                    {/* <SubmenuList submenus={depthmenu.submenu_list} /> */}
+                    <Link to={`/${menu.key}`}>{menu.label}</Link>
                 </li>
             ))}
         </ul>

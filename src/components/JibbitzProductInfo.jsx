@@ -1,15 +1,12 @@
 import React, { useState, useCallback } from 'react';
-// import './scss/ProductDetail.scss';
+import './scss/ProductDetail.scss';
 import { wishListStore } from '../store/wishListStore';
 import WishAddPopup from './WishAddPopup';
-import { useCartStore } from '../store/useCartStore';
-import CartAddPopup from './CartAddPopup';
 // import CartAddPopup from './CartAddPopup';
 
 const JibbitzProductInfo = ({ product }) => {
     const [count, setCount] = useState(1);
     const { wishLists, onAddWishList, onProductAddCart } = wishListStore();
-    const { addProduct } = useCartStore();
 
     const onHeart = wishLists.some((item) => item.id === product.id);
     // const isWish = popUp.message.includes('위시리스트');
@@ -53,7 +50,7 @@ const JibbitzProductInfo = ({ product }) => {
                         >
                             <img src="/images/icon-love_line.svg" alt="wishIcon" />
                         </p>
-                        <WishAddPopup />
+                        {/* <WishAddPopup /> */}
                         {/* <button onClick={() => onAddWishList(product)}>
                             <img src="/images/icon-love_line.svg" alt="wishIcon" />
                         </button> */}
@@ -132,10 +129,13 @@ const JibbitzProductInfo = ({ product }) => {
                 </div>
                 <div className="product-info_breadcrumbs"></div>
                 <div className="product-btn-wrap">
-                    <button className="product-btn-cart" onClick={() => addProduct(product, count)}>
+                    <button
+                        className="product-btn-cart"
+                        onClick={() => onProductAddCart(product, count)}
+                    >
                         장바구니
                     </button>
-                    <CartAddPopup />
+                    <WishAddPopup />
                     <button className="product-btn-buy">구매하기</button>
                 </div>
             </div>

@@ -24,6 +24,7 @@
         position: absolute;
         top: 8%;
         right: 4%;
+        // z-index: 9999;
         img {
             width: 3.2rem;
         }
@@ -124,19 +125,17 @@
                     border-radius: 1rem;
                     max-width: 30rem;
 
-                    span {
-                        a {
-                            display: inline-block;
-                            background: #eee;
-                            padding: 0.6rem 1.8rem;
-                            border-radius: 3rem;
-                            font-size: 1.4rem;
-                            font-weight: 700;
-                            white-space: nowrap;
+                    .tag {
+                        display: inline-block;
+                        background: #eee;
+                        padding: 0.6rem 1.8rem;
+                        border-radius: 3rem;
+                        font-size: 1.4rem;
+                        font-weight: 700;
+                        white-space: nowrap;
 
-                            &:hover {
-                                background: g.$mainColor;
-                            }
+                        &:hover {
+                            background: g.$mainColor;
                         }
                     }
                 }

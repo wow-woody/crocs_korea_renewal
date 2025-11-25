@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Title from '../components/Title';
 import UserInfoTop from '../components/UserInfoTop';
 import './scss/userinfo.scss';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import WishListCard from '../components/WishListCard';
 import { wishListStore } from '../store/wishListStore';
 import OrderHistoryCard from '../components/OrderHistoryCard';
@@ -11,6 +11,7 @@ import OrderState from '../components/OrderState';
 const UserInfo = () => {
     const { wishLists } = wishListStore();
     const [active, setActive] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (wishLists.length === 0) {
@@ -26,13 +27,13 @@ const UserInfo = () => {
                 <Title title="My Page" />
                 {/* 마이 페이지 회원정보
                 이름 / 크록스 클럽 가입 여부 / 쿠폰 정보 */}
-                <button className="logout_btn">Logout</button>
+                {/* <button className="logout_btn">Logout</button> */}
                 <UserInfoTop />
                 <div className="user_btn_wrap">
                     {/* 마이 페이지 탭 버튼
                 나의 정보 / 주문 정보 / 1:1 문의 /  */}
                     <button>나의 정보</button>
-                    <Link to="/orderhistory">주문 정보</Link>
+                    <button onClick={() => navigate('/orderhistory')}>주문 정보</button>
                     <button>혜택 정보</button>
                     <button>1 : 1 문의</button>
                 </div>
@@ -67,13 +68,7 @@ const UserInfo = () => {
                                             <span>{item.price}</span>
                                             <span>{item.price}</span>
                                         </p>
-                                        <p className="price_bottom">
-                                            {(
-                                                (Number(item.price) / Number(item.price)) *
-                                                100
-                                            ).toFixed(0)}
-                                            %
-                                        </p>
+                                        <p className="price_bottom">{item.discountPercent}</p>
                                     </div>
                                 </div>
                             </div>
@@ -101,13 +96,7 @@ const UserInfo = () => {
                                             <span>{item.price}</span>
                                             <span>{item.price}</span>
                                         </p>
-                                        <p className="price_bottom">
-                                            {(
-                                                (Number(item.price) / Number(item.price)) *
-                                                100
-                                            ).toFixed(0)}
-                                            %
-                                        </p>
+                                        <p className="price_bottom">{item.discountPercent}</p>
                                     </div>
                                 </div>
                             </div>
