@@ -1376,22 +1376,32 @@ main {
   border: 1px solid blue;
 }
 
-.product-detail__rating {
+.product-detail__rating,
+.product-detail__size {
   width: 100%;
   padding: 3.6rem 4.4rem;
 }
 
-.product-detail__rating-wrap {
+.product-detail__rating-wrap,
+.product-detail__size-wrap {
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   border: 1px solid red;
+  gap: 2.8rem;
 }
 
 .product-detail__rating-title {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.product-detail__rating-score-wrap,
+.product-detail__size-score-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .product-detail__rating-score {
