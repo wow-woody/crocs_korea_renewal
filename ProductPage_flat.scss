@@ -265,11 +265,14 @@ main {
     display: flex;
     max-width: 112.8rem;
     height: auto;
+
     border-right: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
     padding: 0 4.4rem;
 }
-
+.product-detail--jibbitz {
+    border-top: 1px solid #ebebeb;
+}
 .product-detail__title-wrap {
     width: 100%;
     height: 9.8rem;
@@ -876,15 +879,6 @@ main {
     height: auto;
 }
 
-.product-detail__title-wrap {
-    width: 100%;
-    height: 9.8rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0.8rem;
-}
-
 .product-detail__title {
     font-size: 2rem;
     font-weight: 600;
@@ -931,20 +925,34 @@ main {
     padding: 3.6rem 4.4rem;
     border-right: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
-    display: flex;
-    justify-content: space-between;
+    display: none;
+}
+
+.product-detail__jibbitz.active {
+    padding: 3.6rem 4.4rem;
+    border-right: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    display: flex !important;
+    flex-flow: row wrap !important;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    img {
+    }
 }
 
 .product-detail__jibbitz-item-wrap {
     width: 17.6rem;
     height: fit-content;
     border-radius: 10px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     outline: 1px solid transparent;
     transition: all 0.3s ease;
+    flex-shrink: 0;
+    vertical-align: top;
 }
 
 .product-detail__jibbitz-item {
@@ -1100,11 +1108,32 @@ main {
     transform: translateY(-0.4rem);
 }
 
-.product-detail_desc,
+.product-detail_desc {
+    padding: 3.6rem 4.4rem;
+    border-right: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    display: none;
+}
+
+.product-detail_desc.active {
+    padding: 3.6rem 4.4rem;
+    border-right: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    display: block;
+}
+
 .product-detail_notes {
     padding: 3.6rem 4.4rem;
     border-right: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
+    display: none;
+}
+
+.product-detail_notes.active {
+    padding: 3.6rem 4.4rem;
+    border-right: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    display: block;
 }
 
 .product-detail_desc__wrap,
@@ -1114,6 +1143,7 @@ main {
     flex-direction: column;
     gap: 2.4rem;
 }
+
 .product-detail_desc__item,
 .product-detail_notes__item {
     display: flex;
@@ -1135,6 +1165,14 @@ main {
 
 .product-detail_notes__item-text span {
     font-weight: 500;
+}
+
+.product-detail_review__wrap {
+    display: none;
+}
+
+.product-detail_review__wrap.active {
+    display: block;
 }
 
 .product-detail_review--write {
@@ -1160,15 +1198,13 @@ main {
     margin: 0 auto;
     height: auto;
     overflow: visible;
+    border-bottom: 0.1rem solid #ebebeb;
 }
 
 .product-detail__rating {
     width: 100%;
     height: auto;
     // border: 1px solid blue;
-}
-
-.product-detail__review-summary {
 }
 
 .product-detail__rating,
@@ -1201,12 +1237,16 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.product-detail__rating-value,
-.product-detail__size-value {
-    width: 4.7rem;
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 400;
+}
+
+.product-detail__rating-value {
+    width: 2rem;
+}
+
+.product-detail__size-value {
+    width: 5em;
 }
 .product-detail__bar {
     display: flex;
@@ -1252,10 +1292,20 @@ main {
 
 .product-detail__probability {
     width: 3rem;
+    text-align: right;
+}
+
+.product-detail__review-list-wrap_line-1 {
+    border-bottom: 1px solid #ebebeb;
+    border-right: 1px solid #ebebeb;
+}
+.product-detail__review-list-wrap_line-2 {
+    border-bottom: 1px solid #ebebeb;
+    border-right: 1px solid #ebebeb;
 }
 
 .product-detail__review-list {
-    border: 1px solid red;
+    // border: 1px solid red;
     display: grid;
     grid-template-columns: 1fr 1fr; // 고정 600px 대신 비율로
     max-width: 100%; // 뷰포트 넘지 않도록
@@ -1264,6 +1314,106 @@ main {
     margin: 0 auto;
     height: auto;
     overflow: visible;
+}
+
+.product-detail__review-info-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-detail__review-info-list-warp {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    .title_start {
+        font-size: 1.4rem;
+        color: #d70000;
+    }
+    .title_name {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-left: 0.8rem;
+        color: g.$subColor;
+        width: fit-content;
+        letter-spacing: 0.2rem;
+    }
+    .title_date {
+        font-size: 1rem;
+        font-weight: 300;
+        color: #cccccc;
+    }
+}
+
+.product-detail__review-list-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 3.6rem 4.4rem;
+}
+.product-detail__review-info-wrap {
+}
+
+.product-detail__recommend-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 9.6rem;
+    height: 2.4rem;
+    border: 1px solid #ebebeb;
+    border-radius: 2rem;
+
+    .recommend-icon {
+        width: 1.2rem;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    .recommend-icon img {
+        display: block; /* inline 성격 제거 */
+        margin: auto;
+        vertical-align: middle;
+    }
+
+    .recommend-text {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .recommend-count {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #006da4;
+    }
+}
+
+.product-detail__review-text-wrap {
+    color: g.$subColor;
+
+    .product-detail__review-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 0.8rem;
+    }
+    .product-detail__review-text {
+        font-size: 1.2rem;
+        font-weight: 300;
+        line-height: 1.4;
+    }
+}
+
+.product-detail_review--more {
+    width: 100%;
+    height: 5.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-right: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    color: g.$subColor;
 }
 
 // border: 1px solid #ebebeb;

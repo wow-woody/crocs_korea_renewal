@@ -123,7 +123,7 @@
                                             alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
                                     </a>
                                 </li>
-                                <li class="product-img__thumbs-item">
+                                <!-- <li class="product-img__thumbs-item">
                                     <a href="#" class="product-img__thumbs-link">
                                         <img class="product-img__thumbs-img"
                                             src="public/images/ProductPage/imgi_57_crocs.avif"
@@ -136,7 +136,7 @@
                                             src="public/images/ProductPage/imgi_58_crocs.avif"
                                             alt="클래식 언퍼게터블 스웨이드 클로그 이미지">
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
 
                             <!-- Bottom btns -->
@@ -162,28 +162,22 @@
                 <!-- 지비츠 참 -->
                 <div class="product-detail product-detail--jibbitz">
                     <div class="product-detail__title-wrap">
-                        <img src="" alt="">
                         <h2 class="product-detail__title">지비츠™ 참 </h2>
                         <p class="product-detail__sub-title">지비츠™ 참을 추가해서 나만의 스타일과 개성을 표현해 보세요.</p>
                     </div>
                     <div class="product-detail__toggle">
-                        <button class="product-detail__toggle-btn product-detail__toggle-btn--open"
-                            aria-expanded="false" aria-label="상세 열기">
-                            <img src="./public/images/ProductPage/icon-arrow-down_btn.svg" alt="상세 열기 아이콘 "
+                        <button
+                            class="product-detail__toggle-btn product-detail__toggle-btn--open product-detail--jibbitz-btn--open js-toggle"
+                            data-target="#jibbitzContent" aria-expanded="false" aria-label="지비츠 영역 열기">
+                            <img src="./public/images/ProductPage/icon-arrow-down_btn.svg" alt="상세 열기 아이콘"
                                 class="product-detail__toggle-btn__icon-open">
                             <img src="./public/images/ProductPage/icon-arrow-down_btn-hover.svg" alt="상세 닫기 아이콘"
                                 class="product-detail__toggle-btn__icon-open--hover">
                         </button>
-                        <button class="product-detail__toggle-btn product-detail__toggle-btn--close"
-                            aria-expanded="false" aria-label="상세 닫기">
-                            <img src="./public/images/ProductPage/icon-arrow-up_btn.svg" alt="상세 열기 아이콘 "
-                                class="product-detail__toggle-btn__icon-close">
-                            <img src="./public/images/ProductPage/icon-arrow-up_btn-hover.svg" alt="상세 닫기 아이콘"
-                                class="product-detail__toggle-btn__icon-close--hover">
-                        </button>
+                        <!-- <button class="product-detail__toggle-btn product-detail__toggle-btn--close" aria-expanded="false" aria-label="상세 닫기"> -->
                     </div>
                 </div>
-                <div class="product-detail__jibbitz">
+                <div class="product-detail__jibbitz" id="jibbitzContent" style="display:none;">
                     <div class="product-detail__jibbitz-item-wrap">
                         <div class="product-detail__jibbitz-item">
                             <div class="product-detail__jibbitz-item-img-wrap">
@@ -432,29 +426,30 @@
                     </div>
                 </div>
 
-                <div class="product-detail product-detail_desc">
+                <div class="product-detail product-detail--desc">
                     <div class="product-detail__title-wrap">
                         <h2 class="product-detail__title">상품 상세 설명</h2>
                         <p class="product-detail__sub-title"></p>
                     </div>
                     <div class="product-detail__toggle">
-                        <button class="product-detail__toggle-btn product-detail__toggle-btn--open"
-                            aria-expanded="false" aria-label="상세 열기">
+                        <button
+                            class="product-detail__toggle-btn product-detail__toggle-btn--open product-detail--desc-btn--open js-toggle"
+                            data-target="#descContent" aria-expanded="false" aria-label="상세 열기">
                             <img src="./public/images/ProductPage/icon-arrow-down_btn.svg" alt="상세 열기 아이콘 "
                                 class="product-detail__toggle-btn__icon-open">
                             <img src="./public/images/ProductPage/icon-arrow-down_btn-hover.svg" alt="상세 닫기 아이콘"
                                 class="product-detail__toggle-btn__icon-open--hover">
                         </button>
-                        <button class="product-detail__toggle-btn product-detail__toggle-btn--close"
+                        <!-- <button class="product-detail__toggle-btn product-detail__toggle-btn--close"
                             aria-expanded="false" aria-label="상세 닫기">
                             <img src="./public/images/ProductPage/icon-arrow-up_btn.svg" alt="상세 열기 아이콘 "
                                 class="product-detail__toggle-btn__icon-close">
                             <img src="./public/images/ProductPage/icon-arrow-up_btn-hover.svg" alt="상세 닫기 아이콘"
                                 class="product-detail__toggle-btn__icon-close--hover">
-                        </button>
+                        </button> -->
                     </div>
                 </div>
-                <div class="product-detail_desc">
+                <div class="product-detail_desc" id="descContent" style="display:none;">
                     <div class="product-detail_desc__wrap">
                         <div class="product-detail_desc__item">
                             <p class="product-detail_desc__item-title">Easy to Clean</p>
@@ -493,29 +488,30 @@
                 </div>
 
                 <!-- 싱품 상세 설명 -->
-                <div class="product-detail product-detail--Notes">
+                <div class="product-detail product-detail--notes">
                     <div class="product-detail__title-wrap">
                         <h2 class="product-detail__title">유의 사항 및 품질보증기간</h2>
                         <p class="product-detail__sub-title"></p>
                     </div>
                     <div class="product-detail__toggle">
-                        <button class="product-detail__toggle-btn product-detail__toggle-btn--open"
-                            aria-expanded="false" aria-label="상세 열기">
+                        <button
+                            class="product-detail__toggle-btn product-detail__toggle-btn--open product-detail--notes-btn--open js-toggle"
+                            data-target="#notesContent" aria-expanded="false" aria-label="상세 열기">
                             <img src="./public/images/ProductPage/icon-arrow-down_btn.svg" alt="상세 열기 아이콘 "
                                 class="product-detail__toggle-btn__icon-open">
                             <img src="./public/images/ProductPage/icon-arrow-down_btn-hover.svg" alt="상세 닫기 아이콘"
                                 class="product-detail__toggle-btn__icon-open--hover">
                         </button>
-                        <button class="product-detail__toggle-btn product-detail__toggle-btn--close"
+                        <!-- <button class="product-detail__toggle-btn product-detail__toggle-btn--close"
                             aria-expanded="false" aria-label="상세 닫기">
                             <img src="./public/images/ProductPage/icon-arrow-up_btn.svg" alt="상세 열기 아이콘 "
                                 class="product-detail__toggle-btn__icon-close">
                             <img src="./public/images/ProductPage/icon-arrow-up_btn-hover.svg" alt="상세 닫기 아이콘"
                                 class="product-detail__toggle-btn__icon-close--hover">
-                        </button>
+                        </button> -->
                     </div>
                 </div>
-                <div class="product-detail_notes">
+                <div class="product-detail_notes" id="notesContent" style="display:none;">
                     <div class="product-detail_notes__wrap">
                         <div class="product-detail_notes__item">
                             <p class="product-detail_notes__item-title">유의 사항</p>
@@ -565,25 +561,20 @@
                         <p class="product-detail__sub-title">120명이 상품 리뷰 참여에 참여했습니다.</p>
                     </div>
                     <div class="product-detail__toggle">
-                        <button class="product-detail__toggle-btn product-detail__toggle-btn--open"
-                            aria-expanded="false" aria-label="상세 열기">
-                            <img src="./public/images/ProductPage/icon-arrow-down_btn.svg" alt="상세 열기 아이콘 "
+                        <button
+                            class="product-detail__toggle-btn product-detail__toggle-btn--open product-detail--review-btn--open js-toggle"
+                            data-target="#reviewContent" aria-expanded="false" aria-label="상품 리뷰 열기">
+                            <img src="./public/images/ProductPage/icon-arrow-down_btn.svg" alt="상세 열기 아이콘"
                                 class="product-detail__toggle-btn__icon-open">
                             <img src="./public/images/ProductPage/icon-arrow-down_btn-hover.svg" alt="상세 닫기 아이콘"
                                 class="product-detail__toggle-btn__icon-open--hover">
                         </button>
-                        <button class="product-detail__toggle-btn product-detail__toggle-btn--close"
-                            aria-expanded="false" aria-label="상세 닫기">
-                            <img src="./public/images/ProductPage/icon-arrow-up_btn.svg" alt="상세 열기 아이콘 "
-                                class="product-detail__toggle-btn__icon-close">
-                            <img src="./public/images/ProductPage/icon-arrow-up_btn-hover.svg" alt="상세 닫기 아이콘"
-                                class="product-detail__toggle-btn__icon-close--hover">
-                        </button>
+                        <!-- 접근성: aria-expanded 는 JS 상태 변화에 따라 업데이트 -->
                     </div>
                 </div>
 
                 <div class="product-detail_review">
-                    <div class="product-detail_review__wrap">
+                    <div class="product-detail_review__wrap" id="reviewContent" style="display:none;">
                         <div class="product-detail_review--write">리뷰 작성하기</div>
                         <div class="product-detail__review-summary">
                             <!-- 평점 -->
@@ -688,38 +679,174 @@
                             </div>
                         </div>
                         <div class="product-detail__review-list">
-                            <div class="product-detail__review-info-wrap">
-                                <ul class="product-detail__review-info-list-warp">
-                                    <li class="title_start">
-                                        <p>★★★★☆</p>
-                                    </li>
-                                    <li class="title_name">
-                                        <p>김⭑우</p>
-                                    </li>
-                                    <li class="title_date">
-                                        <p>2025-11-23</p>
-                                    </li>
-                                </ul>
-                                <ul class="product-detail__recommend-wrap">
-                                    <li class="recommend-icon">
-                                        <a href="#">
-                                            <p><img src="./public/images/ProductPage/icon-recommend.svg" alt="추천 아이콘"></p>
-                                        </a>
-                                    </li>
-                                    <li class="recommend-text">
-                                        <a href="#">
-                                            <p>리뷰추천</p>
-                                        </a>
-                                    </li>
-                                    <li class="recommend-count">
-                                        <a href="#">
-                                            <p>120</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                            <div class="product-detail__review-list-wrap product-detail__review-list-wrap_line-1">
+                                <div class="product-detail__review-info-wrap">
+                                    <ul class="product-detail__review-info-list-warp">
+                                        <li class="title_start">
+                                            <p>★★★★☆</p>
+                                        </li>
+                                        <li class="title_name">
+                                            <p>김⭑우</p>
+                                        </li>
+                                        <li class="title_date">
+                                            <p>2025-11-23</p>
+                                        </li>
+                                    </ul>
+                                    <ul class="product-detail__recommend-wrap">
+                                        <li class="recommend-icon">
+                                            <a href="#">
+                                                <p><img src="./public/images/ProductPage/icon-recommend.svg"
+                                                        alt="추천 아이콘">
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="recommend-text">
+                                            <a href="#">
+                                                <p>리뷰추천</p>
+                                            </a>
+                                        </li>
+                                        <li class="recommend-count">
+                                            <a href="#">
+                                                <p>120</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-detail__review-text-wrap">
+                                    <p class="product-detail__review-title">너무 마음에 들어요!!!!!!!</p>
+                                    <p class="product-detail__review-text">크록스 편하고 좋은건 말해모해요~~~<br>
+                                        일단 너무 편하고 좋네요~ 당연하게도 통풍도 잘 되고. 오랫동안 신어도 발아픈것도 없고 좋아요!<br>
+                                        디자인도 너무 예쁘고 색상도 다양해서 고르는 재미도 있네요. 추천 합니다!<br>
+                                        선물용으로 구매했습니다 290이 매장에 잘 없어서 주문했어요</p>
+                                </div>
                             </div>
-
+                            <div class="product-detail__review-list-wrap
+                            product-detail__review-list-wrap_line-1">
+                                <div class="product-detail__review-info-wrap">
+                                    <ul class="product-detail__review-info-list-warp">
+                                        <li class="title_start">
+                                            <p>★★★★☆</p>
+                                        </li>
+                                        <li class="title_name">
+                                            <p>김⭑우</p>
+                                        </li>
+                                        <li class="title_date">
+                                            <p>2025-11-23</p>
+                                        </li>
+                                    </ul>
+                                    <ul class="product-detail__recommend-wrap">
+                                        <li class="recommend-icon">
+                                            <a href="#">
+                                                <p><img src="./public/images/ProductPage/icon-recommend.svg"
+                                                        alt="추천 아이콘">
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="recommend-text">
+                                            <a href="#">
+                                                <p>리뷰추천</p>
+                                            </a>
+                                        </li>
+                                        <li class="recommend-count">
+                                            <a href="#">
+                                                <p>120</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-detail__review-text-wrap">
+                                    <p class="product-detail__review-title">너무 마음에 들어요!!!!!!!</p>
+                                    <p class="product-detail__review-text">크록스 편하고 좋은건 말해모해요~~~<br>
+                                        일단 너무 편하고 좋네요~ 당연하게도 통풍도 잘 되고. 오랫동안 신어도 발아픈것도 없고 좋아요!<br>
+                                        디자인도 너무 예쁘고 색상도 다양해서 고르는 재미도 있네요. 추천 합니다!<br>
+                                        선물용으로 구매했습니다 290이 매장에 잘 없어서 주문했어요</p>
+                                </div>
+                            </div>
+                            <div class="product-detail__review-list-wrap product-detail__review-list-wrap_line-2">
+                                <div class="product-detail__review-info-wrap">
+                                    <ul class="product-detail__review-info-list-warp">
+                                        <li class="title_start">
+                                            <p>★★★★☆</p>
+                                        </li>
+                                        <li class="title_name">
+                                            <p>김⭑우</p>
+                                        </li>
+                                        <li class="title_date">
+                                            <p>2025-11-23</p>
+                                        </li>
+                                    </ul>
+                                    <ul class="product-detail__recommend-wrap">
+                                        <li class="recommend-icon">
+                                            <a href="#">
+                                                <p><img src="./public/images/ProductPage/icon-recommend.svg"
+                                                        alt="추천 아이콘">
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="recommend-text">
+                                            <a href="#">
+                                                <p>리뷰추천</p>
+                                            </a>
+                                        </li>
+                                        <li class="recommend-count">
+                                            <a href="#">
+                                                <p>120</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-detail__review-text-wrap">
+                                    <p class="product-detail__review-title">너무 마음에 들어요!!!!!!!</p>
+                                    <p class="product-detail__review-text">크록스 편하고 좋은건 말해모해요~~~<br>
+                                        일단 너무 편하고 좋네요~ 당연하게도 통풍도 잘 되고. 오랫동안 신어도 발아픈것도 없고 좋아요!<br>
+                                        디자인도 너무 예쁘고 색상도 다양해서 고르는 재미도 있네요. 추천 합니다!<br>
+                                        선물용으로 구매했습니다 290이 매장에 잘 없어서 주문했어요</p>
+                                </div>
+                            </div>
+                            <div class="product-detail__review-list-wrap 
+                            product-detail__review-list-wrap_line-2">
+                                <div class="product-detail__review-info-wrap">
+                                    <ul class="product-detail__review-info-list-warp">
+                                        <li class="title_start">
+                                            <p>★★★★☆</p>
+                                        </li>
+                                        <li class="title_name">
+                                            <p>김⭑우</p>
+                                        </li>
+                                        <li class="title_date">
+                                            <p>2025-11-23</p>
+                                        </li>
+                                    </ul>
+                                    <ul class="product-detail__recommend-wrap">
+                                        <li class="recommend-icon">
+                                            <a href="#">
+                                                <p><img src="./public/images/ProductPage/icon-recommend.svg"
+                                                        alt="추천 아이콘">
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="recommend-text">
+                                            <a href="#">
+                                                <p>리뷰추천</p>
+                                            </a>
+                                        </li>
+                                        <li class="recommend-count">
+                                            <a href="#">
+                                                <p>120</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product-detail__review-text-wrap">
+                                    <p class="product-detail__review-title">너무 마음에 들어요!!!!!!!</p>
+                                    <p class="product-detail__review-text">크록스 편하고 좋은건 말해모해요~~~<br>
+                                        일단 너무 편하고 좋네요~ 당연하게도 통풍도 잘 되고. 오랫동안 신어도 발아픈것도 없고 좋아요!<br>
+                                        디자인도 너무 예쁘고 색상도 다양해서 고르는 재미도 있네요. 추천 합니다!<br>
+                                        선물용으로 구매했습니다 290이 매장에 잘 없어서 주문했어요</p>
+                                </div>
+                            </div>
                         </div>
+                        <div class="product-detail_review--more">리뷰 더보기</div>
                     </div>
                 </div>
             </section>
@@ -1067,18 +1194,23 @@
     </main>
 
     <script>
-        // 사이즈 선택 버튼 클릭 시 active 클래스 토글
-        document.querySelectorAll('.product-info_size-btns a').forEach(link => {
-            link.addEventListener('click', function (e) {
+        // 사이즈 선택 버튼 클릭 시 active 클래스 토글 (셀렉터 수정 및 sold-out 제외)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sizeContainer = document.querySelector('.select-buy__size-btns');
+            if (!sizeContainer) return;
+
+            sizeContainer.addEventListener('click', (e) => {
+                const anchor = e.target.closest('a');
+                if (!anchor) return;
+                if (!anchor.matches('.select-buy__size-btns a')) return;
+                if (anchor.classList.contains('sold-out')) return; // 품절 제외
                 e.preventDefault();
 
-                // 모든 버튼에서 active 제거
-                document.querySelectorAll('.product-info_size-btns a').forEach(btn => {
-                    btn.classList.remove('active');
-                });
+                // 기존 active 제거
+                sizeContainer.querySelectorAll('a.active').forEach(a => a.classList.remove('active'));
 
-                // 클릭한 버튼에 active 추가
-                this.classList.add('active');
+                // 현재 선택 추가
+                anchor.classList.add('active');
             });
         });
 
@@ -1099,6 +1231,75 @@
                     lineIcon.style.display = "block";
                     fillIcon.style.display = "none";
                 }
+            });
+        });
+    </script>
+
+    <script>
+        // 상세 영역(지비츠, 설명, 유의사항, 리뷰) 슬라이드 토글 + aria-expanded 동기화 + 아이콘 방향 즉시 전환
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.js-toggle').forEach(function (btn) {
+                var targetSel = btn.getAttribute('data-target');
+                var content = document.querySelector(targetSel);
+                if (!content) return;
+                // 접근성 초기 상태
+                btn.setAttribute('aria-expanded', 'false');
+
+                // 아이콘 요소 캐싱
+                var iconNormal = btn.querySelector('.product-detail__toggle-btn__icon-open');
+                var iconHover = btn.querySelector('.product-detail__toggle-btn__icon-open--hover');
+
+                // 안전 장치: 아이콘 없으면 진행만 (방향 전환 생략)
+                btn.addEventListener('click', function () {
+                    var isOpen = content.classList.contains('active');
+                    if (!isOpen) {
+                        // 열기
+                        content.classList.add('active');
+                        content.style.display = 'block';
+                        var fullHeight = content.scrollHeight;
+                        content.style.height = '0px';
+                        content.style.overflow = 'hidden';
+                        content.style.transition = 'height 0.5s ease, opacity 0.4s ease';
+                        content.style.opacity = '0';
+                        requestAnimationFrame(function () {
+                            content.style.height = fullHeight + 'px';
+                            content.style.opacity = '1';
+                        });
+                        content.addEventListener('transitionend', function endOpen(e) {
+                            if (e.propertyName === 'height') {
+                                content.style.height = 'auto';
+                                content.style.overflow = 'visible';
+                                content.removeEventListener('transitionend', endOpen);
+                            }
+                        });
+                        btn.setAttribute('aria-expanded', 'true');
+                        // 아이콘 위쪽(닫기 방향)으로 즉시 교체
+                        if (iconNormal) iconNormal.src = './public/images/ProductPage/icon-arrow-up_btn.svg';
+                        if (iconHover) iconHover.src = './public/images/ProductPage/icon-arrow-up_btn-hover.svg';
+                    } else {
+                        // 닫기
+                        var currentHeight = content.scrollHeight;
+                        content.style.height = currentHeight + 'px';
+                        content.style.overflow = 'hidden';
+                        requestAnimationFrame(function () {
+                            content.style.transition = 'height 0.5s ease, opacity 0.4s ease';
+                            content.style.height = '0px';
+                            content.style.opacity = '0';
+                        });
+                        content.addEventListener('transitionend', function endClose(e) {
+                            if (e.propertyName === 'height') {
+                                content.classList.remove('active');
+                                content.style.display = 'none';
+                                content.style.opacity = '1';
+                                content.removeEventListener('transitionend', endClose);
+                            }
+                        });
+                        btn.setAttribute('aria-expanded', 'false');
+                        // 아이콘 아래쪽(열기 방향)으로 즉시 교체
+                        if (iconNormal) iconNormal.src = './public/images/ProductPage/icon-arrow-down_btn.svg';
+                        if (iconHover) iconHover.src = './public/images/ProductPage/icon-arrow-down_btn-hover.svg';
+                    }
+                });
             });
         });
     </script>
