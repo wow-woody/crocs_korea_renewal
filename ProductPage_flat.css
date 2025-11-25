@@ -962,7 +962,7 @@ main {
   height: auto;
 }
 
-.del-btn--hover {
+.select-buy__select__del-btn .del-btn--hover {
   display: none;
 }
 
@@ -1015,20 +1015,63 @@ main {
   font-size: 1.6rem;
 }
 
-.select-buy__buy-btn--add-cart {
-  width: 19.6rem;
+.select-buy__buy-btns__btn-like {
+  width: 5.2rem;
   height: 5.2rem;
   border: 1px solid #ebebeb;
   border-radius: 0.4rem;
   color: #cccccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.select-buy__buy-btns__btn-like:hover {
+  border: 1px solid #b5d766;
+}
+.select-buy__buy-btns__btn-like:hover .select-buy__buy-btns__btn-like_line {
+  display: none;
+}
+.select-buy__buy-btns__btn-like:hover .select-buy__buy-btns__btn-like_fill {
+  display: block;
+}
+
+.select-buy__buy-btns__btn-like_line,
+.select-buy__buy-btns__btn-like_fill {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.select-buy__buy-btns__btn-like_fill {
+  display: none;
+}
+
+.select-buy__buy-btn--add-cart {
+  width: 15.6rem;
+  height: 5.2rem;
+  border: 1px solid #ebebeb;
+  border-radius: 0.4rem;
+  color: #cccccc;
+  transition: all 0.3s ease;
+}
+
+.select-buy__buy-btn--add-cart:hover {
+  border: 1px solid #b5d766;
+  color: #b5d766;
 }
 
 .select-buy__buy-btn--buy-now {
-  width: 39.2rem;
+  width: 36.4rem;
   height: 5.2rem;
   border-radius: 0.4rem;
   color: #fff;
   background: #b5d766;
+  transition: all 0.3s ease;
+}
+
+.select-buy__buy-btn--buy-now:hover {
+  color: #444444;
 }
 
 .product-detail {
@@ -1299,4 +1342,31 @@ main {
 
 .product-detail_notes__item-text span {
   font-weight: 500;
+}
+
+.product-detail_review--write {
+  width: 100%;
+  height: 5.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-right: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  color: #b5d766;
+}
+
+.product-detail__review-summary {
+  width: 100%;
+  height: auto;
+  border: 1px solid red;
+  padding: 3.6rem 4.4rem;
+}
+
+.product-detail__rating {
+  width: 100%;
+  height: auto;
+  border: 1px solid blue;
 }/*# sourceMappingURL=ProductPage_flat.css.map */
