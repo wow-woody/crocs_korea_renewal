@@ -9,6 +9,8 @@
     border-radius: 0.4rem;
 }
 
+body {
+}
 main {
     box-sizing: border-box;
 }
@@ -59,8 +61,9 @@ main {
 }
 
 .product-img-info__wrap {
-    @include g.flex($jc: flex-start, $ai: center, $gap: 0);
+    display: flex;
     max-width: 120rem;
+    justify-content: flex-start;
     margin-bottom: 0;
     height: auto;
     min-height: 100%;
@@ -76,7 +79,9 @@ main {
     height: auto;
     min-height: 100%;
     margin: 0;
-    @include g.flex($jc: flex-start, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%),
         linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
     position: relative;
@@ -89,15 +94,20 @@ main {
 }
 
 .product-img__crumbs {
-    @include g.flex($jc: flex-start, $ai: center, $gap: 0.4rem);
+    @include g.flex($jc: null, $ai: null, $fd: null, $fw: null, $gap: 0.4rem);
     font-size: 1.2rem;
+    font-weight: 400;
+    height: 2.5rem;
+    align-items: center;
     position: absolute;
     top: 4rem;
     left: 8.8rem;
 }
 
 .product-img__sep {
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     width: 0.8rem;
     margin: 0;
@@ -105,7 +115,8 @@ main {
 }
 
 .product-img__crumb {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -113,8 +124,8 @@ main {
 
 .product-img__link {
     @extend %link-base;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
     display: inline-flex;
+    align-items: center;
     height: 100%;
     padding: 0 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
@@ -150,14 +161,16 @@ main {
 .product-img__main-wrap {
     width: 100%;
     height: 100%;
-    @include g.flex($jc: flex-start, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     padding: 0 18rem;
 }
 
 .product-img__list {
     width: 60rem;
     height: fit-content;
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
 }
 
 .product-img__item--none {
@@ -167,11 +180,17 @@ main {
 .product-img__thumbs-wrap {
     margin-right: 8.6rem;
     right: 8.6rem;
-    @include g.flex($jc: center, $ai: center, $fd: column, $gap: 1.6rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
 }
 
 .product-img__thumbs-list {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 1.6rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
 }
 
 .product-img__thumbs-item {
@@ -185,7 +204,9 @@ main {
     border-radius: 1rem;
     border: 1px solid #ebebeb;
     background: #fff;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-img__thumbs-img {
@@ -213,7 +234,9 @@ main {
 .thumbs__btn {
     width: 100%;
     height: 100%;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .thumbs__icon {
@@ -230,7 +253,7 @@ main {
 }
 
 .thumbs__ctrl:hover .thumbs__btn--active {
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
 }
 
 .thumbs__ctrl:hover .thumbs__btn--up,
@@ -239,7 +262,7 @@ main {
 }
 
 .product-detail {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
     max-width: 112.8rem;
     height: auto;
 
@@ -253,7 +276,10 @@ main {
 .product-detail__title-wrap {
     width: 100%;
     height: 9.8rem;
-    @include g.flex($jc: flex-start, $ai: center, $gap: 0.8rem);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .product-detail__title {
@@ -272,7 +298,9 @@ main {
 
 .product-detail__toggle {
     width: 100%;
-    @include g.flex($jc: flex-end, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .product-detail__toggle-btn--open {
@@ -302,7 +330,9 @@ main {
     top: 0;
     align-self: flex-start;
     height: 100vh;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
     z-index: 10;
 }
@@ -310,11 +340,17 @@ main {
 .select-buy__wrap {
     max-width: 60rem;
     height: 100%;
-    @include g.flex($jc: center, $ai: center, $fd: column, $gap: 3.2rem);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3.2rem;
 }
 
 .select-buy__title_wrap {
-    @include g.flex($jc: center, $ai: center, $fd: column, $gap: 0.5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .select-buy__subtitle {
@@ -330,7 +366,9 @@ main {
 }
 
 .select-buy__price {
-    @include g.flex($jc: space-between, $ai: center, $gap: 1.2rem);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
     font-family: 'all-round-gothic', sans-serif;
 }
 
@@ -360,11 +398,15 @@ main {
 }
 
 .select-buy__color {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 1.2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 
 .select-buy__color-title-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 1.2rem);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
 }
 
 .select-buy__color-title {
@@ -380,7 +422,9 @@ main {
 }
 
 .select-buy__color-badge-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 1rem);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .select-buy__color-badge {
@@ -425,11 +469,15 @@ main {
 }
 
 .select-buy__size {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 1.2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 
 .select-buy__size-title-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 1.2rem);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
 }
 
 .select-buy__size-title {
@@ -451,13 +499,19 @@ main {
 }
 
 .select-buy__size-btns-wrap {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 1.2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 
 .select-buy__size-btns {
     width: 100%;
     height: fit-content;
-    @include g.flex($jc: space-between, $ai: center, $fw: wrap, $gap: 1rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .select-buy__size-btns li {
@@ -470,7 +524,9 @@ main {
 }
 
 .select-buy__size-btns li a {
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     border: 1px solid #ebebeb;
@@ -491,8 +547,9 @@ main {
 }
 
 .select-buy__size-btns li .sold-out {
-    @include g.flex($jc: center, $ai: center, $gap: 0);
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     border: 1px solid #ebebeb;
@@ -516,7 +573,8 @@ main {
 }
 
 .select-buy__size-notice-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: space-between;
     font-size: 1.3rem;
     font-weight: 400;
     color: #cccccc;
@@ -532,24 +590,33 @@ main {
 }
 
 .select-buy__selected--wrap {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 0.8rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .select-buy__select {
     width: 100%;
     height: 5.2rem;
     border-radius: 0.8rem;
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
     background-color: #fafafd;
+    justify-content: space-between;
 }
 
 .select-buy__select-wrap {
-    @include g.flex($jc: flex-start, $ai: center, $gap: 1.2rem);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.2rem;
     margin-left: 2rem;
 }
 
 .select-buy__select_chose-item {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0.8rem);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .info__color-badge {
@@ -580,17 +647,23 @@ main {
 }
 
 .select-buy__select__count-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 14px);
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
 .select-buy__select__count-value-wrap {
-    @include g.flex($jc: flex-start, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .select-buy__select__count-value {
     width: 5.5rem;
     height: 3.6rem;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.9rem;
     font-weight: 600;
     border-left: 1px solid #ebebeb;
@@ -605,7 +678,8 @@ main {
 }
 
 .select-buy__select__wrap {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 0);
+    display: flex;
+    flex-direction: column;
     border-right: 1px solid #ebebeb;
     border-top: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
@@ -614,7 +688,7 @@ main {
 .select-buy__select__count-btn {
     width: 1.7rem;
     height: 1.7rem;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
     border: none;
     border-left: 1px solid #ebebeb;
     justify-content: center;
@@ -639,7 +713,9 @@ main {
 .select-buy__select__count-link {
     width: 100%;
     height: 100%;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -655,11 +731,11 @@ main {
 }
 
 .select-buy__select__count-link--disabled-2 {
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
 }
 
 .select-buy__select__count-btn:hover .select-buy__select__count-link--disabled-1 {
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
 }
 
 .select-buy__select__count-btn:hover .select-buy__select__count-link--disabled-2 {
@@ -674,7 +750,9 @@ main {
 .select-buy__select__del-btn {
     padding: 0;
     line-height: 0;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     cursor: pointer;
 }
@@ -700,7 +778,9 @@ main {
 }
 
 .select-buy__total-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .select-buy__total-title {
@@ -709,11 +789,13 @@ main {
 }
 
 .select-buy__total-content {
-    @include g.flex($jc: space-between, $ai: center, $gap: 1.2rem);
+    display: flex;
+    gap: 1.2rem;
 }
 
 .select-buy__total-number-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
     font-size: 1.3rem;
     color: #cccccc;
 }
@@ -723,14 +805,16 @@ main {
 }
 
 .select-buy__total-price-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
+    align-items: center;
     color: #d70000;
     font-size: 2.4rem;
     font-weight: 700;
 }
 
 .select-buy__buy-btns-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 1.2rem);
+    display: flex;
+    gap: 1.2rem;
     font-size: 1.6rem;
 }
 
@@ -740,7 +824,9 @@ main {
     border: 1px solid #ebebeb;
     border-radius: 0.4rem;
     color: #cccccc;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: all 0.3s ease;
 }
 .select-buy__buy-btns__btn-like:hover {
@@ -788,7 +874,7 @@ main {
 }
 
 .product-detail {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
     max-width: 120rem;
     height: auto;
 }
@@ -809,7 +895,9 @@ main {
 
 .product-detail__toggle {
     width: 100%;
-    @include g.flex($jc: flex-end, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     padding: 0;
 }
 
@@ -844,17 +932,23 @@ main {
     padding: 3.6rem 4.4rem;
     border-right: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
-    @include g.flex($jc: center, $ai: center, $fw: wrap, $gap: 1rem);
     display: flex !important;
     flex-flow: row wrap !important;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    img {
+    }
 }
 
 .product-detail__jibbitz-item-wrap {
     width: 17.6rem;
     height: fit-content;
     border-radius: 10px;
-    @include g.flex($jc: center, $ai: center, $fd: column, $gap: 0);
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     outline: 1px solid transparent;
     transition: all 0.3s ease;
     flex-shrink: 0;
@@ -868,13 +962,17 @@ main {
 .product-detail__jibbitz-item-img-wrap {
     width: 100%;
     height: 100%;
-    @include g.flex($jc: center, $ai: flex-start, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .product-detail__jibbitz-item-img-wrap .product-detail__jibbitz-item {
     width: 14.4rem;
     height: 14.4rem;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0) 40%),
         linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.02)), #fcfcff;
     border-radius: 0.8rem;
@@ -890,7 +988,9 @@ main {
 .product-detail__jibbitz-item-icon-wrap {
     width: 1.4rem;
     height: 1.4rem;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     left: 0.8rem;
     top: 0.8rem;
@@ -899,7 +999,9 @@ main {
 .icon-like {
     width: 100%;
     height: 100%;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .icon-like img {
@@ -910,7 +1012,9 @@ main {
 .icon-like-fill {
     width: 1.4rem;
     height: 1.4rem;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     display: none;
 }
 
@@ -924,14 +1028,16 @@ main {
 }
 
 .product-detail__jibbitz-item-icon-wrap:hover .icon-like-fill {
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
 }
 
 .icon-cart {
     display: inline-block;
     width: 2rem;
     height: 2rem;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     right: 0.4rem;
     top: 0.4rem;
@@ -960,7 +1066,10 @@ main {
 
 .product-detail__desc-item-price-wrap {
     width: 14.4rem;
-    @include g.flex($jc: flex-start, $ai: center, $gap: 0.6rem);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.6rem;
     margin-bottom: 1.6rem;
     align-self: flex-start;
     width: 100%;
@@ -1030,12 +1139,16 @@ main {
 .product-detail_desc__wrap,
 .product-detail_notes__wrap {
     font-family: 'Paperlogy';
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 2.4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
 }
 
 .product-detail_desc__item,
 .product-detail_notes__item {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 0.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 .product-detail_desc__item-title,
 .product-detail_notes__item-title {
@@ -1065,7 +1178,9 @@ main {
 .product-detail_review--write {
     width: 100%;
     height: 5.2rem;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     font-size: 1.6rem;
     font-weight: 600;
@@ -1102,8 +1217,10 @@ main {
 .product-detail__size-wrap {
     width: 100%;
     height: auto;
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 2.8rem);
+    display: flex;
+    flex-direction: column;
     // border: 1px solid red;
+    gap: 2.8rem;
 }
 .product-detail__title {
     font-size: 1.6rem;
@@ -1111,11 +1228,15 @@ main {
 }
 .product-detail__rating-score-wrap,
 .product-detail__size-score-wrap {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 1.2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 .product-detail__rating-score,
 .product-detail__size-score {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 1.2rem;
     font-weight: 400;
 }
@@ -1128,8 +1249,10 @@ main {
     width: 5em;
 }
 .product-detail__bar {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 2rem);
+    display: flex;
+    flex-direction: column;
     position: relative;
+    gap: 2rem;
     .product-detail__bar-fill {
         width: 32.08rem;
         height: 0.8rem;
@@ -1147,8 +1270,10 @@ main {
 }
 
 .product-detail__size-bar {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 2rem);
+    display: flex;
+    flex-direction: column;
     position: relative;
+    gap: 2rem;
     .product-detail__size-bar-fill {
         width: 32rem;
         height: 0.8rem;
@@ -1197,7 +1322,9 @@ main {
 }
 
 .product-detail__review-info-list-warp {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0.8rem);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 
     .title_start {
         font-size: 1.4rem;
@@ -1219,15 +1346,19 @@ main {
 }
 
 .product-detail__review-list-wrap {
-    @include g.flex($jc: space-between, $ai: center, $fd: column, $gap: 1.6rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
     padding: 3.6rem 4.4rem;
 }
 .product-detail__review-info-wrap {
-    @include g.flex($jc: space-between, $ai: center, $gap: 0);
 }
 
 .product-detail__recommend-wrap {
-    @include g.flex($jc: center, $ai: center, $gap: 0.4rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
     width: 9.6rem;
     height: 2.4rem;
     border: 1px solid #ebebeb;
@@ -1235,12 +1366,14 @@ main {
 
     .recommend-icon {
         width: 1.2rem;
-        @include g.flex($jc: space-between, $ai: center, $gap: 0);
+        display: flex;
+        align-items: center;
         height: 100%;
     }
     .recommend-icon img {
-        display: block;
+        display: block; /* inline 성격 제거 */
         margin: auto;
+        vertical-align: middle;
     }
 
     .recommend-text {
@@ -1272,7 +1405,9 @@ main {
 .product-detail_review--more {
     width: 100%;
     height: 5.2rem;
-    @include g.flex($jc: center, $ai: center, $gap: 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     font-size: 1.6rem;
     font-weight: 600;
