@@ -10,7 +10,7 @@ import { parsePrice } from "../components/parsePrice";
 const JibbitzProductInfo = ({ product }) => {
   const navigate = useNavigate();
   const [count, setCount] = useState(1);
-  const { wishLists, onAddWishList, onProductAddCart } = wishListStore();
+  const { wishLists, onAddWishList } = wishListStore();
   const { addProductToCart } = useCartStore();
 
   const onHeart = wishLists.some((item) => item.id === product.id);
@@ -161,7 +161,6 @@ const JibbitzProductInfo = ({ product }) => {
                       <img
                         src={`${process.env.PUBLIC_URL}/images/icon-arrow-down_bold-2.svg`}
                         alt='수량 감소 버튼 비활성화'
-                        className='count-btn__icon-2'
                       />
                     </span>
                   </button>
@@ -174,12 +173,12 @@ const JibbitzProductInfo = ({ product }) => {
         <div className='product-btn-wrap'>
           <button
             className='product-btn-cart'
-            onClick={() => addProductToCart(product, count)}
+            onClick={() => handleAddToCart}
           >
             장바구니
           </button>
           <WishAddPopup />
-          <button className='product-btn-buy'>구매하기</button>
+          <button className='product-btn-buy' onClick={handleBuyNow}>구매하기</button>
         </div>
       </div>
     </div>

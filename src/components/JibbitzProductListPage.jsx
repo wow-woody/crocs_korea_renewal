@@ -23,7 +23,6 @@ const JibbitzProductListPage = ({onProductClick}) => {
 
     const onOpenProductDetail = (product) => {
         console.log('확인1', product.id);
-        navigate(`/jibbitz/${product.id}`);
         // e.preventDefault();
 
          // 최근 본 상품에 추가
