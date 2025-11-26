@@ -1,11 +1,12 @@
-import React, { useState, useMemo, useRef, useEffect } from "react";
-import OrderForm from "./OrderForm.jsx";
-import OrderSummary from "./OrderSummary.jsx";
-import "./style/Order.scss";
-import { Products } from "../../data/CrocsProductsData.js";
-import OrderProgress from "./OrderProgress.jsx";
-import Title from "../Title.jsx";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import OrderForm from './OrderForm.jsx';
+import OrderSummary from './OrderSummary.jsx';
+import './styles/Order.scss';
+
+import { Products } from '../../data/CrocsProductsData.js';
+import OrderProgress from './OrderProgress.jsx';
+import Title from '../Title.jsx';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // JSON
 // import womenProducts from '../../data/여성-카테고리-완전통합.json';
@@ -30,8 +31,8 @@ function Order() {
             !cartOrderData.orderProducts ||
             cartOrderData.orderProducts.length === 0
         ) {
-            alert("주문할 상품이 없습니다. 장바구니로 이동합니다.");
-            navigate("/cart", { replace: true }); // replace: true로 히스토리 교체
+            alert('주문할 상품이 없습니다. 장바구니로 이동합니다.');
+            navigate('/cart', { replace: true }); // replace: true로 히스토리 교체
         }
     }, [cartOrderData, navigate]); // cartOrderData와 navigate를 의존성 배열에 추가
 
@@ -43,11 +44,11 @@ function Order() {
                 id: item.id || index + 1,
                 name: item.name || item.product,
                 color: parseColor(item.color),
-                size: item.size || "ONE SIZE",
+                size: item.size || 'ONE SIZE',
                 quantity: item.quantity || 1,
                 price: item.price,
                 image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
-                category: item.cate || "일반",
+                category: item.cate || '일반',
             }));
         }
 
@@ -167,8 +168,8 @@ function Order() {
 
     useEffect(() => {
         if (products.length === 0 && cartOrderData) {
-            alert("주문할 상품이 없습니다. 장바구니로 이동합니다.");
-            navigate("/cart", { replace: true });
+            alert('주문할 상품이 없습니다. 장바구니로 이동합니다.');
+            navigate('/cart', { replace: true });
         }
     }, [products, cartOrderData, navigate]);
 
@@ -225,7 +226,7 @@ function Order() {
 
         // 주문 완료 후 장바구니 비우기
         if (cartOrderData) {
-            localStorage.setItem("cartIds", JSON.stringify([]));
+            localStorage.setItem('cartIds', JSON.stringify([]));
 
             // Zustand store의 장바구니도 비우기 (store가 있다면)
             // useCartStore.getState().clearCart(); // 이 부분은 store 구조에 따라 조정
@@ -233,23 +234,23 @@ function Order() {
 
         // 3초 후 주문완료 페이지로 이동 // 임시로 메인페이지
         setTimeout(() => {
-            navigate("/", { replace: true });
+            navigate('/userinfo', { replace: true });
         }, 3000);
     };
 
     return (
-        <div className='order-container'>
-            <div className='main-title'>
-                <Title title='Order' />
+        <div className="order-container">
+            <div className="main-title">
+                <Title title="Order" />
             </div>
             {/* <h1 className="order-title">Order</h1> */}
             <OrderProgress />
-            <div className='order-content'>
-                <div className='order-left'>
+            <div className="order-content">
+                <div className="order-left">
                     <OrderForm ref={orderFormRef} />
                 </div>
 
-                <div className='order-right'>
+                <div className="order-right">
                     <OrderSummary
                         products={products}
                         subtotal={calculateSubtotal()}
@@ -278,8 +279,8 @@ function getRandomItems(array, count) {
 function parsePrice(priceStr) {
     if (!priceStr) return 0;
 
-    let price = String(priceStr).replace(/₩|,/g, "").trim();
-    price = price.replace(/\([^)]*\)/g, "").trim();
+    let price = String(priceStr).replace(/₩|,/g, '').trim();
+    price = price.replace(/\([^)]*\)/g, '').trim();
 
     const numbers = price.match(/\d+/);
     return numbers ? parseInt(numbers[0]) : 0;
@@ -287,15 +288,15 @@ function parsePrice(priceStr) {
 
 // 색상
 function parseColor(colorArray) {
-    if (!colorArray || colorArray.length === 0) return "기본색상";
+    if (!colorArray || colorArray.length === 0) return '기본색상';
 
     const firstColor = String(colorArray[0]);
 
-    if (firstColor.toLowerCase().includes("rgb")) {
-        if (firstColor.includes("0, 0, 0")) return "블랙";
-        if (firstColor.includes("249, 249, 249")) return "화이트";
-        if (firstColor.includes("150, 105, 74")) return "브라운";
-        return "컬러";
+    if (firstColor.toLowerCase().includes('rgb')) {
+        if (firstColor.includes('0, 0, 0')) return '블랙';
+        if (firstColor.includes('249, 249, 249')) return '화이트';
+        if (firstColor.includes('150, 105, 74')) return '브라운';
+        return '컬러';
     }
 
     return firstColor;

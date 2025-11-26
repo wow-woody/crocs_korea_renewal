@@ -8,7 +8,7 @@ const JibbitzProductCard = ({ sendItem }) => {
 
     const onOpenProductDetail = () => {
         console.log('확인1', sendItem.id);
-        navigate(`/product/${sendItem.id}`);
+        navigate(`/jibbitz/${sendItem.id}`);
         // e.preventDefault();
     };
 

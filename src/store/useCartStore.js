@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { parsePrice } from "../components/parsePrice";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { parsePrice } from '../components/parsePrice';
 
 export const useCartStore = create(
     persist(
@@ -14,12 +14,79 @@ export const useCartStore = create(
             freeShippingThreshold: 30000,
             shippingFee: 2500,
 
-            // 초기화 -  localstorage에서 불러오기
+            // ✅ 위시리스트 cartItems를 cartProducts에 병합
+            mergeCartData: (products, cartItems) => {
+                console.log('🔀 mergeCartData 호출:', { products, cartItems });
+
+                if (!cartItems || cartItems.length === 0) {
+                    console.log('⚠️ cartItems 없음');
+                    return;
+                }
+
+                set((state) => {
+                    const merged = [...state.cartProducts];
+
+                    cartItems.forEach((item) => {
+                        // id와 size가 모두 같은 제품 찾기
+                        const existingIndex = merged.findIndex(
+                            (p) => p.id === item.id && p.size === (item.size || null)
+                        );
+
+                        // 가격 파싱
+                        const p = item.price
+                            ? Number(String(item.price).replace(/,/g, ''))
+                            : item.prices && item.prices.length > 0
+                            ? Number(
+                                  String(item.prices[1] || item.prices[0] || '0').replace(/,/g, '')
+                              )
+                            : 0;
+
+                        if (existingIndex !== -1) {
+                            // 이미 있으면 수량만 증가
+                            merged[existingIndex].quantity += item.count || item.quantity || 1;
+                            console.log('✅ 기존 상품 수량 증가:', merged[existingIndex]);
+                        } else {
+                            // 새 제품이면 추가
+                            const newItem = {
+                                id: item.id,
+                                name: item.title || item.name,
+                                price: p,
+                                product_img:
+                                    (Array.isArray(item.imageUrl) && item.imageUrl[0]) ||
+                                    (Array.isArray(item.product_img)
+                                        ? item.product_img[0]
+                                        : item.product_img) ||
+                                    '',
+                                quantity: item.count || item.quantity || 1,
+                                size: item.size || null,
+                            };
+                            merged.push(newItem);
+                            console.log('✅ 새 상품 추가:', newItem);
+                        }
+                    });
+
+                    console.log('🎯 병합 완료:', merged);
+                    return {
+                        cartProducts: merged,
+                        selectedProducts: new Set(merged.map((p) => p.id)),
+                    };
+                });
+            },
+
+            // 초기화 - localstorage에서 불러오기
             initializeCart: (Products, wishCartItems = []) => {
-                const cartIds = JSON.parse(localStorage.getItem("cartIds")) || [];
+                const { cartProducts } = get();
 
                 // 이미 장바구니에 상품이 있으면 건너뜀
-                // if (cartProducts.length > 0) return;
+                if (cartProducts.length > 0) {
+                    console.log('⚠️ 이미 초기화됨');
+                    return;
+                }
+
+                console.log('🚀 장바구니 초기화 시작');
+
+                const cartIds = JSON.parse(localStorage.getItem('cartIds')) || [];
+                console.log('📋 cartIds:', cartIds);
 
                 // Products에서 가져온 상품
                 const productsWithPrice = Products.filter((item) => cartIds.includes(item.id)).map(
@@ -30,13 +97,12 @@ export const useCartStore = create(
                             ...item,
                             quantity: 1,
                             price: price_dc > 0 ? price_dc : price_original,
-                            // size가 있는 경우에만 추가
                             ...(item.size && { size: item.size }),
                         };
                     }
                 );
 
-                // wishCartItems가 있으면 추가
+                // wishCartItems 처리
                 const wishProducts = wishCartItems.map((item) => {
                     const price_dc = parsePrice(item.price_dc_rate || item.price);
                     const price_original = parsePrice(item.price);
@@ -47,7 +113,6 @@ export const useCartStore = create(
                         price: price_dc > 0 ? price_dc : price_original,
                         product_img: item.imageUrl || item.product_img,
                         name: item.title || item.name,
-                        // size가 있는 경우에만 추가
                         ...(item.size && { size: item.size }),
                     };
                 });
@@ -61,21 +126,28 @@ export const useCartStore = create(
                     }
                 });
 
+                console.log('✅ 초기화 완료:', allProducts);
+
                 set({
                     cartProducts: allProducts,
                     selectedProducts: new Set(allProducts.map((p) => p.id)),
                 });
             },
 
-            // 위시리스트에서 장바구니로 추가
-            addFromWishlist: (Products, wishCartItems = []) => {
+            // 위시리스트에서 상품 추가
+            addFromWishlist: (Products, wishCartItems) => {
+                console.log('💚 addFromWishlist 호출:', wishCartItems);
+
+                if (!wishCartItems || wishCartItems.length === 0) {
+                    console.log('⚠️ wishCartItems 없음');
+                    return;
+                }
+
                 const { cartProducts } = get();
 
-                // wishListStore의 cartWishItems 처리
                 const wishProducts = wishCartItems.map((item) => {
                     const price_dc = parsePrice(item.price_dc_rate || item.price);
                     const price_original = parsePrice(item.price);
-
                     return {
                         ...item,
                         quantity: item.count || 1,
@@ -92,42 +164,82 @@ export const useCartStore = create(
 
                 if (newProducts.length > 0) {
                     const updatedProducts = [...cartProducts, ...newProducts];
+                    console.log('✅ 위시리스트 상품 추가:', newProducts);
                     set({
                         cartProducts: updatedProducts,
                         selectedProducts: new Set(updatedProducts.map((p) => p.id)),
                     });
+                } else {
+                    console.log('ℹ️ 추가할 새 상품 없음');
                 }
             },
 
-            // 상품 상세에서 장바구니에 직접 추가 (새로 추가)
-            addProductToCart: (product, count = 1) => {
-                const { cartProducts } = get();
-                const cartIds = JSON.parse(localStorage.getItem("cartIds")) || [];
+            // 상품 직접 추가 (size 옵션 포함)
+            addProduct: (product, quantity = 1, size = null) => {
+                console.log('➕ addProduct 호출:', { product, quantity, size });
 
-                // 중복 체크
-                // if (cartIds.includes(product.id)) {
-                //   alert("이미 장바구니에 담긴 상품입니다.");
-                //   return false;
-                // }
-                // 수정: cartProducts에서 직접 확인 + 중복이면 수량 증가
-                const existingProductIndex = cartProducts.findIndex(
-                    (item) => item.id === product.id
+                set((state) => {
+                    const cartProducts = state.cartProducts;
+
+                    const existingProduct = cartProducts.find(
+                        (p) => p.id === product.id && p.size === size
+                    );
+
+                    let updatedProducts;
+
+                    if (existingProduct) {
+                        updatedProducts = cartProducts.map((p) =>
+                            p.id === product.id && p.size === size
+                                ? { ...p, quantity: p.quantity + quantity }
+                                : p
+                        );
+                        console.log('✅ 기존 상품 수량 증가');
+                    } else {
+                        const newProduct = { ...product, quantity };
+                        if (size) newProduct.size = size;
+                        updatedProducts = [...cartProducts, newProduct];
+                        console.log('✅ 새 상품 추가');
+                    }
+
+                    // localStorage cartIds 업데이트
+                    const cartIds = JSON.parse(localStorage.getItem('cartIds')) || [];
+                    if (!cartIds.includes(product.id)) {
+                        cartIds.push(product.id);
+                        localStorage.setItem('cartIds', JSON.stringify(cartIds));
+                    }
+
+                    return {
+                        cartProducts: updatedProducts,
+                        selectedProducts: new Set(updatedProducts.map((p) => p.id)),
+                    };
+                });
+            },
+
+            // 상품 상세에서 장바구니에 직접 추가
+            addProductToCart: (product, count = 1, size = null) => {
+                console.log('🛒 addProductToCart 호출:', { product, count, size });
+
+                const { cartProducts } = get();
+
+                const existingProduct = cartProducts.find(
+                    (item) => item.id === product.id && item.size === size
                 );
 
-                if (existingProductIndex !== -1) {
-                    // 이미 있으면 수량만 증가
-                    const updatedProducts = cartProducts.map((item, index) =>
-                        index === existingProductIndex
+                if (existingProduct) {
+                    const updatedProducts = cartProducts.map((item) =>
+                        item.id === product.id && item.size === size
                             ? { ...item, quantity: item.quantity + count }
                             : item
                     );
 
                     set({ cartProducts: updatedProducts });
+                    console.log('✅ 기존 상품 수량 증가');
 
                     alert(`장바구니에 상품이 이미 있어 수량이 ${count}개 추가되었습니다.`);
                     return true;
                 }
 
+                // 가격 계산
                 const price_dc = parsePrice(product.price_dc_rate || product.discountPrice);
                 const price_original = parsePrice(product.price);
                 const finalPrice = price_dc > 0 ? price_dc : price_original;
@@ -141,11 +253,17 @@ export const useCartStore = create(
                     name: product.title || product.name || product.product,
                 };
 
-                // localStorage에 추가
-                cartIds.push(product.id);
-                localStorage.setItem("cartIds", JSON.stringify(cartIds));
+                if (size) {
+                    newProduct.size = size;
+                }
 
-                // cartProducts에 추가
+                // localStorage cartIds 업데이트
+                const cartIds = JSON.parse(localStorage.getItem('cartIds')) || [];
+                if (!cartIds.includes(product.id)) {
+                    cartIds.push(product.id);
+                    localStorage.setItem('cartIds', JSON.stringify(cartIds));
+                }
+
                 const updatedProducts = [...cartProducts, newProduct];
 
                 set({
@@ -153,6 +271,7 @@ export const useCartStore = create(
                     selectedProducts: new Set(updatedProducts.map((p) => p.id)),
                 });
 
+                console.log('✅ 장바구니에 추가 완료:', newProduct);
                 return true;
             },
 
@@ -186,10 +305,9 @@ export const useCartStore = create(
                 const newSelected = new Set(selectedProducts);
                 newSelected.delete(id);
 
-                // localStorage에서도 제거
-                const cartIds = JSON.parse(localStorage.getItem("cartIds")) || [];
+                const cartIds = JSON.parse(localStorage.getItem('cartIds')) || [];
                 const updatedCartIds = cartIds.filter((cartId) => cartId !== id);
-                localStorage.setItem("cartIds", JSON.stringify(updatedCartIds));
+                localStorage.setItem('cartIds', JSON.stringify(updatedCartIds));
 
                 set({
                     cartProducts: newProducts,
@@ -202,18 +320,14 @@ export const useCartStore = create(
                 const { selectedProducts, cartProducts } = get();
 
                 if (selectedProducts.size === 0) {
-                    alert("삭제할 상품을 선택해주세요.");
+                    alert('삭제할 상품을 선택해주세요.');
                     return;
                 }
 
-                const newProducts = cartProducts.filter((p) => !selectedProducts.has(p.id));
-
                 if (window.confirm(`선택한 ${selectedProducts.size}개 상품을 삭제하시겠습니까?`)) {
-                  
-                    // localStorage에서도 삭제
-                    const cartIds = JSON.parse(localStorage.getItem("cartIds")) || [];
+                    const cartIds = JSON.parse(localStorage.getItem('cartIds')) || [];
                     const updatedCartIds = cartIds.filter((id) => !selectedProducts.has(id));
-                    localStorage.setItem("cartIds", JSON.stringify(updatedCartIds));
+                    localStorage.setItem('cartIds', JSON.stringify(updatedCartIds));
 
                     set({
                         cartProducts: cartProducts.filter((p) => !selectedProducts.has(p.id)),
@@ -244,7 +358,6 @@ export const useCartStore = create(
                 });
             },
 
-            // 총 가격 계산
             // 전체 상품 금액 (배송비 제외)
             getSubtotal: () => {
                 const { cartProducts } = get();
@@ -269,11 +382,8 @@ export const useCartStore = create(
             // 전체 최종 금액 (상품금액 + 배송비)
             getTotal: () => {
                 const { cartProducts } = get();
+                if (cartProducts.length === 0) return 0;
 
-                // 장바구니가 비어있으면 총가격 0
-                if (cartProducts.length === 0) {
-                    return 0;
-                }
                 const subtotal = get().getSubtotal();
                 const shipping = get().getShipping();
                 return subtotal + shipping;
@@ -284,10 +394,7 @@ export const useCartStore = create(
                 const { freeShippingThreshold, shippingFee, cartProducts } = get();
                 const selectedSubtotal = get().getSelectedSubtotal();
 
-                // 장바구니가 비어있으면 배송비도 0
-                if (cartProducts.length === 0 || selectedSubtotal === 0) {
-                    return 0;
-                }
+                if (cartProducts.length === 0 || selectedSubtotal === 0) return 0;
 
                 const Shipping = selectedSubtotal >= freeShippingThreshold ? 0 : shippingFee;
                 return selectedSubtotal + Shipping;
@@ -298,7 +405,7 @@ export const useCartStore = create(
                 const { cartProducts } = get();
 
                 if (cartProducts.length === 0) {
-                    alert("장바구니에 상품이 없습니다.");
+                    alert('장바구니에 상품이 없습니다.');
                     return null;
                 }
 
@@ -323,7 +430,7 @@ export const useCartStore = create(
                 const { cartProducts, selectedProducts } = get();
 
                 if (selectedProducts.size === 0) {
-                    alert("주문할 상품을 선택해주세요.");
+                    alert('주문할 상품을 선택해주세요.');
                     return;
                 }
 
@@ -343,20 +450,6 @@ export const useCartStore = create(
                     shipping: get().getShipping(),
                     total: get().getSelectedTotal(),
                 };
-
-                // set({ isOrderComplete: true });
-
-                // setTimeout(() => {
-                //   const newProducts = cartProducts.filter(
-                //     (p) => !selectedProducts.has(p.id)
-                //   );
-                //   set({
-                //     cartProducts: newProducts,
-                //     selectedProducts: new Set(),
-                //     isOrderComplete: false,
-                //   });
-                //   alert(`선택한 ${selectedProducts.size}개 상품만 주문하시겠습니까?`);
-                // }, 1000);
             },
 
             // 선택 상품 선물
@@ -364,15 +457,17 @@ export const useCartStore = create(
                 const { selectedProducts } = get();
 
                 if (selectedProducts.size === 0) {
-                    alert("선물할 상품을 선택해주세요.");
+                    alert('선물할 상품을 선택해주세요.');
                     return;
                 }
 
                 alert(`선택한 ${selectedProducts.size}개 상품을 선물하기 페이지로 이동합니다.`);
             },
 
-            // 장바구니 전체 비우기 (추가 기능)
+            // 장바구니 전체 비우기
             clearCart: () => {
+                localStorage.setItem('cartIds', JSON.stringify([]));
+
                 set({
                     cartProducts: [],
                     selectedProducts: new Set(),
@@ -384,16 +479,20 @@ export const useCartStore = create(
             resetOrderComplete: () => set({ isOrderComplete: false }),
         }),
         {
-            name: "cart-storage",
+            name: 'cart-storage',
             partialize: (state) => ({
                 cartProducts: state.cartProducts,
-                selectedProducts: Array.from(state.selectedProducts), // Set을 배열로 변환
+                selectedProducts: Array.from(state.selectedProducts),
             }),
-            // 로드 시 Set으로 다시 변환
             onRehydrateStorage: () => (state) => {
                 if (state && Array.isArray(state.selectedProducts)) {
                     state.selectedProducts = new Set(state.selectedProducts);
                 }
+                console.log(
+                    '🔄 Zustand persist 복원:',
+                    state?.cartProducts?.length || 0,
+                    '개 상품'
+                );
             },
         }
     )

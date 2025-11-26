@@ -3,12 +3,15 @@ import { useRecentProductsStore } from "../store/recentProductsStore";
 import Title from "../components/Title";
 import "./scss/RecentSidebar.scss";
 
-const RecentSidebar = ({isOpen, onClose}) => {
+const RecentSidebar = ({ isOpen, onClose }) => {
     const { recentProducts, removeProduct, clearAll } = useRecentProductsStore();
 
     const formatPrice = (price, discountPrice) => {
         return new Intl.NumberFormat("ko-KR").format(price);
     };
+
+    // 브라우저 콘솔에서 확인
+    localStorage.getItem("recent-products-storage");
 
     // ESC 키로 닫기
     useEffect(() => {
@@ -117,8 +120,7 @@ const RecentSidebar = ({isOpen, onClose}) => {
                                         </div>
 
                                         <div className='product-actions'>
-                                            {/* <button 
-                className="remove-btn"
+                                            {/* <button  className="remove-btn"
                 onClick={() => removeProduct(product.id)}
                 aria-label="삭제"
               >

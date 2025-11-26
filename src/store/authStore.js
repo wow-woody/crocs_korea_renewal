@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import jibbitzAll from '../data/jibbitzs';
+import jibbitzAll from '../data/jibbitzAll.json';
 
 export const collaboAuthStore = create((set, get) => ({
     //메인//

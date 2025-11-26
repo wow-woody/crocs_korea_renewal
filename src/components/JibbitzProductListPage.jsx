@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { collaboAuthStore } from '../store/collaboAuthStore';
-import Breadcrumbs from './Breadcrumbs';
+import Breadcrumbs from '../components/Breadcrumbs';
 import './scss/JibbitzProductListPage.scss';
 import { useNavigate } from 'react-router-dom';
 
-const JibbitzProductListPage = ({onProductClick}) => {
+const JibbitzProductListPage = () => {
     const {
         jibbitzItems,
         jibbitzFilterList,
@@ -23,22 +23,8 @@ const JibbitzProductListPage = ({onProductClick}) => {
 
     const onOpenProductDetail = (product) => {
         console.log('확인1', product.id);
-        // e.preventDefault();
-
-         // 최근 본 상품에 추가
-        if (onProductClick) {
-            onProductClick({
-                id: product.id,
-                name: product.title,
-                category: '지비츠',
-                price: parseInt(product.price.replace(/[^0-9]/g, '')), // "5,900원" -> 5900
-                image: product.imageUrl,
-                rating: 4.5, // 기본값 (실제 데이터가 있다면 product.rating 사용)
-                reviewCount: 0 // 기본값 (실제 데이터가 있다면 product.reviewCount 사용)
-            });
-        }
-        
         navigate(`/jibbitz/${product.id}`);
+        // e.preventDefault();
     };
 
     const JibbitzLeftNavigation = {
@@ -66,9 +52,9 @@ const JibbitzProductListPage = ({onProductClick}) => {
 
     // 페이징 처리
     const itemsPerPage = 12;
+    const [currentPage, setCurrentPage] = useState(1);
     const list = displayList(selectFilter);
     const totalPage = Math.ceil(displayList.length / itemsPerPage);
-    const [currentPage, setCurrentPage] = useState(1);
     const start = (currentPage - 1) * itemsPerPage;
     const currentItems = list.slice(start, start + itemsPerPage);
 
@@ -77,56 +63,44 @@ const JibbitzProductListPage = ({onProductClick}) => {
         setCurrentPage(pageNum);
     };
 
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [selectFilter]);
-
     return (
         <div className="product_list_wrap">
             <div className="list_left">
                 <div className="left_nav_wrap">
-                     <Breadcrumbs
+                    <Breadcrumbs
                         category={JibbitzLeftNavigation.category}
                         subcategory={JibbitzLeftNavigation.subcategory}
                     />
-                    <div className="breadcrumbs--section">
-                        <ul className="breadcrumbs__list">
-                            <li className="breadcrumbs__list--home">
-                                <a href="/" className="breadcrumbs__list--home_link">
-                                    <img
-                                        src="/images/Sub_Women_Images/icon-home.svg"
-                                        alt="홈 버튼"
-                                    />
-                                </a>
-                            </li>
-                            <li className="breadcrumbs__list--section">
-                                <span>:</span>
-                            </li>
-                            <li className="breadcrumbs__list--women">
-                                <a href="/jibbitz" className="breadcrumbs__list--women_link">
-                                    <span>지비츠</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div className="breadcrumbs__title">
-                            <h2>지비츠</h2>
-                        </div>
-                    </div>
                     <nav className="left_nav">
                         <div className="filter-menu">
                             <div className="filter-menu__wrap menu_wrap-style">
                                 <div className="filter-menu__wrap--title_wrap title--wrap">
                                     <h3 className="filter-menu__wrap--title title">필터</h3>
+                                    {/* <a
+                                        href="#"
+                                        className="filter-menu--title__toggle title--toggle"
+                                    >
+                                        <button>
+                                            <img
+                                                src="/images/Sub_Women_Images/icon-minus.svg"
+                                                alt=""
+                                            />
+                                        </button>
+                                    </a> */}
                                 </div>
                                 <div className="filter_list_menu">
+                                    {/* <ul className="filter-menu__wrap filter-menu__wrap--color"> */}
+                                    {/* <li className="filter-menu__item filter_list_menu"> */}
                                     <button className="filter_menu_btn">
-                                        {selectFilter} 지비츠 참
+                                        {selectFilter}
                                         <img
                                             src="/images/Sub_Women_Images/icon-close_cross.svg"
                                             alt="필터 닫기 버튼"
                                             className="close-btn"
                                         />
                                     </button>
+                                    {/* </li> */}
+                                    {/* </ul> */}
                                 </div>
                             </div>
                         </div>

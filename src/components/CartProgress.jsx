@@ -9,7 +9,7 @@ function CartProgress() {
         //장바구니 페이지
         { id: 1, label: '장바구니', status: 'current' },
         { id: 2, label: '주문결제', status: 'pending' },
-        { id: 3, label: '주문완료', status: 'pending' }
+        { id: 3, label: '주문완료', status: 'pending' },
 
         // 주문완료 페이지
         // { id: 1, label: '장바구니', status: 'completed' },

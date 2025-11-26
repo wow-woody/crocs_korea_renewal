@@ -2,7 +2,7 @@ import React from 'react';
 import GnbLeft from './GnbLeft';
 import GnbRight from './GnbRight';
 
-const GnbWrap = ({ onSearchClick}) => {
+const GnbWrap = ({ onSearchClick }) => {
     return (
         <div className="gnb_wrap">
             <GnbLeft />

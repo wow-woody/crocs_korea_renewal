@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const FooterBottom = () => {
+const FooterBottom = ({ onOpenCS }) => {
     return (
         <>
             <div className="footer_bottom">
                 <div className="wide_inner">
-                    <Link to="/cscenter">CS Center</Link>{' '}
-                    <Link to="/companyinfo">
+                    <button onClick={onOpenCS}>CS Center</button>
+                    <button>
                         <span>INFO</span>
-                    </Link>
+                    </button>
                 </div>
             </div>
         </>

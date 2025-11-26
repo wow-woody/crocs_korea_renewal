@@ -8,14 +8,14 @@ const Monthly = () => {
     const [isActive, setIsActive] = useState(false);
 
     const toggleSlide = () => {
-        setIsActive((prev) => !prev);
+        setIsActive(true); // 클릭하면 오른쪽 패널 active
     };
 
     return (
         <section className="monthly_wrap">
             <div className="inner">
                 <MonthlyLeft />
-                <ButtonWrap onClick={toggleSlide} />
+                <ButtonWrap onClick={toggleSlide} btnText="here!" isActive={isActive} />
                 <MonthlyRight isActive={isActive} />
             </div>
         </section>
