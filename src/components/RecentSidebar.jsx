@@ -52,8 +52,8 @@ const RecentSidebar = ({isOpen, onClose}) => {
 
             <div className={`recent-side-container ${isOpen ? "open" : ""}`}>
                 <div className='recent-inner'>
-                    <div className='recent-side-products'>
-                        <div className='recent-side-productsc'>
+                    <div className='recent-side-products-wrap'>
+                        <div className='recent-side-product'>
                             <Title title='최근 본 상품' />
                             <button className='close-btn' onClick={onClose}>
                                 ✕
