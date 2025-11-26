@@ -3,6 +3,7 @@ import { collaboAuthStore } from '../store/collaboAuthStore';
 import Breadcrumbs from '../components/Breadcrumbs';
 import './scss/JibbitzProductListPage.scss';
 import { useNavigate } from 'react-router-dom';
+import { useRecentProductsStore } from '../store/recentProductsStore'; // 추가!
 
 const JibbitzProductListPage = () => {
     const {
@@ -14,17 +15,31 @@ const JibbitzProductListPage = () => {
         filteredList,
         onFilterBtn,
     } = collaboAuthStore();
+    
     const navigate = useNavigate();
+    const { addProduct } = useRecentProductsStore(); // 추가!
 
     // 상품 불러오기
     useEffect(() => {
         onFetchJibbitz();
     }, []);
 
+    // 상품 클릭 시 최근 본 상품에 추가
     const onOpenProductDetail = (product) => {
         console.log('확인1', product.id);
+        
+        // 최근 본 상품에 추가
+        addProduct({
+            id: product.id,
+            name: product.title,
+            image: product.imageUrl,
+            price: product.price,
+            discountPrice: product.discountPrice || "",
+            originPrice: product.originPrice || "",
+            discount: product.discount || ""
+        });
+        
         navigate(`/jibbitz/${product.id}`);
-        // e.preventDefault();
     };
 
     const JibbitzLeftNavigation = {
@@ -36,15 +51,12 @@ const JibbitzProductListPage = () => {
     // 필터 선택 여부에 따라 표시할 리스트
     const displayList = () => {
         if (selectFilter === '') {
-            // 전체 리스트
             return jibbitzItems;
         }
         if (selectFilter === '싱글' || selectFilter === '팩') {
-            // 싱글/팩 필터
             return filteredList;
         }
         if (selectFilter === '콜라보') {
-            // 콜라보 필터
             return disneyItems;
         }
         return jibbitzItems;
@@ -53,8 +65,8 @@ const JibbitzProductListPage = () => {
     // 페이징 처리
     const itemsPerPage = 12;
     const [currentPage, setCurrentPage] = useState(1);
-    const list = displayList(selectFilter);
-    const totalPage = Math.ceil(displayList.length / itemsPerPage);
+    const list = displayList();
+    const totalPage = Math.ceil(list.length / itemsPerPage); // 수정!
     const start = (currentPage - 1) * itemsPerPage;
     const currentItems = list.slice(start, start + itemsPerPage);
 
@@ -76,21 +88,8 @@ const JibbitzProductListPage = () => {
                             <div className="filter-menu__wrap menu_wrap-style">
                                 <div className="filter-menu__wrap--title_wrap title--wrap">
                                     <h3 className="filter-menu__wrap--title title">필터</h3>
-                                    {/* <a
-                                        href="#"
-                                        className="filter-menu--title__toggle title--toggle"
-                                    >
-                                        <button>
-                                            <img
-                                                src="/images/Sub_Women_Images/icon-minus.svg"
-                                                alt=""
-                                            />
-                                        </button>
-                                    </a> */}
                                 </div>
                                 <div className="filter_list_menu">
-                                    {/* <ul className="filter-menu__wrap filter-menu__wrap--color"> */}
-                                    {/* <li className="filter-menu__item filter_list_menu"> */}
                                     <button className="filter_menu_btn">
                                         {selectFilter}
                                         <img
@@ -99,8 +98,6 @@ const JibbitzProductListPage = () => {
                                             className="close-btn"
                                         />
                                     </button>
-                                    {/* </li> */}
-                                    {/* </ul> */}
                                 </div>
                             </div>
                         </div>
@@ -125,10 +122,11 @@ const JibbitzProductListPage = () => {
                     <ul className="product_list_card_list">
                         {currentItems.map((product) => (
                             <li
+                                key={product.id} // key를 li로 이동!
                                 className="product_list_card"
                                 onClick={() => onOpenProductDetail(product)}
                             >
-                                <div className="product_list_card_imgbox" key={product.id}>
+                                <div className="product_list_card_imgbox">
                                     <img
                                         src={product.imageUrl}
                                         alt={product.title}
