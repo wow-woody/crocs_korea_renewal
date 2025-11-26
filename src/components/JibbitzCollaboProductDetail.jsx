@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { collaboAuthStore } from '../store/collaboAuthStore';
 import { wishListStore } from '../store/wishListStore';
+import { useCartStore } from '../store/useCartStore';
 import Title from '../components/Title';
 import WishAddPopup from '../components/WishAddPopup';
 import JibbitzCollaboProductDetailCard from '../components/JibbitzCollaboProductDetailCard';

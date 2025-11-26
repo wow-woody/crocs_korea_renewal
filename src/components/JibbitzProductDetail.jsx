@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../components/scss/ProductDetail.scss';
 import { collaboAuthStore } from '../store/collaboAuthStore';
 import { wishListStore } from '../store/wishListStore';
+import { useCartStore } from '../store/useCartStore';
 import { useParams } from 'react-router-dom';
 import JibbitzProductImage from '../components/JibbitzProductImage';
 import JibbitzProductInfo from '../components/JibbitzProductInfo';
@@ -10,6 +11,7 @@ const JibbitzProductDetail = () => {
     const { id } = useParams();
     const { disneyItems, jibbitzItems } = collaboAuthStore();
     const { onAddWishList } = wishListStore();
+    const { addProductToCart } = useCartStore();
 
     //찾은 상품을 저장할 변수
     const [product, setProduct] = useState(null);

@@ -97,7 +97,7 @@ export const wishListStore = create((set, get) => ({
             }
         });
 
-        console.log('✅ 새로운 cartWishItems:', newcartWishItems);
+        console.log('새로운 cartWishItems:', newcartWishItems);
 
         // 상태 업데이트
         set({
@@ -109,12 +109,12 @@ export const wishListStore = create((set, get) => ({
         });
     },
 
-    // ✅ cartItems - 상품 상세에서 직접 장바구니 담기용
+    // cartItems - 상품 상세에서 직접 장바구니 담기용
     cartItems: [],
 
-    // ✅ 상품 상세에서 장바구니 담기 메서드
+    // 상품 상세에서 장바구니 담기 메서드
     onProductAddCart: (product, count = 1) => {
-        console.log('🛒 onProductAddCart 호출:', { product, count });
+        console.log('onProductAddCart 호출:', { product, count });
 
         const cartItems = get().cartItems;
         const existing = cartItems.find((item) => item.id === product.id);
@@ -125,19 +125,19 @@ export const wishListStore = create((set, get) => ({
             updated = cartItems.map((item) =>
                 item.id === product.id ? { ...item, count: item.count + count } : item
             );
-            console.log('✅ 기존 상품 수량 증가');
+            console.log('기존 상품 수량 증가');
         } else {
             // 새로운 상품 추가
             updated = [...cartItems, { ...product, count }];
-            console.log('✅ 새 상품 추가');
+            console.log('새 상품 추가');
         }
 
-        console.log('📦 업데이트된 cartItems:', updated);
+        console.log('업데이트된 cartItems:', updated);
 
         set({
             cartItems: updated,
             cartCount: updated.reduce((sum, item) => sum + item.count, 0),
-            popUp: { show: true, message: '장바구니에 담겼습니다! 🛒' },
+            popUp: { show: true, message: '장바구니에 담겼습니다!' },
         });
 
         return true;
