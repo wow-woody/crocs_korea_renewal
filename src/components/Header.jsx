@@ -8,11 +8,7 @@ import Search from './Search';
 import { useCrocsProductStore } from '../store/useCrocsProductStore';
 import { useLocation } from 'react-router-dom';
 
-<<<<<<< HEAD
-const Header = () => {
-=======
 const Header = ({ onCartClick, onRecentClick }) => {
->>>>>>> origin/Chae-A
     const searchOpen = useCrocsProductStore((state) => state.searchOpen);
     const onOpenSearch = useCrocsProductStore((state) => state.onOpenSearch);
     const onCloseSearch = useCrocsProductStore((state) => state.onCloseSearch);

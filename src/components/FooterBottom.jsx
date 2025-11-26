@@ -7,11 +7,7 @@ const FooterBottom = ({ onOpenCS }) => {
             <div className="footer_bottom">
                 <div className="wide_inner">
                     <button onClick={onOpenCS}>CS Center</button>
-<<<<<<< HEAD
-                    <Link to="/companyinfo">
-=======
                     <button>
->>>>>>> origin/Chae-A
                         <span>INFO</span>
                     </button>
                 </div>

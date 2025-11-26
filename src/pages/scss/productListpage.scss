@@ -1,14 +1,10 @@
 @use '../../App.scss' as g;
 
-<<<<<<< HEAD
-.product_list_wrap {
-=======
 .product_list_page {
     .title_wrap {
         margin: 0 auto;
         width: fit-content;
     }
->>>>>>> origin/Chae-A
     .search_info_wrap {
         @include g.flex($jc: center, $gap: 10px);
         width: fit-content;
@@ -39,12 +35,6 @@
         @include g.flex($jc: center, $ai: flex-start);
         margin: 0 auto;
 
-<<<<<<< HEAD
-        // .list_left {
-        // }
-
-=======
->>>>>>> origin/Chae-A
         .list_right {
             // width: 100%;
             .product-card__item_list {

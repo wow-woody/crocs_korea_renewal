@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import Title from '../components/Title';
-=======
 // import Title from '../components/Title';
->>>>>>> origin/Chae-A
 import './scss/brand.scss';
 
 const Brand = () => {
@@ -13,20 +9,13 @@ const Brand = () => {
                 <img src="/images/brand_img_01.png" alt="brand_page_banner" />
             </div>
             <div className="inner">
-<<<<<<< HEAD
-                <Title title="brand" />
-=======
                 {/* <Title title="brand" /> */}
->>>>>>> origin/Chae-A
 
                 <div className="about_crocs_wrap">
                     <div className="img_box">
                         <img src="/images/brand_img_02.png" alt="brand_img" />
                     </div>
                     <div className="text_box">
-<<<<<<< HEAD
-                        <h4 className="about_title">BRAND CROCS</h4>
-=======
                         <h3 className="about_title">BRAND CROCS</h3>
                         <div className="about_text">
                             크록스™ 브랜드는 자신의 성격 및 라이프스타일을 반영하며, 자신의 발에 꼭
@@ -58,7 +47,6 @@ const Brand = () => {
                     </div>
                     <div className="text_box">
                         <h3 className="about_title">About CROCS</h3>
->>>>>>> origin/Chae-A
                         <div className="about_text">
                             미국 콜로라도 볼더에서 소박하면서도 편안한 보트 슈즈로 시작한 크록스™
                             슈즈는 오늘날 수백스타일의 남성용, 여성용, 어린이용 스타일이 전세계에서
@@ -75,8 +63,6 @@ const Brand = () => {
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
                 <div className="about_crocs_wrap">
                     <div className="text_box">
                         <h3 className="about_title">CROCS is</h3>
@@ -115,7 +101,6 @@ const Brand = () => {
                         <img src="/images/brand_img_02.png" alt="brand_img" />
                     </div>
                 </div>
->>>>>>> origin/Chae-A
             </div>
         </div>
     );

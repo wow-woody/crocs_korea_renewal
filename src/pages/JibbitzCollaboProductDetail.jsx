@@ -1,3 +1,5 @@
+'use no memo';
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { collaboAuthStore } from '../store/collaboAuthStore';
@@ -8,18 +10,18 @@ import JibbitzCollaboProductDetailCard from '../components/JibbitzCollaboProduct
 
 const JibbitzCollaboProductDetail = () => {
     const { id } = useParams();
-    const { disneyItems, jibbitzItems } = collaboAuthStore();
+    const { disneyItems } = collaboAuthStore();
     const { onAddWishList } = wishListStore();
 
     //찾은 상품을 저장할 변수
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        if (!id || jibbitzItems.length === 0) return;
+        if (!id || disneyItems.length === 0) return;
         //뿌려질 제품 찾기
-        const findItem = jibbitzItems.find((item) => String(item.id) === String(id));
+        const findItem = disneyItems.find((item) => String(item.id) === String(id));
         setProduct(findItem);
-    }, [id, jibbitzItems]);
+    }, [id, disneyItems]);
 
     if (!product) {
         return <div>상품 정보를 불러오고 있으니 기다리</div>;

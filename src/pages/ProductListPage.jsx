@@ -202,14 +202,8 @@ const ProductListPage = () => {
     return (
         <div className="sub_page">
             <div className="inner">
-<<<<<<< HEAD
-                <Title title={cate?.toUpperCase()} />
-
-                <div className="product_list_wrap">
-=======
                 <div className="product_list_page">
                     <Title title={cate?.toUpperCase()} />
->>>>>>> origin/Chae-A
                     {/* 검색결과 */}
                     {searchWord && (
                         <div className="search_info_wrap">

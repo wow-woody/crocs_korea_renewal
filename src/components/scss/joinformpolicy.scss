@@ -1,11 +1,10 @@
 @use '../../App.scss' as g;
 
 .policy_wrap {
+    grid-column: 2/3;
+    grid-row: 1;
     .policy_top {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding: 0.8rem 0 0.8rem;
+        margin-bottom: 2rem;
         font-weight: 600;
     }
     .policy_middle {
@@ -32,21 +31,6 @@
                 // background: url(../../assets/images/icon-arrow-down.svg) no-repeat center center;
                 cursor: pointer;
                 line-height: 1.6rem;
-            }
-            .terms_text,
-            .privacy_text,
-            .option_text {
-                grid-column: 2/3;
-                grid-row: 2;
-                width: 100%;
-                max-height: 20rem;
-                margin-top: 2rem;
-                overflow-y: auto;
-                white-space: normal;
-                padding: 2rem;
-                border: 0.1rem solid #eee;
-                border-radius: 1rem;
-                font-size: 1.4rem;
             }
         }
     }

@@ -16,7 +16,7 @@ export const useNewProductStore = create((set, get) => ({
             const cateLower = product.cate.toLowerCase();
             return cateLower.includes('신상품') || cateLower.includes('출시 예정');
         });
-        // console.log(`전체상품: ${Products.length}, 신상품 출시예정 상품: ${filteredProuducts.length}`);
+        // console.log(`전체상품: ${Prouducts.length}, 신상품 출시예정 상품: ${filteredProuducts.length}`);
 
         set({ items: filteredProuducts });
     },

@@ -1220,11 +1220,6 @@ export const Products = [
             'rgb(150, 115, 89)',
             'rgb(230, 202, 193',
         ],
-<<<<<<< HEAD
-        price: '',
-        price_dc_rate: '49,900',
-=======
->>>>>>> origin/Chae-A
         'price_~': '~',
         price_dc_2: '',
         rating: '/images/icon_start.svg',
@@ -1263,11 +1258,6 @@ export const Products = [
             'rgb(249, 249, 249)',
             'rgb(151, 143, 123',
         ],
-<<<<<<< HEAD
-        price: '',
-        price_dc_rate: '56,900',
-=======
->>>>>>> origin/Chae-A
         'price_~': '~',
         price_dc_2: '',
         rating: '/images/icon_start.svg',
@@ -1287,11 +1277,6 @@ export const Products = [
             'rgb(179, 163, 155)',
             'rgb(250, 213, 220',
         ],
-<<<<<<< HEAD
-        price: '',
-        price_dc_rate: '49,900 (44%)',
-=======
->>>>>>> origin/Chae-A
         'price_~': '',
         price_dc_2: '',
         rating: '/images/icon_start.svg',
@@ -1351,11 +1336,6 @@ export const Products = [
             'rgb(191, 203, 215)',
             'rgb(248, 238, 237',
         ],
-<<<<<<< HEAD
-        price: '',
-        price_dc_rate: '55,900 (41%)',
-=======
->>>>>>> origin/Chae-A
         'price_~': '',
         price_dc_2: '',
         rating: '/images/icon_start.svg',
