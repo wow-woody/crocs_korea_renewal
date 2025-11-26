@@ -3,9 +3,9 @@ import Title from '../components/Title';
 import UserInfoTop from '../components/UserInfoTop';
 import './scss/userinfo.scss';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import WishListCard from '../components/WishListCard';
+// import WishListCard from '../components/WishListCard';
 import { wishListStore } from '../store/wishListStore';
-import OrderHistoryCard from '../components/OrderHistoryCard';
+// import OrderHistoryCard from '../components/OrderHistoryCard';
 import OrderState from '../components/OrderState';
 
 const UserInfo = () => {

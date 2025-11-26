@@ -1,7 +1,7 @@
 @use '../../App.scss' as g;
 
 .product_list_wrap {
-    @include g.flex($ai: unset);
+    @include g.flex($ai: unset, $jc: unset);
     .list_left {
         .left_nav_wrap {
             color: g.$subColor;
@@ -16,6 +16,7 @@
             border-radius: 1rem;
             background-color: #fafafd;
             .filter-menu__wrap {
+                gap: 2rem;
             }
             .filter_list_menu {
                 width: 100%;

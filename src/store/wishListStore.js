@@ -128,7 +128,7 @@ export const wishListStore = create((set, get) => ({
         } else {
             updated = [...cartItems, { ...product, count }];
         }
-
+        console.log(cartItems);
         set({
             cartItems: updated,
             cartCount: updated.reduce((sum, item) => sum + item.count, 0),

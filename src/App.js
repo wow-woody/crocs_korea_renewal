@@ -17,7 +17,7 @@ import Nonmember from './pages/Nonmember';
 import ComeAsPopup from './components/ComeAsPopup';
 import { useEffect } from 'react';
 import { loginAuthStore } from './store/loginStore';
-import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
+// import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
 // import Order from './components/Order/Order';
 import WishList from './pages/WishList';
 import OrderHistory from './pages/OrderHistory';
@@ -66,7 +66,7 @@ function App() {
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/nonmember" element={<Nonmember />} />
                 <Route path="/comaspopup" element={<ComeAsPopup />} />
-                <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} />
+                {/* <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} /> */}
                 <Route path="/wishlist" element={<WishList />} />
                 <Route path="/orderhistory" element={<OrderHistory />} />
                 <Route path="/cart" element={<Cart />} />
@@ -75,7 +75,9 @@ function App() {
                 <Route path="/wishlist" element={<WishList />} />
                 <Route path="/orderhistory" element={<OrderHistory />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/:cate/:subcategory?" element={<ProductListPage />} />
+                {/* <Route path="/:cate/:subcategory?" element={<ProductListPage />} />
+                 */}
+                {/* <Route path="/:cate" element={<ProductListPage />} /> */}
                 {/* <Route path="/cscenter" element={<CustomerService />} /> */}
                 <Route path="/product/:id" element={<CrocsProductDetail />} />
                 <Route path="/store" element={<StoreLocator />} />

@@ -8,9 +8,11 @@ const Join = () => {
     return (
         <div className="sub_page">
             <div className="inner">
-                <Title title="Join" />
-                <LoginSns />
-                <JoinForm />
+                <div className="join_wrap">
+                    <Title title="Join" />
+                    <LoginSns />
+                    <JoinForm />
+                </div>
             </div>
         </div>
     );

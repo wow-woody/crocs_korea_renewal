@@ -22,6 +22,55 @@ export const useCartStore = create(
             freeShippingThreshold: 30000,
             shippingFee: 2500,
 
+            // 위시리스트 cartWishList + 장바구니 cartItems 합치기
+            mergeCartData: (products, cartItems) =>
+                set((state) => {
+                    if (!cartItems || cartItems.length === 0) return {};
+
+                    const merged = [...state.cartProducts];
+
+                    cartItems.forEach((item) => {
+                        const exists = merged.find((p) => p.id === item.id && p.size === item.size);
+                        // const p = item.price
+                        //     ? Number(item.price.replace(/,/g, ''))
+                        //     : Number((item['price_~'] || '0').replace(/,/g, ''));
+                        const p = item.price
+                            ? Number(item.price.replace(/,/g, '')) // 기존 가격 (절대 변경 X)
+                            : item.prices && item.prices.length > 0
+                            ? Number(
+                                  (item.prices[1] || item.prices[0] || '0')
+                                      .toString()
+                                      .replace(/,/g, '')
+                              )
+                            : 0;
+
+                        if (exists) {
+                            // 이미 있으면 수량만 증가
+                            exists.quantity += item.quantity || 1;
+                        } else {
+                            // 새 제품이면 구조 변환 후 push
+                            merged.push({
+                                id: item.id,
+                                name: item.title,
+                                price: p,
+                                // product_img:
+                                //     (item.imageUrl ? item.imageUrl[0] : '') ||
+                                //     (item.product_img ? item.product_img[0] : ''),
+                                product_img:
+                                    (Array.isArray(item.imageUrl) && item.imageUrl[0]) ||
+                                    (Array.isArray(item.product_img)
+                                        ? item.product_img[0]
+                                        : item.product_img) ||
+                                    '',
+                                quantity: item.quantity || 1,
+                                size: item.size || null,
+                            });
+                        }
+                    });
+
+                    return { cartProducts: merged };
+                }),
+
             // 초기화 -  localstorage에서 불러오기
             initializeCart: (Products, wishCartItems = []) => {
                 const { cartProducts } = get();
@@ -75,6 +124,7 @@ export const useCartStore = create(
                     const price_original = parsePrice(item.price);
                     return {
                         ...item,
+                        id: item.id,
                         quantity: item.count || 1,
                         price: price_dc > 0 ? price_dc : price_original,
                         product_img: item.imageUrl || item.product_img,
@@ -130,16 +180,6 @@ export const useCartStore = create(
                 }
             },
 
-            //여기 장바구니 팝업 초원 추가//
-            // 장바구니 팝업
-            popUp: {
-                show: false,
-                message: '',
-            },
-
-            // 장바구니 팝업 닫기
-            hidePopup: () => set({ popUp: { show: false, message: '' } }),
-
             // 상품 직접 추가 (새로운 기능)
             addProduct: (product, quantity = 1, size = null) => {
                 const { cartProducts } = get();
@@ -161,10 +201,7 @@ export const useCartStore = create(
 
                     set({
                         cartProducts: [...cartProducts, newProduct],
-                        //여기 장바구니 팝업 초원 추가//
-                        popUp: { show: true, message: '장바구니에 담겼습니다! 💚' },
                     });
-                    console.log('🛒 CartProducts:', get().cartProducts);
                 }
             },
 

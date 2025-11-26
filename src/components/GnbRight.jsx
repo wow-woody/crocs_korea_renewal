@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginAuthStore } from '../store/loginStore';
 
 const GnbRight = ({ onSearchClick }) => {
@@ -25,9 +25,9 @@ const GnbRight = ({ onSearchClick }) => {
                 )}
             </li>
             <li>
-                <button className="cart_btn">
+                <Link to="/cart" className="cart_btn">
                     <img src="/images/cart_icon.svg" alt="cart_icon" />
-                </button>
+                </Link>
             </li>
         </ul>
     );

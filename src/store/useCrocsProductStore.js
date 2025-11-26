@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Products } from '../data/CrocsProductsData';
-// import { getCategoryMap } from '../utils/getCategoryMap';
+import { getCategoryMap } from '../utils/getCategoryMap';
 
 // 🔥 스토어 버전
 const STORE_VERSION = 4;
@@ -68,6 +68,10 @@ export const useCrocsProductStore = create(
             // ============================================
             // 📦 제품 관련 상태
             // ============================================
+            crocsItems: [],
+            categoryMap: getCategoryMap(),
+            version: STORE_VERSION,
+
             // 필터 상태
             colorFilter: null,
             selectedCategory: null,
@@ -322,6 +326,7 @@ export const useCrocsProductStore = create(
                         inputText: '',
                         searchOpen: false,
                         recentSearches: persistedState?.recentSearches || [],
+                        categoryMap: getCategoryMap(),
                         version: STORE_VERSION,
                         colorFilter: null,
                         selectedCategory: null,

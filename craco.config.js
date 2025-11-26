@@ -1,8 +1,8 @@
-module.exports = {
-    babel: {
-        plugins: [require.resolve('babel-plugin-react-compiler')],
-    },
-};
+// module.exports = {
+//     babel: {
+//         plugins: [require.resolve('babel-plugin-react-compiler')],
+//     },
+// };
 
 // module.exports = {
 //     babel: {
