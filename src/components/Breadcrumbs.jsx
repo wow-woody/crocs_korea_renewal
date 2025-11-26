@@ -6,12 +6,24 @@ export default function Breadcrumbs({ category, subcategory }) {
     const navigate = useNavigate();
 
     const handleClose = () => {
-        if (subcategory) {
-            // 서브카테고리가 있으면 메인 카테고리로 이동
-            navigate(`/${category}`);
+        // Jibbitz 페이지인 경우
+        if (category?.toLowerCase() === 'jibbitz') {
+            if (subcategory && subcategory.toLowerCase() !== 'all') {
+                // 서브카테고리가 있고 All이 아니면 All 페이지로
+                navigate('/jibbitz/all');
+            } else {
+                // All 페이지이거나 서브카테고리 없으면 홈으로
+                navigate('/');
+            }
         } else {
-            // 서브카테고리가 없으면 홈으로 이동
-            navigate('/');
+            // 일반 카테고리 페이지
+            if (subcategory) {
+                // 서브카테고리가 있으면 메인 카테고리로 이동
+                navigate(`/${category}`);
+            } else {
+                // 서브카테고리가 없으면 홈으로 이동
+                navigate('/');
+            }
         }
     };
 

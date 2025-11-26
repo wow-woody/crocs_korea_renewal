@@ -57,9 +57,9 @@ function App() {
                 <Route path="/join" element={<Join />} />
 
                 {/* 지비츠 리스트 + 상세 */}
-                <Route path="/jibbitz" element={<JibbitzProductListPage />} />
-                <Route path="/jibbitz/:filter" element={<JibbitzProductListPage />} />
                 <Route path="/jibbitz/detail/:id" element={<JibbitzProductDetail />} />
+                <Route path="/jibbitz/:filter" element={<JibbitzProductListPage />} />
+                <Route path="/jibbitz" element={<JibbitzProductListPage />} />
 
                 {/* 상품 페이지 */}
                 <Route path="/:cate/:subcategory?" element={<ProductListPage />} />
