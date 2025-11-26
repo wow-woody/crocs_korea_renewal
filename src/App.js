@@ -47,7 +47,10 @@ import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
 import WishList from './pages/WishList';
 import OrderHistory from './pages/OrderHistory';
 import ProductDetail from './pages/ProductDetail';
+<<<<<<< HEAD
 >>>>>>> 7d4862a (2025-11-26(수)  워크 트리 머지 - v01)
+=======
+>>>>>>> 138ae27786ad15781f30dd6515dbd1fddf69a230
 
 function App() {
     const { user, loading, checkSession, initAuthListener } = loginAuthStore();

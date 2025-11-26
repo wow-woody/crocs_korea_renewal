@@ -59,6 +59,7 @@ const ProductInfo = () => {
                     <div className="product-info__color-badge-wrap" role="group" aria-label="색상 선택">
                         {colors.map((color) => (
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <button
                                 key={color.id}
                                 type="button"
@@ -240,6 +241,8 @@ const ProductInfo = () => {
                         {colors.map((color) => (
 =======
 >>>>>>> 664d07f (2025-11-21(금) 워크트리 정우 - 머지 - v03)
+=======
+>>>>>>> 138ae27786ad15781f30dd6515dbd1fddf69a230
                             <button 
                                 key={color.id} 
                                 type="button"

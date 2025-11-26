@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 .App {
     /* text-align: center; */
     overflow: hidden;
@@ -7,6 +8,10 @@
 html {
   font-size: 10px;
 >>>>>>> 27d0dd3 (2025-11-16(일) 임시 커밋 v03)
+=======
+html {
+  font-size: 10px;
+>>>>>>> 138ae27786ad15781f30dd6515dbd1fddf69a230
 }
 
 body {

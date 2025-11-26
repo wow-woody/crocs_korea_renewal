@@ -10,6 +10,7 @@
     border-radius: 10px;
     padding: 2rem 2rem;
 <<<<<<< HEAD
+<<<<<<< HEAD
     // transition: all 0.3s ease;
 
     .product-card__color,
@@ -27,10 +28,14 @@
 =======
     transition: all 0.3s ease;
 >>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
+=======
+    transition: all 0.3s ease;
+>>>>>>> 138ae27786ad15781f30dd6515dbd1fddf69a230
 
     &:hover {
         outline: 1px solid #cccccc;
         box-shadow: 0 0 12px 2.5px rgba(0, 0, 0, 0.08);
+<<<<<<< HEAD
 <<<<<<< HEAD
         // transform: translateY(-0.4rem);
 
@@ -45,6 +50,9 @@
 <<<<<<< HEAD
 >>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
 =======
+=======
+        transform: translateY(-0.4rem);
+>>>>>>> 138ae27786ad15781f30dd6515dbd1fddf69a230
         
         .product-card__color,
         .product-card__size {
@@ -52,7 +60,10 @@
             opacity: 1;
             margin-top: 0;
         }
+<<<<<<< HEAD
 >>>>>>> ab0e3cd (2025-11-17(월) 아이템 카드 스르륵 효과 추가)
+=======
+>>>>>>> 138ae27786ad15781f30dd6515dbd1fddf69a230
     }
 
     &__img_info_wrap {
@@ -61,10 +72,14 @@
         height: fit-content;
         background-color: #fff;
 <<<<<<< HEAD
+<<<<<<< HEAD
         border-radius: 0.8rem;
 =======
         border-radius: 0.80rem;
 >>>>>>> 680e991 (2025-11-17(월) 스와이퍼 적용 완료 - v02)
+=======
+        border-radius: 0.80rem;
+>>>>>>> 138ae27786ad15781f30dd6515dbd1fddf69a230
         display: flex;
         flex-direction: column;
         align-items: center;
