@@ -8,29 +8,18 @@ export const useRecentProductsStore = create(
       recentProducts: [],
 
       // 상품 추가 (최근 본 상품에 추가)
-      addProduct: (product) => {
-        set((state) => {
-          const exists = state.recentProducts.find(p => p.id === product.id);
-          
-          if (exists) {
-            // 이미 있는 상품이면 맨 앞으로 이동하고 시간 업데이트
-            return {
-              recentProducts: [
-                { ...product, viewedAt: new Date().toISOString() },
-                ...state.recentProducts.filter(p => p.id !== product.id)
-              ]
-            };
-          } else {
-            // 새 상품이면 맨 앞에 추가 (최대 50개까지만 저장)
-            return {
-              recentProducts: [
-                { ...product, viewedAt: new Date().toISOString() },
-                ...state.recentProducts
-              ].slice(0, 50)
-            };
-          }
-        });
-      },
+      addProduct: (product) =>  set((state) => {
+        // 이미 존재하는 상품이면 제거 후 맨 앞에 추가
+        const filtered = state.recentProducts.filter(p => p.id !== product.id);
+        const newProduct = {
+          ...product,
+          viewedAt: new Date().toISOString()
+        };
+        // 최대 20개까지만 저장
+        return {
+          recentProducts: [newProduct, ...filtered].slice(0, 20)
+        };
+      }),
 
       // 상품 삭제
       removeProduct: (productId) => {
