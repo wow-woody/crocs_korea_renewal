@@ -12,6 +12,7 @@ const MainInstagram = () => {
     const videoRef3 = useRef(null);
 
     const videoRefs = [videoRef1, videoRef2, videoRef3];
+
     const [playStates, setPlayStates] = useState([false, false, false]);
 
     // 비디오 재생/정지 핸들러

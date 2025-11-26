@@ -1,28 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchStore } from '../store/useSearchStore';
-import { Link } from 'react-router-dom';
-
-const hashtags = [
-    '신상',
-    '라인드 클로그',
-    '레이',
-    '주토피아',
-    '지비츠',
-    '베이 크록스',
-    '아이브',
-    '르세라핌',
-    '장 폴 고티에',
-    '샤몬 로샤',
-    '도라에몽',
-    '언퍼게터블',
-    '클래식 플랫폼 클로그',
-    '에코 웨이브',
-    '태민',
-    '발레리나 플랫폼',
-    '트레일브레이크',
-    '하이드라 클로그',
-    '잔망루피',
-];
+import { useCrocsProductStore } from '../store/useCrocsProductStore';
+import { useNavigate } from 'react-router-dom';
 
 // 배열 섞기 함수
 const shuffleTag = (tag) => {
@@ -36,13 +14,58 @@ const shuffleTag = (tag) => {
 };
 
 const SearchLeft = () => {
-    const { recentSearches, onRemoveSearch, onClearAll } = useSearchStore();
+    const {
+        recentSearches,
+        onRemoveSearch,
+        onClearAll,
+        setSearchWord,
+        onCloseSearch,
+        onAddRecentSearches,
+        getHashtags, // ⬅️ store에서 가져옴
+        crocsItems,
+    } = useCrocsProductStore();
+
+    const navigate = useNavigate();
+
     const [randomTags, setRandomTags] = useState([]);
 
+    // 🚀 crocsItems가 로딩된 이후에만 해시태그 만들기
     useEffect(() => {
+        if (!crocsItems || crocsItems.length === 0) {
+            console.log('제품 데이터 없음'); // 🔍
+            return;
+        }
+
+        const hashtags = getHashtags();
+        if (!hashtags || hashtags.length === 0) return;
+
         const shuffled = shuffleTag(hashtags).slice(0, 6);
         setRandomTags(shuffled);
-    }, []);
+    }, [crocsItems, getHashtags]); // ← 핵심: crocsItems가 바뀔 때만 실행됨
+
+    // 최근 검색어 클릭 핸들러
+    const handleRecentSearchClick = (searchText) => {
+        // 1. 검색어 설정하여 제품 필터링
+        setSearchWord(searchText);
+
+        // 2. 최근 검색어에 재추가 (최상단으로 이동)
+        onAddRecentSearches(searchText);
+    };
+
+    // 해시태그 클릭 핸들러
+    const handleHashtagClick = (hashtag) => {
+        // 1. 검색어 설정하여 제품 필터링
+        setSearchWord(hashtag);
+
+        // 2. 최근 검색어에 추가
+        // onAddRecentSearches(hashtag);
+
+        // 3. 검색 모달 닫기
+        onCloseSearch();
+
+        // 4. 검색 결과 페이지로 이동
+        navigate(`/all?search=${encodeURIComponent(hashtag)}`);
+    };
 
     return (
         <>
@@ -52,7 +75,12 @@ const SearchLeft = () => {
                     {recentSearches.length > 0 ? (
                         recentSearches.map((search) => (
                             <li key={search.id}>
-                                <Link to="*">{search.inputText}</Link>
+                                <p
+                                    className="search_text"
+                                    onClick={() => handleRecentSearchClick(search.inputText)}
+                                >
+                                    {search.inputText}
+                                </p>
                                 <button onClick={() => onRemoveSearch(search.id)}>x</button>
                             </li>
                         ))
@@ -70,15 +98,14 @@ const SearchLeft = () => {
             <div className="hashtag_wrap">
                 <h4 className="hashtag"># HASHTAG</h4>
                 <div className="hashtag_list">
-                    {/* {hashtags.map((hashtag) => (
-                        <span className="tag">
-                            <Link to="*">{`# ${hashtag}`}</Link>
-                        </span>
-                    ))} */}
                     {randomTags.map((hashtag, id) => (
-                        <span className="tag" key={id}>
-                            <Link to="*">{`# ${hashtag}`}</Link>
-                        </span>
+                        <button
+                            className="tag"
+                            key={id}
+                            onClick={() => handleHashtagClick(hashtag)}
+                        >
+                            {`# ${hashtag.toUpperCase()}`}
+                        </button>
                     ))}
                 </div>
             </div>

@@ -9,6 +9,7 @@
         @include g.flex($fd: column);
 
         .title_wrap {
+            margin-top: 11rem;
             text-align: center;
             @include g.flex($fd: column);
         }
@@ -16,7 +17,7 @@
 
     // 카테고리 리스트
     &__list {
-        margin-top: 5rem;
+        // margin-top: 5rem;
         &-items {
             @include g.flex();
             // margin-top: 5rem;
@@ -66,7 +67,7 @@
 
     // 프로모션 섹션
     &__promotions {
-        margin-top: 5rem;
+        // margin-top: 5rem;
         margin-bottom: 12rem;
     }
 

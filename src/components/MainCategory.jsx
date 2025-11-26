@@ -23,7 +23,7 @@ const MainCategory = () => {
     };
 
     return (
-        <main>
+       
             <section className="category category_wrap">
                 <div className="inner">
                     <Title
@@ -37,7 +37,7 @@ const MainCategory = () => {
                     />
                 </div>
             </section>
-        </main>
+
     );
 };
 

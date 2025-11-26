@@ -18,16 +18,16 @@ const FooterContents = () => {
             <div className="footer_right">
                 <div className="sns_img_box">
                     <p>
-                        <img src="./images/icon-insta.png" alt="" />
+                        <img src="/images/icon-insta.png" alt="" />
                     </p>
                     <p>
-                        <img src="./images/icon-youtube.png" alt="" />
+                        <img src="/images/icon-youtube.png" alt="" />
                     </p>
                     <p>
-                        <img src="./images/icon-facebook.png" alt="" />
+                        <img src="/images/icon-facebook.png" alt="" />
                     </p>
                     <p>
-                        <img src="./images/icon-earth.png" alt="" />
+                        <img src="/images/icon-earth.png" alt="" />
                     </p>
                 </div>
                 <div className="copy-text">© 2025 Crocs Retail, LLC</div>

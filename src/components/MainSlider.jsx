@@ -11,7 +11,7 @@ const MainSlider = () => {
         { id: 1, src: './video/main_slide_01.mp4', tag: 'video', title: "Rei's Bay Clog" },
         {
             id: 2,
-            src: './images/main_slide_02.jpg',
+            src: '/images/main_slide_02.jpg',
             alt: 'slide2',
             tag: 'img',
             title: 'Crocs x Vogue',
@@ -24,7 +24,7 @@ const MainSlider = () => {
         },
         {
             id: 4,
-            src: './images/main_slide_04.jpg',
+            src: '/images/main_slide_04.jpg',
             alt: 'slide4',
             tag: 'img',
             title: 'Crocs x ABC MART with SEULGI',

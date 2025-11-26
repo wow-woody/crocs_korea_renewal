@@ -4,12 +4,15 @@ import FooterContents from './FooterContents';
 import FooterBottom from './FooterBottom';
 import './scss/Footer.scss';
 
-const Footer = () => {
+const Footer = ({ onOpenCS }) => {
     return (
         <footer>
-            <FooterTitle />
-            <FooterContents />
-            <FooterBottom />
+            <div className="footer_top">
+                <FooterTitle />
+                <FooterContents />
+            </div>
+
+            <FooterBottom onOpenCS={onOpenCS} />
         </footer>
     );
 };

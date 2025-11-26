@@ -1,7 +1,12 @@
 import React from 'react';
 import './scss/WomenComponents.scss';
 
-export default function WomenFilterMenu({ filters = [{ color: 'pink', class: 'select-pink' }, { color: 'black', class: 'select-black' }] }) {
+export default function FilterMenu({
+    filters = [
+        { color: 'pink', class: 'select-pink' },
+        { color: 'black', class: 'select-black' },
+    ],
+}) {
     return (
         <div className="filter-menu">
             <div className="filter-menu__wrap menu_wrap-style">
@@ -18,7 +23,11 @@ export default function WomenFilterMenu({ filters = [{ color: 'pink', class: 'se
                         <li key={index} className="filter-menu__item">
                             <div className={`filter-menu__select_color ${filter.class}`}></div>
                             <a href="#" className="filter-menu__close-link">
-                                <img src="/images/Sub_Women_Images/icon-close_cross.svg" alt="필터 닫기 버튼" className="close-btn" />
+                                <img
+                                    src="/images/Sub_Women_Images/icon-close_cross.svg"
+                                    alt="필터 닫기 버튼"
+                                    className="close-btn"
+                                />
                             </a>
                         </li>
                     ))}

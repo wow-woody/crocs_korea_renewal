@@ -1,0 +1,13 @@
+@use '../../App.scss' as g;
+
+.user_btn_wrap {
+    .user_home_btn {
+        padding: 0 !important;
+        background: g.$mainColor;
+        color: g.$subColor;
+        &:hover {
+            background: g.$subColor;
+            color: g.$mainColor;
+        }
+    }
+}

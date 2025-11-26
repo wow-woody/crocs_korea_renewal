@@ -1,24 +1,14 @@
-import React, { useState } from 'react';
-import PriceRange from './PriceRange';
-import './scss/WomenComponents.scss';
+import React from 'react';
 
-export default function WomenPriceMenu({ onPriceSelect }) {
-    const [activeRange, setActiveRange] = useState(null);
-    
+const PriceMenu = () => {
     const priceRanges = [
-        { min: 0, max: 20000 },
-        { min: 20000, max: 40000 },
-        { min: 40000, max: 60000 },
-        { min: 60000, max: 80000 },
-        { min: 80000, max: 100000 },
-        { min: 100000, max: null }
+        '0 ~ 20,000',
+        '20,000 ~ 40,000',
+        '40,000 ~ 60,000',
+        '60,000 ~ 80,000',
+        '80,000 ~ 100,000',
+        '100,000 ~'
     ];
-
-    const handlePriceClick = (range) => {
-        const rangeKey = `${range.min}-${range.max}`;
-        setActiveRange(rangeKey);
-        onPriceSelect && onPriceSelect(range);
-    };
 
     return (
         <div className="price-menu">
@@ -32,17 +22,17 @@ export default function WomenPriceMenu({ onPriceSelect }) {
                     </a>
                 </div>
                 <ul className="price-menu__wrap price-menu__wrap--price-range">
-                    {priceRanges.map((range, index) => (
-                        <PriceRange
-                            key={index}
-                            min={range.min}
-                            max={range.max}
-                            isActive={activeRange === `${range.min}-${range.max}`}
-                            onClick={handlePriceClick}
-                        />
+                    {priceRanges.map((price, index) => (
+                        <li key={index} className="price-menu__item">
+                            <a href="#" className="price-menu__link btn-menu-style">
+                                <button className="price-menu__button btn-menu__button">{price}</button>
+                            </a>
+                        </li>
                     ))}
                 </ul>
             </div>
         </div>
     );
-}
+};
+
+export default PriceMenu;

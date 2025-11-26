@@ -21,11 +21,18 @@ html {
     font-size: 10px;
     // font-family: 'Paperlogy', '돋움', sans-serif;
     // 폰트 바꿔야 함.
+    scroll-snap-type: y mandatory;
 }
 
 body {
     font-size: 1.6rem;
     color: #222;
+    margin: 0;
+}
+
+// 메인에서 스크롤바숨기기
+body.no-scroll {
+    overflow: hidden;
 }
 
 .wide_inner {
@@ -45,7 +52,8 @@ body {
 
 section {
     height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
+    // height: calc(var(--vh, 1vh) * 100);
+    scroll-snap-align: start;
 }
 
 .section_title {

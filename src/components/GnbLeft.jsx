@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const gnbMenus = [
-    { key: 'promotion', label: 'PROMOTION' },
+    { key: 'store', label: 'STORE' },
     { key: 'brand', label: 'BRAND' },
 ];
 
