@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MainmenuList from "./MainmenuList";
-import "./scss/header.scss";
+import './scss/header.scss';
+import './scss/CartSidebar.scss';
+import './scss/RecentSidebar.scss';
 import GnbWrap from "./GnbWrap";
 import Depth1 from "./Depth1";
 import Search from "./Search";
 import { useSearchStore } from "../store/useSearchStore";
 
 const Header = ({ onCartClick, onRecentClick }) => {
-    // const [searchOpen, setSearchOpen] = useState(false);
     const searchOpen = useSearchStore((state) => state.searchOpen);
     const onOpenSearch = useSearchStore((state) => state.onOpenSearch);
     const onCloseSearch = useSearchStore((state) => state.onCloseSearch);

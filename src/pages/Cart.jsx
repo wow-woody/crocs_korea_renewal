@@ -184,13 +184,13 @@ function Cart() {
                         <span className='price'>
                           {formatPrice(product.price * product.quantity)}원
                         </span>
-                        <button
+                        {/* <button
                           className='remove-btn'
                           onClick={() => handleRemoveProduct(product.id)}
                           title='상품 삭제'
                         >
                           ✕
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>

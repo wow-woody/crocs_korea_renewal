@@ -12,7 +12,7 @@ import Promotion from "./pages/Promotion";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
 import Cart from "./pages/Cart";
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 import Header from "./components/Header";
 import CrocsClubPopup from "./components/CrocsClubPopup";
 import UserInfo from "./UserInfo";

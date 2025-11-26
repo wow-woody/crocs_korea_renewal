@@ -44,7 +44,7 @@ function OrderSummary({
                 >
                   -
                 </button>
-                <span className="quantity-display">수량: {product.quantity}</span>
+                <span className="quantity-display">{product.quantity}</span>
                 <button 
                   className="quantity-btn"
                   onClick={() => onIncreaseQuantity(product.id)}
