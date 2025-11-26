@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import { create } from 'zustand';
 // import { auth, db, googleProvider } from '../firebase/firebase';
 // import {
@@ -189,6 +190,8 @@
 //     },
 // }));
 
+=======
+>>>>>>> origin/Chae-A
 import { create } from 'zustand';
 import { auth, db, googleProvider } from '../firebase/firebase';
 import {

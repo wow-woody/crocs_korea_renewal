@@ -29,7 +29,6 @@ export const wishListStore = create((set, get) => ({
     },
 
     // 위시 추가 팝업창 끄기
-
     hidePopup: () => set({ popUp: { show: false, message: '' } }),
 
     // ======== 위시리스트 데이터 삭제 ========
@@ -38,7 +37,6 @@ export const wishListStore = create((set, get) => ({
     removeWish: [],
 
     // 체크박스 체크했을 때 담기
-
     toggleRemoveWish: (item) => {
         const currentWish = get().removeWish;
         const findSelectWish = currentWish.find((w) => w.id === item.id);
@@ -55,10 +53,13 @@ export const wishListStore = create((set, get) => ({
     },
 
     onRemoveWish: () => {
+<<<<<<< HEAD
         // console.log('위시삭제');
         // const wish = get().removeWish;
         // const updateWish = wish.filter((wish) => wish.id !== item.id);
         // set({ removeWish: updateWish });
+=======
+>>>>>>> origin/Chae-A
         console.log('위시삭제');
         const removeWish = get().removeWish;
         console.log('removeWish 선택된 위시:', removeWish);
@@ -70,6 +71,86 @@ export const wishListStore = create((set, get) => ({
         );
 
         set({ wishLists: updateWishLists, removeWish: [] });
+<<<<<<< HEAD
+=======
+    },
+
+    addCartWish: [],
+    cartWishItems: [],
+    cartCount: 0,
+
+    //장바구니 추가 버튼 선택 시 위시리스트에서 지우고 장바구니 배열에 추가
+    onAddCartBtn: () => {
+        // 체크된 위시들을 배열로 가져옴
+        const removeWish = get().removeWish;
+        // 전체 위시리스트
+        const wishLists = get().wishLists;
+        // 현재 장바구니 목록
+        const cartWishItems = get().cartWishItems;
+
+        console.log('🛒 장바구니 추가 버튼:', { removeWish, wishLists, cartWishItems });
+
+        // 위시리스트에서 선택된 항목 제거
+        const newWishLists = wishLists.filter((wish) => !removeWish.some((r) => r.id === wish.id));
+
+        // 장바구니에 선택된 항목 추가
+        const newcartWishItems = [...cartWishItems];
+
+        removeWish.forEach((item) => {
+            const existing = newcartWishItems.find((cart) => cart.id === item.id);
+
+            if (existing) {
+                existing.count = (existing.count || 1) + (item.count || 1);
+            } else {
+                newcartWishItems.push({ ...item, count: item.count || 1 });
+            }
+        });
+
+        console.log('✅ 새로운 cartWishItems:', newcartWishItems);
+
+        // 상태 업데이트
+        set({
+            wishLists: newWishLists,
+            cartWishItems: newcartWishItems,
+            cartCount: newcartWishItems.length,
+            removeWish: [], // 체크 초기화
+            popUp: { show: true, message: '장바구니에 추가되었습니다! 🛒' },
+        });
+    },
+
+    // ✅ cartItems - 상품 상세에서 직접 장바구니 담기용
+    cartItems: [],
+
+    // ✅ 상품 상세에서 장바구니 담기 메서드
+    onProductAddCart: (product, count = 1) => {
+        console.log('🛒 onProductAddCart 호출:', { product, count });
+
+        const cartItems = get().cartItems;
+        const existing = cartItems.find((item) => item.id === product.id);
+
+        let updated;
+        if (existing) {
+            // 이미 있으면 수량 증가
+            updated = cartItems.map((item) =>
+                item.id === product.id ? { ...item, count: item.count + count } : item
+            );
+            console.log('✅ 기존 상품 수량 증가');
+        } else {
+            // 새로운 상품 추가
+            updated = [...cartItems, { ...product, count }];
+            console.log('✅ 새 상품 추가');
+        }
+
+        console.log('📦 업데이트된 cartItems:', updated);
+
+        set({
+            cartItems: updated,
+            cartCount: updated.reduce((sum, item) => sum + item.count, 0),
+            popUp: { show: true, message: '장바구니에 담겼습니다! 🛒' },
+        });
+
+        return true;
+>>>>>>> origin/Chae-A
     },
 
     addCartWish: [],

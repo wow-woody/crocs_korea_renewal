@@ -1,6 +1,7 @@
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
 import Main from './pages/Main';
+<<<<<<< HEAD
 // import New from './pages/New';
 // import Women from './pages/Women';
 // import Men from './pages/Men';
@@ -10,6 +11,12 @@ import Brand from './pages/Brand';
 import Login from './pages/Login';
 import Join from './pages/Join';
 // import Footer from './components/Footer';
+=======
+import Brand from './pages/Brand';
+import Login from './pages/Login';
+import Join from './pages/Join';
+import OrderHistory from './pages/OrderHistory';
+>>>>>>> origin/Chae-A
 import Header from './components/Header';
 import CrocsClubPopup from './components/CrocsClubPopup';
 import UserInfo from './pages/UserInfo';
@@ -17,6 +24,7 @@ import Nonmember from './pages/Nonmember';
 import ComeAsPopup from './components/ComeAsPopup';
 import { useEffect } from 'react';
 import { loginAuthStore } from './store/loginStore';
+<<<<<<< HEAD
 // import JibbitzCollaboProductDetail from './pages/JibbitzCollaboProductDetail';
 // import Order from './components/Order/Order';
 import WishList from './pages/WishList';
@@ -30,6 +38,16 @@ import ProductListPage from './pages/ProductListPage';
 import CrocsProductDetail from './pages/CrocsProductDetail';
 import Promotion from './pages/Promotion';
 import StoreLocator from './components/StoreLocator';
+=======
+import ProductListPage from './pages/ProductListPage';
+import CrocsProductDetail from './pages/CrocsProductDetail';
+import Store from './pages/Store';
+import WishList from './pages/WishList';
+import JibbitzProductDetail from './pages/JibbitzProductDetail';
+import JibbitzProductListPage from './pages/JibbitzProductListPage';
+import Cart from './pages/Cart';
+import Order from './components/Order/Order';
+>>>>>>> origin/Chae-A
 
 function App() {
     const { user, loading, checkSession, initAuthListener } = loginAuthStore();
@@ -54,10 +72,14 @@ function App() {
             <Header />
             <Routes>
                 <Route index element={<Main />} />
+<<<<<<< HEAD
                 <Route path="/jibbitz" element={<JibbitzProductListPage />} />
                 <Route path="/collabs" element={<Collabs />} />
                 <Route path="/promotion" element={<Promotion />} />
                 {/* <Route path="/store" element={<Store />} /> */}
+=======
+                <Route path="/store" element={<Store />} />
+>>>>>>> origin/Chae-A
                 <Route path="/Brand" element={<Brand />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/join" element={<Join />} />
@@ -66,6 +88,7 @@ function App() {
                 <Route path="/userinfo" element={<UserInfo />} />
                 <Route path="/nonmember" element={<Nonmember />} />
                 <Route path="/comaspopup" element={<ComeAsPopup />} />
+<<<<<<< HEAD
                 {/* <Route path="/product/:id" element={<JibbitzCollaboProductDetail />} /> */}
                 <Route path="/wishlist" element={<WishList />} />
                 <Route path="/orderhistory" element={<OrderHistory />} />
@@ -81,6 +104,15 @@ function App() {
                 {/* <Route path="/cscenter" element={<CustomerService />} /> */}
                 <Route path="/product/:id" element={<CrocsProductDetail />} />
                 <Route path="/store" element={<StoreLocator />} />
+=======
+                <Route path="/product/:id" element={<CrocsProductDetail />} />
+                <Route path="/orderhistory" element={<OrderHistory />} />
+                <Route path="/wishlist" element={<WishList />} />
+                <Route path="/jibbitz" element={<JibbitzProductListPage />} />
+                <Route path="/jibbitz/:id" element={<JibbitzProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/order" element={<Order />} />
+>>>>>>> origin/Chae-A
             </Routes>
             {/* <Footer /> */}
         </div>

@@ -115,7 +115,11 @@ const Main = () => {
                         <button className="cs-close-btn" onClick={closeCS}>
                             ×
                         </button>
+<<<<<<< HEAD
                         <CustomerService />
+=======
+                        <CustomerService onClose={closeCS} />
+>>>>>>> origin/Chae-A
                     </div>
                 </div>
             )}

@@ -119,9 +119,18 @@
             border: none;
             font-weight: bold;
             font-size: 1.6rem;
-            background: g.$mainColor;
             line-height: 4rem;
             text-align: center;
+            background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+
+            &:hover {
+                transform: translateY(-2px);
+                // box-shadow: 0 6px 20px rgba(102, 222, 27, 0.4);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
         }
     }
 }

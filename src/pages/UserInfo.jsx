@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Title from '../components/Title';
 import UserInfoTop from '../components/UserInfoTop';
 import './scss/userinfo.scss';
+<<<<<<< HEAD
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+=======
+import { Link, useNavigate } from 'react-router-dom';
+>>>>>>> origin/Chae-A
 // import WishListCard from '../components/WishListCard';
 import { wishListStore } from '../store/wishListStore';
 // import OrderHistoryCard from '../components/OrderHistoryCard';

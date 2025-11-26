@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { collaboAuthStore } from '../store/collaboAuthStore';
+<<<<<<< HEAD
+=======
+import Breadcrumbs from '../components/Breadcrumbs';
+>>>>>>> origin/Chae-A
 import './scss/JibbitzProductListPage.scss';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +32,11 @@ const JibbitzProductListPage = () => {
 
     const JibbitzLeftNavigation = {
         category: '지비츠',
+<<<<<<< HEAD
         subcategory: '',
+=======
+        subcategory: '콜라보',
+>>>>>>> origin/Chae-A
         filters: [],
     };
 
@@ -51,9 +59,15 @@ const JibbitzProductListPage = () => {
 
     // 페이징 처리
     const itemsPerPage = 12;
+<<<<<<< HEAD
     const list = displayList();
     const totalPage = Math.ceil(list.length / itemsPerPage);
     const [currentPage, setCurrentPage] = useState(1);
+=======
+    const [currentPage, setCurrentPage] = useState(1);
+    const list = displayList(selectFilter);
+    const totalPage = Math.ceil(displayList.length / itemsPerPage);
+>>>>>>> origin/Chae-A
     const start = (currentPage - 1) * itemsPerPage;
     const currentItems = list.slice(start, start + itemsPerPage);
 
@@ -62,14 +76,18 @@ const JibbitzProductListPage = () => {
         setCurrentPage(pageNum);
     };
 
+<<<<<<< HEAD
     useEffect(() => {
         setCurrentPage(1);
     }, [selectFilter]);
 
+=======
+>>>>>>> origin/Chae-A
     return (
         <div className="product_list_wrap">
             <div className="list_left">
                 <div className="left_nav_wrap">
+<<<<<<< HEAD
                     <div className="breadcrumbs--section">
                         <ul className="breadcrumbs__list">
                             <li className="breadcrumbs__list--home">
@@ -93,21 +111,52 @@ const JibbitzProductListPage = () => {
                             <h2>지비츠</h2>
                         </div>
                     </div>
+=======
+                    <Breadcrumbs
+                        category={JibbitzLeftNavigation.category}
+                        subcategory={JibbitzLeftNavigation.subcategory}
+                    />
+>>>>>>> origin/Chae-A
                     <nav className="left_nav">
                         <div className="filter-menu">
                             <div className="filter-menu__wrap menu_wrap-style">
                                 <div className="filter-menu__wrap--title_wrap title--wrap">
                                     <h3 className="filter-menu__wrap--title title">필터</h3>
+<<<<<<< HEAD
                                 </div>
                                 <div className="filter_list_menu">
                                     <button className="filter_menu_btn">
                                         {selectFilter} 지비츠 참
+=======
+                                    {/* <a
+                                        href="#"
+                                        className="filter-menu--title__toggle title--toggle"
+                                    >
+                                        <button>
+                                            <img
+                                                src="/images/Sub_Women_Images/icon-minus.svg"
+                                                alt=""
+                                            />
+                                        </button>
+                                    </a> */}
+                                </div>
+                                <div className="filter_list_menu">
+                                    {/* <ul className="filter-menu__wrap filter-menu__wrap--color"> */}
+                                    {/* <li className="filter-menu__item filter_list_menu"> */}
+                                    <button className="filter_menu_btn">
+                                        {selectFilter}
+>>>>>>> origin/Chae-A
                                         <img
                                             src="/images/Sub_Women_Images/icon-close_cross.svg"
                                             alt="필터 닫기 버튼"
                                             className="close-btn"
                                         />
                                     </button>
+<<<<<<< HEAD
+=======
+                                    {/* </li> */}
+                                    {/* </ul> */}
+>>>>>>> origin/Chae-A
                                 </div>
                             </div>
                         </div>

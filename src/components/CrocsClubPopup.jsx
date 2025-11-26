@@ -1,10 +1,16 @@
 import React from 'react';
 import Title from './Title';
 import CrocsClubOption from './CrocsClubOption';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './scss/crocsClubPopup.scss';
+import { useNavigate } from 'react-router-dom';
 
 const CrocsClubPopup = () => {
+    const navigate = useNavigate();
+
+    const handleclubJoin = () => {
+        navigate('/userinfo');
+    };
     return (
         <div className="sub_page">
             <div className="inner">
@@ -34,7 +40,7 @@ const CrocsClubPopup = () => {
                         </div>
                     </div>
                     <p>
-                        <Link to="/userinfo">Crocs Club Join</Link>
+                        <button className="club_join_btn">Crocs Club Join</button>
                     </p>
                 </div>
             </div>

@@ -1,6 +1,10 @@
 import React from 'react';
 import OrderHistoryCard from '../components/OrderHistoryCard';
+<<<<<<< HEAD
 import UserInfoTop from '../components/UserInfoTop';
+=======
+// import UserInfoTop from '../components/UserInfoTop';
+>>>>>>> origin/Chae-A
 import { Link, useNavigate } from 'react-router-dom';
 import OrderState from '../components/OrderState';
 import './scss/orderhistory.scss';

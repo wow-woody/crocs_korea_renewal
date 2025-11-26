@@ -9,7 +9,10 @@ import { useNavigate } from 'react-router-dom';
 
 function Cart() {
     const cartStore = useCartStore();
+<<<<<<< HEAD
     // console.log('cartStore:', cartStore);
+=======
+>>>>>>> origin/Chae-A
     const wishStore = wishListStore();
     const navigate = useNavigate();
 
@@ -20,6 +23,10 @@ function Cart() {
         freeShippingThreshold,
         initializeCart,
         addFromWishlist,
+<<<<<<< HEAD
+=======
+        mergeCartData,
+>>>>>>> origin/Chae-A
         getSubtotal,
         getSelectedSubtotal,
         getShipping,
@@ -34,6 +41,7 @@ function Cart() {
         handleOrderAll,
         handleOrderSelected,
         handleGiftSelected,
+<<<<<<< HEAD
         // } = useCartStore();
     } = cartStore || {};
 
@@ -54,6 +62,43 @@ function Cart() {
             addFromWishlist(Products, cartWishItems);
         }
     }, [cartWishItems]);
+=======
+    } = cartStore || {};
+
+    // wishListStore에서 cartWishItems와 cartItems 가져오기
+    const { cartItems = [], cartWishItems = [] } = wishStore || {};
+
+    console.log('🔍 Cart 렌더링:', {
+        cartProducts,
+        cartItems,
+        cartWishItems,
+        cartProductsLength: cartProducts?.length,
+        cartItemsLength: cartItems?.length,
+    });
+
+    // 장바구니 초기화
+    useEffect(() => {
+        console.log('🚀 initializeCart 실행');
+        initializeCart(Products, cartWishItems);
+    }, []);
+
+    // cartWishItems와 cartItems를 cartProducts에 병합
+    useEffect(() => {
+        console.log('🔄 병합 체크:', { cartWishItems, cartItems });
+
+        // wishListStore의 cartWishItems를 cartProducts에 추가
+        if (cartWishItems && cartWishItems.length > 0) {
+            console.log('✅ cartWishItems 병합 실행');
+            addFromWishlist(Products, cartWishItems);
+        }
+
+        // wishListStore의 cartItems를 cartProducts에 추가
+        if (cartItems && cartItems.length > 0) {
+            console.log('✅ cartItems 병합 실행');
+            mergeCartData(Products, cartItems);
+        }
+    }, [cartWishItems, cartItems]);
+>>>>>>> origin/Chae-A
 
     // 가격 계산
     const subtotal = getSubtotal();
@@ -71,11 +116,31 @@ function Cart() {
         let orderData;
 
         if (type === 'all') {
+<<<<<<< HEAD
             orderData = handleOrderAll();
         } else {
             orderData = handleOrderSelected();
         }
 
+=======
+            if (cartProducts.length === 0) {
+                alert('장바구니에 상품이 없습니다.');
+                return;
+            }
+            orderData = handleOrderAll();
+        } else {
+            if (selectedProducts.size === 0) {
+                alert('선택된 상품이 없습니다.');
+                return;
+            }
+            orderData = handleOrderSelected();
+        }
+
+        if (!orderData) {
+            return;
+        }
+
+>>>>>>> origin/Chae-A
         navigate('/order', {
             state: {
                 orderProducts: orderData.products,
@@ -121,8 +186,17 @@ function Cart() {
                                     <p>장바구니에 담긴 상품이 없습니다.</p>
                                 </div>
                             ) : (
+<<<<<<< HEAD
                                 [...cartProducts, ...cartItems].map((product) => (
                                     <div key={product.id} className="product-item-wrap">
+=======
+                                // ✅ cartProducts만 렌더링 (cartItems 제거)
+                                cartProducts.map((product) => (
+                                    <div
+                                        key={`${product.id}-${product.size || 'default'}`}
+                                        className="product-item-wrap"
+                                    >
+>>>>>>> origin/Chae-A
                                         <input
                                             type="checkbox"
                                             className="product-checkbox"
@@ -136,15 +210,21 @@ function Cart() {
 
                                             <div className="product-info">
                                                 <h3 className="product-name">{product.name}</h3>
+<<<<<<< HEAD
                                                 {/* 지비츠 - 사이즈가 있을때만 표시 */}
+=======
+>>>>>>> origin/Chae-A
                                                 {product.size && (
                                                     <p className="product-option">
                                                         사이즈: {product.size}
                                                     </p>
                                                 )}
+<<<<<<< HEAD
                                                 {/* <p className='product-color'>
                                                     컬러: {product.color}
                                                 </p> */}
+=======
+>>>>>>> origin/Chae-A
 
                                                 <div className="quantity-control">
                                                     <button

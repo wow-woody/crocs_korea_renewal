@@ -39,7 +39,11 @@
 // export default UserInfoTop;
 
 import React from 'react';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+import { useNavigate } from 'react-router-dom';
+>>>>>>> origin/Chae-A
 import { loginAuthStore } from '../store/loginStore';
 
 // const UserInfoTop = () => {
@@ -90,18 +94,31 @@ import { loginAuthStore } from '../store/loginStore';
 // };
 
 const UserInfoTop = () => {
+<<<<<<< HEAD
     const { user, setClubMember } = loginAuthStore();
+=======
+    const { user } = loginAuthStore();
+    const navigate = useNavigate();
+>>>>>>> origin/Chae-A
 
     if (!user) return null; // ⭐ 중요! user 준비가 안 되면 렌더링 X
 
     const isClubMember = user.isClubMember === true;
 
     const handleJoin = () => {
+<<<<<<< HEAD
         setClubMember(user.uid, true);
+=======
+        navigate('/crocsclub');
+>>>>>>> origin/Chae-A
     };
 
     return (
         <div className="user_info_top">
+<<<<<<< HEAD
+=======
+            {/* 미가입자 영역 */}
+>>>>>>> origin/Chae-A
             {!isClubMember && (
                 <div className="user_info_left_wrap">
                     <p className="user_info_text">
@@ -115,6 +132,10 @@ const UserInfoTop = () => {
                 </div>
             )}
 
+<<<<<<< HEAD
+=======
+            {/* 가입자 영역 */}
+>>>>>>> origin/Chae-A
             {isClubMember && (
                 <div className="user_info_left_wrap club_join_wrap">
                     <p>
@@ -129,6 +150,10 @@ const UserInfoTop = () => {
                 </div>
             )}
 
+<<<<<<< HEAD
+=======
+            {/* 오른쪽 고정 영역 */}
+>>>>>>> origin/Chae-A
             <div className="usr_info_right">
                 <strong>쿠폰</strong>
                 <p>쿠폰 개수</p>

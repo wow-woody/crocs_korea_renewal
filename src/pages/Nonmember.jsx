@@ -1,7 +1,8 @@
 import React from 'react';
 import Title from '../components/Title';
 import './scss/Nonmember.scss';
-import CrocsClubJion from '../components/CrocsClubJion';
+// import CrocsClubJion from '../components/CrocsClubJion';
+import CrocsClubJoin from '../components/CrocsClubJoin';
 
 const Nonmember = () => {
     return (
@@ -15,7 +16,7 @@ const Nonmember = () => {
                         <input type="password" placeholder="비회원 주문조회 비밀번호" />
                         <button>주문조회</button>
                     </form>
-                    <CrocsClubJion />
+                    <CrocsClubJoin />
                 </div>
             </div>
         </div>

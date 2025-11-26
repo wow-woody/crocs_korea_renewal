@@ -23,6 +23,7 @@ export const useProductStore = create(
                 if (existing.length > 0) return;
 
                 // 상품 불러오기
+<<<<<<< HEAD
                 // const res = {
                 //     json: async () => Products,
                 // };
@@ -31,6 +32,16 @@ export const useProductStore = create(
                 // console.log(data);
 
                 // set({ items: data });
+=======
+                const res = {
+                    json: async () => Products,
+                };
+
+                const data = await res.json();
+                console.log(data);
+
+                set({ items: data });
+>>>>>>> origin/Chae-A
                 set({ items: Products });
             },
 
@@ -44,8 +55,13 @@ export const useProductStore = create(
                     return allItems.filter((item) => item.category === cate);
                 }
                 // 위에서 else 생략가능
+<<<<<<< HEAD
                 // if (!cate || cate === "all") return allItems
                 //     return allItems.filter((item) => item.category === cate)
+=======
+                if (!cate || cate === 'all') return allItems;
+                return allItems.filter((item) => item.category === cate);
+>>>>>>> origin/Chae-A
             },
 
             // ==========================================
@@ -60,6 +76,7 @@ export const useProductStore = create(
             // ==========================================
             // 장바구니추가
             onAddToCart: (product) => {
+<<<<<<< HEAD
                 // let updateCart;
                 // // 사이즈 같은 요소를 다시 담기를 했으면 이미 장바구니에 있는 제품이므로 개수만 증가
                 // // 사이즈 다른 요소를 담기로 새로 담기
@@ -84,6 +101,35 @@ export const useProductStore = create(
                 //     // set({ cartItems: product })
                 //     // set({ cartCount: cartItems.length })
                 // })
+=======
+                let updateCart;
+                // 사이즈 같은 요소를 다시 담기를 했으면 이미 장바구니에 있는 제품이므로 개수만 증가
+                // 사이즈 다른 요소를 담기로 새로 담기
+                set((state) => {
+                    const existing = state.cartItems.find(
+                        (item) => item.id === product.id && item.color === product.color
+                    );
+                    if (existing) {
+                        // 다른 제품은 그냥 담고, 같은 제품은 개수를 변경
+                        // set을 생략하면 state. 사용
+                        updateCart = state.cartItems.map((item) =>
+                            item.id === product.id && item.color === product.color
+                                ? // 기존의 있는 아이템복사, 카운트 속성은 기존카운트값+새로운카운트값
+                                  { ...item, count: item.count + product.count }
+                                : item
+                        );
+                    } else {
+                        updateCart = [
+                            ...state.cartItems,
+                            { ...product, count: product.count || 1 },
+                        ];
+                    }
+                    return { cartItems: updateCart, cartCount: updateCart.length };
+                    // get으로 가져온값이 아니라 리턴에 바로 넣어주고 set 안씀
+                    set({ cartItems: product });
+                    set({ cartCount: cartItems.length });
+                });
+>>>>>>> origin/Chae-A
 
                 // 다른 방식으로
                 // 카트안에 다 넣어주기

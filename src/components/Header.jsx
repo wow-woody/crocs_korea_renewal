@@ -8,7 +8,11 @@ import Search from './Search';
 import { useCrocsProductStore } from '../store/useCrocsProductStore';
 import { useLocation } from 'react-router-dom';
 
+<<<<<<< HEAD
 const Header = () => {
+=======
+const Header = ({ onCartClick, onRecentClick }) => {
+>>>>>>> origin/Chae-A
     const searchOpen = useCrocsProductStore((state) => state.searchOpen);
     const onOpenSearch = useCrocsProductStore((state) => state.onOpenSearch);
     const onCloseSearch = useCrocsProductStore((state) => state.onCloseSearch);
@@ -66,6 +70,15 @@ const Header = () => {
                         <div className="header_right">
                             <GnbWrap onSearchClick={onOpenSearch} />
                         </div>
+                        {/* 장바구니 최근본상품 슬라이드 버튼 */}
+                        {/* <div className="header_slide_buttons">
+                            <button className="cart-button" onClick={onCartClick}>
+                                <img src="./images/cart-slide-icon.svg" alt="" />
+                            </button>
+                            <button className="recently-button" onClick={onRecentClick}>
+                                <img src="./images/recently-slide-icon.svg" alt="" />
+                            </button>
+                        </div> */}
                     </div>
                 </header>
 
