@@ -12,7 +12,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { onLogin, onGoogleLogin } = loginAuthStore();
+    const { onLogin, onGoogleLogin, onKakaoLogin } = loginAuthStore();
 
     const navigate = useNavigate();
 
@@ -32,6 +32,13 @@ const Login = () => {
         navigate('/userinfo');
     };
 
+    // 3. 카카오 로그인
+    const handleKakaoLogin = async () => {
+        console.log('카카오');
+        await onKakaoLogin();
+        navigate('/');
+    };
+
     return (
         <div className="sub_page">
             <div className="inner">
@@ -44,6 +51,7 @@ const Login = () => {
                         setEmail={setEmail}
                         setPassword={setPassword}
                         onGoogleLogin={handleGoogleLogin}
+                        onKakaoLogin={handleKakaoLogin}
                     />
                     <p>
                         <Link to="/nonmember">비회원 주문조회</Link>

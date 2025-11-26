@@ -25,6 +25,37 @@ export const loginAuthStore = create((set, get) => ({
                 const userDoc = await getDoc(userRef);
                 const userData = userDoc.exists() ? userDoc.data() : firebaseUser;
 
+                // 🎟️ 기존 크록스 클럽 회원이지만 쿠폰이 없는 경우 자동 발급
+                if (userData.isClubMember && (!userData.coupons || userData.coupons.length === 0)) {
+                    console.log('🎁 기존 클럽 회원에게 웰컴 쿠폰 자동 발급');
+
+                    const welcomeCoupon = {
+                        id: `WELCOME_${Date.now()}`,
+                        name: '크록스 클럽 가입 축하 15% 할인 쿠폰',
+                        discount: 15,
+                        type: 'percentage',
+                        code: `CLUB15_${firebaseUser.uid.slice(0, 6).toUpperCase()}`,
+                        issuedAt: new Date(),
+                        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                        isUsed: false,
+                    };
+
+                    try {
+                        await updateDoc(userRef, {
+                            coupons: [welcomeCoupon],
+                        });
+
+                        userData = {
+                            ...userData,
+                            coupons: [welcomeCoupon],
+                        };
+
+                        console.log('✅ 기존 회원 쿠폰 발급 완료');
+                    } catch (err) {
+                        console.error('기존 회원 쿠폰 발급 실패:', err);
+                    }
+                }
+
                 set({
                     user: userData,
                     loginTime: Date.now(), // 복원 시점 저장
@@ -46,21 +77,46 @@ export const loginAuthStore = create((set, get) => ({
     },
 
     // ==========================================================
-    // 🔥 크록스 클럽 가입 상태 변경
+    // 🔥 크록스 클럽 가입 상태 변경 + 쿠폰 발급
     // ==========================================================
     setClubMember: async (uid, value) => {
         try {
             const userRef = doc(db, 'users', uid);
-            await updateDoc(userRef, { isClubMember: value });
+
+            // 가입 시 15% 할인 쿠폰 발급
+            const welcomeCoupon = {
+                id: `WELCOME_${Date.now()}`,
+                name: '크록스 클럽 가입 축하 15% 할인 쿠폰',
+                discount: 15,
+                type: 'percentage',
+                code: `CLUB15_${uid.slice(0, 6).toUpperCase()}`,
+                issuedAt: new Date(),
+                expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30일 후 만료
+                isUsed: false,
+            };
+
+            // 기존 유저 데이터 가져오기
+            const userDoc = await getDoc(userRef);
+            const userData = userDoc.data();
+            const existingCoupons = userData?.coupons || [];
+
+            await updateDoc(userRef, {
+                isClubMember: value,
+                coupons: [...existingCoupons, welcomeCoupon], // 쿠폰 추가
+            });
 
             set({
                 user: {
                     ...get().user,
                     isClubMember: value,
+                    coupons: [...existingCoupons, welcomeCoupon],
                 },
             });
+
+            console.log('✅ 쿠폰 발급 완료:', welcomeCoupon);
         } catch (err) {
             console.error('클럽 가입 정보 업데이트 실패:', err);
+            throw err; // 에러를 다시 throw해서 CrocsClubPopup에서 처리
         }
     },
 
@@ -81,6 +137,37 @@ export const loginAuthStore = create((set, get) => ({
 
             if (userDoc.exists()) {
                 userData = userDoc.data();
+
+                // 🎟️ 기존 크록스 클럽 회원이지만 쿠폰이 없는 경우 자동 발급
+                if (userData.isClubMember && (!userData.coupons || userData.coupons.length === 0)) {
+                    console.log('🎁 기존 클럽 회원에게 웰컴 쿠폰 자동 발급');
+
+                    const welcomeCoupon = {
+                        id: `WELCOME_${Date.now()}`,
+                        name: '크록스 클럽 가입 축하 15% 할인 쿠폰',
+                        discount: 15,
+                        type: 'percentage',
+                        code: `CLUB15_${firebaseUser.uid.slice(0, 6).toUpperCase()}`,
+                        issuedAt: new Date(),
+                        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                        isUsed: false,
+                    };
+
+                    try {
+                        await updateDoc(userRef, {
+                            coupons: [welcomeCoupon],
+                        });
+
+                        userData = {
+                            ...userData,
+                            coupons: [welcomeCoupon],
+                        };
+
+                        console.log('✅ 기존 회원 쿠폰 발급 완료');
+                    } catch (err) {
+                        console.error('기존 회원 쿠폰 발급 실패:', err);
+                    }
+                }
             } else {
                 userData = {
                     uid: firebaseUser.uid,
@@ -91,6 +178,7 @@ export const loginAuthStore = create((set, get) => ({
                     file: '',
                     profile: '',
                     isClubMember: false,
+                    coupons: [], // 쿠폰 배열 초기화
                 };
                 await setDoc(userRef, userData);
             }
@@ -122,8 +210,35 @@ export const loginAuthStore = create((set, get) => ({
 
             let userData;
 
-            if (userDoc.exists()) {
-                userData = userDoc.data();
+            // 🎟️ 기존 크록스 클럽 회원이지만 쿠폰이 없는 경우 자동 발급
+            if (userData.isClubMember && (!userData.coupons || userData.coupons.length === 0)) {
+                console.log('🎁 기존 클럽 회원에게 웰컴 쿠폰 자동 발급');
+
+                const welcomeCoupon = {
+                    id: `WELCOME_${Date.now()}`,
+                    name: '크록스 클럽 가입 축하 15% 할인 쿠폰',
+                    discount: 15,
+                    type: 'percentage',
+                    code: `CLUB15_${firebaseUser.uid.slice(0, 6).toUpperCase()}`,
+                    issuedAt: new Date(),
+                    expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                    isUsed: false,
+                };
+
+                try {
+                    await updateDoc(userRef, {
+                        coupons: [welcomeCoupon],
+                    });
+
+                    userData = {
+                        ...userData,
+                        coupons: [welcomeCoupon],
+                    };
+
+                    console.log('✅ 기존 회원 쿠폰 발급 완료');
+                } catch (err) {
+                    console.error('기존 회원 쿠폰 발급 실패:', err);
+                }
             } else {
                 userData = {
                     uid: firebaseUser.uid,
@@ -134,6 +249,7 @@ export const loginAuthStore = create((set, get) => ({
                     file: '',
                     profile: '',
                     isClubMember: false,
+                    coupons: [], // 쿠폰 배열 초기화
                 };
                 await setDoc(userRef, userData);
             }
@@ -175,6 +291,36 @@ export const loginAuthStore = create((set, get) => ({
 
             if (userDoc.exists()) {
                 userData = userDoc.data();
+                // 🎟️ 기존 크록스 클럽 회원이지만 쿠폰이 없는 경우 자동 발급
+                if (userData.isClubMember && (!userData.coupons || userData.coupons.length === 0)) {
+                    console.log('🎁 기존 클럽 회원에게 웰컴 쿠폰 자동 발급');
+
+                    const welcomeCoupon = {
+                        id: `WELCOME_${Date.now()}`,
+                        name: '크록스 클럽 가입 축하 15% 할인 쿠폰',
+                        discount: 15,
+                        type: 'percentage',
+                        code: `CLUB15_${uid.slice(0, 6).toUpperCase()}`,
+                        issuedAt: new Date(),
+                        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                        isUsed: false,
+                    };
+
+                    try {
+                        await updateDoc(userRef, {
+                            coupons: [welcomeCoupon],
+                        });
+
+                        userData = {
+                            ...userData,
+                            coupons: [welcomeCoupon],
+                        };
+
+                        console.log('✅ 기존 회원 쿠폰 발급 완료');
+                    } catch (err) {
+                        console.error('기존 회원 쿠폰 발급 실패:', err);
+                    }
+                }
             } else {
                 userData = {
                     uid,
@@ -185,6 +331,7 @@ export const loginAuthStore = create((set, get) => ({
                     provider: 'kakao',
                     createAt: new Date(),
                     isClubMember: false,
+                    coupons: [], // 쿠폰 배열 초기화
                 };
                 await setDoc(userRef, userData);
             }
