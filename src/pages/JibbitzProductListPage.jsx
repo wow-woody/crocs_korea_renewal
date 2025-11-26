@@ -145,7 +145,7 @@ const JibbitzProductListPage = () => {
     return (
         <div className="sub_page">
             <div className="inner">
-                <div className="jibbitz_wrap">
+                <div className="jibbitz_list_wrap">
                     <div className="product_list_page">
                         <Title title={'Jibbitz'} />
 
@@ -269,15 +269,15 @@ const JibbitzProductListPage = () => {
                             </div>
                         </div>
                     </div>
-                    {/* 페이징 */}
-                    {totalPage > 1 && (
-                        <div className="page_pager">
-                            <button onClick={() => handleGoPage(currentPage - 1)}>이전</button>
-                            {pagerButton}
-                            <button onClick={() => handleGoPage(currentPage + 1)}>다음</button>
-                        </div>
-                    )}
                 </div>
+                {/* 페이징 */}
+                {totalPage > 1 && (
+                    <div className="page_pager">
+                        <button onClick={() => handleGoPage(currentPage - 1)}>이전</button>
+                        {pagerButton}
+                        <button onClick={() => handleGoPage(currentPage + 1)}>다음</button>
+                    </div>
+                )}
             </div>
         </div>
     );
