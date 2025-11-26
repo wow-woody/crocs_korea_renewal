@@ -56,11 +56,9 @@ const UserInfoTop = () => {
                     <p className="coupon_count">{couponCount}개</p>
                 </div>
                 <div className="coupon_popup_link">
-                    {couponCount > 0 && (
-                        <button className="view_coupons_btn" onClick={() => navigate('/coupons')}>
-                            쿠폰함 보기
-                        </button>
-                    )}
+                    <button className="view_coupons_btn" onClick={() => navigate('/coupons')}>
+                        쿠폰함 보기
+                    </button>
                 </div>
             </div>
         </div>

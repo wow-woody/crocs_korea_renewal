@@ -34,20 +34,19 @@ const Coupons = () => {
     };
 
     return (
-        <div className="sub_page">
+        <div className="coupons_bg">
             <div className="inner">
-                <Title title="My Coupons" subTitle="보유하신 쿠폰을 확인하세요" />
-
                 <div className="coupons_container">
+                    <Title title="MY COUPON" />
                     {/* 사용 가능한 쿠폰 */}
-                    <section className="coupon_section">
-                        <h3>
+                    <div className="coupon_list_wrap">
+                        <p>
                             사용 가능한 쿠폰{' '}
                             <span className="count">({availableCoupons.length})</span>
-                        </h3>
+                        </p>
                         <div className="coupon_list">
                             {availableCoupons.length === 0 ? (
-                                <div className="empty_state">
+                                <div className="empty_coupon">
                                     <p>사용 가능한 쿠폰이 없습니다.</p>
                                     <button onClick={() => navigate('/crocsclub')}>
                                         크록스 클럽 가입하고 쿠폰 받기
@@ -61,36 +60,40 @@ const Coupons = () => {
                                             isExpired(coupon.expiresAt) ? 'expired' : ''
                                         }`}
                                     >
-                                        <div className="coupon_header">
-                                            <div className="discount_badge">
-                                                {coupon.discount}
-                                                {coupon.type === 'percentage' ? '%' : '원'}
+                                        <div className="coupon_card_text">
+                                            <div className="coupon_left">
+                                                <div className="discount_badge">
+                                                    {coupon.discount}
+                                                    {coupon.type === 'percentage' ? '%' : '원'}
+                                                </div>
+                                                <div className="coupon_info">
+                                                    <h4>{coupon.name}</h4>
+                                                    <p className="coupon_code">
+                                                        코드: {coupon.code}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div className="coupon_info">
-                                                <h4>{coupon.name}</h4>
-                                                <p className="coupon_code">코드: {coupon.code}</p>
+                                            <div className="coupon_right">
+                                                <p className="issued_date">
+                                                    발급일: {formatDate(coupon.issuedAt)}
+                                                </p>
+                                                <p
+                                                    className={`expire_date ${
+                                                        isExpired(coupon.expiresAt) ? 'expired' : ''
+                                                    }`}
+                                                >
+                                                    {isExpired(coupon.expiresAt)
+                                                        ? '만료됨'
+                                                        : `유효기간: ${formatDate(
+                                                              coupon.expiresAt
+                                                          )}까지`}
+                                                </p>
                                             </div>
-                                        </div>
-                                        <div className="coupon_footer">
-                                            <p className="issued_date">
-                                                발급일: {formatDate(coupon.issuedAt)}
-                                            </p>
-                                            <p
-                                                className={`expire_date ${
-                                                    isExpired(coupon.expiresAt) ? 'expired' : ''
-                                                }`}
-                                            >
-                                                {isExpired(coupon.expiresAt)
-                                                    ? '만료됨'
-                                                    : `유효기간: ${formatDate(
-                                                          coupon.expiresAt
-                                                      )}까지`}
-                                            </p>
                                         </div>
                                         {!isExpired(coupon.expiresAt) && (
                                             <button
                                                 className="use_coupon_btn"
-                                                onClick={() => navigate('/products')}
+                                                onClick={() => navigate('/all')}
                                             >
                                                 쇼핑하러 가기
                                             </button>
@@ -99,11 +102,11 @@ const Coupons = () => {
                                 ))
                             )}
                         </div>
-                    </section>
+                    </div>
 
                     {/* 사용한 쿠폰 */}
                     {usedCoupons.length > 0 && (
-                        <section className="coupon_section used_section">
+                        <div className="coupon_section used_section">
                             <h3>
                                 사용 완료 <span className="count">({usedCoupons.length})</span>
                             </h3>
@@ -126,7 +129,7 @@ const Coupons = () => {
                                     </div>
                                 ))}
                             </div>
-                        </section>
+                        </div>
                     )}
                 </div>
             </div>
