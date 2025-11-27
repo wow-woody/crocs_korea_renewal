@@ -38,6 +38,17 @@ const Coupons = () => {
             <div className="inner">
                 <div className="coupons_container">
                     <Title title="MY COUPON" />
+                    <div className="coupons_wrap">
+                        <h4 className="coupon_title">쿠폰 번호 등록하기</h4>
+                        <div className="coupons_num_wrap">
+                            <div className="coupons_input_wrap">
+                                <label>
+                                    <input type="text" className="coupons_number_input" />
+                                    <button>쿠폰 등록하기</button>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     {/* 사용 가능한 쿠폰 */}
                     <div className="coupon_list_wrap">
                         <p>
