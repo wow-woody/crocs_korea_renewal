@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './scss/KidSize.scss';
 
-const KidSize = () => {
-    const [isVisible, setIsVisible] = useState(true);
-
+const KidSize = ({ onClose }) => {
     // 영유아 사이즈
     const infantSizes = [
         { kr: 98, us: 'C2' },
@@ -17,7 +15,7 @@ const KidSize = () => {
         { kr: 165, us: 'C10' },
     ];
 
-    //키즈 사이즈
+    // 키즈 사이즈
     const kidsSizes = [
         { kr: 175, us: 'C11' },
         { kr: 180, us: 'C12' },
@@ -30,19 +28,13 @@ const KidSize = () => {
         { kr: 250, us: 'J6' },
     ];
 
-    const handleClose = () => {
-        setIsVisible(false);
-    };
-
-    if (!isVisible) return null;
-
     return (
         <div className="crocs_kid_size_table">
             <div className="size_table_header">
                 <h2 className="size_table_title">
                     <span className="mini_title">crocs</span> 사이즈 가이드
                 </h2>
-                <button className="close_button" onClick={handleClose}>
+                <button className="close_button" onClick={onClose}>
                     ×
                 </button>
             </div>

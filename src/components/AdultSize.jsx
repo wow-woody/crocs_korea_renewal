@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./scss/AdultSize.scss"
 
-const AdultSize = () => {
-  const [isVisible, setIsVisible] = useState(true);
-
+const AdultSize = ({ onClose }) => {
   // 사이즈 데이터
   const sizes = [
     { kr: 210, usWomen: 4, usMen: 2 },
@@ -21,12 +19,6 @@ const AdultSize = () => {
     { kr: 320, usWomen: "─", usMen: 14 },
   ];
 
-  const handleClose = () => {
-    setIsVisible(false);
-  };
-
-  if (!isVisible) return null;
-
   return (
     <div className="crocs_size_table">
       <div className="size_table_header">
@@ -35,7 +27,7 @@ const AdultSize = () => {
         </h2>
         <button 
           className="close_button"
-          onClick={handleClose}
+          onClick={onClose}
         >
           ×
         </button>
