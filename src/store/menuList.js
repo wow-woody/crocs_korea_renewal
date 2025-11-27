@@ -34,11 +34,6 @@ export const menuList = [
             },
             { key: 'fuzz', label: 'FUZZ', imgUrl: '/images/13_클래식_언퍼게터블_클로그_1.png' },
             {
-                key: 'jibbitz',
-                label: 'JIBBITZ',
-                imgUrl: '/images/3_인디_럭스_실버_5개_세트.jpg',
-            },
-            {
                 key: 'collabs',
                 label: 'COLLABS',
                 imgUrl: '/images/6_시몬_로샤_x_크록스_발레리나_플랫폼_1.jpg',

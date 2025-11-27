@@ -2,7 +2,7 @@
 
 .crocs_size_table {
     max-width: 700px;
-    height: 100vh;
+    // height: 100vh;
     margin: 0 auto;
     padding: 2.4rem;
     background-color: #fff;
@@ -212,13 +212,13 @@
                 }
             }
         }
-        .size_tips{
-          .tip_text{
-            font-size: 1.2rem;
-          }
-          .tip_note{
-            font-size: 1.2rem;
-          }
+        .size_tips {
+            .tip_text {
+                font-size: 1.2rem;
+            }
+            .tip_note {
+                font-size: 1.2rem;
+            }
         }
 
         .size_table {

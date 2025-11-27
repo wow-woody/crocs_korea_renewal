@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './scss/KidSize.scss';
 
-const KidSize = () => {
+const KidSize = ({ onClose }) => {
     const [isVisible, setIsVisible] = useState(true);
 
     // 영유아 사이즈
@@ -30,8 +30,14 @@ const KidSize = () => {
         { kr: 250, us: 'J6' },
     ];
 
-    const handleClose = () => {
+    const handleClose = (e) => {
         setIsVisible(false);
+        if (e) {
+            e.stopPropagation();
+        }
+        if (onClose) {
+            onClose();
+        }
     };
 
     if (!isVisible) return null;
@@ -139,25 +145,25 @@ const KidSize = () => {
                 <div className="measure_title">
                     <h3>아이의 발사이즈 측정 방법</h3>
                     <p>
-                        아래 단계를 따라 아이에게 적합한 사이즈를 찾아보세요. <br /><strong>아이의 발은 금방
-                        자라므로 확신이 서지 않으면 한 사이즈 크게 선택하는 것을 권장합니다.</strong>
+                        아래 단계를 따라 아이에게 적합한 사이즈를 찾아보세요. <br />
+                        <strong>
+                            아이의 발은 금방 자라므로 확신이 서지 않으면 한 사이즈 크게 선택하는
+                            것을 권장합니다.
+                        </strong>
                     </p>
                 </div>
 
                 <div className="measure_steps">
                     <div className="step_item">
                         <div className="img_box">
-                            <img
-                                src="/images/KidSize1.JPG"
-                                alt="어린이신발사이즈측정"
-                            />
+                            <img src="/images/KidSize1.JPG" alt="어린이신발사이즈측정" />
                         </div>
                         <div className="text_box">
                             <h4>1. 벽이 있는 장소와 종이 한 장을 준비하기</h4>
                             <p>
-                                바닥에 종이를 평평하게 내려놓습니다.<br/> 종이의 한쪽 끝이 벽과 직각을
-                                이뤄야 합니다.<br /> 아이가 종이 위에 올라 발 뒷꿈치를 벽에 붙이도록
-                                합니다.
+                                바닥에 종이를 평평하게 내려놓습니다.
+                                <br /> 종이의 한쪽 끝이 벽과 직각을 이뤄야 합니다.
+                                <br /> 아이가 종이 위에 올라 발 뒷꿈치를 벽에 붙이도록 합니다.
                             </p>
                         </div>
                     </div>
@@ -169,8 +175,8 @@ const KidSize = () => {
                         <div className="text_box">
                             <h4>2. 발 모양을 따라 그리고 길이 재기</h4>
                             <p>
-                                볼펜 또는 연필로 발가락을 따라 그립니다.그 다음에 <br/>자 또는 줄자로
-                                발가락 끝에서 종이 끝까지의 길이를 잽니다.
+                                볼펜 또는 연필로 발가락을 따라 그립니다.그 다음에 <br />자 또는
+                                줄자로 발가락 끝에서 종이 끝까지의 길이를 잽니다.
                             </p>
                         </div>
                     </div>

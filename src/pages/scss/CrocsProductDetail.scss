@@ -4,17 +4,17 @@
 // Product Detail Container - Order 스타일과 동일한 구조
 // ========================================
 .product-detail-container {
-    max-width: 1200px;
+    // max-width: 1200px;
     margin: 0 auto;
-    padding: 4rem 2rem;
-    min-height: 100vh;
+    padding: 4rem 2rem 10rem;
+    // min-height: 100vh;
 
     // ========================================
     // 전체 레이아웃 - 다른 페이지와 충돌 방지를 위해 구체적인 클래스명 사용
     // ========================================
     .product-detail-content {
         display: grid;
-        grid-template-columns: 2fr 3fr; // ⭐ 4:6 비율 (이미지 40% : 정보 60%)
+        grid-template-columns: repeat(2, 1fr);
         gap: 4rem;
         margin-top: 10rem;
         margin-bottom: 4rem;

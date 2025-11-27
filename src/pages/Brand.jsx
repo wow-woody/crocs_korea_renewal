@@ -93,7 +93,7 @@ const Brand = () => {
                         </div>
                     </div>
                     <div className="img_box">
-                        <img src="/images/brand_img_02.png" alt="brand_img" />
+                        <img src="/images/brand_img_05.png" alt="brand_img" />
                     </div>
                 </div>
             </div>
