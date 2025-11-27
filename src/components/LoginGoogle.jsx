@@ -1,10 +1,13 @@
 import React from 'react';
+import { loginAuthStore } from '../store/loginStore';
 
 const LoginGoogle = () => {
+    const { onGoogleLogin } = loginAuthStore();
+
     return (
         <div className="google_wrap">
-            <button>
-                <img src="/images/icon_google.svg" alt="icon_google" />
+            <button className="sns_login google" onClick={onGoogleLogin} type="button">
+                <img src="/images/google_icon.svg" alt="google_login" />
             </button>
         </div>
     );
