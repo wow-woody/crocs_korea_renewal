@@ -1,239 +1,424 @@
-// ⭐ CrocsProductDetail 디자인을 그대로 사용하면서
-// ⭐ Jibbitz 데이터(product)를 적용한 버전
-
-import React, { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { collaboAuthStore } from '../store/collaboAuthStore';
 import { wishListStore } from '../store/wishListStore';
-import '../components/scss/ProductDetail.scss';
-import './scss/CrocsProductDetail.scss';
-import './scss/ProductPage_flat.scss';
-import Title from '../components/Title';
 import WishAddPopup from '../components/WishAddPopup';
-// import JibbitzProductImage from '../components/JibbitzProductImage';
-// import JibbitzProductInfo from '../components/JibbitzProductInfo';
+import './scss/CrocsProductDetail.scss';
 
 const JibbitzProductDetail = () => {
     const { id } = useParams();
-    const { jibbitzItems } = collaboAuthStore();
-    const { onAddWishList, onProductAddCart, wishLists } = wishListStore();
+    const navigate = useNavigate();
+    const { jibbitzItems, onFetchJibbitz } = collaboAuthStore();
+    const { onAddWishList, onProductAddCart } = wishListStore();
 
-    const [product, setProduct] = useState(null);
-    const [quantity, setQuantity] = useState(1);
+    const [JibbitzProduct, setJibbitzProduct] = useState(null);
     const [selectedImageIdx, setSelectedImageIdx] = useState(0);
 
-    const increaseQty = () => setQuantity((q) => q + 1);
-    const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
+    // ⭐ 선택된 상품 리스트 (배열로 관리)
+    const [selectedProducts, setSelectedProducts] = useState([]);
 
-    // 가격 숫자로 변환
-    const parseNumber = useCallback((p) => {
-        if (!p) return 0;
-        return Number(String(p).replace(/[^0-9]/g, ''));
+    // ⭐ localStorage에서 불러오기 또는 기본 상품 추가
+    useEffect(() => {
+        const savedProducts = localStorage.getItem(`selectedProducts_${id}`);
+        if (savedProducts) {
+            try {
+                const parsed = JSON.parse(savedProducts);
+                setSelectedProducts(parsed);
+            } catch (error) {
+                console.error('Failed to parse saved products:', error);
+            }
+        }
+    }, [id]);
+
+    // ⭐ 상품 정보 로드 시 기본 수량 1개 자동 추가
+    useEffect(() => {
+        if (!JibbitzProduct) return;
+
+        // localStorage에 저장된 것이 없고, selectedProducts가 비어있을 때만 자동 추가
+        const savedProducts = localStorage.getItem(`selectedProducts_${id}`);
+        if (!savedProducts && selectedProducts.length === 0) {
+            const defaultProduct = {
+                id: Date.now(),
+                productId: JibbitzProduct.id,
+                name: JibbitzProduct.title,
+                quantity: 1,
+                price: getDetailPrice(JibbitzProduct),
+            };
+            setSelectedProducts([defaultProduct]);
+        }
+    }, [JibbitzProduct, id]);
+
+    // ⭐ selectedProducts 변경 시 localStorage에 저장
+    useEffect(() => {
+        if (selectedProducts.length > 0) {
+            localStorage.setItem(`selectedProducts_${id}`, JSON.stringify(selectedProducts));
+        } else {
+            localStorage.removeItem(`selectedProducts_${id}`);
+        }
+    }, [selectedProducts, id]);
+
+    // 토글 상태
+    const [openJibbitz, setOpenJibbitz] = useState(false);
+    const [openDesc, setOpenDesc] = useState(false);
+    const [openNotes, setOpenNotes] = useState(false);
+    const [openReview, setOpenReview] = useState(false);
+
+    // 가격 계산
+    const getDetailPrice = (product) => {
+        if (!product) return 0;
+
+        // discountPrice가 있으면 우선 사용
+        if (product.discountPrice) {
+            return Number(String(product.discountPrice).replace(/[^0-9]/g, ''));
+        }
+
+        // 없으면 price 사용
+        if (product.price) {
+            return Number(String(product.price).replace(/[^0-9]/g, ''));
+        }
+
+        return 0;
+    };
+
+    const getOriginalPrice = (product) => {
+        if (!product) return null;
+
+        // discountPrice가 있을 때만 원가 표시
+        if (product.discountPrice && product.price) {
+            return Number(String(product.price).replace(/[^0-9]/g, ''));
+        }
+
+        return null;
+    };
+
+    const detailPrice = JibbitzProduct ? getDetailPrice(JibbitzProduct) : 0;
+    const originalPrice = JibbitzProduct ? getOriginalPrice(JibbitzProduct) : null;
+    const hasOriginal = originalPrice !== null && originalPrice > detailPrice;
+    const discountPercent = hasOriginal
+        ? Math.round(((originalPrice - detailPrice) / originalPrice) * 100)
+        : null;
+
+    // ⭐ 상품 추가 (지비츠는 사이즈/색상 없음)
+    const handleAddProduct = () => {
+        // 이미 추가된 상품이 있는지 확인
+        const existingIndex = selectedProducts.findIndex((p) => p.productId === JibbitzProduct.id);
+
+        if (existingIndex !== -1) {
+            // 이미 있으면 수량 증가
+            const updated = [...selectedProducts];
+            updated[existingIndex].quantity += 1;
+            setSelectedProducts(updated);
+        } else {
+            // 없으면 새로 추가
+            const newProduct = {
+                id: Date.now(),
+                productId: JibbitzProduct.id,
+                name: JibbitzProduct.title,
+                quantity: 1,
+                price: detailPrice,
+            };
+            setSelectedProducts([...selectedProducts, newProduct]);
+        }
+    };
+
+    // ⭐ 수량 증가
+    const increaseQty = (productId) => {
+        setSelectedProducts(
+            selectedProducts.map((p) =>
+                p.id === productId ? { ...p, quantity: p.quantity + 1 } : p
+            )
+        );
+    };
+
+    // ⭐ 수량 감소
+    const decreaseQty = (productId) => {
+        setSelectedProducts(
+            selectedProducts.map((p) =>
+                p.id === productId && p.quantity > 1 ? { ...p, quantity: p.quantity - 1 } : p
+            )
+        );
+    };
+
+    // ⭐ 상품 삭제
+    const removeProduct = (productId) => {
+        setSelectedProducts(selectedProducts.filter((p) => p.id !== productId));
+    };
+
+    // ⭐ 총 수량 계산
+    const totalQuantity = selectedProducts.reduce((sum, p) => sum + p.quantity, 0);
+
+    // ⭐ 총 가격 계산
+    const totalPrice = selectedProducts.reduce((sum, p) => sum + p.price * p.quantity, 0);
+
+    // 상품 불러오기
+    useEffect(() => {
+        onFetchJibbitz();
     }, []);
-
-    // 총액 계산
-    const price = product ? parseNumber(product.discountPrice || product.price) : 0;
-    const totalPrice = price * quantity;
 
     useEffect(() => {
         if (!id || jibbitzItems.length === 0) return;
-        const target = jibbitzItems.find((i) => String(i.id) === String(id));
-        setProduct(target);
+        const findJibbitzItem = jibbitzItems.find((item) => String(item.id) === String(id));
+        setJibbitzProduct(findJibbitzItem);
     }, [id, jibbitzItems]);
 
-    if (!product) return <div>상품 정보를 불러오고 있습니다...</div>;
+    if (!JibbitzProduct) {
+        return (
+            <div className="product-detail-container">
+                <div style={{ textAlign: 'center', padding: '4rem' }}>
+                    상품 정보를 불러오고 있습니다...
+                </div>
+            </div>
+        );
+    }
 
-    // 이미지 배열로 통일
-    const images = [product.imageUrl];
+    // 이미지 배열 처리
+    const images = Array.isArray(JibbitzProduct.imageUrl)
+        ? JibbitzProduct.imageUrl
+        : [JibbitzProduct.imageUrl];
 
     return (
-        <div className="sub_page">
-            <div className="inner">
-                <Title title="ProductDetail" />
-                <div className="product-detail-wrap">
-                    <div className="product-img-info">
-                        <div className="product-img-info__wrap">
-                            <div className="product-img">
-                                {/* 작은 크럼브 */}
-                                <div className="product-img__crumbs-wrap">
-                                    <ul className="product-img__crumbs">
-                                        <li className="product-img__crumb product-img__crumb--home">
-                                            <a href="/" className="product-img__link">
-                                                <img
-                                                    className="product-img__icon"
-                                                    src="/images/Sub_Women_Images/icon-close_cross.svg"
-                                                    alt="홈"
-                                                />
-                                            </a>
-                                        </li>
-                                        <li className="product-img__sep">:</li>
-                                        <li className="product-img__crumb">
-                                            {product.category || 'jibbitz'}
-                                        </li>
-                                        <li className="product-img__sep">:</li>
-                                        <li className="product-img__crumb product-img__crumb--current">
-                                            {product.title}
-                                        </li>
-                                    </ul>
+        <div className="product-detail-container">
+            {/* 메인 콘텐츠 */}
+            <div className="product-detail-content">
+                {/* 왼쪽: 이미지 영역 */}
+                <div className="product-image-section">
+                    {/* 메인 이미지 */}
+                    <div className="main-image-wrapper">
+                        <img src={images[selectedImageIdx]} alt={JibbitzProduct.title} />
+                    </div>
+
+                    {/* 썸네일 */}
+                    {images.length > 1 && (
+                        <div className="thumbnail-list">
+                            {images.map((img, idx) => (
+                                <div
+                                    key={idx}
+                                    className={`thumbnail-item ${
+                                        idx === selectedImageIdx ? 'active' : ''
+                                    }`}
+                                    onClick={() => setSelectedImageIdx(idx)}
+                                >
+                                    <img src={img} alt={`썸네일 ${idx + 1}`} />
                                 </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
-                                {/* 메인 이미지 */}
-                                <div className="product-img__main-wrap">
-                                    <ul className="product-img__list product-img__list--main">
-                                        <li>
-                                            <img
-                                                className="product-img__img"
-                                                src={images[selectedImageIdx]}
-                                                alt={product.title}
-                                            />
-                                        </li>
-                                    </ul>
+                {/* 오른쪽: 상품 정보 */}
+                <div className="product-info-section">
+                    {/* 상품 헤더 */}
+                    <div className="product-header">
+                        <p className="product-subtitle">Jibbitz™ 참</p>
+                        <h2 className="product-title">{JibbitzProduct.title}</h2>
+                        <div className="product-price">
+                            {hasOriginal && discountPercent && (
+                                <span className="discount-rate">{discountPercent}%</span>
+                            )}
+                            <span className="sale-price">₩{detailPrice.toLocaleString()}</span>
+                            {hasOriginal && (
+                                <span className="original-price">
+                                    ₩{originalPrice.toLocaleString()}
+                                </span>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* 선택된 상품 목록 */}
+                    {selectedProducts.length > 0 && (
+                        <div className="selected-products">
+                            {selectedProducts.map((product) => (
+                                <div key={product.id} className="selected-item">
+                                    <div className="item-info">
+                                        <span className="item-name">{product.name}</span>
+                                    </div>
+                                    <div className="quantity-controls">
+                                        <button
+                                            className="quantity-btn"
+                                            onClick={() => decreaseQty(product.id)}
+                                            disabled={product.quantity <= 1}
+                                        >
+                                            -
+                                        </button>
+                                        <span className="quantity">{product.quantity}</span>
+                                        <button
+                                            className="quantity-btn"
+                                            onClick={() => increaseQty(product.id)}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <button
+                                        className="remove-btn"
+                                        onClick={() => removeProduct(product.id)}
+                                        title="상품 삭제"
+                                    >
+                                        ✕
+                                    </button>
                                 </div>
+                            ))}
+                        </div>
+                    )}
 
-                                {/* 썸네일 리스트 */}
-                                <div className="product-img__thumbs-wrap">
-                                    <div
-                                        className="thumbs__ctrl thumbs__ctrl--top"
-                                        aria-hidden="true"
-                                    ></div>
-
-                                    <ul className="product-img__thumbs-list">
-                                        {images.map((img, idx) => (
-                                            <li key={idx} className="product-img__thumbs-item">
-                                                <button
-                                                    type="button"
-                                                    className="product-img__thumbs-link"
-                                                    onClick={() => setSelectedImageIdx(idx)}
-                                                >
-                                                    <img
-                                                        className="product-img__thumbs-img"
-                                                        src={img}
-                                                        alt="지비츠 썸네일"
-                                                        style={
-                                                            selectedImageIdx === idx
-                                                                ? {
-                                                                      filter: 'brightness(1.05)',
-                                                                      transform: 'scale(1.05)',
-                                                                  }
-                                                                : {}
-                                                        }
-                                                    />
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <div
-                                        className="thumbs__ctrl thumbs__ctrl--bottom"
-                                        aria-hidden="true"
-                                    ></div>
-                                </div>
+                    {/* 총 상품 금액 */}
+                    <div className="total-price-section">
+                        <h3 className="total-header">총 상품 금액</h3>
+                        <div className="total-content">
+                            <div className="total-quantity">
+                                총 수량 <span className="quantity">{totalQuantity}</span>개
+                            </div>
+                            <div className="total-price">
+                                <span className="price">{totalPrice.toLocaleString()}</span>
+                                <span className="unit">원</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* 구매 영역 (Crocs 스타일 그대로 적용) */}
-                    <div className="select-buy">
-                        <div className="select-buy__wrap">
-                            {/* 가격 영역 */}
-                            <div className="select-buy__title_wrap">
-                                <p className="select-buy__subtitle">Jibbitz</p>
-                                <h2 className="select-buy__title">{product.title}</h2>
+                    {/* 구매 버튼 */}
+                    <div className="action-buttons">
+                        <button
+                            className="btn-wishlist"
+                            onClick={() => onAddWishList(JibbitzProduct)}
+                        >
+                            💚
+                        </button>
+                        <WishAddPopup />
+                        <button
+                            className="btn-cart"
+                            onClick={() => {
+                                if (selectedProducts.length === 0) {
+                                    alert('상품을 추가해주세요.');
+                                    return;
+                                }
+                                selectedProducts.forEach((product) => {
+                                    onProductAddCart({
+                                        id: product.productId,
+                                        name: product.name,
+                                        title: product.name,
+                                        price: product.price,
+                                        quantity: product.quantity,
+                                        product_img: images[0],
+                                    });
+                                });
+                            }}
+                        >
+                            장바구니
+                        </button>
+                        <WishAddPopup />
+                        <button
+                            className="btn-buy"
+                            onClick={() => {
+                                if (selectedProducts.length === 0) {
+                                    alert('상품을 추가해주세요.');
+                                    return;
+                                }
 
-                                <div className="select-buy__price">
-                                    <span className="select-buy__price_dc_rate">
-                                        ₩{price.toLocaleString()}
-                                    </span>
-                                </div>
-                            </div>
+                                const orderProducts = selectedProducts.map((product) => ({
+                                    id: product.productId,
+                                    name: product.name,
+                                    product: product.name,
+                                    price: product.price,
+                                    quantity: product.quantity,
+                                    product_img: images[0],
+                                    cate: 'Jibbitz',
+                                }));
 
-                            <div className="select-buy__breadcrumbs"></div>
+                                selectedProducts.forEach((product) => {
+                                    onProductAddCart({
+                                        id: product.productId,
+                                        name: product.name,
+                                        title: product.name,
+                                        price: product.price,
+                                        quantity: product.quantity,
+                                        product_img: images[0],
+                                    });
+                                });
 
-                            {/* 수량 */}
-                            <div className="select-buy__selected--wrap">
-                                <div className="select-buy__select">
-                                    <div className="select-buy__select-wrap">
-                                        <span className="select-buy__select_chose-item-name">
-                                            {product.title}
-                                        </span>
-                                    </div>
+                                localStorage.removeItem(`selectedProducts_${id}`);
 
-                                    <div className="select-buy__select__count-wrap">
-                                        <div className="select-buy__select__count">
-                                            <div className="select-buy__select__count-value-wrap">
-                                                <p className="select-buy__select__count-value">
-                                                    <span>{quantity}</span>
-                                                </p>
-                                            </div>
+                                navigate('/order', {
+                                    state: {
+                                        orderProducts: orderProducts,
+                                    },
+                                });
+                            }}
+                        >
+                            구매하기
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                                            <div className="select-buy__select__wrap">
-                                                <button
-                                                    className="select-buy__select__count-btn select-buy__select__count-btn--increase"
-                                                    onClick={increaseQty}
-                                                >
-                                                    <img
-                                                        src="/images/icon-arrow-up_bold-1.svg"
-                                                        alt=""
-                                                    />
-                                                </button>
-                                                <button
-                                                    className="select-buy__select__count-btn select-buy__select__count-btn--decrease"
-                                                    onClick={decreaseQty}
-                                                    disabled={quantity <= 1}
-                                                >
-                                                    <img
-                                                        src="/images/icon-arrow-down_bold-1.svg"
-                                                        alt=""
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* 총 금액 */}
-                            <div className="select-buy__breadcrumbs"></div>
-
-                            <div className="select-buy__total-wrap">
-                                <p>총 상품 금액</p>
-                                <div className="select-buy__total-price-wrap">
-                                    <p className="total-price">₩{totalPrice.toLocaleString()}</p>
-                                </div>
-                            </div>
-
-                            <div className="select-buy__breadcrumbs"></div>
-
-                            {/* 버튼 */}
-                            <div className="select-buy__buy-btns-wrap">
-                                <button
-                                    className="select-buy__buy-btns__btn-like"
-                                    onClick={() => onAddWishList(product)}
-                                >
-                                    💚
-                                </button>
-
-                                <WishAddPopup />
-
-                                <button
-                                    className="select-buy__buy-btn select-buy__buy-btn--add-cart"
-                                    onClick={() =>
-                                        onProductAddCart({
-                                            ...product,
-                                            quantity,
-                                            price,
-                                            product_img: product.imageUrl,
-                                        })
-                                    }
-                                >
-                                    장바구니
-                                </button>
-
-                                <button className="select-buy__buy-btn select-buy__buy-btn--buy-now">
-                                    구매하기
-                                </button>
+            {/* 하단: 상세 정보 탭 */}
+            <div className="product-details-tabs">
+                {/* 상품 설명 */}
+                <div className="tab-section">
+                    <div
+                        className={`tab-header ${openDesc ? 'active' : ''}`}
+                        onClick={() => setOpenDesc(!openDesc)}
+                    >
+                        <h3 className="tab-title">상품 상세 설명</h3>
+                        <div className="tab-icon">
+                            <img src="/images/Sub_Women_Images/icon-arrow-down.svg" alt="토글" />
+                        </div>
+                    </div>
+                    <div className={`tab-content ${openDesc ? 'active' : ''}`}>
+                        <div className="content-inner">
+                            <div className="desc-section">
+                                <h4 className="desc-title">Jibbitz™ 참</h4>
+                                <ul className="desc-list">
+                                    <li>크록스만의 개성을 표현할 수 있는 Jibbitz™ 참</li>
+                                    <li>다양한 디자인으로 나만의 크록스를 꾸며보세요</li>
+                                    <li>크록스 구멍에 간편하게 착탈 가능</li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {/* 유의사항 */}
+                <div className="tab-section">
+                    <div
+                        className={`tab-header ${openNotes ? 'active' : ''}`}
+                        onClick={() => setOpenNotes(!openNotes)}
+                    >
+                        <h3 className="tab-title">유의 사항</h3>
+                        <div className="tab-icon">
+                            <img src="/images/Sub_Women_Images/icon-arrow-down.svg" alt="토글" />
+                        </div>
+                    </div>
+                    <div className={`tab-content ${openNotes ? 'active' : ''}`}>
+                        <div className="content-inner">
+                            <div className="desc-section">
+                                <h4 className="desc-title">사용 시 주의사항</h4>
+                                <ul className="desc-list">
+                                    <li>
+                                        36개월 미만 어린이는 삼킬 위험이 있으니 주의가 필요합니다.
+                                    </li>
+                                    <li>강한 충격이나 무리한 힘을 가하면 파손될 수 있습니다.</li>
+                                    <li>불에 가까이 하지 마십시오.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* 리뷰 */}
+                <div className="tab-section">
+                    <div
+                        className={`tab-header ${openReview ? 'active' : ''}`}
+                        onClick={() => setOpenReview(!openReview)}
+                    >
+                        <h3 className="tab-title">
+                            리뷰
+                            <span className="tab-subtitle">(0)</span>
+                        </h3>
+                        <div className="tab-icon">
+                            <img src="/images/Sub_Women_Images/icon-arrow-down.svg" alt="토글" />
+                        </div>
+                    </div>
+                    <div className={`tab-content ${openReview ? 'active' : ''}`}>
+                        <div className="content-inner">리뷰 목록이 여기에 표시됩니다.</div>
                     </div>
                 </div>
             </div>
@@ -242,45 +427,3 @@ const JibbitzProductDetail = () => {
 };
 
 export default JibbitzProductDetail;
-
-// import React, { useEffect, useState } from 'react';
-// import '../components/scss/ProductDetail.scss';
-// import './scss/CrocsProductDetail.scss';
-// import './scss/ProductPage_flat.scss';
-// import { collaboAuthStore } from '../store/collaboAuthStore';
-// import { wishListStore } from '../store/wishListStore';
-// import { useParams } from 'react-router-dom';
-// import JibbitzProductImage from '../components/JibbitzProductImage';
-// import JibbitzProductInfo from '../components/JibbitzProductInfo';
-
-// const JibbitzProductDetail = () => {
-//     const { id } = useParams();
-//     const { disneyItems, jibbitzItems } = collaboAuthStore();
-//     const { onAddWishList } = wishListStore();
-
-//     //찾은 상품을 저장할 변수
-//     const [product, setProduct] = useState(null);
-
-//     useEffect(() => {
-//         if (!id || jibbitzItems.length === 0) return;
-//         //선택된 제품 찾기
-//         const findItem = jibbitzItems.find((item) => String(item.id) === String(id));
-//         setProduct(findItem);
-//     }, [id, jibbitzItems]);
-
-//     if (!product) {
-//         return <div>상품 정보를 불러오고 있으니 기다리</div>;
-//     }
-//     return (
-//         <div className="sub_page">
-//             <div className="inner">
-//                 <div className="product-detail-page">
-//                     <JibbitzProductImage product={product} />
-//                     <JibbitzProductInfo product={product} />
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default JibbitzProductDetail;
