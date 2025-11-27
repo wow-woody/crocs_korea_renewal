@@ -1,19 +1,22 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCrocsProductStore } from "../store/useCrocsProductStore";
 import { wishListStore } from "../store/wishListStore";
 import { useRecentProductsStore } from "../store/recentProductsStore";
 import Title from "../components/Title";
 import WishAddPopup from "../components/WishAddPopup";
 import { useCrocsSizeStore } from "../store/useCrocsSizeStore";
+import { useCartStore } from "../store/useCartStore";
 import "./scss/CrocsProductDetail.scss";
 
 const CrocsProductDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { crocsItems, onFetchItems } = useCrocsProductStore();
     const { crocsSizesByCategory, onFetchSize } = useCrocsSizeStore();
-    const { onAddWishList, onProductAddCart } = wishListStore();
-    const { addProduct } = useRecentProductsStore();
+    const { onAddWishList } = wishListStore();
+    // const { addProduct } = useRecentProductsStore();
+    const { addProductToCart } = useCartStore(); // ⭐ 추가
     const [CrocsProduct, setCrocsProduct] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedColor, setSelectedColor] = useState("brown"); // 기본 색상
@@ -53,19 +56,15 @@ const CrocsProductDetail = () => {
     // ⭐ 원가 계산 (prices[0])
     const getOriginalPrice = (product) => {
         if (!product || !product.prices) return null; // ⭐ null 방어
-
         const origin = product.prices[0];
         if (!origin) return null;
-
         return Number(String(origin).replace(/,/g, ""));
     };
 
     // ⭐ 할인율 계산
     const detailPrice = CrocsProduct ? getDetailPrice(CrocsProduct) : 0;
     const originalPrice = CrocsProduct ? getOriginalPrice(CrocsProduct) : null;
-
     const hasOriginal = originalPrice !== null && originalPrice > detailPrice;
-
     const discountPercent = hasOriginal
         ? Math.round(((originalPrice - detailPrice) / originalPrice) * 100)
         : null;
@@ -119,66 +118,61 @@ const CrocsProductDetail = () => {
 
     useEffect(() => {
         if (!id || crocsItems.length === 0) return;
-
         const findCrocsItem = crocsItems.find((item) => String(item.id) === String(id));
         setCrocsProduct(findCrocsItem);
     }, [id, crocsItems]);
-
-    // ⭐ 상품 정보가 로드되면 최근 본 상품에 추가
-    useEffect(() => {
-        if (!CrocsProduct) return;
-
-        // 이미지 배열 처리 (useEffect 안에서만)
-        let productImages = [];
-        if (Array.isArray(CrocsProduct.product_img)) {
-            productImages = CrocsProduct.product_img
-                .flatMap((item) => String(item).split(","))
-                .map((v) => v.trim())
-                .filter(Boolean);
-        } else {
-            productImages = String(CrocsProduct.product_img)
-                .split(",")
-                .map((v) => v.trim())
-                .filter(Boolean);
-        }
-
-        // 최근 본 상품에 추가
-        addProduct({
-            id: CrocsProduct.id,
-            name: CrocsProduct.product,
-            image: productImages[0] || "",
-            price: detailPrice.toLocaleString(),
-            discountPrice: hasOriginal ? detailPrice.toLocaleString() : "",
-            originPrice: hasOriginal ? originalPrice.toLocaleString() : "",
-            discount: discountPercent || "",
-        });
-
-        console.log("✅ 최근 본 상품에 추가:", CrocsProduct.product);
-    }, [CrocsProduct]); // ⭐ 의존성 배열 수정: CrocsProduct만!
 
     if (!CrocsProduct) {
         return <div>상품 정보를 불러오고 있으니 기다려주세요.</div>;
     }
 
+    // ⭐ 상품 정보가 로드되면 최근 본 상품에 추가
+    // useEffect(() => {
+    //     if (!CrocsProduct) return;
+
+    //     // 이미지 배열 처리 (useEffect 안에서만)
+    //     let productImages = [];
+    //     if (Array.isArray(CrocsProduct.product_img)) {
+    //         productImages = CrocsProduct.product_img
+    //             .flatMap((item) => String(item).split(","))
+    //             .map((v) => v.trim())
+    //             .filter(Boolean);
+    //     } else {
+    //         productImages = String(CrocsProduct.product_img)
+    //             .split(",")
+    //             .map((v) => v.trim())
+    //             .filter(Boolean);
+    //     }
+
+    //     // 최근 본 상품에 추가
+    //     addProduct({
+    //         id: CrocsProduct.id,
+    //         name: CrocsProduct.product,
+    //         image: productImages[0] || "",
+    //         price: detailPrice.toLocaleString(),
+    //         discountPrice: hasOriginal ? detailPrice.toLocaleString() : "",
+    //         originPrice: hasOriginal ? originalPrice.toLocaleString() : "",
+    //         discount: discountPercent || "",
+    //     });
+
+    //     console.log("✅ 최근 본 상품에 추가:", CrocsProduct.product);
+    // }, [CrocsProduct]); // ⭐ 의존성 배열 수정: CrocsProduct만!
+
     const normalizeCate = (cate) => {
         if (!cate) return "women"; // 기본값
-
         const c = cate.split(",")[0].trim().toLowerCase();
-
         if (c.includes("men") || c.includes("남성") || c.includes("man")) return "men";
         if (c.includes("women") || c.includes("여성") || c.includes("woman")) return "women";
         if (c.includes("kid") || c.includes("아동") || c.includes("주니어")) return "kids";
-
         return "women"; // fallback
     };
 
     // 카테고리 기반 사이즈 찾기
     const mainCate = normalizeCate(CrocsProduct.cate);
+    const categorySizes = crocsSizesByCategory[mainCate] || [];
 
     console.log("정규화된 mainCate:", mainCate);
     console.log("sizes store:", crocsSizesByCategory);
-
-    const categorySizes = crocsSizesByCategory[mainCate] || [];
 
     // ⭐ 이미지 타입 관계없이 배열로 통일
     const images = Array.isArray(CrocsProduct.product_img)
@@ -227,20 +221,47 @@ const CrocsProductDetail = () => {
             return;
         }
 
-        const cartProduct = {
+        const productToAdd = {
             id: CrocsProduct.id,
             name: CrocsProduct.product,
             title: CrocsProduct.product,
             price: detailPrice,
-            quantity: quantity,
+            product_img: Array.isArray(CrocsProduct.product_img)
+                ? CrocsProduct.product_img[0]
+                : CrocsProduct.product_img,
             size: selectedSize,
-            color: selectedColor,
-            product_img: images[0],
-            cate: CrocsProduct.cate,
+            // useCartStore의 addProductToCart에 필요한 데이터
+            discountPrice: hasOriginal ? detailPrice : null,
+            price_dc_rate: hasOriginal ? detailPrice : null,
         };
 
-        console.log("장바구니에 담을 상품:", cartProduct);
-        onProductAddCart(cartProduct, quantity);
+        console.log("🛒 장바구니 추가:", productToAdd);
+
+        const success = addProductToCart(productToAdd, quantity);
+
+        if (success) {
+            const goToCart = window.confirm(
+                "장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?"
+            );
+            if (goToCart) {
+                navigate("/cart");
+            }
+        }
+
+        // const cartProduct = {
+        //     id: CrocsProduct.id,
+        //     name: CrocsProduct.product,
+        //     title: CrocsProduct.product,
+        //     price: detailPrice,
+        //     quantity: quantity,
+        //     size: selectedSize,
+        //     color: selectedColor,
+        //     product_img: images[0],
+        //     cate: CrocsProduct.cate,
+        // };
+
+        // console.log("장바구니에 담을 상품:", cartProduct);
+        // onProductAddCart(cartProduct, quantity);
     };
 
     return (
@@ -447,8 +468,7 @@ const CrocsProductDetail = () => {
                                         className={`color-badge color-badge--${c.key} ${
                                             selectedColor === c.key ? "active" : ""
                                         }`}
-                                        aria-label={`${c.label} 선택`}
-                                        aria-pressed={selectedColor === c.key}
+                                        
                                         onClick={() => handleColorSelect(c.key)}
                                     />
                                 ))}
@@ -718,7 +738,7 @@ const CrocsProductDetail = () => {
                             <button
                                 className='select-buy__buy-btn select-buy__buy-btn--add-cart'
                                 onClick={() =>
-                                    onProductAddCart({
+                                    handleAddToCart({
                                         id: CrocsProduct.id,
 
                                         // ⭐ CartStore에서 name 사용하므로 반드시 넣기
