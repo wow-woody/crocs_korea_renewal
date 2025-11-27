@@ -11,6 +11,7 @@ function OrderSummary({
     onRemoveProduct,
     onIncreaseQuantity,
     onDecreaseQuantity,
+    handleOrderComplete,
 }) {
     // 금액 포맷팅
     const formatPrice = (price) => {

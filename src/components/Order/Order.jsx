@@ -1,25 +1,24 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+// import { Products } from '../../data/CrocsProductsData.js';
 import OrderForm from './OrderForm.jsx';
 import OrderSummary from './OrderSummary.jsx';
-import './styles/Order.scss';
-
-import { Products } from '../../data/CrocsProductsData.js';
 import OrderProgress from './OrderProgress.jsx';
 import Title from '../Title.jsx';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { loginAuthStore } from '../../store/loginStore';
+import { db } from '../../firebase/firebase';
+import { collection, addDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 
-// JSON
-// import womenProducts from '../../data/여성-카테고리-완전통합.json';
-// import menProducts from '../../data/남성-카테고리-완전통합.json';
-// import kidsProducts from '../../data/키즈-카테고리-완전통합.json';
-// import newProducts from '../../data/신상품&트렌드-카테고리-완전통합.json';
-// import jibbitzProducts from '../../data/지비츠_참-카테고리-완전통합.json';
+import './styles/Order.scss';
 
 function Order() {
     const location = useLocation();
     const navigate = useNavigate();
     const [isOrderComplete, setIsOrderComplete] = useState(false);
     const orderFormRef = useRef(null);
+
+    // 로그인 사용자 정보 가져오기
+    const { user } = loginAuthStore();
 
     // 장바구니에서 받은 주문데이터
     const cartOrderData = location.state || null;
@@ -34,7 +33,7 @@ function Order() {
             alert('주문할 상품이 없습니다. 장바구니로 이동합니다.');
             navigate('/cart', { replace: true }); // replace: true로 히스토리 교체
         }
-    }, [cartOrderData, navigate]); // cartOrderData와 navigate를 의존성 배열에 추가
+    }, [cartOrderData, navigate]);
 
     // 초기 상품 데이터 생성 (useMemo로 한 번만 생성)
     const initialProducts = useMemo(() => {
@@ -52,101 +51,6 @@ function Order() {
             }));
         }
 
-        // 여성 상품 1개 선택
-        // const womenItems = Products.filter((product)=> {
-        //     if(!product.cate) return false;
-        //         // cate 속성비교
-        //         const cateLower = product.cate.toLowerCase();
-        //         return cateLower.includes("여성")
-        // });
-        // const randomWomen = getRandomItems(womenItems, 1);
-
-        // randomWomen.forEach((item) => {
-        //     result.push({
-        //         id: result.length + 1,
-        //         name: item.product || '상품명 없음',
-        //         color: parseColor(item.color),
-        //         size: 'W7/W8',
-        //         quantity: 1,
-        //         price: parsePrice(item.price_dc_rate || item.price),
-        //         image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
-        //         category: '여성',
-        //     });
-        // });
-
-        // 남성 상품 1개 추가
-        // const menItems = Products.filter((product)=> {
-        //     if(!product.cate) return false;
-        //         // cate 속성비교
-        //         const cateLower = product.cate.toLowerCase();
-        //         return cateLower.includes("남성")
-        // });
-        // const randomMen = getRandomItems(menItems, 1);
-
-        // randomMen.forEach((item) => {
-        //     result.push({
-        //         id: result.length + 1,
-        //         name: item.product || '상품명 없음',
-        //         color: parseColor(item.color),
-        //         size: 'M9/M10',
-        //         quantity: 1,
-        //         price: parsePrice(item.price_dc_rate || item.price),
-        //         image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
-        //         category: '남성',
-        //     });
-        // });
-
-        // // 키즈 상품 1개 추가
-        // const kidsItems = kidsProducts.products || [];
-        // const randomKids = getRandomItems(kidsItems, 1);
-
-        // randomKids.forEach((item) => {
-        //     result.push({
-        //         id: result.length + 1,
-        //         name: item.product || '상품명 없음',
-        //         color: parseColor(item.color),
-        //         size: 'C10/C11',
-        //         quantity: 1,
-        //         price: parsePrice(item.price_dc_rate || item.price),
-        //         image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
-        //         category: '키즈',
-        //     });
-        // });
-
-        // // 지비츠 1개 추가
-        // const jibbitzItems = jibbitzProducts.products || [];
-        // const randomJibbitz = getRandomItems(jibbitzItems, 1);
-
-        // randomJibbitz.forEach((item) => {
-        //     result.push({
-        //         id: result.length + 1,
-        //         name: item.product || '상품명 없음',
-        //         color: '지비츠',
-        //         size: 'ONE SIZE',
-        //         quantity: 1,
-        //         price: parsePrice(item.price_dc_rate || item.price),
-        //         image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
-        //         category: '지비츠',
-        //     });
-        // });
-
-        // // 신상품 1개 추가
-        // const newItems = newProducts.products || [];
-        // const randomNew = getRandomItems(newItems, 1);
-
-        // randomNew.forEach((item) => {
-        //     result.push({
-        //         id: result.length + 1,
-        //         name: item.product || '상품명 없음',
-        //         color: parseColor(item.color),
-        //         size: item.size || 'ONE SIZE',
-        //         quantity: 1,
-        //         price: parsePrice(item.price_dc_rate || item.price),
-        //         image: Array.isArray(item.product_img) ? item.product_img[0] : item.product_img,
-        //         category: '신상품',
-        //     });
-        // });
-
         return [];
     }, [cartOrderData]);
 
@@ -158,20 +62,8 @@ function Order() {
         shippingFee: 2500,
     };
 
-    // Cart에서 받은 데이터가 없으면 Cart로 리다이렉트
-    // useEffect(() => {
-    //     if (!cartOrderData && (!products || products.length === 0)) {
-    //         alert("주문할 상품이 없습니다. 장바구니로 이동합니다.");
-    //         navigate('/cart');
-    //     }
-    // }, [cartOrderData, navigate]);
-
-    useEffect(() => {
-        if (products.length === 0 && cartOrderData) {
-            alert('주문할 상품이 없습니다. 장바구니로 이동합니다.');
-            navigate('/cart', { replace: true });
-        }
-    }, [products, cartOrderData, navigate]);
+    // ⭐ 자동 리다이렉트 제거 (handleRemoveProduct에서 수동으로 처리)
+    // 사용자가 마지막 상품 삭제 시 확인 메시지로 제어
 
     // 총 상품 금액 계산
     const calculateSubtotal = () => {
@@ -193,6 +85,22 @@ function Order() {
     // 상품 삭제
     const handleRemoveProduct = (productId) => {
         if (!products) return;
+
+        // ⭐ 마지막 상품 삭제 시 확인
+        if (products.length === 1) {
+            const confirmed = window.confirm(
+                '모든 상품을 삭제하면 주문이 취소됩니다.\n장바구니로 이동하시겠습니까?'
+            );
+
+            if (confirmed) {
+                // 확인 → 장바구니로 이동
+                navigate('/cart', { replace: true });
+            }
+            // 취소 → 아무것도 안 함 (삭제하지 않음)
+            return;
+        }
+
+        // 마지막 상품이 아니면 정상 삭제
         setProducts(products.filter((product) => product.id !== productId));
     };
 
@@ -216,26 +124,101 @@ function Order() {
         );
     };
 
+    // // 주문 완료
+    // const handleOrderComplete = () => {
+    //     if (orderFormRef.current && !orderFormRef.current.validateForm()) {
+    //         return;
+    //     }
+
+    //     // 페이지 최상단으로 스크롤
+    //     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    //     setIsOrderComplete(true);
+
+    //     // 주문 완료 후 장바구니 비우기
+    //     if (cartOrderData) {
+    //         localStorage.setItem('cartIds', JSON.stringify([]));
+
+    //         // Zustand store의 장바구니도 비우기 (store가 있다면)
+    //         // useCartStore.getState().clearCart(); // 이 부분은 store 구조에 따라 조정
+    //     }
+
+    //     // 회원/비회원에 따라 다른 페이지로 이동
+    //     setTimeout(() => {
+    //         if (user) {
+    //             // 회원: UserInfo 페이지로 이동
+    //             navigate('/userinfo', { replace: true });
+    //         } else {
+    //             // 비회원: 메인 페이지로 이동
+    //             navigate('/', { replace: true });
+    //         }
+    //     }, 3000);
+    // };
+
     // 주문 완료
-    const handleOrderComplete = () => {
+    const handleOrderComplete = async () => {
         if (orderFormRef.current && !orderFormRef.current.validateForm()) {
             return;
         }
 
-        setIsOrderComplete(true);
+        // 페이지 최상단으로 스크롤
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        // 주문 완료 후 장바구니 비우기
-        if (cartOrderData) {
-            localStorage.setItem('cartIds', JSON.stringify([]));
+        try {
+            // 주문 데이터 생성
+            const orderData = {
+                orderId: `ORDER_${Date.now()}`,
+                orderDate: new Date(),
+                status: 'pending', // pending, processing, shipped, delivered, cancelled
+                products: products.map((p) => ({
+                    id: p.id,
+                    name: p.name,
+                    color: p.color,
+                    size: p.size,
+                    quantity: p.quantity,
+                    price: p.price,
+                    image: p.image,
+                })),
+                subtotal: calculateSubtotal(),
+                shipping: calculateShipping(),
+                total: calculateTotal(),
+                userId: user?.uid || null,
+                userEmail: user?.email || null,
+                userName: user?.name || null,
+            };
 
-            // Zustand store의 장바구니도 비우기 (store가 있다면)
-            // useCartStore.getState().clearCart(); // 이 부분은 store 구조에 따라 조정
+            if (user) {
+                // 로그인 사용자: users 컬렉션에 주문 내역 추가
+                const userRef = doc(db, 'users', user.uid);
+                await updateDoc(userRef, {
+                    orders: arrayUnion(orderData),
+                });
+                console.log('주문 내역이 사용자 정보에 저장되었습니다.');
+            } else {
+                // 비회원: orders 컬렉션에 별도 저장
+                await addDoc(collection(db, 'orders'), orderData);
+                console.log('비회원 주문 내역이 저장되었습니다.');
+            }
+
+            setIsOrderComplete(true);
+
+            // 주문 완료 후 장바구니 비우기
+            if (cartOrderData) {
+                localStorage.setItem('cartIds', JSON.stringify([]));
+            }
+
+            // 회원/비회원에 따라 다른 페이지로 이동
+            setTimeout(() => {
+                if (user) {
+                    navigate('/userinfo', { replace: true });
+                } else {
+                    navigate('/', { replace: true });
+                }
+            }, 3000);
+        } catch (error) {
+            console.error('주문 저장 실패:', error);
+            alert('주문 처리 중 오류가 발생했습니다. 다시 시도해주세요.');
         }
-
-        // 3초 후 주문완료 페이지로 이동 // 임시로 메인페이지
-        setTimeout(() => {
-            navigate('/userinfo', { replace: true });
-        }, 3000);
     };
 
     return (
@@ -243,50 +226,54 @@ function Order() {
             <div className="main-title">
                 <Title title="Order" />
             </div>
-            {/* <h1 className="order-title">Order</h1> */}
-            <OrderProgress />
-            <div className="order-content">
-                <div className="order-left">
-                    <OrderForm ref={orderFormRef} />
-                </div>
+            <OrderProgress isOrderComplete={isOrderComplete} />
 
-                <div className="order-right">
-                    <OrderSummary
-                        products={products}
-                        subtotal={calculateSubtotal()}
-                        shipping={calculateShipping()}
-                        total={calculateTotal()}
-                        freeShippingThreshold={shippingInfo.freeShippingThreshold}
-                        isOrderComplete={isOrderComplete}
-                        onOrderComplete={handleOrderComplete}
-                        onRemoveProduct={handleRemoveProduct}
-                        onIncreaseQuantity={handleIncreaseQuantity}
-                        onDecreaseQuantity={handleDecreaseQuantity}
-                    />
+            {!isOrderComplete ? (
+                <div className="order-content">
+                    <div className="order-left">
+                        <OrderForm ref={orderFormRef} />
+                    </div>
+
+                    <div className="order-right">
+                        <OrderSummary
+                            products={products}
+                            subtotal={calculateSubtotal()}
+                            shipping={calculateShipping()}
+                            total={calculateTotal()}
+                            freeShippingThreshold={shippingInfo.freeShippingThreshold}
+                            isOrderComplete={isOrderComplete}
+                            onOrderComplete={handleOrderComplete}
+                            onRemoveProduct={handleRemoveProduct}
+                            onIncreaseQuantity={handleIncreaseQuantity}
+                            onDecreaseQuantity={handleDecreaseQuantity}
+                        />
+                    </div>
                 </div>
-            </div>
+            ) : (
+                <div className="order-complete-wrapper">
+                    <div className="order-complete-message">
+                        <div className="success-icon">✓</div>
+                        <h3 className="success-title">주문이 완료되었습니다!</h3>
+                        <p className="success-message">
+                            빠른 시일 내에 배송해드리겠습니다.
+                            <br />
+                            감사합니다.
+                            <br />
+                            <br />
+                            <span className="redirect-notice">
+                                {user
+                                    ? '잠시 후 마이페이지로 이동합니다.'
+                                    : '잠시 후 메인페이지로 이동합니다.'}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
 
-// 배열에서 랜덤하게 아이템 선택
-function getRandomItems(array, count) {
-    const shuffled = [...array].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, Math.min(count, array.length));
-}
-
-// 가격
-function parsePrice(priceStr) {
-    if (!priceStr) return 0;
-
-    let price = String(priceStr).replace(/₩|,/g, '').trim();
-    price = price.replace(/\([^)]*\)/g, '').trim();
-
-    const numbers = price.match(/\d+/);
-    return numbers ? parseInt(numbers[0]) : 0;
-}
-
-// 색상
+// 색상 파싱
 function parseColor(colorArray) {
     if (!colorArray || colorArray.length === 0) return '기본색상';
 
