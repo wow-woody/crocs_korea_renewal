@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './scss/ProductDetail.scss';
 
 const JibbitzProductImage = ({ product }) => {
     const mainImages = [
@@ -13,69 +12,20 @@ const JibbitzProductImage = ({ product }) => {
     ];
 
     return (
-        <div className="product-img">
-            {/* <nav className="product-img__crumbs-wrap" aria-label="breadcrumb">
-                <ul className="product-img__crumbs">
-                    <li className="product-img__crumb product-img__crumb--home">
-                        <Link to="/" className="product-img__link">
+        <div className="product-img-info__wrap">
+            <div className="product-img">
+                {/* 메인 이미지 */}
+                <div className="product-img__main-wrap">
+                    <ul className="product-img__list product-img__list--main">
+                        <li>
                             <img
-                                className="product-img__icon"
-                                src={`${process.env.PUBLIC_URL}/images/Sub_Women_Images/icon-home.svg`}
-                                alt="홈"
+                                className="product-img__img"
+                                src={product.imageUrl}
+                                alt={product.title}
+                                loading="lazy"
                             />
-                        </Link>
-                    </li>
-
-                    <li className="product-img__sep" aria-hidden="true">
-                        <span>:</span>
-                    </li>
-
-                    <li className="product-img__crumb product-img__crumb--category">
-                        <Link to="/women" className="product-img__link">
-                            <span className="product-img__text">여성</span>
-                            <img
-                                className="product-img__icon"
-                                src={`${process.env.PUBLIC_URL}/images/Sub_Women_Images/icon-arrow-right.svg`}
-                                alt=""
-                            />
-                        </Link>
-                    </li>
-
-                    <li className="product-img__sep" aria-hidden="true">
-                        <span>:</span>
-                    </li>
-
-                    <li className="product-img__crumb product-img__crumb--current">
-                        <span className="product-img__link" aria-current="page">
-                            <span className="product-img__text">털안감 라인드 클로그</span>
-                            <button
-                                type="button"
-                                className="product-img__close-btn"
-                                aria-label="닫기"
-                            >
-                                <img
-                                    className="product-img__icon"
-                                    src={`${process.env.PUBLIC_URL}/images/Sub_Women_Images/icon-close_cross.svg`}
-                                    alt=""
-                                />
-                            </button>
-                        </span>
-                    </li>
-                </ul>
-            </nav> */}
-
-            {/* 메인 이미지 */}
-            <div className="product-img__main-wrap">
-                <ul className="product-img__list product-img__list--main">
-                    <li>
-                        <img
-                            className="product-img__img"
-                            src={product.imageUrl}
-                            alt={product.title}
-                            loading="lazy"
-                        />
-                    </li>
-                    {/* {mainImages.map((img, index) => (
+                        </li>
+                        {/* {mainImages.map((img, index) => (
                         <li
                             key={index}
                             className={`product-img__item ${
@@ -90,54 +40,54 @@ const JibbitzProductImage = ({ product }) => {
                             />
                         </li>
                     ))} */}
-                </ul>
-            </div>
-
-            {/* 썸네일 이미지 */}
-            <aside className="product-img__thumbs-wrap">
-                {/* Top btns */}
-                <div className="thumbs__ctrl thumbs__ctrl--top">
-                    <button
-                        type="button"
-                        className="thumbs__btn thumbs__btn--up"
-                        aria-label="이전 썸네일 보기"
-                    >
-                        <img
-                            className="thumbs__icon"
-                            src={`${process.env.PUBLIC_URL}/images/icon-arrow-up-hairline.svg`}
-                            alt=""
-                        />
-                    </button>
-                    <button
-                        type="button"
-                        className="thumbs__btn thumbs__btn--active"
-                        aria-label="이전 썸네일 보기"
-                    >
-                        <img
-                            className="thumbs__icon"
-                            src={`${process.env.PUBLIC_URL}/images/icon-arrow-up-green.svg`}
-                            alt=""
-                        />
-                    </button>
+                    </ul>
                 </div>
 
-                {/* Thumbs List */}
-                <ul className="product-img__thumbs-list">
-                    <li className="product-img__thumbs-item">
+                {/* 썸네일 이미지 */}
+                <aside className="product-img__thumbs-wrap">
+                    {/* Top btns */}
+                    <div className="thumbs__ctrl thumbs__ctrl--top">
                         <button
                             type="button"
-                            className="product-img__thumbs-link"
-                            // aria-label={`${index + 1}번째 이미지 보기`}
+                            className="thumbs__btn thumbs__btn--up"
+                            aria-label="이전 썸네일 보기"
                         >
                             <img
-                                className="product-img__thumbs-img"
-                                src={product.imageUrl}
-                                alt={product.title}
-                                loading="lazy"
+                                className="thumbs__icon"
+                                src={`${process.env.PUBLIC_URL}/images/icon-arrow-up-hairline.svg`}
+                                alt=""
                             />
                         </button>
-                    </li>
-                    {/* {mainImages.map((img, index) => (
+                        <button
+                            type="button"
+                            className="thumbs__btn thumbs__btn--active"
+                            aria-label="이전 썸네일 보기"
+                        >
+                            <img
+                                className="thumbs__icon"
+                                src={`${process.env.PUBLIC_URL}/images/icon-arrow-up-green.svg`}
+                                alt=""
+                            />
+                        </button>
+                    </div>
+
+                    {/* Thumbs List */}
+                    <ul className="product-img__thumbs-list">
+                        <li className="product-img__thumbs-item">
+                            <button
+                                type="button"
+                                className="product-img__thumbs-link"
+                                // aria-label={`${index + 1}번째 이미지 보기`}
+                            >
+                                <img
+                                    className="product-img__thumbs-img"
+                                    src={product.imageUrl}
+                                    alt={product.title}
+                                    loading="lazy"
+                                />
+                            </button>
+                        </li>
+                        {/* {mainImages.map((img, index) => (
                         <li key={index} className="product-img__thumbs-item">
                             <button
                                 type="button"
@@ -153,34 +103,35 @@ const JibbitzProductImage = ({ product }) => {
                             </button>
                         </li>
                     ))} */}
-                </ul>
+                    </ul>
 
-                {/* Bottom btns */}
-                <div className="thumbs__ctrl thumbs__ctrl--bottom">
-                    <button
-                        type="button"
-                        className="thumbs__btn thumbs__btn--down"
-                        aria-label="다음 썸네일 보기"
-                    >
-                        <img
-                            className="thumbs__icon"
-                            src={`${process.env.PUBLIC_URL}/images/icon-arrow-down-hairline.svg`}
-                            alt=""
-                        />
-                    </button>
-                    <button
-                        type="button"
-                        className="thumbs__btn thumbs__btn--active"
-                        aria-label="다음 썸네일 보기"
-                    >
-                        <img
-                            className="thumbs__icon"
-                            src={`${process.env.PUBLIC_URL}/images/icon-arrow-down-green.svg`}
-                            alt=""
-                        />
-                    </button>
-                </div>
-            </aside>
+                    {/* Bottom btns */}
+                    <div className="thumbs__ctrl thumbs__ctrl--bottom">
+                        <button
+                            type="button"
+                            className="thumbs__btn thumbs__btn--down"
+                            aria-label="다음 썸네일 보기"
+                        >
+                            <img
+                                className="thumbs__icon"
+                                src={`${process.env.PUBLIC_URL}/images/icon-arrow-down-hairline.svg`}
+                                alt=""
+                            />
+                        </button>
+                        <button
+                            type="button"
+                            className="thumbs__btn thumbs__btn--active"
+                            aria-label="다음 썸네일 보기"
+                        >
+                            <img
+                                className="thumbs__icon"
+                                src={`${process.env.PUBLIC_URL}/images/icon-arrow-down-green.svg`}
+                                alt=""
+                            />
+                        </button>
+                    </div>
+                </aside>
+            </div>
         </div>
     );
 };

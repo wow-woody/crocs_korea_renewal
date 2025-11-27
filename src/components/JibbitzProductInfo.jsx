@@ -1,23 +1,46 @@
 import React, { useState, useCallback } from 'react';
-import './scss/ProductDetail.scss';
 import { wishListStore } from '../store/wishListStore';
 import WishAddPopup from './WishAddPopup';
-// import CartAddPopup from './CartAddPopup';
+import { useParams } from 'react-router-dom';
 
 const JibbitzProductInfo = ({ product }) => {
+    const { id } = useParams();
     const [count, setCount] = useState(1);
     const { wishLists, onAddWishList, onProductAddCart } = wishListStore();
 
+    const [CrocsProduct, setCrocsProduct] = useState(null);
+    const [quantity, setQuantity] = useState(1);
+    const [likeActive, setLikeActive] = useState(false);
+
     const onHeart = wishLists.some((item) => item.id === product.id);
-    // const isWish = popUp.message.includes('위시리스트');
 
-    const handleIncrease = useCallback(() => {
-        setCount((prevCount) => prevCount + 1);
+    // 가격 파싱 유틸 (문자열 내 숫자만 추출)
+    const parsePriceNumber = useCallback((p) => {
+        if (!p) return 0;
+        const num = String(p).replace(/[^0-9]/g, '');
+        return Number(num || 0);
     }, []);
 
-    const handleDecrease = useCallback(() => {
-        setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1));
-    }, []);
+    // CrocsProduct가 아직 로드되지 않았을 때 null 접근 방지
+    const salePriceNumber = parsePriceNumber(CrocsProduct?.prices?.[0]);
+    const originalPriceNumber = parsePriceNumber(CrocsProduct?.prices?.[1]);
+    const hasOriginal = originalPriceNumber > 0 && originalPriceNumber > salePriceNumber;
+    const discountPercent = hasOriginal
+        ? Math.round(((originalPriceNumber - salePriceNumber) / originalPriceNumber) * 100)
+        : null;
+    const totalPrice = salePriceNumber * quantity;
+
+    const increaseQty = () => setQuantity((q) => q + 1);
+    const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
+    // const handleColorSelect = (c) => setSelectedColor(c);
+
+    // const handleIncrease = useCallback(() => {
+    //     setCount((prevCount) => prevCount + 1);
+    // }, []);
+
+    // const handleDecrease = useCallback(() => {
+    //     setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1));
+    // }, []);
 
     return (
         <div className="product-info__wrap" aria-labelledby="product-title">
@@ -50,10 +73,6 @@ const JibbitzProductInfo = ({ product }) => {
                         >
                             <img src="/images/icon-love_line.svg" alt="wishIcon" />
                         </p>
-                        {/* <WishAddPopup /> */}
-                        {/* <button onClick={() => onAddWishList(product)}>
-                            <img src="/images/icon-love_line.svg" alt="wishIcon" />
-                        </button> */}
                     </div>
                 </div>
 
@@ -62,25 +81,18 @@ const JibbitzProductInfo = ({ product }) => {
                 <div className="product-info_select">
                     <div className="product-info__wrap">
                         <div className="product-info-select_chose-item">
-                            {/* <span
-                                className={`info__color-badge info__color-badge--${selectedColor}`}
-                            ></span> */}
                             <span className="product-info-select_chose-item-name">
                                 {product.title}
                             </span>
                         </div>
-                        {/* <span className="product-info__price_breadcrumbs__line"></span> */}
-                        {/* <span className="product-info-select_chose-item-option">
-                            {selectedSize}
-                        </span> */}
                     </div>
                     <div className="product-info-select__count-wrap">
                         <div className="product-info-select__count">
                             <div className="product-info-select__count-value-wrap">
                                 <p className="product-info-select__count-value">
-                                    <span>{count}</span>
+                                    <span>{quantity}</span>
                                 </p>
-                                <div className="product-info-select__wrap">
+                                {/* <div className="product-info-select__wrap">
                                     <button
                                         type="button"
                                         className="product-info-select__count-btn product-info-select__count-btn--increase"
@@ -88,7 +100,7 @@ const JibbitzProductInfo = ({ product }) => {
                                     >
                                         <span className="product-info-select__count-link product-info-select__count-link--disabled-1">
                                             <img
-                                                src={`${process.env.PUBLIC_URL}/images/icon-arrow-up_bold-1.svg`}
+                                                src="icon-prev.svg"
                                                 alt="수량 증가 버튼"
                                                 className="count-btn__icon-1"
                                             />
@@ -122,21 +134,77 @@ const JibbitzProductInfo = ({ product }) => {
                                             />
                                         </span>
                                     </button>
+                                </div> */}
+                                {/* 수량 버튼 */}
+                                <div className="select-buy__select__wrap">
+                                    <button
+                                        type="button"
+                                        className="select-buy__select__count-btn select-buy__select__count-btn--increase"
+                                        onClick={increaseQty}
+                                    >
+                                        <span className="select-buy__select__count-link select-buy__select__count-link--disabled-1">
+                                            <img
+                                                src="/images/icon-arrow-up_bold-1.svg"
+                                                alt="증가"
+                                            />
+                                        </span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="select-buy__select__count-btn select-buy__select__count-btn--decrease"
+                                        onClick={decreaseQty}
+                                        disabled={quantity <= 1}
+                                    >
+                                        <span className="select-buy__select__count-link select-buy__select__count-link--disabled-1">
+                                            <img
+                                                src="/images/icon-arrow-down_bold-1.svg"
+                                                alt="감소"
+                                            />
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="product-info_breadcrumbs"></div>
-                <div className="product-btn-wrap">
+                <div className="select-buy__breadcrumbs"></div>
+                {/* 총 금액 */}
+                <div className="select-buy__total-wrap">
+                    <div className="select-buy__total-title">
+                        <p>총 상품 금액</p>
+                    </div>
+                    <div className="select-buy__total-content">
+                        <div className="select-buy__total-number-wrap">
+                            <p className="total-number-text">수량: {quantity}</p>
+                        </div>
+                        <div className="select-buy__total-price-wrap">
+                            <p className="total-price">₩{totalPrice.toLocaleString()}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="select-buy__breadcrumbs" />
+                {/* 구매버튼 */}
+                <div className="select-buy__buy-btns-wrap">
+                    <p
+                        className={`select-buy ${onHeart ? 'active' : 'normal'}`}
+                        onClick={() => onAddWishList(product)}
+                    >
+                        <img src="/images/icon-love_line.svg" alt="wishIcon" />
+                    </p>
                     <button
-                        className="product-btn-cart"
+                        className="select-buy__buy-btn select-buy__buy-btn--add-cart"
+                        type="button"
                         onClick={() => onProductAddCart(product, count)}
                     >
                         장바구니
                     </button>
                     <WishAddPopup />
-                    <button className="product-btn-buy">구매하기</button>
+                    <button
+                        className="select-buy__buy-btn select-buy__buy-btn--buy-now"
+                        type="button"
+                    >
+                        구매하기
+                    </button>
                 </div>
             </div>
         </div>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../components/scss/ProductDetail.scss';
+import './scss/CrocsProductDetail.scss';
+import './scss/ProductPage_flat.scss';
 import { collaboAuthStore } from '../store/collaboAuthStore';
 import { wishListStore } from '../store/wishListStore';
 import { useParams } from 'react-router-dom';
@@ -25,12 +27,14 @@ const JibbitzProductDetail = () => {
         return <div>상품 정보를 불러오고 있으니 기다리</div>;
     }
     return (
-        <main className="product-detail-page">
-            <div className="product-img-info__wrap">
-                <JibbitzProductImage product={product} />
-                <JibbitzProductInfo product={product} />
+        <div className="sub_page">
+            <div className="inner">
+                <div className="product-detail-page">
+                    <JibbitzProductImage product={product} />
+                    <JibbitzProductInfo product={product} />
+                </div>
             </div>
-        </main>
+        </div>
     );
 };
 

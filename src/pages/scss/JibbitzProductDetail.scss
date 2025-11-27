@@ -1,0 +1,250 @@
+@use '../../App.scss' as g;
+
+.product-detail-page {
+    // display: flex;
+    // justify-content: center;
+    // width: 100%;
+    max-width: 144rem;
+    margin: 0 auto;
+    padding: 4rem 0;
+    .jibbitz-product-img-wrap {
+        display: flex;
+        justify-content: space-between;
+        .product-img-main-wrap {
+            .product-img {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 3rem;
+                width: 100%;
+                // max-width: 120rem;
+
+                /* 메인 이미지 */
+                &__main-wrap {
+                    flex: 1;
+
+                    .product-img__list {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+
+                        li {
+                            .product-img__img {
+                                width: 100%;
+                                height: auto;
+                                border-radius: 1rem;
+                                background: #fff;
+                            }
+                        }
+                    }
+                }
+
+                /* 썸네일 */
+                &__thumbs-wrap {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 1.6rem;
+
+                    .product-img__thumbs-list {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.6rem;
+
+                        .product-img__thumbs-item {
+                            width: 8rem;
+                            height: 8rem;
+
+                            .product-img__thumbs-link {
+                                width: 100%;
+                                height: 100%;
+                                border: 1px solid #e0e0e0;
+                                border-radius: 0.8rem;
+                                background: #fff;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                cursor: pointer;
+
+                                &:hover {
+                                    border-color: #b5d766;
+                                }
+
+                                .product-img__thumbs-img {
+                                    width: 70%;
+                                    height: auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 상품 정보 영역
+            .product-info__wrap {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                width: 100%;
+                max-width: 56rem;
+
+                .product-info {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3.2rem;
+
+                    /* 제목 */
+                    &__title_wrap {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+
+                        .product-info__subtitle {
+                            font-family: 'all-round-gothic';
+                            color: #b5d766;
+                            font-size: 1.6rem;
+                            font-weight: 600;
+                        }
+
+                        .product-info__title {
+                            font-size: 3rem;
+                            font-weight: 600;
+                        }
+                    }
+
+                    /* 가격 */
+                    &__price {
+                        display: flex;
+                        align-items: center;
+                        gap: 1.2rem;
+                        font-family: 'all-round-gothic';
+
+                        .product-info__price_dc_rate {
+                            font-size: 2.4rem;
+                            font-weight: 700;
+                            color: g.$subColor;
+                        }
+
+                        .product-info__price_sale {
+                            font-size: 2rem;
+                            font-weight: 700;
+                            color: #d70000;
+                        }
+
+                        .product-info__price_cost {
+                            font-size: 1.6rem;
+                            font-weight: 300;
+                            color: #ebebeb;
+                            text-decoration: line-through;
+                        }
+
+                        .product-info__price_breadcrumbs__line {
+                            width: 0.2rem;
+                            height: 1.2rem;
+                            background-color: #d9d9d9;
+                        }
+                    }
+
+                    /* 구분선 */
+                    .product-info_breadcrumbs {
+                        width: 100%;
+                        height: 0.1rem;
+                        background: #ebebeb;
+                    }
+
+                    // 수량선택
+                    .product-info-select__count-wrap {
+                        display: flex;
+                        align-items: center;
+
+                        .product-info-select__count-value {
+                            width: 5.5rem;
+                            height: 3.6rem;
+                            background: #fff;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border: 1px solid #ebebeb;
+                            border-right: none;
+                            border-radius: 4px 0 0 4px;
+                            font-size: 1.9rem;
+                            font-weight: 600;
+                        }
+
+                        .select-buy__select__wrap {
+                            display: flex;
+                            flex-direction: column;
+                            border: 1px solid #ebebeb;
+                            border-left: none;
+
+                            .select-buy__select__count-btn {
+                                width: 1.7rem;
+                                height: 1.7rem;
+                                border: none;
+                                background: #fff;
+                                cursor: pointer;
+                                border-bottom: 1px solid #ebebeb;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                img {
+                                    width: 1rem;
+                                    height: auto;
+                                }
+
+                                &:last-child {
+                                    border-bottom: none;
+                                }
+                            }
+                        }
+                    }
+
+                    // 구매버튼
+                    .select-buy__buy-btns-wrap {
+                        display: flex;
+                        align-items: center;
+                        gap: 1.2rem;
+
+                        .select-buy {
+                            width: 5.2rem;
+                            height: 5.2rem;
+                            border: 1px solid #ebebeb;
+                            border-radius: 4rem;
+
+                            img {
+                                width: 50%;
+                                height: 50%;
+                            }
+                        }
+
+                        button {
+                            cursor: pointer;
+                            font-size: 1.6rem;
+                            border-radius: 0.4rem;
+                        }
+
+                        .select-buy__buy-btn--add-cart {
+                            width: 15.6rem;
+                            height: 5.2rem;
+                            border: 1px solid #ebebeb;
+                            background: #fff;
+                        }
+
+                        .select-buy__buy-btn--buy-now {
+                            width: 36.4rem;
+                            height: 5.2rem;
+                            background: #b5d766;
+                            color: #fff;
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

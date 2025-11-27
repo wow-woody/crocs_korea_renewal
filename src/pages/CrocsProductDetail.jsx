@@ -5,6 +5,7 @@ import { wishListStore } from '../store/wishListStore';
 import Title from '../components/Title';
 import WishAddPopup from '../components/WishAddPopup';
 import { useCrocsSizeStore } from '../store/useCrocsSizeStore';
+import './scss/CrocsProductDetail.scss';
 
 const CrocsProductDetail = () => {
     const { id } = useParams();
@@ -153,12 +154,11 @@ const CrocsProductDetail = () => {
               .split(',')
               .map((v) => v.trim())
               .filter(Boolean);
-
     return (
-        <div className="sub_page">
-            <div className="inner">
+        <div className="sub_page container">
+            <section className="product-img-info">
                 <Title title="ProductDetail" />
-                <div className="product-detail-wrap">
+                <div className="product-img-info__wrap">
                     {/* 이미지 + 썸네일 + 크럼브 영역 */}
                     <div className="product-img">
                         <div className="product-img__crumbs-wrap">
@@ -172,9 +172,11 @@ const CrocsProductDetail = () => {
                                         />
                                     </a>
                                 </li>
+
                                 <li className="product-img__sep">
                                     <span>:</span>
                                 </li>
+
                                 <li className="product-img__crumb product-img__crumb--category">
                                     <button
                                         type="button"
@@ -184,9 +186,11 @@ const CrocsProductDetail = () => {
                                         <span className="product-img__text">{mainCate}</span>
                                     </button>
                                 </li>
+
                                 <li className="product-img__sep">
                                     <span>:</span>
                                 </li>
+
                                 <li className="product-img__crumb product-img__crumb--current">
                                     <button
                                         type="button"
@@ -243,6 +247,8 @@ const CrocsProductDetail = () => {
                                     />
                                 </button>
                             </div>
+
+                            {/* 썸네일 리스트 */}
                             <ul className="product-img__thumbs-list">
                                 {images.map((img, idx) => (
                                     <li key={idx} className="product-img__thumbs-item">
@@ -255,7 +261,8 @@ const CrocsProductDetail = () => {
                                             <img
                                                 className="product-img__thumbs-img"
                                                 src={img}
-                                                alt={`${CrocsProduct.product} 썸네일 ${idx + 1}`}
+                                                alt={`${CrocsProduct.product} 썸네일
+                                    ${idx + 1}`}
                                                 style={
                                                     selectedImageIdx === idx
                                                         ? {
@@ -269,6 +276,8 @@ const CrocsProductDetail = () => {
                                     </li>
                                 ))}
                             </ul>
+
+                            {/* 상단 컨트롤 (비활성화 상태 유지) */}
                             <div className="thumbs__ctrl thumbs__ctrl--bottom" aria-hidden="true">
                                 <button
                                     type="button"
@@ -295,208 +304,354 @@ const CrocsProductDetail = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="img_box">
-                        <img src={images[0]} alt={CrocsProduct.product} />
-                    </div> */}
-                    {/* 상품 정보 영역 */}
-                    <div className="product-info__wrap">
-                        <div className="product-info">
-                            <div className="product-info__title_wrap">
-                                <p className="product-info__subtitle">{CrocsProduct.product}</p>
-                                <h2 className="product-info__title">{CrocsProduct.product}</h2>
-                                {/* <div className="product-info__price">
-                                    <span className="product-info__price_dc_rate">
-                                        {salePriceNumber
-                                            ? salePriceNumber.toLocaleString()
-                                            : '가격 없음'}
-                                    </span>
-                                    {hasOriginal && (
-                                        <span className="product-info__price_breadcrumbs__line" />
-                                    )}
-                                    {discountPercent && (
-                                        <span className="product-info__price_sale">
-                                            {discountPercent}%
-                                        </span>
-                                    )}
-                                    {hasOriginal && (
-                                        <span className="product-info__price_breadcrumbs__line" />
-                                    )}
-                                    {hasOriginal && (
-                                        <span className="product-info__price_cost">
-                                            {originalPriceNumber.toLocaleString()}
-                                        </span>
-                                    )}
-                                </div> */}
-                                <div className="product-info__price">
-                                    <span className="product-info__price_dc_rate">
-                                        {detailPrice ? detailPrice.toLocaleString() : '가격 없음'}
-                                    </span>
+                </div>
 
-                                    {hasOriginal && (
-                                        <>
-                                            <span className="product-info__price_breadcrumbs__line" />
-                                            <span className="product-info__price_sale">
-                                                {discountPercent}%
-                                            </span>
-                                            <span className="product-info__price_breadcrumbs__line" />
-                                            <span className="product-info__price_cost">
-                                                {originalPrice.toLocaleString()}
-                                            </span>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="product-info_breadcrumbs" />
-                            {/* 색상 선택 */}
-                            <div className="product-info_color">
-                                <div className="product-info__color-title-wrap">
-                                    <p className="product-info__color-title">색상</p>
-                                    <span className="product-info__price_breadcrumbs__line" />
-                                    <p className="product-info__color-select">
-                                        {colorOptions.find((c) => c.key === selectedColor)?.label ||
-                                            '브라운'}
-                                    </p>
-                                </div>
-                                <div
-                                    className="product-info__color-badge-wrap"
-                                    role="group"
-                                    aria-label="색상 선택"
-                                >
-                                    {colorOptions.map((c) => (
-                                        <button
-                                            key={c.key}
-                                            type="button"
-                                            className={`color-badge color-badge--${c.key} ${
-                                                selectedColor === c.key ? 'active' : ''
-                                            }`}
-                                            aria-label={`${c.label} 선택`}
-                                            aria-pressed={selectedColor === c.key}
-                                            onClick={() => handleColorSelect(c.key)}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                            {/* 사이즈 선택 (BEM 구조 변환) */}
-                            <div className="product-info_size">
-                                <div className="product-info_size-title-wrap">
-                                    <p className="product-info_size-title">사이즈</p>
-                                    <span className="product-info_size_breadcrumbs__line" />
-                                    <p className="product-info_size-select">
-                                        {selectedSize || '선택하세요'}
-                                    </p>
-                                </div>
-                                <div className="product-info_size-btns-wrap">
-                                    <ul
-                                        className="product-info_size-btns"
-                                        role="group"
-                                        aria-label="사이즈 선택"
-                                    >
-                                        {categorySizes.map((size) => (
-                                            <li key={size}>
-                                                <button
-                                                    type="button"
-                                                    className={
-                                                        selectedSize === size ? 'active' : ''
-                                                    }
-                                                    onClick={() => setSelectedSize(size)}
-                                                >
-                                                    {size}
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                            <button onClick={() => onAddWishList(CrocsProduct)}>위시버튼💚</button>
-                            <WishAddPopup />
-                            {/* <button
-                                className="product-btn-cart"
-                                onClick={() =>
-                                    onProductAddCart({
-                                        ...CrocsProduct,
-                                        product_img: Array.isArray(CrocsProduct.product_img)
-                                            ? CrocsProduct.product_img[0] // 대표 이미지
-                                            : CrocsProduct.product_img,
-                                        price: detailPrice, // ⭐ 장바구니에서도 동일 가격 사용
-                                    })
-                                }
-                            >
-                                장바구니
-                            </button> */}
-                            <button
-                                className="product-btn-cart"
-                                onClick={() =>
-                                    onProductAddCart({
-                                        id: CrocsProduct.id,
+                {/* 지비츠 참 */}
+            </section>
 
-                                        // ⭐ CartStore에서 name 사용하므로 반드시 넣기
-                                        name: CrocsProduct.product,
-                                        title: CrocsProduct.product, // 혹시 title도 찾을 수 있으므로 같이 넣기
-
-                                        // ⭐ 할인 가격 or 정상 가격 반영
-                                        price: detailPrice,
-
-                                        // ⭐ 장바구니 수량
-                                        quantity: quantity,
-
-                                        // ⭐ 선택한 사이즈
-                                        size: selectedSize || null,
-
-                                        // ⭐ 대표 이미지
-                                        product_img: Array.isArray(CrocsProduct.product_img)
-                                            ? CrocsProduct.product_img[0]
-                                            : CrocsProduct.product_img,
-                                    })
-                                }
-                            >
-                                장바구니
-                            </button>
-                            <WishAddPopup />
+            {/* 구매하기 영역 */}
+            <section className="select-buy">
+                <div className="select-buy__wrap">
+                    {/* 타이틀 영역 */}
+                    <div className="select-buy__title_wrap">
+                        <p class="select-buy__subtitle">{CrocsProduct.product}</p>
+                        <h2 class="select-buy__title">{CrocsProduct.product}</h2>
+                        <div className="select-buy__price">
+                            <span class="select-buy__price_dc_rate">
+                                {detailPrice ? detailPrice.toLocaleString() : '가격 없음'}
+                            </span>
+                            <span class="select-buy__price_breadcrumbs__line"></span>
+                            <span class="select-buy__price_sale">{discountPercent}%</span>
+                            <span class="select-buy__price_breadcrumbs__line"></span>
+                            <span class="select-buy__price_cost">
+                                {originalPrice.toLocaleString()}
+                            </span>
                         </div>
                     </div>
-                    {/* <div className="detail-info">
-                        {/* 🔥 제품명 
-                        <h2 className="detail-title">{CrocsProduct.product}</h2>
 
-                        {/* 🔥 가격 
-                        {/* <p className="detail-price">₩{CrocsProduct.prices?.[0] || '가격 없음'}</p> */}
-                    {/* <p className="detail-price">₩{detailPrice.toLocaleString()}</p>
-                    {hasOriginal && (
-                        <p className="detail-original">
-                            <del>₩{originalPrice.toLocaleString()}</del>
-                            {discountPercent !== null && (
-                                <span className="detail-discount"> {discountPercent}%</span>
-                            )}
-                        </p>
-                    )} */}
-                    {/* 🔥 사이즈 선택 
-                        <div className="detail-sizes">
-                            <h3>사이즈</h3>
-                            <div className="size-buttons">
+                    {/* 구분선 */}
+                    <div className="select-buy__breadcrumbs"></div>
+
+                    {/* 색상 선택 영역 */}
+                    <div className="select-buy__color">
+                        <div className="select-buy__color-title-wrap">
+                            <p className="select-buy__color-title">색상</p>
+                            <span className="select-buy__price_breadcrumbs__line"></span>
+                            <p className="select-buy__color-select">
+                                {colorOptions.find((c) => c.key === selectedColor)?.label ||
+                                    '브라운'}
+                            </p>
+                        </div>
+                        <div
+                            className="select-buy__color-badge-wrap"
+                            role="group"
+                            aria-label="색상 선택"
+                        >
+                            {colorOptions.map((c) => (
+                                <button
+                                    key={c.key}
+                                    type="button"
+                                    className={`color-badge color-badge--${c.key} ${
+                                        selectedColor === c.key ? 'active' : ''
+                                    }`}
+                                    aria-label={`${c.label} 선택`}
+                                    aria-pressed={selectedColor === c.key}
+                                    onClick={() => handleColorSelect(c.key)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* 사이즈 선택 (BEM 구조 변환) */}
+                    <div className="select-buy__size">
+                        <div className="select-buy__size-title-wrap">
+                            <p className="select-buy__size-title">사이즈</p>
+                            <span className="select-buy__size_breadcrumbs__line" />
+                            <p className="select-buy__size-select">
+                                {selectedSize || '선택하세요'}
+                            </p>
+                        </div>
+                        <div className="select-buy__size-btns-wrap">
+                            <ul
+                                className=" select-buy__size-btns"
+                                role="group"
+                                aria-label="사이즈 선택"
+                            >
                                 {categorySizes.map((size) => (
-                                    <button
-                                        key={size}
-                                        className={selectedSize === size ? 'active' : ''}
-                                        onClick={() => setSelectedSize(size)}
-                                    >
-                                        {size}
-                                    </button>
+                                    <li key={size}>
+                                        <button
+                                            type="button"
+                                            className={selectedSize === size ? 'active' : ''}
+                                            onClick={() => setSelectedSize(size)}
+                                        >
+                                            {size}
+                                        </button>
+                                    </li>
                                 ))}
+                            </ul>
+                            <div className="select-buy__size-notice-wrap">
+                                <span>원하는 옵션이 없으신가요?</span>
+                                <div>
+                                    <a href="#">
+                                        <img src="/images/icon-bell.svg" alt="재입고 알림 아이콘" />
+                                        <span>재입고 알림 신청하기</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <button onClick={() => onAddWishList(CrocsProduct)}>위시버튼💚</button>
+                    </div>
+                    {/* 구분선 */}
+                    <div className="select-buy__breadcrumbs"></div>
+
+                    {/* 구매 선택 수량 목록 */}
+                    <div className="select-buy__selected--wrap">
+                        <div className="select-buy__select">
+                            <div className="select-buy__select-wrap">
+                                <div className="select-buy__select_chose-item">
+                                    <span className="info__color-badge buy__color-badge--black"></span>
+                                    <span className="select-buy__select_chose-item-name">
+                                        클래식 언퍼게터블 스웨이드 클로그
+                                    </span>
+                                </div>
+                                <span className="select-buy__price_breadcrumbs__line"></span>
+                                <span className="select-buy__select_chose-item-option">220</span>
+                            </div>
+                            <div className="select-buy__select__count-wrap">
+                                <div className="select-buy__select__count">
+                                    <div className="select-buy__select__count-value-wrap">
+                                        <p className=" select-buy__select__count-value">
+                                            <span>1</span>
+                                        </p>
+                                    </div>
+                                    {/* 카운타 버튼 */}
+                                    <div className="select-buy__select__wrap">
+                                        {/* 증가 버튼 */}
+                                        <button className="select-buy__select__count-btn select-buy__select__count-btn--increase">
+                                            <a
+                                                href="#"
+                                                className="select-buy__select__count-link select-buy__select__count-link--disabled-1"
+                                            >
+                                                <img
+                                                    src="/images/icon-arrow-up_bold-1.svg"
+                                                    alt="수량 증가 버튼"
+                                                    className="count-btn__icon-1"
+                                                />
+                                            </a>
+                                            <a
+                                                href="#"
+                                                className="select-buy__select__count-link select-buy__select__count-link--disabled-2"
+                                            >
+                                                <img
+                                                    src="/images/icon-arrow-up_bold-2.svg"
+                                                    alt="수량 증가 버튼 비활성화"
+                                                    className="count-btn__icon-2"
+                                                />
+                                            </a>
+                                        </button>
+                                        {/* 감소 버튼 */}
+                                        <button className="select-buy__select__count-btn select-buy__select__count-btn--decrease">
+                                            <a
+                                                href="#"
+                                                className="select-buy__select__count-link select-buy__select__count-link--disabled-1"
+                                            >
+                                                <img
+                                                    src="/images/icon-arrow-down_bold-1.svg"
+                                                    alt="수량 감소 버튼"
+                                                    className="count-btn__icon-1"
+                                                />
+                                            </a>
+                                            <a
+                                                href="#"
+                                                className="select-buy__select__count-link select-buy__select__count-link--disabled-2"
+                                            >
+                                                <img
+                                                    src="/images/icon-arrow-down_bold-2.svg"
+                                                    alt="수량 감소 버튼 비활성화"
+                                                    className="count-btn__icon-2"
+                                                />
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="select-buy__select__del">
+                                <button className="select-buy__select__del-btn ">
+                                    <img
+                                        src="/images/ProductPage/icon-delete.svg"
+                                        className="del-btn--normal"
+                                    />
+                                    <img
+                                        src="/images/ProductPage/icon-delete-hover.svg"
+                                        className="del-btn--hover"
+                                    />
+                                </button>
+                                {/*<!-- <button class="select-buy__select__del-btn del-btn--hover">
+                                    <img src="/images/ProductPage/icon-delete-hover.svg" />
+                                </button> -->*/}
+                            </div>
+                        </div>
+                        <div className="select-buy__select">
+                            <div className="select-buy__select-wrap">
+                                <div className="select-buy__select_chose-item">
+                                    <span className="info__color-badge buy__color-badge--brown"></span>
+                                    <span className="select-buy__select_chose-item-name">
+                                        클래식 언퍼게터블 스웨이드 클로그
+                                    </span>
+                                </div>
+                                <span className="select-buy__price_breadcrumbs__line"></span>
+                                <span className="select-buy__select_chose-item-option">220</span>
+                            </div>
+                            <div className="select-buy__select__count-wrap">
+                                <div className="select-buy__select__count">
+                                    <div className="select-buy__select__count-value-wrap">
+                                        <p className=" select-buy__select__count-value">
+                                            <span>1</span>
+                                        </p>
+
+                                        {/* 카운타 버튼 */}
+                                        <div className="select-buy__select__wrap">
+                                            {/* 증가 버튼 */}
+                                            <button className="select-buy__select__count-btn select-buy__select__count-btn--increase">
+                                                <a
+                                                    href="#"
+                                                    className="select-buy__select__count-link select-buy__select__count-link--disabled-1"
+                                                >
+                                                    <img
+                                                        src="/images/icon-arrow-up_bold-1.svg"
+                                                        alt="수량 증가 버튼"
+                                                        className="count-btn__icon-1"
+                                                    />
+                                                </a>
+                                                <a
+                                                    href="#"
+                                                    className="select-buy__select__count-link select-buy__select__count-link--disabled-2"
+                                                >
+                                                    <img
+                                                        src="/images/icon-arrow-up_bold-2.svg"
+                                                        alt="수량 증가 버튼 비활성화"
+                                                        className="count-btn__icon-2"
+                                                    />
+                                                </a>
+                                            </button>
+                                            {/* 감소 버튼 */}
+                                            <button className="select-buy__select__count-btn select-buy__select__count-btn--decrease">
+                                                <a
+                                                    href="#"
+                                                    className="select-buy__select__count-link select-buy__select__count-link--disabled-1"
+                                                >
+                                                    <img
+                                                        src="/images/icon-arrow-down_bold-1.svg"
+                                                        alt="수량 감소 버튼"
+                                                        className="count-btn__icon-1"
+                                                    />
+                                                </a>
+                                                <a
+                                                    href="#"
+                                                    className="select-buy__select__count-link select-buy__select__count-link--disabled-2"
+                                                >
+                                                    <img
+                                                        src="/images/icon-arrow-down_bold-2.svg"
+                                                        alt="수량 감소 버튼 비활성화"
+                                                        className="count-btn__icon-2"
+                                                    />
+                                                </a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="select-buy__select__del">
+                                    <button className="select-buy__select__del-btn ">
+                                        <img
+                                            src="/images/ProductPage/icon-delete.svg"
+                                            className="del-btn--normal"
+                                        />
+                                        <img
+                                            src="/images/ProductPage/icon-delete-hover.svg"
+                                            className="del-btn--hover"
+                                        />
+                                    </button>
+                                    {/*<!-- <button class="select-buy__select__del-btn del-btn--hover">
+                                    <img src="/images/ProductPage/icon-delete-hover.svg" />
+                                </button> -->*/}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* 구분선 */}
+                    <div className="select-buy__breadcrumbs"></div>
+
+                    {/* 총 상품 금액 */}
+                    <div className="select-buy__total-wrap">
+                        <div className="select-buy__total-title">
+                            <p>총 상품 금액</p>
+                        </div>
+                        <div className="select-buy__total-content">
+                            <div className="select-buy__total-number-wrap">
+                                <p className="total-number-text">총 수량</p>
+                                <p className="total-number">2</p>
+                                <p>개</p>
+                            </div>
+                            <div className="select-buy__total-price-wrap">
+                                <p className="total-price">77,790</p>
+                                <p className="total-price-text">원</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="select-buy__breadcrumbs"></div>
+
+                    {/* 구매 버튼 영역 */}
+                    <div className="select-buy__buy-btns-wrap">
                         <button
-                            className="product-btn-cart"
-                            onClick={() => onProductAddCart(CrocsProduct)}
+                            className="select-buy__buy-btns__btn-like"
+                            onClick={() => onAddWishList(CrocsProduct)}
+                        >
+                            💚
+                            {/* <p className="select-buy__buy-btns__btn-like_line">
+                                <img src="/images/ProductPage/icon-love_line.svg" alt="좋아요 비활성화" />
+                            </p>
+                            <p className="select-buy__buy-btns__btn-like_fill">
+                                <img src="/images/ProductPage/icon-love_fill.svg" alt="좋아요 활성화" />
+                            </p> */}
+                        </button>
+                        <WishAddPopup />
+                        <button
+                            className="select-buy__buy-btn select-buy__buy-btn--add-cart"
+                            onClick={() =>
+                                onProductAddCart({
+                                    id: CrocsProduct.id,
+
+                                    // ⭐ CartStore에서 name 사용하므로 반드시 넣기
+                                    name: CrocsProduct.product,
+                                    title: CrocsProduct.product, // 혹시 title도 찾을 수 있으므로 같이 넣기
+
+                                    // ⭐ 할인 가격 or 정상 가격 반영
+                                    price: detailPrice,
+
+                                    // ⭐ 장바구니 수량
+                                    quantity: quantity,
+
+                                    // ⭐ 선택한 사이즈
+                                    size: selectedSize || null,
+
+                                    // ⭐ 대표 이미지
+                                    product_img: Array.isArray(CrocsProduct.product_img)
+                                        ? CrocsProduct.product_img[0]
+                                        : CrocsProduct.product_img,
+                                })
+                            }
                         >
                             장바구니
                         </button>
                         <WishAddPopup />
-                    </div> */}{' '}
-                    {/* detail-info 닫는 태그 */}
+                        <button className="select-buy__buy-btn select-buy__buy-btn--buy-now">
+                            구매하기
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };
+
 export default CrocsProductDetail;
