@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { collaboAuthStore } from '../store/collaboAuthStore';
+import { useCrocsProductStore } from '../store/useCrocsProductStore';
+import { useRecentProductsStore } from '../store/recentProductsStore';
 import Breadcrumbs from '../components/Breadcrumbs';
 import './scss/productListpage.scss';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Title from '../components/Title';
-import { useCrocsProductStore } from '../store/useCrocsProductStore';
+
 
 const JibbitzProductListPage = () => {
     const [searchParams] = useSearchParams();
     const searchQuery = searchParams.get('search');
 
-    const { jibbitzItems, onFetchJibbitz, disneyItems, selectFilter, filteredList, onFilterBtn } =
+    const { jibbitzItems, jibbitzFilterList, onFetchJibbitz, disneyItems, selectFilter, filteredList, onFilterBtn } =
         collaboAuthStore();
 
     const navigate = useNavigate();
     const { filter } = useParams();
+    const { addProduct } = useRecentProductsStore(); 
 
     // Crocs store (검색용)
     const { searchWord, setSearchWord } = useCrocsProductStore();
@@ -26,6 +29,24 @@ const JibbitzProductListPage = () => {
     useEffect(() => {
         onFetchJibbitz();
     }, []);
+
+     // 상품 클릭 시 최근 본 상품에 추가
+    const onOpenProductDetail = (product) => {
+        console.log('확인1', product.id);
+        
+        // 최근 본 상품에 추가
+        addProduct({
+            id: product.id,
+            name: product.title,
+            image: product.imageUrl,
+            price: product.price,
+            discountPrice: product.discountPrice || "",
+            originPrice: product.originPrice || "",
+            discount: product.discount || ""
+        });
+        
+        navigate(`/jibbitz/${product.id}`);
+    };
 
     // ⭐ URL filter 파라미터가 변경되면 store의 selectFilter 업데이트
     useEffect(() => {

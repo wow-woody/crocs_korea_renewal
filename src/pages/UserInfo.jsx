@@ -52,7 +52,7 @@ const UserInfo = () => {
                     <div className="user_menu_top">
                         {/* 최근 본 상품 */}
                         <h4>최근 본 상품</h4>
-                        <Link to="/wishlist">더보기</Link>
+                        <Link to="/recent">더보기</Link>
                     </div>
                     <hr />
                     <div className={`user_menu_bottom ${active ? 'active' : ''}`}>

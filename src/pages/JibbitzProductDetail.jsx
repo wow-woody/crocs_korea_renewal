@@ -3,15 +3,15 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import { collaboAuthStore } from '../store/collaboAuthStore';
+import { wishListStore } from '../store/wishListStore';
 import '../components/scss/ProductDetail.scss';
 import './scss/CrocsProductDetail.scss';
 import './scss/ProductPage_flat.scss';
-
-import { collaboAuthStore } from '../store/collaboAuthStore';
-import { wishListStore } from '../store/wishListStore';
-
 import Title from '../components/Title';
 import WishAddPopup from '../components/WishAddPopup';
+// import JibbitzProductImage from '../components/JibbitzProductImage';
+// import JibbitzProductInfo from '../components/JibbitzProductInfo';
 
 const JibbitzProductDetail = () => {
     const { id } = useParams();

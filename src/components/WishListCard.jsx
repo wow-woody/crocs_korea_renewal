@@ -50,7 +50,11 @@ const WishListCard = () => {
                     <div key={item.id} className="wish_card">
                         <div className="wish_card_imgbox">
                             <img src={item.imageUrl} alt={item.title} />
-                            <span onClick={() => toggleRemoveWish(item)}>체크박스</span>
+                            <input
+                                type='checkbox'
+                                className='product-checkbox'
+                                onChange={() => toggleRemoveWish(item)}
+                            />
                         </div>
                         <div className="wish_card_textbox">
                             <p>{item.title}</p>
