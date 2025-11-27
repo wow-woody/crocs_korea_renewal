@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import JibbitzCollaboSwiper from '../components/JibbitzCollaboSwiper';
 import MainSlider from '../components/MainSlider';
-import TopPopup from '../components/TopPopup';
 import Monthly from '../components/Monthly';
 import MainCategory from '../components/MainCategory';
 import MainInstagram from '../components/MainInstagram';
@@ -76,7 +75,6 @@ const Main = () => {
                 <FullPageScroll onSectionChange={handleSectionChange}>
                     <section data-section-id="main-slider">
                         <MainSlider />
-                        <TopPopup />
                     </section>
                     <section data-section-id="main-category">
                         <MainCategory />

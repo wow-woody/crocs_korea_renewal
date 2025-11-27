@@ -10,6 +10,15 @@ const RecentSidebar = ({ isOpen, onClose }) => {
         return new Intl.NumberFormat('ko-KR').format(price);
     };
 
+    // 브라우저 콘솔에서 확인
+    localStorage.getItem('recent-products-storage');
+    // 이 부분은 제거하거나 개발 환경에서만 실행
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'development') {
+            console.log('저장된 데이터:', localStorage.getItem('recent-products-storage'));
+        }
+    }, [recentProducts]);
+
     // ESC 키로 닫기
     useEffect(() => {
         const handleEsc = (e) => {
@@ -95,30 +104,23 @@ const RecentSidebar = ({ isOpen, onClose }) => {
                                         <div className="product_textbox">
                                             <h3 className="product-name">{item.name}</h3>
                                             {/* <p className='product-category'>{item.category}</p> */}
-                                            <div className="product-price-wrap">
-                                                <span className="price-text">
-                                                    {item.discountPrice == ''
-                                                        ? item.price
-                                                        : item.discountPrice}
-                                                </span>
-                                                <span className="price-text">
-                                                    {item.discountPrice == ''
-                                                        ? ''
-                                                        : item.originPrice}
-                                                </span>
-                                                {/* <span className='price-text'>{formatPrice(item.price)}원</span>
-                                <span className='price-text'>{item.price}</span> */}
-                                                {item.discount && (
-                                                    <span className="discount">
-                                                        {item.discount}%
-                                                    </span>
-                                                )}
-                                            </div>
+                                            {/* <div className='product-price-wrap'>
+                        <span className='price-text'>
+                          {item.discountPrice == ""
+                            ? item.price
+                            : item.discountPrice}
+                        </span>
+                        <span className='price-text'>
+                          {item.discountPrice == "" ? "" : item.originPrice}
+                        </span>
+                        {item.discount && (
+                          <span className='discount'>{item.discount}%</span>
+                        )}
+                      </div> */}
                                         </div>
 
                                         <div className="product-actions">
-                                            {/* <button 
-                className="remove-btn"
+                                            {/* <button  className="remove-btn"
                 onClick={() => removeProduct(product.id)}
                 aria-label="삭제"
               >

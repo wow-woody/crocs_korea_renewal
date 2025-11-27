@@ -1,4 +1,6 @@
 import './App.scss';
+import { useEffect, useState } from 'react';
+import { loginAuthStore } from './store/loginStore';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Main from './pages/Main';
 import Brand from './pages/Brand';
@@ -10,12 +12,13 @@ import CrocsClubPopup from './components/CrocsClubPopup';
 import UserInfo from './pages/UserInfo';
 import Nonmember from './pages/Nonmember';
 import ComeAsPopup from './components/ComeAsPopup';
-import { useEffect, useState } from 'react';
-import { loginAuthStore } from './store/loginStore';
 import ProductListPage from './pages/ProductListPage';
 import CrocsProductDetail from './pages/CrocsProductDetail';
 import Store from './pages/Store';
 import WishList from './pages/WishList';
+import CartSidebar from './components/CartSidebar';
+import RecentProducts from './pages/RecentProducts';
+import RecentSidebar from './components/RecentSidebar';
 import JibbitzProductDetail from './pages/JibbitzProductDetail';
 import JibbitzProductListPage from './pages/JibbitzProductListPage';
 import Cart from './pages/Cart';
@@ -26,11 +29,19 @@ import Coupons from './components/Coupons';
 
 function App() {
     const { user, loading, checkSession, initAuthListener } = loginAuthStore();
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isRecentOpen, setIsRecentOpen] = useState(false);
     const location = useLocation();
     const [isCSOpen, setIsCSOpen] = useState(false);
 
     // Main 페이지인지 확인
     const isMainPage = location.pathname === '/';
+
+    // 페이지 이동 시 장바구니 닫기 + 최근본상품 닫기
+    useEffect(() => {
+        setIsCartOpen(false);
+        setIsRecentOpen(false);
+    }, [location.pathname]);
 
     // ⭐ CS 센터 모달 열기
     const openCS = () => {
@@ -61,7 +72,12 @@ function App() {
 
     return (
         <div className="App">
-            <Header />
+            <Header
+                onCartClick={() => setIsCartOpen(true)}
+                onRecentClick={() => setIsRecentOpen(true)}
+            />
+            <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+            <RecentSidebar isOpen={isRecentOpen} onClose={() => setIsRecentOpen(false)} />
             <Routes>
                 <Route index element={<Main />} />
                 <Route path="/store" element={<Store />} />
@@ -81,6 +97,7 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/order" element={<Order />} />
                 <Route path="/coupons" element={<Coupons />} />
+                <Route path="/recent" element={<RecentProducts />} />
             </Routes>
             {/* Main 페이지가 아닐 때만 Footer 표시 */}
             {!isMainPage && <Footer onOpenCS={openCS} />}

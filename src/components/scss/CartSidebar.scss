@@ -97,7 +97,7 @@ $white: #fff;
         .close-btn {
             position: absolute;
             top: 1.5rem;
-            right: 1.5rem;
+            right: 3rem;
             background: none;
             border: none;
             font-size: 2.4rem;
@@ -254,7 +254,7 @@ $white: #fff;
                 img {
                     width: 100%;
                     height: 100%;
-                    // object-fit: cover;
+                    object-fit: contain;
                 }
             }
 

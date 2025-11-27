@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './scss/Cart.scss';
 import Title from '../components/Title';
 import { Products } from '../data/CrocsProductsData.js';
@@ -12,6 +12,9 @@ function Cart() {
     const wishStore = wishListStore();
     const navigate = useNavigate();
 
+    // 초기화 여부 추적
+    const isInitialized = useRef(false);
+
     const {
         cartProducts,
         selectedProducts,
@@ -20,6 +23,7 @@ function Cart() {
         initializeCart,
         addFromWishlist,
         mergeCartData,
+        addProductCart,
         getSubtotal,
         getSelectedSubtotal,
         getShipping,
@@ -39,36 +43,50 @@ function Cart() {
     // wishListStore에서 cartWishItems와 cartItems 가져오기
     const { cartItems = [], cartWishItems = [] } = wishStore || {};
 
-    console.log('🔍 Cart 렌더링:', {
+    console.log('Cart 렌더링:', {
         cartProducts,
         cartItems,
         cartWishItems,
         cartProductsLength: cartProducts?.length,
         cartItemsLength: cartItems?.length,
+        cartWishItemsLength: cartWishItems?.length,
     });
 
-    // 장바구니 초기화
+    // 장바구니 초기화 및 동기화
     useEffect(() => {
-        console.log('🚀 initializeCart 실행');
-        initializeCart(Products, cartWishItems);
-    }, []);
+        console.log('useEffect 실행:', {
+            isInitialized: isInitialized.current,
+            cartItemsLength: cartItems.length,
+            cartWishItemsLength: cartWishItems.length,
+        });
 
-    // cartWishItems와 cartItems를 cartProducts에 병합
-    useEffect(() => {
-        console.log('🔄 병합 체크:', { cartWishItems, cartItems });
-
-        // wishListStore의 cartWishItems를 cartProducts에 추가
-        if (cartWishItems && cartWishItems.length > 0) {
-            console.log('✅ cartWishItems 병합 실행');
-            addFromWishlist(Products, cartWishItems);
+        // 초기 로드 시 한 번만 초기화
+        if (!isInitialized.current) {
+            console.log('🔄 장바구니 초기화 실행');
+            initializeCart(Products, cartWishItems);
+            isInitialized.current = true;
         }
 
-        // wishListStore의 cartItems를 cartProducts에 추가
-        if (cartItems && cartItems.length > 0) {
-            console.log('✅ cartItems 병합 실행');
+        // 장바구니에 상품 상세(cartItems)에서 추가된 상품 병합
+        if (cartItems.length > 0) {
+            console.log('🛒 cartItems 병합:', cartItems);
+
             mergeCartData(Products, cartItems);
+
+            // ⭐ 병합 완료 후 cartItems 초기화!
+            wishListStore.setState({ cartItems: [] });
         }
-    }, [cartWishItems, cartItems]);
+
+        // 위시리스트(cartWishItems)에서 장바구니로 추가된 상품 병합
+        if (cartWishItems.length > 0) {
+            console.log('💚 cartWishItems 병합:', cartWishItems);
+
+            addFromWishlist(Products, cartWishItems);
+
+            // ⭐ 병합 후 cartWishItems 초기화!
+            wishListStore.setState({ cartWishItems: [] });
+        }
+    }, [cartItems, cartWishItems]);
 
     // 가격 계산
     const subtotal = getSubtotal();
@@ -148,7 +166,6 @@ function Cart() {
                                     <p>장바구니에 담긴 상품이 없습니다.</p>
                                 </div>
                             ) : (
-                                // ✅ cartProducts만 렌더링 (cartItems 제거)
                                 cartProducts.map((product) => (
                                     <div
                                         key={`${product.id}-${product.size || 'default'}`}

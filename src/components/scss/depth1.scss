@@ -31,13 +31,13 @@
 
                     &:hover {
                         a {
-                            background: g.$mainColor;
+                            background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
                         }
                     }
 
                     &.active {
                         a {
-                            background: g.$mainColor;
+                            background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
                         }
                     }
 
@@ -48,7 +48,7 @@
 
                         &:hover {
                             a {
-                                background: g.$mainColor;
+                                background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
                                 color: g.$subColor;
                             }
                         }
@@ -108,13 +108,13 @@
 
                         &:hover {
                             a {
-                                background: lightgreen;
+                                background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
                             }
                         }
 
                         &.active {
                             a {
-                                background: lightgreen;
+                                background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
                             }
                         }
                     }

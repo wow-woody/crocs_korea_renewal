@@ -7,7 +7,7 @@ const ComeAsPopup = ({ onClose }) => {
         <div className="come_as_popup_wrap">
             <div className="come_as_wrap">
                 <button className="close_btn" onClick={onClose}>
-                    <img src="/images/close_btn.svg" alt="close_btn" />
+                    ✕
                 </button>
                 <p className="jibbitz jibbitz_img1">
                     <img src="/images/monthly_zibbitz_01.svg" alt="zibbitz_img1" />
