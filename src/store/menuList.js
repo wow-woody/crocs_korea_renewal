@@ -33,11 +33,7 @@ export const menuList = [
                 imgUrl: '/images/2_베이_라인드_클로그_1.jpg',
             },
             { key: 'fuzz', label: 'FUZZ', imgUrl: '/images/13_클래식_언퍼게터블_클로그_1.png' },
-            {
-                key: 'jibbitz',
-                label: 'JIBBITZ',
-                imgUrl: '/images/3_인디_럭스_실버_5개_세트.jpg',
-            },
+
             {
                 key: 'collabs',
                 label: 'COLLABS',

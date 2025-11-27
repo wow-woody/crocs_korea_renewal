@@ -43,6 +43,9 @@
         width: 100%;
         @include g.flex($jc: center, $ai: flex-start);
 
+        .list-left {
+            position: sticky;
+        }
         .list_right {
             .product-card__item_list {
                 display: grid;
