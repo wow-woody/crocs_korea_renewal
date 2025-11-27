@@ -1,4 +1,4 @@
-'use no memo';
+// 'use no memo';
 
 import React, { useState } from 'react';
 import { wishListStore } from '../store/wishListStore';
