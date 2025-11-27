@@ -28,7 +28,7 @@ const JoinForm = () => {
         e.preventDefault();
         console.log('회원가입');
         await onJoin(formData);
-        navigate('/');
+        navigate('/join');
     };
 
     // 각각의 input 요소의 값이 변경될 때

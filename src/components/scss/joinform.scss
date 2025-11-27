@@ -108,23 +108,54 @@
         }
     }
 
-    .join_btn {
-        grid-column: 1/3;
-        grid-row: 2;
-        display: block;
-        justify-self: center;
+    // .join_btn {
+    //     grid-column: 1/3;
+    //     grid-row: 2;
+    //     display: block;
+    //     justify-self: center;
+    //     width: 40rem;
+    //     height: 4rem;
+    //     // padding: 1.8rem 4rem;
+    //     text-align: center;
+    //     background: g.$subColor;
+    //     border-radius: 5rem;
+    //     color: g.$mainColor;
+    //     &:hover {
+    //         background: g.$mainColor;
+    //         color: g.$subColor;
+    //     }
+    // }
+    > button {
         width: 40rem;
         height: 4rem;
-        // padding: 1.8rem 4rem;
-        text-align: center;
-        background: g.$subColor;
-        border-radius: 5rem;
-        color: g.$mainColor;
+        border-radius: 50px;
+        border: none;
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
+
+    .join_btn {
+        background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
         &:hover {
-            background: g.$mainColor;
-            color: g.$subColor;
+            transform: translateY(-2px);
+            // box-shadow: 0 6px 20px rgba(102, 222, 27, 0.4);
+        }
+
+        &:active {
+            transform: translateY(0);
         }
     }
+
+    // .join_link {
+    //     display: block;
+    //     width: 40rem;
+    //     height: 4rem;
+    //     border-radius: 50px;
+    //     border: none;
+    //     font-weight: bold;
+    //     font-size: 1.6rem;
+    //     background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+    //     line-height: 4rem;
 }
 
 input[type='text'],
