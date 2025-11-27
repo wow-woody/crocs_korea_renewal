@@ -67,14 +67,14 @@ const Header = ({ onCartClick, onRecentClick }) => {
                             <GnbWrap onSearchClick={onOpenSearch} />
                         </div>
                         {/* 장바구니 최근본상품 슬라이드 버튼 */}
-                        {/* <div className="header_slide_buttons">
+                        <div className="header_slide_buttons">
                             <button className="cart-button" onClick={onCartClick}>
                                 <img src="./images/cart-slide-icon.svg" alt="" />
                             </button>
                             <button className="recently-button" onClick={onRecentClick}>
                                 <img src="./images/recently-slide-icon.svg" alt="" />
                             </button>
-                        </div> */}
+                        </div>
                     </div>
                 </header>
 
