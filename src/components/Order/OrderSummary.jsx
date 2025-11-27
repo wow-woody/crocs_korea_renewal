@@ -4,6 +4,7 @@ function OrderSummary({
     products,
     subtotal,
     shipping,
+    discount = 0,
     total,
     freeShippingThreshold,
     isOrderComplete,
