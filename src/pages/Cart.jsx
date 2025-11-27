@@ -52,6 +52,8 @@ function Cart() {
     cartWishItemsLength: cartWishItems?.length,
   });
 
+
+
   // 장바구니 초기화 및 동기화
   useEffect(() => {
     console.log("useEffect 실행:", {
@@ -67,18 +69,28 @@ function Cart() {
       isInitialized.current = true;
     }
 
-    // cartItems 추가 처리 (상품 페이지에서 추가된 경우)
+    // 장바구니에 상품 상세(cartItems)에서 추가된 상품 병합
     if (cartItems.length > 0) {
       console.log("🛒 cartItems 병합:", cartItems);
+
       mergeCartData(Products, cartItems);
+
+      // ⭐ 병합 완료 후 cartItems 초기화!
+      wishListStore.setState({ cartItems: [] });
     }
 
-    // cartWishItems 추가 처리 (위시리스트에서 추가된 경우)
+    // 위시리스트(cartWishItems)에서 장바구니로 추가된 상품 병합
     if (cartWishItems.length > 0) {
-      console.log("💚 wishItems 병합:", cartWishItems);
+      console.log("💚 cartWishItems 병합:", cartWishItems);
+
       addFromWishlist(Products, cartWishItems);
+
+      // ⭐ 병합 후 cartWishItems 초기화!
+      wishListStore.setState({ cartWishItems: [] });
     }
   }, [cartItems, cartWishItems]);
+
+
 
   // 가격 계산
   const subtotal = getSubtotal();
@@ -237,9 +249,8 @@ function Cart() {
                   <div className='price-row'>
                     <span className='price-label'>배송비</span>
                     <span
-                      className={`price-value ${
-                        shipping === 0 ? "free-shipping" : ""
-                      }`}
+                      className={`price-value ${shipping === 0 ? "free-shipping" : ""
+                        }`}
                     >
                       {shipping === 0
                         ? "무료배송"
