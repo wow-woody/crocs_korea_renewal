@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNewProductStore } from "../store/useNewProductStore";
 import Title from "./Title";
 import "./scss/SlideCircle.scss";
+import { useNavigate } from "react-router-dom";
 
 const SlideCircle = ({ showDot }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -15,6 +16,16 @@ const SlideCircle = ({ showDot }) => {
     useEffect(() => {
         onFetchItem();
     }, []);
+
+    // 상품디테일페이지이동
+    const navigate = useNavigate();
+    console.log("확인2", items);
+
+    const onOpenProductMore = (id) => {
+        console.log("확인1", id);
+        navigate(`/product/${id}`);
+        // e.preventDefault();
+    };
 
     // 모든 슬라이드의 기본 컬러 이름을 미리 저장
     // const defaultColor = items.map((s) =>
@@ -226,7 +237,10 @@ const SlideCircle = ({ showDot }) => {
                                                                     selectedColor || "#444444",
                                                             }}
                                                         >
-                                                            <span className='btn-read'>
+                                                            <span
+                                                                className='btn-read'
+                                                                onClick={() => onOpenProductMore(slide.id)}
+                                                            >
                                                                 READ MORE
                                                             </span>
                                                         </a>
