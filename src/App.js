@@ -17,7 +17,7 @@ import CrocsProductDetail from "./pages/CrocsProductDetail";
 import Store from "./pages/Store";
 import WishList from "./pages/WishList";
 import CartSidebar from "./components/CartSidebar";
-// import RecentProducts from "./pages/RecentProducts";
+import RecentProducts from "./pages/RecentProducts";
 import RecentSidebar from "./components/RecentSidebar";
 import JibbitzProductDetail from "./pages/JibbitzProductDetail";
 import JibbitzProductListPage from "./pages/JibbitzProductListPage";
@@ -71,12 +71,13 @@ function App() {
                 <Route path='/nonmember' element={<Nonmember />} />
                 <Route path='/comaspopup' element={<ComeAsPopup />} />
                 <Route path='/product/:id' element={<CrocsProductDetail />} />
-                <Route path='/orderhistory' element={<OrderHistory />} />
+                <Route path='/recent' element={<RecentProducts />} />
                 <Route path='/wishlist' element={<WishList />} />
                 <Route path='/jibbitz' element={<JibbitzProductListPage />} />
                 <Route path='/jibbitz/:id' element={<JibbitzProductDetail />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/order' element={<Order />} />
+                <Route path='/orderhistory' element={<OrderHistory />} /> 
             </Routes>
             {/* <Footer /> */}
         </div>

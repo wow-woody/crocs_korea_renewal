@@ -107,7 +107,7 @@ const RecentSidebar = ({ isOpen, onClose }) => {
                     <div className='product_textbox'>
                       <h3 className='product-name'>{item.name}</h3>
                       {/* <p className='product-category'>{item.category}</p> */}
-                      <div className='product-price-wrap'>
+                      {/* <div className='product-price-wrap'>
                         <span className='price-text'>
                           {item.discountPrice == ""
                             ? item.price
@@ -116,12 +116,10 @@ const RecentSidebar = ({ isOpen, onClose }) => {
                         <span className='price-text'>
                           {item.discountPrice == "" ? "" : item.originPrice}
                         </span>
-                        {/* <span className='price-text'>{formatPrice(item.price)}원</span>
-                                <span className='price-text'>{item.price}</span> */}
                         {item.discount && (
                           <span className='discount'>{item.discount}%</span>
                         )}
-                      </div>
+                      </div> */}
                     </div>
 
                     <div className='product-actions'>
