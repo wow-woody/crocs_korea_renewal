@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCrocsProductStore } from '../store/useCrocsProductStore';
 import { wishListStore } from '../store/wishListStore';

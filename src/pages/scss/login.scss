@@ -80,11 +80,12 @@
             font-weight: bold;
             font-size: 1.6rem;
             background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+            box-shadow: 0 6px 20px rgba(102, 222, 27, 0.3);
             line-height: 4rem;
 
             &:hover {
                 transform: translateY(-2px);
-                // box-shadow: 0 6px 20px rgba(102, 222, 27, 0.4);
+                box-shadow: 0 6px 20px rgba(102, 222, 27, 0.4);
             }
 
             &:active {
