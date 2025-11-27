@@ -1,8 +1,8 @@
 @use '../../App.scss' as g;
 
 .product_list_page {
-    max-width: 1600px; // ★ 혹시 독립적으로도 width 관리하고 싶을 때
-    margin: 0 auto;
+    width: 100%;
+    padding: 0 2rem;
 
     .title_wrap {
         margin: 0 auto;
@@ -12,6 +12,7 @@
     .search_info_wrap {
         @include g.flex($jc: center, $gap: 10px);
         width: fit-content;
+        margin: 0 auto;
         background: lightgreen;
         padding-left: 1rem;
         margin-bottom: 4rem;
@@ -40,13 +41,9 @@
 
     .product_list_wrap {
         width: 100%;
-        max-width: 1600px; // ★ 리스트 전체 폭도 동일 적용
-        margin: 0 auto;
         @include g.flex($jc: center, $ai: flex-start);
 
         .list_right {
-            width: 100%;
-
             .product-card__item_list {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
@@ -63,6 +60,8 @@
 }
 
 .jibbitz_list_wrap {
+    width: 100%; // 추가
+
     .product-card {
         height: 50rem;
     }
