@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
 // import { wishListStore } from '../store/wishListStore';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './scss/wishAddPopup.scss';
 import { useCartStore } from '../store/useCartStore';
 
 const CartAddPopup = () => {
     const { popUp, hidePopup } = useCartStore();
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const handlegotocart = () => {
+        navigate('/cart');
+    };
 
     useEffect(() => {
         hidePopup();
@@ -20,9 +25,8 @@ const CartAddPopup = () => {
                 <div className="popup_text">{popUp.message}</div>
                 <div className="popup_btn_wrap">
                     <button onClick={hidePopup}>쇼핑 계속하기</button>
-                    <Link to="/cart">
-                        <button>장바구니 이동</button>
-                    </Link>
+
+                    <button onClick={handlegotocart}>장바구니 이동</button>
                 </div>
             </div>
         </div>

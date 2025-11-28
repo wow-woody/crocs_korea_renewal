@@ -16,18 +16,15 @@ export default function WomenPriceRange({ min, max, isActive, onClick }) {
 
     return (
         <li className="price-menu__item">
-            <a 
-                href="#" 
+            <button
                 className={`price-menu__link btn-menu-style ${isActive ? 'active' : ''}`}
                 onClick={(e) => {
                     e.preventDefault();
                     onClick && onClick({ min, max });
                 }}
             >
-                <button className="price-menu__button btn-menu__button">
-                    {getPriceLabel()}
-                </button>
-            </a>
+                {getPriceLabel()}
+            </button>
         </li>
     );
 }

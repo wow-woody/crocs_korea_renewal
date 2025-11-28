@@ -5,7 +5,7 @@ import { useCrocsSizeStore } from '../store/useCrocsSizeStore';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './scss/WomenComponents.scss';
+// import './scss/WomenComponents.scss';
 import './scss/leftNavigation.scss';
 
 // 이미지 슬라이더
@@ -188,7 +188,7 @@ const ProductCard = ({ product, onClick, onSizeSelect }) => (
         <ProductCardSwiper images={product.product_img || []} />
         <ProductName name={product.product} />
         <ProductPrice prices={product.prices} />
-        <ProductColorBadges
+        {/* <ProductColorBadges
             colors={product.color || []}
             onColorClick={(c) => console.log('색상 선택:', c)}
         />
@@ -196,7 +196,7 @@ const ProductCard = ({ product, onClick, onSizeSelect }) => (
             cate={product.cate} // 여기서 cate 값을 전달
             soldOutSizes={product.soldOutSizes || []}
             onSizeSelect={onSizeSelect} // 🔥 상위 상태로 전달
-        />
+        /> */}
     </li>
 );
 

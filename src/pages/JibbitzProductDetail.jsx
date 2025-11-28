@@ -179,233 +179,243 @@ const JibbitzProductDetail = () => {
 
     return (
         <div className="product-detail-container">
-            {/* 메인 콘텐츠 */}
-            <div className="product-detail-content">
-                {/* 왼쪽: 이미지 영역 */}
-                <div className="product-image-section">
-                    {/* 메인 이미지 */}
-                    <div className="main-image-wrapper">
-                        <img src={images[selectedImageIdx]} alt={JibbitzProduct.title} />
-                    </div>
-
-                    {/* 썸네일 */}
-                    {images.length > 1 && (
-                        <div className="thumbnail-list">
-                            {images.map((img, idx) => (
-                                <div
-                                    key={idx}
-                                    className={`thumbnail-item ${
-                                        idx === selectedImageIdx ? 'active' : ''
-                                    }`}
-                                    onClick={() => setSelectedImageIdx(idx)}
-                                >
-                                    <img src={img} alt={`썸네일 ${idx + 1}`} />
-                                </div>
-                            ))}
+            <div className="inner">
+                {/* 메인 콘텐츠 */}
+                <div className="product-detail-content">
+                    {/* 왼쪽: 이미지 영역 */}
+                    <div className="product-image-section">
+                        {/* 메인 이미지 */}
+                        <div className="main-image-wrapper">
+                            <img src={images[selectedImageIdx]} alt={JibbitzProduct.title} />
                         </div>
-                    )}
-                </div>
 
-                {/* 오른쪽: 상품 정보 */}
-                <div className="product-info-section">
-                    {/* 상품 헤더 */}
-                    <div className="product-header">
-                        <p className="product-subtitle">Jibbitz™ 참</p>
-                        <h2 className="product-title">{JibbitzProduct.title}</h2>
-                        <div className="product-price">
-                            {hasOriginal && discountPercent && (
-                                <span className="discount-rate">{discountPercent}%</span>
-                            )}
-                            <span className="sale-price">₩{detailPrice.toLocaleString()}</span>
-                            {hasOriginal && (
-                                <span className="original-price">
-                                    ₩{originalPrice.toLocaleString()}
-                                </span>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* 선택된 상품 목록 */}
-                    {selectedProducts.length > 0 && (
-                        <div className="selected-products">
-                            {selectedProducts.map((product) => (
-                                <div key={product.id} className="selected-item">
-                                    <div className="item-info">
-                                        <span className="item-name">{product.name}</span>
-                                    </div>
-                                    <div className="quantity-controls">
-                                        <button
-                                            className="quantity-btn"
-                                            onClick={() => decreaseQty(product.id)}
-                                            disabled={product.quantity <= 1}
-                                        >
-                                            -
-                                        </button>
-                                        <span className="quantity">{product.quantity}</span>
-                                        <button
-                                            className="quantity-btn"
-                                            onClick={() => increaseQty(product.id)}
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                    <button
-                                        className="remove-btn"
-                                        onClick={() => removeProduct(product.id)}
-                                        title="상품 삭제"
+                        {/* 썸네일 */}
+                        {images.length > 1 && (
+                            <div className="thumbnail-list">
+                                {images.map((img, idx) => (
+                                    <div
+                                        key={idx}
+                                        className={`thumbnail-item ${
+                                            idx === selectedImageIdx ? 'active' : ''
+                                        }`}
+                                        onClick={() => setSelectedImageIdx(idx)}
                                     >
-                                        ✕
-                                    </button>
+                                        <img src={img} alt={`썸네일 ${idx + 1}`} />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* 오른쪽: 상품 정보 */}
+                    <div className="product-info-section">
+                        {/* 상품 헤더 */}
+                        <div className="product-header">
+                            <p className="product-subtitle">Jibbitz™ 참</p>
+                            <h2 className="product-title">{JibbitzProduct.title}</h2>
+                            <div className="product-price">
+                                {hasOriginal && discountPercent && (
+                                    <span className="discount-rate">{discountPercent}%</span>
+                                )}
+                                <span className="sale-price">₩{detailPrice.toLocaleString()}</span>
+                                {hasOriginal && (
+                                    <span className="original-price">
+                                        ₩{originalPrice.toLocaleString()}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* 선택된 상품 목록 */}
+                        {selectedProducts.length > 0 && (
+                            <div className="selected-products">
+                                {selectedProducts.map((product) => (
+                                    <div key={product.id} className="selected-item">
+                                        <div className="item-info">
+                                            <span className="item-name">{product.name}</span>
+                                        </div>
+                                        <div className="quantity-controls">
+                                            <button
+                                                className="quantity-btn"
+                                                onClick={() => decreaseQty(product.id)}
+                                                disabled={product.quantity <= 1}
+                                            >
+                                                -
+                                            </button>
+                                            <span className="quantity">{product.quantity}</span>
+                                            <button
+                                                className="quantity-btn"
+                                                onClick={() => increaseQty(product.id)}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                        <button
+                                            className="remove-btn"
+                                            onClick={() => removeProduct(product.id)}
+                                            title="상품 삭제"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* 총 상품 금액 */}
+                        <div className="total-price-section">
+                            <h3 className="total-header">총 상품 금액</h3>
+                            <div className="total-content">
+                                <div className="total-quantity">
+                                    총 수량 <span className="quantity">{totalQuantity}</span>개
                                 </div>
-                            ))}
-                        </div>
-                    )}
-
-                    {/* 총 상품 금액 */}
-                    <div className="total-price-section">
-                        <h3 className="total-header">총 상품 금액</h3>
-                        <div className="total-content">
-                            <div className="total-quantity">
-                                총 수량 <span className="quantity">{totalQuantity}</span>개
-                            </div>
-                            <div className="total-price">
-                                <span className="price">{totalPrice.toLocaleString()}</span>
-                                <span className="unit">원</span>
+                                <div className="total-price">
+                                    <span className="price">{totalPrice.toLocaleString()}</span>
+                                    <span className="unit">원</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* 구매 버튼 */}
-                    <div className="action-buttons">
-                        <button
-                            className="btn-wishlist"
-                            onClick={() => onAddWishList(JibbitzProduct)}
-                        >
-                            💚
-                        </button>
-                        <WishAddPopup />
-                        <button
-                            className="btn-cart"
-                            onClick={() => {
-                                if (selectedProducts.length === 0) {
-                                    alert('상품을 추가해주세요.');
-                                    return;
-                                }
-                                selectedProducts.forEach((product) => {
-                                    onProductAddCart({
+                        {/* 구매 버튼 */}
+                        <div className="action-buttons">
+                            <button
+                                className="btn-wishlist"
+                                onClick={() => onAddWishList(JibbitzProduct)}
+                            >
+                                💚
+                            </button>
+                            <WishAddPopup />
+                            <button
+                                className="btn-cart"
+                                onClick={() => {
+                                    if (selectedProducts.length === 0) {
+                                        alert('상품을 추가해주세요.');
+                                        return;
+                                    }
+                                    selectedProducts.forEach((product) => {
+                                        onProductAddCart({
+                                            id: product.productId,
+                                            name: product.name,
+                                            title: product.name,
+                                            price: product.price,
+                                            quantity: product.quantity,
+                                            product_img: images[0],
+                                        });
+                                    });
+                                }}
+                            >
+                                장바구니
+                            </button>
+                            <WishAddPopup />
+                            <button
+                                className="btn-buy"
+                                onClick={() => {
+                                    if (selectedProducts.length === 0) {
+                                        alert('상품을 추가해주세요.');
+                                        return;
+                                    }
+
+                                    const orderProducts = selectedProducts.map((product) => ({
                                         id: product.productId,
                                         name: product.name,
-                                        title: product.name,
+                                        product: product.name,
                                         price: product.price,
                                         quantity: product.quantity,
                                         product_img: images[0],
+                                        cate: 'Jibbitz',
+                                    }));
+
+                                    selectedProducts.forEach((product) => {
+                                        onProductAddCart({
+                                            id: product.productId,
+                                            name: product.name,
+                                            title: product.name,
+                                            price: product.price,
+                                            quantity: product.quantity,
+                                            product_img: images[0],
+                                        });
                                     });
-                                });
-                            }}
-                        >
-                            장바구니
-                        </button>
-                        <WishAddPopup />
-                        <button
-                            className="btn-buy"
-                            onClick={() => {
-                                if (selectedProducts.length === 0) {
-                                    alert('상품을 추가해주세요.');
-                                    return;
-                                }
 
-                                const orderProducts = selectedProducts.map((product) => ({
-                                    id: product.productId,
-                                    name: product.name,
-                                    product: product.name,
-                                    price: product.price,
-                                    quantity: product.quantity,
-                                    product_img: images[0],
-                                    cate: 'Jibbitz',
-                                }));
+                                    localStorage.removeItem(`selectedProducts_${id}`);
 
-                                selectedProducts.forEach((product) => {
-                                    onProductAddCart({
-                                        id: product.productId,
-                                        name: product.name,
-                                        title: product.name,
-                                        price: product.price,
-                                        quantity: product.quantity,
-                                        product_img: images[0],
+                                    navigate('/order', {
+                                        state: {
+                                            orderProducts: orderProducts,
+                                        },
                                     });
-                                });
-
-                                localStorage.removeItem(`selectedProducts_${id}`);
-
-                                navigate('/order', {
-                                    state: {
-                                        orderProducts: orderProducts,
-                                    },
-                                });
-                            }}
-                        >
-                            구매하기
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* 하단: 상세 정보 탭 */}
-            <div className="product-details-tabs">
-                {/* 상품 설명 */}
-                <div className="tab-section">
-                    <div
-                        className={`tab-header ${openDesc ? 'active' : ''}`}
-                        onClick={() => setOpenDesc(!openDesc)}
-                    >
-                        <h3 className="tab-title">상품 상세 설명</h3>
-                        <div className="tab-icon">
-                            <img src="/images/Sub_Women_Images/icon-arrow-down.svg" alt="토글" />
+                                }}
+                            >
+                                구매하기
+                            </button>
                         </div>
                     </div>
-                    <div className={`tab-content ${openDesc ? 'active' : ''}`}>
-                        <div className="content-inner">
-                            <div className="desc-section">
-                                <h4 className="desc-title">Jibbitz™ 참</h4>
-                                <ul className="desc-list">
-                                    <li>크록스만의 개성을 표현할 수 있는 Jibbitz™ 참</li>
-                                    <li>다양한 디자인으로 나만의 크록스를 꾸며보세요</li>
-                                    <li>크록스 구멍에 간편하게 착탈 가능</li>
-                                </ul>
+                </div>
+
+                {/* 하단: 상세 정보 탭 */}
+                <div className="product-details-tabs">
+                    {/* 상품 설명 */}
+                    <div className="tab-section">
+                        <div
+                            className={`tab-header ${openDesc ? 'active' : ''}`}
+                            onClick={() => setOpenDesc(!openDesc)}
+                        >
+                            <h3 className="tab-title">상품 상세 설명</h3>
+                            <div className="tab-icon">
+                                <img
+                                    src="/images/Sub_Women_Images/icon-arrow-down.svg"
+                                    alt="토글"
+                                />
+                            </div>
+                        </div>
+                        <div className={`tab-content ${openDesc ? 'active' : ''}`}>
+                            <div className="content-inner">
+                                <div className="desc-section">
+                                    <h4 className="desc-title">Jibbitz™ 참</h4>
+                                    <ul className="desc-list">
+                                        <li>크록스만의 개성을 표현할 수 있는 Jibbitz™ 참</li>
+                                        <li>다양한 디자인으로 나만의 크록스를 꾸며보세요</li>
+                                        <li>크록스 구멍에 간편하게 착탈 가능</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {/* 유의사항 */}
-                <div className="tab-section">
-                    <div
-                        className={`tab-header ${openNotes ? 'active' : ''}`}
-                        onClick={() => setOpenNotes(!openNotes)}
-                    >
-                        <h3 className="tab-title">유의 사항</h3>
-                        <div className="tab-icon">
-                            <img src="/images/Sub_Women_Images/icon-arrow-down.svg" alt="토글" />
+                    {/* 유의사항 */}
+                    <div className="tab-section">
+                        <div
+                            className={`tab-header ${openNotes ? 'active' : ''}`}
+                            onClick={() => setOpenNotes(!openNotes)}
+                        >
+                            <h3 className="tab-title">유의 사항</h3>
+                            <div className="tab-icon">
+                                <img
+                                    src="/images/Sub_Women_Images/icon-arrow-down.svg"
+                                    alt="토글"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className={`tab-content ${openNotes ? 'active' : ''}`}>
-                        <div className="content-inner">
-                            <div className="desc-section">
-                                <h4 className="desc-title">사용 시 주의사항</h4>
-                                <ul className="desc-list">
-                                    <li>
-                                        36개월 미만 어린이는 삼킬 위험이 있으니 주의가 필요합니다.
-                                    </li>
-                                    <li>강한 충격이나 무리한 힘을 가하면 파손될 수 있습니다.</li>
-                                    <li>불에 가까이 하지 마십시오.</li>
-                                </ul>
+                        <div className={`tab-content ${openNotes ? 'active' : ''}`}>
+                            <div className="content-inner">
+                                <div className="desc-section">
+                                    <h4 className="desc-title">사용 시 주의사항</h4>
+                                    <ul className="desc-list">
+                                        <li>
+                                            36개월 미만 어린이는 삼킬 위험이 있으니 주의가
+                                            필요합니다.
+                                        </li>
+                                        <li>
+                                            강한 충격이나 무리한 힘을 가하면 파손될 수 있습니다.
+                                        </li>
+                                        <li>불에 가까이 하지 마십시오.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {/* 리뷰 */}
-                {/* <div className="tab-section">
+                    {/* 리뷰 */}
+                    {/* <div className="tab-section">
                     <div
                         className={`tab-header ${openReview ? 'active' : ''}`}
                         onClick={() => setOpenReview(!openReview)}
@@ -422,23 +432,27 @@ const JibbitzProductDetail = () => {
                         <div className="content-inner">리뷰 목록이 여기에 표시됩니다.</div>
                     </div>
                 </div> */}
-                {/* 리뷰 */}
-                <div className="tab-section">
-                    <div
-                        className={`tab-header ${openReview ? 'active' : ''}`}
-                        onClick={() => setOpenReview(!openReview)}
-                    >
-                        <h3 className="tab-title">
-                            리뷰
-                            <span className="tab-subtitle">(1,747)</span>
-                        </h3>
-                        <div className="tab-icon">
-                            <img src="/images/Sub_Women_Images/icon-arrow-down.svg" alt="토글" />
+                    {/* 리뷰 */}
+                    <div className="tab-section">
+                        <div
+                            className={`tab-header ${openReview ? 'active' : ''}`}
+                            onClick={() => setOpenReview(!openReview)}
+                        >
+                            <h3 className="tab-title">
+                                리뷰
+                                <span className="tab-subtitle">(1,747)</span>
+                            </h3>
+                            <div className="tab-icon">
+                                <img
+                                    src="/images/Sub_Women_Images/icon-arrow-down.svg"
+                                    alt="토글"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className={`tab-content ${openReview ? 'active' : ''}`}>
-                        <div className="content-inner">
-                            <ProductReviews productId="205089" />
+                        <div className={`tab-content ${openReview ? 'active' : ''}`}>
+                            <div className="content-inner">
+                                <ProductReviews productId="205089" />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -115,6 +115,7 @@
 
             .product-price {
                 display: flex;
+                justify-content: flex-end;
                 align-items: center;
                 gap: 1.2rem;
                 font-family: 'all-round-gothic', sans-serif;
@@ -128,11 +129,12 @@
                 .sale-price {
                     font-size: 2rem;
                     font-weight: 700;
-                    color: #d70000;
+                    // color: #d70000;
                 }
 
                 .original-price {
                     font-size: 1.6rem;
+                    font-weight: 600;
                     color: #999;
                     text-decoration: line-through;
                 }

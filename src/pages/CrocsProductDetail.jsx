@@ -1038,7 +1038,7 @@ const CrocsProductDetail = () => {
                     <div className="product-info-section">
                         {/* 상품 헤더 */}
                         <div className="product-header">
-                            <p className="product-subtitle">클래식 컬렉션</p>
+                            {/* <p className="product-subtitle">클래식 컬렉션</p> */}
                             <h2 className="product-title">{CrocsProduct.product}</h2>
                             <div className="product-price">
                                 {hasOriginal && discountPercent && (

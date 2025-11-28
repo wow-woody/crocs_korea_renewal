@@ -17,14 +17,17 @@
 }
 
 %btn-menu-style {
-    display: block;
+    display: flex;
     width: 100%;
     height: 100%;
+    font-size: 1.4rem;
     border: 1px solid #ebebeb;
     border-radius: 4px;
     background-color: #fff;
+    text-align: center;
     transition: all 0.2s ease;
     color: #ccc;
+    // line-height: 100%;
 
     .btn-menu__button {
         width: 100%;
@@ -911,13 +914,13 @@
 // ============================================
 
 .product-card__name--warp {
-    width: 32.8rem;
+    // width: 32.8rem;
     height: 4.5rem;
 
-    p {
+    > p {
         width: 100%;
-        font-size: 2.4rem;
-        font-weight: 400;
+        // font-size: 2.4rem;
+        font-weight: 600;
         color: g.$subColor;
         line-height: 2.9rem;
     }
@@ -928,17 +931,21 @@
 // ============================================
 
 .product-card__price_wrap {
-    width: 32.8rem;
-    font-family: 'all-round-gothic', sans-serif;
+    // width: 32.8rem;
+    // font-family: 'all-round-gothic', sans-serif;
+    font-weight: 600;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 1rem 0;
 
+    .discount-price {
+        color: g.$mainColor;
+    }
+
     .product-card__price {
         display: flex;
-
         align-items: center;
         gap: 0.8rem;
 
@@ -973,129 +980,129 @@
 // ProductColorBadges 컴포넌트
 // ============================================
 
-.product-card__color {
-    justify-content: flex-start;
-    width: 100%;
+// .product-card__color {
+//     justify-content: flex-start;
+//     width: 100%;
 
-    max-height: 0;
-    opacity: 0;
-    overflow: visible;
-    transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+//     max-height: 0;
+//     opacity: 0;
+//     overflow: visible;
+//     transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
 
-    &__title--wrap {
-        p {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: g.$subColor;
-            margin-bottom: 0.8rem;
-        }
-    }
+//     &__title--wrap {
+//         p {
+//             font-size: 1.3rem;
+//             font-weight: 500;
+//             color: g.$subColor;
+//             margin-bottom: 0.8rem;
+//         }
+//     }
 
-    .color-badge__wrap {
-        // width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-direction: row;
-        gap: 0.8rem;
-        overflow: visible;
+//     .color-badge__wrap {
+//         // width: 100%;
+//         display: flex;
+//         justify-content: flex-start;
+//         align-items: center;
+//         flex-direction: row;
+//         gap: 0.8rem;
+//         overflow: visible;
 
-        > .color-badge {
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50px;
-        }
-    }
-}
+//         > .color-badge {
+//             width: 1rem;
+//             height: 1rem;
+//             border-radius: 50px;
+//         }
+//     }
+// }
 
 // ============================================
 // ProductSizeButtons 컴포넌트
 // ============================================
 
-.product-card__size {
-    justify-content: flex-start;
-    width: 100%;
+// .product-card__size {
+//     justify-content: flex-start;
+//     width: 100%;
 
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+//     max-height: 0;
+//     opacity: 0;
+//     overflow: hidden;
+//     transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
 
-    &__title--wrap {
-        p {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: g.$subColor;
-            margin-bottom: 0.8rem;
-        }
-    }
+//     &__title--wrap {
+//         p {
+//             font-size: 1.3rem;
+//             font-weight: 500;
+//             color: g.$subColor;
+//             margin-bottom: 0.8rem;
+//         }
+//     }
 
-    .product-card__size--btns__wrap {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-    }
-}
+//     .product-card__size--btns__wrap {
+//         width: 100%;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         flex-wrap: wrap;
+//         gap: 0.4rem;
+//     }
+// }
 
 // ============================================
 // SizeButton 컴포넌트
 // ============================================
 
-.size--btns__item {
-    width: 4.8rem;
-    height: 2.3rem;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: #cccccc;
-    font-family: 'all-round-gothic', sans-serif;
+// .size--btns__item {
+//     width: 4.8rem;
+//     height: 2.3rem;
+//     font-size: 1.1rem;
+//     font-weight: 400;
+//     color: #cccccc;
+//     font-family: 'all-round-gothic', sans-serif;
 
-    .size--btns__link {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        border: 1px solid #ebebeb;
-        border-radius: 4px;
-        color: #cccccc;
-        background-color: #ffffff;
-        transition: all 0.2s ease;
-        position: relative;
+//     .size--btns__link {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: 100%;
+//         height: 100%;
+//         border: 1px solid #ebebeb;
+//         border-radius: 4px;
+//         color: #cccccc;
+//         background-color: #ffffff;
+//         transition: all 0.2s ease;
+//         position: relative;
 
-        .size--btns__button {
-            width: 100%;
-            height: 100%;
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
+//         .size--btns__button {
+//             width: 100%;
+//             height: 100%;
+//             font-size: 1.1rem;
+//             font-weight: 400;
+//         }
 
-        &:hover {
-            border: 1px solid g.$mainColor;
-            color: g.$mainColor;
-        }
+//         &:hover {
+//             border: 1px solid g.$mainColor;
+//             color: g.$mainColor;
+//         }
 
-        &.active {
-            background-color: g.$mainColor;
-            border: 1px solid g.$mainColor;
-            color: g.$subColor;
-        }
+//         &.active {
+//             background-color: g.$mainColor;
+//             border: 1px solid g.$mainColor;
+//             color: g.$subColor;
+//         }
 
-        &.sold-out {
-            color: #ebebeb;
-            background-color: #f9f9f9;
-            cursor: not-allowed;
-            pointer-events: none;
+//         &.sold-out {
+//             color: #ebebeb;
+//             background-color: #f9f9f9;
+//             cursor: not-allowed;
+//             pointer-events: none;
 
-            .sold-out-line {
-                position: absolute;
-                width: 2.5rem;
-                height: 0.15rem;
-                background-color: #ebebeb;
-                transform: rotate(-45deg);
-            }
-        }
-    }
-}
+//             .sold-out-line {
+//                 position: absolute;
+//                 width: 2.5rem;
+//                 height: 0.15rem;
+//                 background-color: #ebebeb;
+//                 transform: rotate(-45deg);
+//             }
+//         }
+//     }
+// }
