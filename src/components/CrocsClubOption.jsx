@@ -1,12 +1,89 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { loginAuthStore } from '../store/loginStore';
 
-const CrocsClubOption = () => {
+const CrocsClubOption = ({ onValidationChange }) => {
+    const { user } = loginAuthStore();
+
+    const [formData, setFormData] = useState({
+        month: '',
+        day: '',
+        email: user?.email || '',
+        agree: false,
+    });
+
+    // user 정보가 나중에 로드될 수 있으므로 업데이트
+    useEffect(() => {
+        if (user?.email && !formData.email) {
+            setFormData((prev) => ({
+                ...prev,
+                email: user.email,
+            }));
+        }
+    }, [user, formData.email]);
+
+    // 입력값 검증
+    useEffect(() => {
+        const isValid =
+            formData.month &&
+            formData.month !== '' &&
+            formData.day &&
+            formData.day !== '' &&
+            formData.email &&
+            formData.email.trim() !== '' &&
+            formData.agree === true;
+
+        console.log('=== CrocsClubOption 검증 ===');
+        console.log('월:', formData.month);
+        console.log('일:', formData.day);
+        console.log('이메일:', formData.email);
+        console.log('약관동의:', formData.agree);
+        console.log('검증결과:', isValid);
+        console.log('===========================');
+
+        // 부모 컴포넌트에 검증 결과 전달
+        if (onValidationChange) {
+            onValidationChange(isValid);
+        }
+    }, [formData, onValidationChange]);
+
+    // 월 선택 핸들러
+    const handleMonthChange = (e) => {
+        setFormData((prev) => ({
+            ...prev,
+            month: e.target.value,
+        }));
+    };
+
+    // 일 선택 핸들러
+    const handleDayChange = (e) => {
+        setFormData((prev) => ({
+            ...prev,
+            day: e.target.value,
+        }));
+    };
+
+    // 이메일 입력 핸들러
+    const handleEmailChange = (e) => {
+        setFormData((prev) => ({
+            ...prev,
+            email: e.target.value,
+        }));
+    };
+
+    // 체크박스 핸들러
+    const handleAgreeChange = (e) => {
+        setFormData((prev) => ({
+            ...prev,
+            agree: e.target.checked,
+        }));
+    };
+
     return (
         <div className="crocs_club_option">
             <div className="option_wrap">
                 <form className="join_option_wrap">
                     <div className="birthday_select_wrap">
-                        <select>
+                        <select value={formData.month} onChange={handleMonthChange}>
                             <option value="">mm</option>
                             <option value="01">1월</option>
                             <option value="02">2월</option>
@@ -21,7 +98,7 @@ const CrocsClubOption = () => {
                             <option value="11">11월</option>
                             <option value="12">12월</option>
                         </select>
-                        <select>
+                        <select value={formData.day} onChange={handleDayChange}>
                             <option value="">dd</option>
                             <option value="01">01일</option>
                             <option value="02">02일</option>
@@ -55,13 +132,26 @@ const CrocsClubOption = () => {
                             <option value="30">30일</option>
                             <option value="31">31일</option>
                         </select>
+                        {formData.month && formData.day && <span className="valid_check"> ✓</span>}
                     </div>
 
-                    <input type="email" placeholder="이메일 주소를 입력해주세요." />
+                    <input
+                        type="email"
+                        placeholder="이메일 주소를 입력해주세요."
+                        value={formData.email}
+                        onChange={handleEmailChange}
+                    />
+                    {formData.email && <span className="valid_check"> ✓</span>}
+
                     <label>
-                        <input type="checkbox" />
+                        <input
+                            type="checkbox"
+                            checked={formData.agree}
+                            onChange={handleAgreeChange}
+                        />
                         크록스 클럽 및 마케팅 정보 수신 을 위한 개인정보의 수집 및 이용에
                         동의합니다.
+                        {formData.agree && <span className="valid_check"> ✓</span>}
                     </label>
                     <div className="text_box">
                         <div>
