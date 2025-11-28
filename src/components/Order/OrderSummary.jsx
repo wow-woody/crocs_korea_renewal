@@ -95,10 +95,13 @@ function OrderSummary({
                     </p>
                 )}
 
-                <div className="price-row">
-                    <span className="price-label">할인/쿠폰</span>
-                    <span className="price-value discount">-0원</span>
-                </div>
+                {/* 할인 금액 표시 - 할인이 있을 때만 */}
+                {discount > 0 && (
+                    <div className="price-row">
+                        <span className="price-label">할인/쿠폰</span>
+                        <span className="price-value discount">-{formatPrice(discount)}원</span>
+                    </div>
+                )}
 
                 <div className="price-row total-row">
                     <span className="price-label total-label">최종 결제 금액</span>

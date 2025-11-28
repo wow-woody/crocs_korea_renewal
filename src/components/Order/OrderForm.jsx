@@ -1,9 +1,21 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { loginAuthStore } from '../../store/loginStore';
+import { useProductStore } from '../../store/useProductStore';
 
 const OrderForm = forwardRef((props, ref) => {
-    // 로그인 사용자 정보 가져오기 (비밀번호 섹션 조건부 렌더링용)
+    const { subtotal = 0, onCouponUpdate } = props;
+
+    // 로그인 사용자 정보 가져오기
     const { user } = loginAuthStore();
+
+    // ProductStore에서 쿠폰 관련 함수 가져오기
+    const { getUserCoupons, onSelectCoupon } = useProductStore();
+
+    // 쿠폰 관련 상태
+    const [availableCoupons, setAvailableCoupons] = useState([]);
+    const [selectedCoupon, setSelectedCoupon] = useState(null);
+    const [showCouponModal, setShowCouponModal] = useState(false);
+    const [discountAmount, setDiscountAmount] = useState(0);
 
     // 주문자 정보
     const [ordererName, setOrdererName] = useState('');
@@ -30,10 +42,6 @@ const OrderForm = forwardRef((props, ref) => {
     const [passwordValid, setPasswordValid] = useState(null);
     const [passwordMatch, setPasswordMatch] = useState(null);
 
-    // 쿠폰
-    const [couponCode, setCouponCode] = useState('');
-    const [couponApplied, setCouponApplied] = useState(false);
-
     // 약관 동의
     const [agreeTerms, setAgreeTerms] = useState(false);
 
@@ -43,16 +51,22 @@ const OrderForm = forwardRef((props, ref) => {
     // 이메일 도메인 선택지
     const emailDomains = ['직접입력', 'naver.com', 'hanmail.net', 'gmail.com', 'daum.net'];
 
+    // 사용 가능한 쿠폰 목록 가져오기
+    useEffect(() => {
+        if (user) {
+            const coupons = getUserCoupons(user);
+            setAvailableCoupons(coupons);
+        }
+    }, [user, getUserCoupons]);
+
     // 로그인된 사용자 정보 자동 채우기
     useEffect(() => {
         if (user) {
-            // 이름
             if (user.name) {
                 setOrdererName(user.name);
-                setReceiverName(user.name); // 배송지 이름도 같이 설정
+                setReceiverName(user.name);
             }
 
-            // 이메일
             if (user.email) {
                 const [local, domain] = user.email.split('@');
                 setEmailLocal(local);
@@ -65,14 +79,12 @@ const OrderForm = forwardRef((props, ref) => {
                 }
             }
 
-            // 전화번호 (형식: 010-1234-5678 또는 01012345678)
             if (user.phone) {
                 const phoneClean = user.phone.replace(/[^0-9]/g, '');
                 if (phoneClean.length === 10) {
                     setPhone1(phoneClean.slice(0, 3));
                     setPhone2(phoneClean.slice(3, 6));
                     setPhone3(phoneClean.slice(6, 10));
-                    // 배송지 전화번호도 같이 설정
                     setDeliveryPhone1(phoneClean.slice(0, 3));
                     setDeliveryPhone2(phoneClean.slice(3, 6));
                     setDeliveryPhone3(phoneClean.slice(6, 10));
@@ -80,7 +92,6 @@ const OrderForm = forwardRef((props, ref) => {
                     setPhone1(phoneClean.slice(0, 3));
                     setPhone2(phoneClean.slice(3, 7));
                     setPhone3(phoneClean.slice(7, 11));
-                    // 배송지 전화번호도 같이 설정
                     setDeliveryPhone1(phoneClean.slice(0, 3));
                     setDeliveryPhone2(phoneClean.slice(3, 7));
                     setDeliveryPhone3(phoneClean.slice(7, 11));
@@ -88,6 +99,71 @@ const OrderForm = forwardRef((props, ref) => {
             }
         }
     }, [user]);
+
+    // 쿠폰 할인 금액 계산
+    const calculateDiscount = () => {
+        if (!selectedCoupon) return 0;
+        if (!subtotal || subtotal <= 0) return 0;
+
+        if (selectedCoupon.type === 'percentage') {
+            return Math.floor(subtotal * (selectedCoupon.discount / 100));
+        } else if (selectedCoupon.type === 'fixed') {
+            return Math.min(selectedCoupon.discount, subtotal);
+        }
+
+        return 0;
+    };
+
+    // 특정 쿠폰의 할인 금액 미리보기 계산
+    const calculateCouponDiscount = (coupon) => {
+        if (!coupon) return 0;
+        if (!subtotal || subtotal <= 0) return 0;
+
+        if (coupon.type === 'percentage') {
+            return Math.floor(subtotal * (coupon.discount / 100));
+        } else if (coupon.type === 'fixed') {
+            return Math.min(coupon.discount, subtotal);
+        }
+
+        return 0;
+    };
+
+    // 쿠폰 할인 금액 업데이트 및 부모 컴포넌트에 전달
+    useEffect(() => {
+        const discount = calculateDiscount();
+        console.log('쿠폰 할인 계산:', {
+            selectedCoupon,
+            subtotal,
+            calculatedDiscount: discount,
+            couponType: selectedCoupon?.type,
+            couponDiscount: selectedCoupon?.discount
+        });
+        setDiscountAmount(discount);
+        if (onCouponUpdate) {
+            onCouponUpdate(selectedCoupon, discount);
+        }
+    }, [selectedCoupon, subtotal, onCouponUpdate]);
+
+    // 날짜 포맷 함수
+    const formatDate = (date) => {
+        if (!date) return '';
+        const d = date.toDate ? date.toDate() : new Date(date);
+        return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(
+            d.getDate()
+        ).padStart(2, '0')}`;
+    };
+
+    // 쿠폰 선택 핸들러
+    const handleCouponSelect = (coupon) => {
+        if (selectedCoupon?.id === coupon.id) {
+            setSelectedCoupon(null);
+            onSelectCoupon(null);
+        } else {
+            setSelectedCoupon(coupon);
+            onSelectCoupon(coupon);
+        }
+        setShowCouponModal(false);
+    };
 
     // 유효성 검사 함수 - 부모 컴포넌트에서 호출 가능
     useImperativeHandle(ref, () => ({
@@ -120,7 +196,7 @@ const OrderForm = forwardRef((props, ref) => {
                 return false;
             }
 
-            if (postcode || address) {
+            if (!postcode || !address) {
                 alert('입력되지 않은 항목이 있습니다.\n배송지 주소를 입력해주세요.');
                 return false;
             }
@@ -211,16 +287,6 @@ const OrderForm = forwardRef((props, ref) => {
                 setAddress(data.address);
             },
         }).open();
-    };
-
-    // 쿠폰 적용
-    const handleCouponApply = () => {
-        if (couponCode.trim()) {
-            setCouponApplied(true);
-            alert('쿠폰이 적용되었습니다.');
-        } else {
-            alert('쿠폰번호를 입력해주세요.');
-        }
     };
 
     // 배송지 타입 변경 시 주문자 정보 복사 또는 초기화
@@ -506,32 +572,117 @@ const OrderForm = forwardRef((props, ref) => {
                 </div>
             )}
 
-            {/* 쿠폰/할인코드 */}
-            <div className="form-section">
-                <h2 className="section-title">쿠폰/할인코드</h2>
+            {/* 쿠폰 섹션 - 로그인 사용자만 표시 */}
+            {user && (
+                <div className="form-section">
+                    <h2 className="section-title">쿠폰/할인</h2>
 
-                <div className="form-group">
-                    <label className="form-label">할인쿠폰 적용</label>
-                    <div className="coupon-input-group">
-                        <input
-                            type="text"
-                            className="form-input coupon-input"
-                            placeholder="쿠폰번호 입력"
-                            value={couponCode}
-                            onChange={(e) => setCouponCode(e.target.value)}
-                        />
-                        <button type="button" className="btn-coupon" onClick={handleCouponApply}>
-                            적용
-                        </button>
+                    {availableCoupons.length > 0 ? (
+                        <>
+                            <div className="coupon-section">
+                                <button
+                                    type="button"
+                                    className="coupon-select-btn"
+                                    onClick={() => setShowCouponModal(true)}
+                                >
+                                    {selectedCoupon
+                                        ? `${selectedCoupon.name} 적용됨`
+                                        : `사용 가능한 쿠폰 ${availableCoupons.length}개`}
+                                </button>
+
+                                {selectedCoupon && (
+                                    <div className="selected-coupon">
+                                        <div className="coupon-info">
+                                            <span className="coupon-name">{selectedCoupon.name}</span>
+                                            <span className="coupon-discount">
+                                                -{discountAmount.toLocaleString()}원
+                                            </span>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            className="cancel-btn"
+                                            onClick={() => {
+                                                setSelectedCoupon(null);
+                                                onSelectCoupon(null);
+                                            }}
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* 할인 금액 표시 - 쿠폰 선택 시에만 */}
+                            {selectedCoupon && (
+                                <div className="discount-amount">
+                                    <span className="discount-label">할인 적용 금액</span>
+                                    <span className="discount-value">
+                                        {discountAmount > 0 
+                                            ? `-${discountAmount.toLocaleString()}원`
+                                            : '계산 중...'}
+                                    </span>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <p className="no-coupon-message">사용 가능한 쿠폰이 없습니다.</p>
+                    )}
+                </div>
+            )}
+
+            {/* 쿠폰 선택 모달 */}
+            {showCouponModal && (
+                <div className="coupon-modal" onClick={() => setShowCouponModal(false)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-header">
+                            <h3>쿠폰 선택</h3>
+                            <button
+                                className="close-btn"
+                                onClick={() => setShowCouponModal(false)}
+                            >
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="coupon-list">
+                            {availableCoupons.length === 0 ? (
+                                <p className="no-coupon">사용 가능한 쿠폰이 없습니다.</p>
+                            ) : (
+                                availableCoupons.map((coupon) => {
+                                    const previewDiscount = calculateCouponDiscount(coupon);
+                                    
+                                    return (
+                                        <div
+                                            key={coupon.id}
+                                            className={`coupon-item ${
+                                                selectedCoupon?.id === coupon.id ? 'selected' : ''
+                                            }`}
+                                            onClick={() => handleCouponSelect(coupon)}
+                                        >
+                                            <div className="coupon-badge">
+                                                <span className="discount-value">
+                                                    {coupon.discount}
+                                                    {coupon.type === 'percentage' ? '%' : '원'}
+                                                </span>
+                                            </div>
+                                            <div className="coupon-details">
+                                                <h4>{coupon.name}</h4>
+                                                <p className="coupon-code">코드: {coupon.code}</p>
+                                                <p className="expire-date">
+                                                    유효기간: {formatDate(coupon.expiresAt)}까지
+                                                </p>
+                                            </div>
+                                            {selectedCoupon?.id === coupon.id && (
+                                                <span className="check-mark">✓</span>
+                                            )}
+                                        </div>
+                                    );
+                                })
+                            )}
+                        </div>
                     </div>
-                    {couponApplied && <p className="coupon-message">쿠폰이 적용되었습니다.</p>}
                 </div>
-
-                <div className="discount-amount">
-                    <span className="discount-label">적용금액</span>
-                    <span className="discount-value">-0원</span>
-                </div>
-            </div>
+            )}
 
             {/* 결제수단 */}
             <div className="form-section">

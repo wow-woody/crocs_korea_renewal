@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-// import { Products } from '../../data/CrocsProductsData.js';
 import OrderForm from './OrderForm.jsx';
 import OrderSummary from './OrderSummary.jsx';
 import OrderProgress from './OrderProgress.jsx';
@@ -21,18 +20,12 @@ function Order() {
     const { user } = loginAuthStore();
     const applyCoupon = loginAuthStore((state) => state.applyCoupon);
 
-    
-    // ProductStore에서 쿠폰 관련 함수 가져오기
-    const { getUserCoupons, onSelectCoupon, onFinalPrice } = useProductStore();
-
-    // 쿠폰 관련 상태
-    const [availableCoupons, setAvailableCoupons] = useState([]);
-    const [selectedCoupon, setSelectedCoupon] = useState(null);
-    const [showCouponModal, setShowCouponModal] = useState(false);
-    const [discountAmount, setDiscountAmount] = useState(0);
-
     // 장바구니에서 받은 주문데이터
     const cartOrderData = location.state || null;
+
+    // 쿠폰 관련 상태 (OrderForm에서 전달받음)
+    const [selectedCoupon, setSelectedCoupon] = useState(null);
+    const [discountAmount, setDiscountAmount] = useState(0);
 
     // Cart에서 받은 데이터가 없으면 즉시 Cart로 리다이렉트
     useEffect(() => {
@@ -42,21 +35,12 @@ function Order() {
             cartOrderData.orderProducts.length === 0
         ) {
             alert('주문할 상품이 없습니다. 장바구니로 이동합니다.');
-            navigate('/cart', { replace: true }); // replace: true로 히스토리 교체
+            navigate('/cart', { replace: true });
         }
     }, [cartOrderData, navigate]);
 
-     // 사용 가능한 쿠폰 목록 가져오기
-    useEffect(() => {
-        if (user) {
-            const coupons = getUserCoupons(user);
-            setAvailableCoupons(coupons);
-        }
-    }, [user]);
-
     // 초기 상품 데이터 생성 (useMemo로 한 번만 생성)
     const initialProducts = useMemo(() => {
-        // Cart에서 전달받은 데이터가 있으면 사용
         if (cartOrderData && cartOrderData.orderProducts) {
             return cartOrderData.orderProducts.map((item, index) => ({
                 id: item.id || index + 1,
@@ -69,7 +53,6 @@ function Order() {
                 category: item.cate || '일반',
             }));
         }
-
         return [];
     }, [cartOrderData]);
 
@@ -81,13 +64,15 @@ function Order() {
         shippingFee: 2500,
     };
 
-    // ⭐ 자동 리다이렉트 제거 (handleRemoveProduct에서 수동으로 처리)
-    // 사용자가 마지막 상품 삭제 시 확인 메시지로 제어
-
     // 총 상품 금액 계산
     const calculateSubtotal = () => {
-        if (!products || products.length === 0) return 0;
-        return products.reduce((sum, product) => sum + product.price * product.quantity, 0);
+        if (!products || products.length === 0) {
+            console.log('⚠️ calculateSubtotal: products 없음');
+            return 0;
+        }
+        const subtotal = products.reduce((sum, product) => sum + product.price * product.quantity, 0);
+        console.log('✅ calculateSubtotal:', subtotal, 'products:', products.length);
+        return subtotal;
     };
 
     // 배송비 계산
@@ -96,79 +81,34 @@ function Order() {
         return subtotal >= shippingInfo.freeShippingThreshold ? 0 : shippingInfo.shippingFee;
     };
 
-    // 최종 결제 금액 - 쿠폰 할인 금액 계산
-    const calculateDiscount = () => {
-        if (!selectedCoupon) return 0;
-
-        const subtotal = calculateSubtotal();
-
-        if (selectedCoupon.type === 'percentage') {
-            // 퍼센트 할인
-            return Math.floor(subtotal * (selectedCoupon.discount / 100));
-        } else if (selectedCoupon.type === 'fixed') {
-            // 고정 금액 할인
-            return Math.min(selectedCoupon.discount, subtotal);
-        }
-
-        return 0;
-    };
-
     // 최종 결제 금액 (쿠폰 할인 적용)
     const calculateTotal = () => {
         const subtotal = calculateSubtotal();
         const shipping = calculateShipping();
-        const discount = calculateDiscount();
-
-        return Math.max(0, subtotal + shipping - discount);
+        return Math.max(0, subtotal + shipping - discountAmount);
     };
 
-    // 쿠폰 할인 금액 업데이트
-    useEffect(() => {
-        setDiscountAmount(calculateDiscount());
-    }, [selectedCoupon, products]);
-
-    // 날짜 포맷 함수
-    const formatDate = (date) => {
-        if (!date) return '';
-        const d = date.toDate ? date.toDate() : new Date(date);
-        return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(
-            d.getDate()
-        ).padStart(2, '0')}`;
+    // OrderForm에서 쿠폰 정보 업데이트 받기
+    const handleCouponUpdate = (coupon, discount) => {
+        setSelectedCoupon(coupon);
+        setDiscountAmount(discount);
     };
-
-    // 쿠폰 선택 핸들러
-    const handleCouponSelect = (coupon) => {
-        if (selectedCoupon?.id === coupon.id) {
-            // 이미 선택된 쿠폰을 다시 클릭하면 선택 해제
-            setSelectedCoupon(null);
-            onSelectCoupon(null);
-        } else {
-            setSelectedCoupon(coupon);
-            onSelectCoupon(coupon);
-        }
-        setShowCouponModal(false);
-    };
-
 
     // 상품 삭제
     const handleRemoveProduct = (productId) => {
         if (!products) return;
 
-        // ⭐ 마지막 상품 삭제 시 확인
         if (products.length === 1) {
             const confirmed = window.confirm(
                 '모든 상품을 삭제하면 주문이 취소됩니다.\n장바구니로 이동하시겠습니까?'
             );
 
             if (confirmed) {
-                // 확인 → 장바구니로 이동
                 navigate('/cart', { replace: true });
             }
-            // 취소 → 아무것도 안 함 (삭제하지 않음)
             return;
         }
 
-        // 마지막 상품이 아니면 정상 삭제
         setProducts(products.filter((product) => product.id !== productId));
     };
 
@@ -192,44 +132,12 @@ function Order() {
         );
     };
 
-    // // 주문 완료
-    // const handleOrderComplete = () => {
-    //     if (orderFormRef.current && !orderFormRef.current.validateForm()) {
-    //         return;
-    //     }
-
-    //     // 페이지 최상단으로 스크롤
-    //     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    //     setIsOrderComplete(true);
-
-    //     // 주문 완료 후 장바구니 비우기
-    //     if (cartOrderData) {
-    //         localStorage.setItem('cartIds', JSON.stringify([]));
-
-    //         // Zustand store의 장바구니도 비우기 (store가 있다면)
-    //         // useCartStore.getState().clearCart(); // 이 부분은 store 구조에 따라 조정
-    //     }
-
-    //     // 회원/비회원에 따라 다른 페이지로 이동
-    //     setTimeout(() => {
-    //         if (user) {
-    //             // 회원: UserInfo 페이지로 이동
-    //             navigate('/userinfo', { replace: true });
-    //         } else {
-    //             // 비회원: 메인 페이지로 이동
-    //             navigate('/', { replace: true });
-    //         }
-    //     }, 3000);
-    // };
-
     // 주문 완료
     const handleOrderComplete = async () => {
         if (orderFormRef.current && !orderFormRef.current.validateForm()) {
             return;
         }
 
-        // 페이지 최상단으로 스크롤
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
         try {
@@ -242,7 +150,7 @@ function Order() {
             const orderData = {
                 orderId: `ORDER_${Date.now()}`,
                 orderDate: new Date(),
-                status: 'pending', // pending, processing, shipped, delivered, cancelled
+                status: 'pending',
                 products: products.map((p) => ({
                     id: p.id,
                     name: p.name,
@@ -271,26 +179,22 @@ function Order() {
             };
 
             if (user) {
-                // 로그인 사용자: users 컬렉션에 주문 내역 추가
                 const userRef = doc(db, 'users', user.uid);
                 await updateDoc(userRef, {
                     orders: arrayUnion(orderData),
                 });
                 console.log('주문 내역이 사용자 정보에 저장되었습니다.');
             } else {
-                // 비회원: orders 컬렉션에 별도 저장
                 await addDoc(collection(db, 'orders'), orderData);
                 console.log('비회원 주문 내역이 저장되었습니다.');
             }
 
             setIsOrderComplete(true);
 
-            // 주문 완료 후 장바구니 비우기
             if (cartOrderData) {
                 localStorage.setItem('cartIds', JSON.stringify([]));
             }
 
-            // 회원/비회원에 따라 다른 페이지로 이동
             setTimeout(() => {
                 if (user) {
                     navigate('/userinfo', { replace: true });
@@ -314,46 +218,14 @@ function Order() {
             {!isOrderComplete ? (
                 <div className="order-content">
                     <div className="order-left">
-                        <OrderForm ref={orderFormRef} />
+                        <OrderForm 
+                            ref={orderFormRef} 
+                            subtotal={calculateSubtotal()}
+                            onCouponUpdate={handleCouponUpdate}
+                        />
                     </div>
 
                     <div className="order-right">
-                        {/* 쿠폰 선택 영역 */}
-                        {user && availableCoupons.length > 0 && (
-                            <div className="coupon-section">
-                                <h3>쿠폰 선택</h3>
-                                <button
-                                    className="coupon-select-btn"
-                                    onClick={() => setShowCouponModal(true)}
-                                >
-                                    {selectedCoupon
-                                        ? `${selectedCoupon.name} 적용됨`
-                                        : `사용 가능한 쿠폰 ${availableCoupons.length}개`}
-                                </button>
-
-                                {selectedCoupon && (
-                                    <div className="selected-coupon">
-                                        <div className="coupon-info">
-                                            <span className="coupon-name">
-                                                {selectedCoupon.name}
-                                            </span>
-                                            <span className="coupon-discount">
-                                                -{discountAmount.toLocaleString()}원
-                                            </span>
-                                        </div>
-                                        <button
-                                            className="cancel-btn"
-                                            onClick={() => {
-                                                setSelectedCoupon(null);
-                                                onSelectCoupon(null);
-                                            }}
-                                        >
-                                            ✕
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        )}
                         <OrderSummary
                             products={products}
                             subtotal={calculateSubtotal()}
@@ -389,59 +261,9 @@ function Order() {
                     </div>
                 </div>
             )}
-        {/* 쿠폰 선택 모달 */}
-            {showCouponModal && (
-                <div className="coupon-modal" onClick={() => setShowCouponModal(false)}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <div className="modal-header">
-                            <h3>쿠폰 선택</h3>
-                            <button
-                                className="close-btn"
-                                onClick={() => setShowCouponModal(false)}
-                            >
-                                ✕
-                            </button>
-                        </div>
-
-                        <div className="coupon-list">
-                            {availableCoupons.length === 0 ? (
-                                <p className="no-coupon">사용 가능한 쿠폰이 없습니다.</p>
-                            ) : (
-                                availableCoupons.map((coupon) => (
-                                    <div
-                                        key={coupon.id}
-                                        className={`coupon-item ${
-                                            selectedCoupon?.id === coupon.id ? 'selected' : ''
-                                        }`}
-                                        onClick={() => handleCouponSelect(coupon)}
-                                    >
-                                        <div className="coupon-badge">
-                                            <span className="discount-value">
-                                                {coupon.discount}
-                                                {coupon.type === 'percentage' ? '%' : '원'}
-                                            </span>
-                                        </div>
-                                        <div className="coupon-details">
-                                            <h4>{coupon.name}</h4>
-                                            <p className="coupon-code">코드: {coupon.code}</p>
-                                            <p className="expire-date">
-                                                유효기간: {formatDate(coupon.expiresAt)}까지
-                                            </p>
-                                        </div>
-                                        {selectedCoupon?.id === coupon.id && (
-                                            <span className="check-mark">✓</span>
-                                        )}
-                                    </div>
-                                ))
-                            )}
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
-
 
 // 색상 파싱
 function parseColor(colorArray) {

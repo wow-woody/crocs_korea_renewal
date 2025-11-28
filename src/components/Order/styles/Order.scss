@@ -919,8 +919,9 @@
       color: #495057;
 
       &:hover {
-        border-color: #007bff;
-        background: #f8f9ff;
+        border-color:#b0d96e;
+        background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+        color: #fff;
       }
     }
 
@@ -930,9 +931,9 @@
       align-items: center;
       margin-top: 12px;
       padding: 12px 16px;
-      background: #e3f2fd;
+      background: rgba(238, 255, 227, 0.829);
       border-radius: 6px;
-      border: 1px solid #90caf9;
+      border: 1px solid rgba(102, 222, 27, 0.3);
 
       .coupon-info {
         display: flex;
@@ -942,7 +943,7 @@
         .coupon-name {
           font-size: 14px;
           font-weight: 500;
-          color: #1976d2;
+          color: g.$subColor;
         }
 
         .coupon-discount {
@@ -962,7 +963,7 @@
         border: none;
         cursor: pointer;
         font-size: 18px;
-        color: #1976d2;
+        color: rgb(22, 160, 10);
         transition: all 0.2s;
 
         &:hover {
@@ -1056,16 +1057,16 @@
           position: relative;
 
           &:hover {
-            border-color: #007bff;
+            border-color: g.$mainColor;
             background: #f8f9ff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.1);
+            box-shadow: 0 4px 8px rgba(176, 217, 110, 0.7);
           }
 
           &.selected {
-            border-color: #007bff;
-            background: #e3f2fd;
-            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+            border-color: g.$mainColor;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(176, 217, 110, 0.8);
           }
 
           .coupon-badge {
@@ -1075,9 +1076,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, rgb(102, 222, 28) 0%, rgb(176, 217, 110) 100%);
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 2px 8px rgb(176, 217, 110, 0.7);
 
             .discount-value {
               font-size: 18px;
@@ -1126,7 +1127,7 @@
             top: 12px;
             right: 12px;
             font-size: 24px;
-            color: #007bff;
+            color: rgb(176, 217, 110, 0.9);
             font-weight: 700;
           }
         }
