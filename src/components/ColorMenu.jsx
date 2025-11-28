@@ -13,6 +13,7 @@ export default function ColorMenu() {
             name: '그레이',
             class: 'gray',
             value: [
+                'rgb(128, 128, 128)',
                 'rgb(221, 223, 222)',
                 'rgb(220,220,220)',
                 'rgba(221,223,222,1)',
@@ -109,7 +110,11 @@ export default function ColorMenu() {
                                         {/* 🎨 여기가 핵심! 실제 색상 표시 */}
                                         <span
                                             className={`select_color ${color.class}`}
-                                            style={{ backgroundColor: color.value }}
+                                            style={{
+                                                backgroundColor: Array.isArray(color.value)
+                                                    ? color.value[0]
+                                                    : color.value,
+                                            }}
                                         ></span>
                                         <span className="select_color_text">{color.name}</span>
                                     </button>
@@ -122,79 +127,3 @@ export default function ColorMenu() {
         </div>
     );
 }
-
-// import React, { useState } from 'react';
-// import './scss/WomenComponents.scss';
-// import { useCrocsProductStore } from '../store/useCrocsProductStore';
-
-// export default function ColorMenu() {
-//     const [isOpen, setIsOpen] = useState(true);
-
-//     // ⭐ Crocs Store에서 colorFilter 상태 사용
-//     const colorFilter = useCrocsProductStore((s) => s.colorFilter);
-//     const setColorFilter = useCrocsProductStore((s) => s.setColorFilter);
-
-//     const colors = [
-//         { name: '블랙', class: 'black', value: 'rgb(0, 0, 0)' },
-//         { name: '그레이', class: 'gray', value: 'rgb(128, 128, 128)' },
-//         { name: '화이트', class: 'white', value: 'rgb(255, 255, 255)' },
-//         { name: '빨강', class: 'red', value: 'rgb(220, 43, 43)' },
-//         { name: '핑크', class: 'pink', value: 'rgb(255, 166, 237)' },
-//         { name: '브라운', class: 'brown', value: 'rgb(92, 53, 27)' },
-//         { name: '주황', class: 'orange', value: 'rgb(255, 140, 0)' },
-//         { name: '보라', class: 'purple', value: 'rgb(78, 52, 212)' },
-//         { name: '노랑', class: 'yellow', value: 'rgb(255, 255, 91)' },
-//         { name: '민트', class: 'mint', value: 'rgb(215, 251, 225)' },
-//         { name: '연두', class: 'light-green', value: 'rgb(142, 240, 50)' },
-//         { name: '녹색', class: 'green', value: 'rgb(34, 139, 34)' },
-//         { name: '하늘', class: 'sky-blue', value: 'rgb(210, 244, 255)' },
-//         { name: '파랑', class: 'blue', value: 'rgb(0, 8, 255)' },
-//         { name: '네이비', class: 'navy', value: 'rgb(23, 29, 96)' },
-//     ];
-
-//     const isSelected = (value) => colorFilter === value;
-
-//     return (
-//         <div className="filtering_wrap color_menu_wrap">
-//             <div className="filtering_menu color_menu">
-//                 <div className="filtering_menu_top color_menu_top">
-//                     <h3 className="menu_title">색상</h3>
-//                     <button className="filtering_menu_toggle" onClick={() => setIsOpen(!isOpen)}>
-//                         <img
-//                             src={
-//                                 isOpen
-//                                     ? '/images/Sub_Women_Images/icon-minus.svg'
-//                                     : '/images/Sub_Women_Images/icon-plus.svg'
-//                             }
-//                             alt="toggle"
-//                         />
-//                     </button>
-//                 </div>
-
-//                 {isOpen && (
-//                     <ul className="select_color_wrap">
-//                         {colors.map((color) => (
-//                             <li
-//                                 key={color.class}
-//                                 className={`color_list ${
-//                                     isSelected(color.value) ? 'selected' : ''
-//                                 }`}
-//                             >
-//                                 <button
-//                                     className="select_color_btn"
-//                                     onClick={() => setColorFilter(color.value)}
-//                                 >
-//                                     <span
-//                                         className="select_color"
-//                                         style={{ backgroundColor: color.value }}
-//                                     ></span>
-//                                     <span className="select_color_text">{color.name}</span>
-//                                 </button>
-//                             </li>
-//                         ))}
-//                     </ul>
-//                 )}
-//             </div>
-//         </div>
-//     );
-// }

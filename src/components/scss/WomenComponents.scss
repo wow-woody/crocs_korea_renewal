@@ -589,14 +589,6 @@
             }
         }
 
-        .filter-tag__color-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid #ddd;
-            flex-shrink: 0;
-        }
-
         .filter-tag__text {
             color: #333;
             font-weight: 500;
@@ -632,6 +624,13 @@
         padding: 30px 0;
         margin: 0;
     }
+}
+
+.filter-menu__select_color {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid #ddd;
 }
 
 // 애니메이션
