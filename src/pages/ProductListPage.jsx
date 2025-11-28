@@ -45,6 +45,7 @@ const ProductListPage = () => {
     }, [cate, subcategory, searchWord]);
 
     // 1) 카테고리 필터
+    // 1) 카테고리 필터
     let filteredItems = filterByMenu(cate, subcategory);
 
     // 2) 검색어 필터
@@ -58,11 +59,14 @@ const ProductListPage = () => {
     }
 
     // 3) 카테고리 기반 사이즈 자동 지정
+    // 3) 카테고리 기반 사이즈 자동 지정
     const normalizeCate = (cateString) => {
         if (!cateString) return null;
         const lower = cateString.toLowerCase();
 
         if (lower.includes('kid') || lower.includes('키즈')) return 'kids';
+        if (lower.includes('women') || lower.includes('여성')) return 'women';
+        if (lower.includes('men') || lower.includes('남성')) return 'men';
         if (lower.includes('women') || lower.includes('여성')) return 'women';
         if (lower.includes('men') || lower.includes('남성')) return 'men';
 
@@ -85,6 +89,7 @@ const ProductListPage = () => {
         }
     }
 
+    // 5) 색상 필터
     // 5) 색상 필터
     if (selectedColors.length > 0) {
         filteredItems = filteredItems.filter((item) => {
@@ -129,7 +134,9 @@ const ProductListPage = () => {
     }
 
     // UI 서브카테고리
+    // UI 서브카테고리
     const currentMenu = menuList.find((m) => m.key === cate);
+
 
     const subCategoryList = [
         ...new Set(
@@ -146,6 +153,30 @@ const ProductListPage = () => {
     return (
         <div className="sub_page">
             <div className="inner">
+                <div className="jibbitz_list_wrap">
+                    <div className="product_list_page">
+                        <Title title={cate?.toUpperCase()} />
+
+                        {/* 검색결과 */}
+                        {searchWord && (
+                            <div className="search_info_wrap">
+                                <div className="search_info">
+                                    {`" ${searchWord} " 검색 결과 : `}
+                                    <p>
+                                        <strong>{filteredItems.length}</strong>개
+                                    </p>
+                                </div>
+                                <button
+                                    className="clear_search_info_btn"
+                                    onClick={() => {
+                                        setSearchWord('');
+                                        navigate(`/${cate}`);
+                                    }}
+                                >
+                                    ×
+                                </button>
+                            </div>
+                        )}
                 <div className="jibbitz_list_wrap">
                     <div className="product_list_page">
                         <Title title={cate?.toUpperCase()} />
@@ -187,7 +218,34 @@ const ProductListPage = () => {
                                 ))}
                             </div>
                         )}
+                        {/* 서브 메뉴 (Jibbitz 스타일 유지) */}
+                        {currentMenu?.submenu_list?.length > 0 && !searchWord && (
+                            <div className="sub_menu_wrap">
+                                {currentMenu.submenu_list.map((sub) => (
+                                    <div
+                                        key={sub.key}
+                                        className={`btn_menu_item ${
+                                            subcategory === sub.key ? 'active' : ''
+                                        }`}
+                                        onClick={() => navigate(`/${cate}/${sub.key}`)}
+                                    >
+                                        <button className="sub_menu_btn">{sub.label}</button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
 
+                        <div className="product_list_wrap">
+                            {/* 좌측 네비게이션 */}
+                            <div className="list_left">
+                                <LeftNavigation
+                                    category={mainCategory}
+                                    subcategory={mainSubcategory}
+                                    subCategoryList={subCategoryList}
+                                    selectedSize={selectedSize}
+                                    onSizeSelect={setSelectedSize}
+                                />
+                            </div>
                         <div className="product_list_wrap">
                             {/* 좌측 네비게이션 */}
                             <div className="list_left">
@@ -223,10 +281,34 @@ const ProductListPage = () => {
                                     </div>
                                 )}
                             </div>
+                            {/* 우측 리스트 (Jibbitz 스타일 유지) */}
+                            <div className="list_right">
+                                {currentItems.length > 0 ? (
+                                    <ul className="product-card__item_list">
+                                        {currentItems.map((p) => (
+                                            <ProductCard
+                                                key={p.id}
+                                                product={p}
+                                                onClick={() => navigate(`/product/${p.id}`)}
+                                                onSizeSelect={setSelectedSize}
+                                            />
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <div className="empty_state">
+                                        <p>
+                                            {searchWord
+                                                ? `"${searchWord}"에 대한 검색 결과가 없습니다.`
+                                                : '해당 조건에 맞는 상품이 없습니다.'}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                {/* 페이징 */}
                 {/* 페이징 */}
                 {totalPage > 1 && (
                     <div className="page_pager">
