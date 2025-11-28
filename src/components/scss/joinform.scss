@@ -7,6 +7,7 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
     gap: 20px;
+
     form {
         grid-column: 1/2;
         grid-row: 1;
@@ -18,14 +19,16 @@
             display: grid;
             grid-template-columns: 1fr 3fr;
             align-items: center;
+
             p {
                 font-weight: 600;
             }
             .admit_input {
                 height: 4rem;
+
                 &::placeholder {
-                    // font-size: 1.2rem;
-                    font-weight: 400;
+                    text-align: start;
+                    font-weight: 600;
                 }
             }
         }
@@ -43,7 +46,7 @@
 
             .required_title {
                 width: 100%;
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
                 text-align: left;
                 font-weight: 600;
             }
@@ -55,6 +58,8 @@
                 padding-left: 2rem;
                 background-color: #eee;
                 border-radius: 5rem;
+                text-align: start;
+                font-weight: 600;
             }
 
             .required_content {
@@ -121,7 +126,8 @@
         border-radius: 5rem;
         color: g.$mainColor;
         &:hover {
-            background: g.$mainColor;
+            background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+            box-shadow: 0 6px 20px rgba(102, 222, 27, 0.3);
             color: g.$subColor;
         }
     }

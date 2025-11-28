@@ -1,7 +1,6 @@
 import React from 'react';
 import Title from '../components/Title';
 import './scss/Nonmember.scss';
-// import CrocsClubJion from '../components/CrocsClubJion';
 import CrocsClubJoin from '../components/CrocsClubJoin';
 
 const Nonmember = () => {

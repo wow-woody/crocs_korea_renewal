@@ -1,13 +1,21 @@
 @use '../../App.scss' as g;
 
 .nonmember_wrap {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    // box-shadow: ;
     text-align: center;
-    border: 1px solid #ddd;
-    padding: 5rem 10rem;
+    box-shadow: 0 30px 60px rgba(20, 20, 21, 0.06);
+    border-radius: 1rem;
+    padding: 5rem 10rem 20rem;
     @include g.flex($fd: column, $jc: center, $gap: none);
+
+    .title_wrap {
+        margin-bottom: 3rem;
+        .section_sub_title {
+            font-size: 2.4rem;
+            font-weight: 600;
+        }
+    }
 
     .nonmember_form {
         padding: 2rem;

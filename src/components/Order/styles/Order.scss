@@ -744,45 +744,80 @@
         max-width: 800px;
         margin: 4rem auto;
         padding: 0 2rem;
-    }
 
-    .order-complete-message {
-        text-align: center;
-        padding: 60px 20px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        margin-top: 20px;
+        .order-complete-message {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-top: 20px;
 
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background-color: #66de1b;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 50px;
-            font-weight: bold;
-        }
+            .success-icon {
+                width: 80px;
+                height: 80px;
+                background-color: #66de1b;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 20px;
+                color: white;
+                font-size: 50px;
+                font-weight: bold;
+            }
 
-        .success-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 15px;
-        }
+            .success-title {
+                font-size: 24px;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 15px;
+            }
 
-        .success-message {
-            font-size: 16px;
-            color: #666;
-            line-height: 1.6;
+            .order-info-box {
+                padding: 2.5rem;
+                margin-bottom: 3rem;
+                text-align: left;
+                .order-info-row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 1.2rem 0;
+                    border-bottom: 1px solid #e0e0e0;
 
-            .redirect-notice {
-                color: #999;
-                font-size: 14px;
-                font-style: italic;
+                    &:last-child {
+                        border-bottom: none;
+                    }
+
+                    .info-label {
+                        font-size: 1.5rem;
+                        color: #666;
+                        font-weight: 500;
+                    }
+
+                    .info-value {
+                        font-size: 1.5rem;
+                        color: #333;
+                        font-weight: 600;
+
+                        &.total {
+                            font-size: 2rem;
+                            color: #4caf50;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+
+            .success-message {
+                font-size: 16px;
+                color: #666;
+                line-height: 1.6;
+
+                .redirect-notice {
+                    color: #999;
+                    font-size: 14px;
+                    font-style: italic;
+                }
             }
         }
     }
