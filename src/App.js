@@ -98,6 +98,12 @@ function App() {
                 <Route path="/order" element={<Order />} />
                 <Route path="/coupons" element={<Coupons />} />
                 <Route path="/recent" element={<RecentProducts />} />
+
+                {/* 지비츠 리스트 + 상세 */}
+                <Route path="/jibbitz/detail/:id" element={<JibbitzProductDetail />} />
+                <Route path="/jibbitz/:filter" element={<JibbitzProductListPage />} />
+                <Route path="/jibbitz" element={<JibbitzProductListPage />} />
+                <Route path="/all/jibbitz" element={<JibbitzProductListPage />} />
             </Routes>
             {/* Main 페이지가 아닐 때만 Footer 표시 */}
             {!isMainPage && <Footer onOpenCS={openCS} />}
