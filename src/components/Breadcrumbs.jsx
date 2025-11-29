@@ -82,13 +82,13 @@ export default function Breadcrumbs({ category, subcategory }) {
                 )}
             </ul>
 
-            <div className="breadcrumbs__title">
+            {/* <div className="breadcrumbs__title">
                 <h2>
                     {subcategory
                         ? `${category.toUpperCase()} : ${subcategory.toUpperCase()}`
                         : category.toUpperCase()}
                 </h2>
-            </div>
+            </div> */}
         </div>
     );
 }
