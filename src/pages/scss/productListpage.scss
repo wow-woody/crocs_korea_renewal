@@ -1,4 +1,4 @@
-@use "../../App.scss" as g;
+@use '../../App.scss' as g;
 
 .product_list_page {
     width: 100%;
@@ -6,6 +6,7 @@
 
     .title_wrap {
         margin: 0 auto;
+        margin-bottom: 5rem;
         width: fit-content;
     }
 
