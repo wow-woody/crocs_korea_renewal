@@ -9,7 +9,8 @@
         height: 44rem;
         position: relative; // fixed → relative
         border-radius: 0 0 1rem 1rem;
-
+        // 메뉴가 배경과 함께 0.5초 동안 부드럽게 나타남
+        animation: fadeInDown 0.5s ease-out;
         .depth1_left {
             padding: 0 10rem 0;
             .depthmenu {
@@ -124,96 +125,14 @@
     }
 }
 
-// 원래 코드
-// .depth1_right {
-//     margin: 0 auto;
-//     position: relative;
-//     .submenu_wrap {
-//         .menu_title {
-//             position: absolute;
-//             left: -16rem;
-//             top: -1.2rem;
-//             font-weight: 900;
-//             font-size: 2rem;
-//         }
-//         .submenu {
-//             @include g.flex($gap: auto, $fw: wrap, $jc: none);
-//             gap: 4rem 4rem; // 세로 1.2rem, 가로 2rem
-//             // padding: 1rem;
-//             border-radius: 1rem;
-//             max-width: 100rem;
-
-//             li {
-//                 a {
-//                     @include g.flex($fd: column, $gap: 0.5rem);
-//                     background: #ddd;
-//                     width: 28rem;
-//                     height: 16rem;
-//                     border-radius: 1rem;
-//                     img {
-//                         height: 12rem;
-//                     }
-//                     span {
-//                         height: 2.8rem;
-//                         line-height: 1.6rem;
-//                         font-weight: 700;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// 상단 고정 됨
-// .depth1_right {
-//     margin: 0 auto;
-//     position: relative;
-
-//     .submenu_wrap {
-//         position: relative;
-
-//         .menu_title {
-//             position: absolute;
-//             left: -16rem;
-//             top: 0;
-//             font-weight: 900;
-//             font-size: 2rem;
-//         }
-
-//         .submenu {
-//             @include g.flex($gap: auto, $fw: wrap, $jc: flex-start);
-//             gap: 4rem 4rem;
-//             border-radius: 1rem;
-//             max-width: 100rem;
-//             height: 36rem; // 고정 높이 (아이템 1줄: 16rem, 2줄: 36rem)
-//             // 또는
-//             // height: 56rem; // 3줄까지 표시
-
-//             // 넘치는 경우 처리
-//             overflow: hidden; // 숨김
-//             // 또는
-//             // overflow-y: auto; // 스크롤
-
-//             align-content: flex-start; // 위쪽부터 배치
-
-//             li {
-//                 a {
-//                     @include g.flex($fd: column, $gap: 0.5rem);
-//                     background: #ddd;
-//                     width: 28rem;
-//                     height: 16rem;
-//                     border-radius: 1rem;
-
-//                     img {
-//                         height: 12rem;
-//                     }
-//                     span {
-//                         height: 2.8rem;
-//                         line-height: 1.6rem;
-//                         font-weight: 700;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
+// 애니메이션 정의
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

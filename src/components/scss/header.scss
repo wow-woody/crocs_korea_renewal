@@ -6,7 +6,6 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: background-color 0.5s ease;
 
     &.hide {
         opacity: 0;
@@ -39,7 +38,7 @@
         background: rgba($color: #eee, $alpha: 0.4);
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
-        transition: height 0.3s ease, border-radius 0.3s ease;
+        transition: height 0.2s ease, border-radius 0.2s ease; // 0.3s → 0.5s로 변경
         z-index: -1;
     }
 

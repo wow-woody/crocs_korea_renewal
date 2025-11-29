@@ -13,7 +13,13 @@
     margin: 0 auto;
     border-radius: 0 0 1rem 1rem;
     z-index: 2000;
-    transition: transform 2s ease-in-out;
+    // 부드러운 slide-down 애니메이션
+    animation: slideDown 0.5s ease-out;
+
+    // 닫힐 때 애니메이션
+    &.closing {
+        animation: slideUp 0.5s ease-in forwards;
+    }
 
     &.open.subpage,
     &.open.scrolled {
@@ -156,5 +162,29 @@
                 overflow: hidden;
             }
         }
+    }
+}
+
+// 검색창 slide-down 애니메이션
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// 검색창 slide-up 애니메이션 (닫기)
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-100%);
     }
 }
