@@ -56,10 +56,19 @@
         }
     }
 
-    .page_pager {
-        @include g.flex($jc: center);
-        margin-top: 4rem;
-    }
+    // .page_pager {
+    //     @include g.flex($jc: center);
+    //     margin-top: 4rem;
+    // }
+}
+.page_pager {
+    @include g.flex($jc: center);
+    margin-top: 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .product-card {
