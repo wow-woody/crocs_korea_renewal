@@ -7,6 +7,7 @@ import PriceMenu from './PriceMenu';
 import './scss/leftNavigation.scss';
 import { useCrocsSizeStore } from '../store/useCrocsSizeStore';
 import { useParams } from 'react-router-dom';
+import { useColorFilterStore } from '../store/useColorFilterStore';
 
 export default function LeftNavigation({
     category,
@@ -16,10 +17,9 @@ export default function LeftNavigation({
     filters = [],
     priceRanges = [],
     colors = [],
-    selectedColors = [],
-    onColorSelect,
 }) {
     const { crocsSizes, onFetchSize } = useCrocsSizeStore();
+    const { selectedColors, toggleColor } = useColorFilterStore();
     const params = useParams();
 
     // ⭐ 최종적으로 사용할 category, subcategory
@@ -30,21 +30,43 @@ export default function LeftNavigation({
         onFetchSize();
     }, []);
 
+    // 색상 제거 핸들러
+    const handleRemoveColor = (colorToRemove) => {
+        toggleColor(colorToRemove);
+    };
+
+    // 사이즈 제거 핸들러
+    const handleRemoveSize = () => {
+        onSizeSelect?.(null);
+    };
+
     return (
         <div className="left_nav__section_wrap">
             <Breadcrumbs category={finalCategory} subcategory={finalSubcategory} />
             <div className="left_nav">
+                {/* ⭐ 선택된 필터들을 FilterMenu에 전달 */}
+                <FilterMenu
+                    selectedColors={selectedColors}
+                    selectedSize={selectedSize}
+                    onRemoveColor={handleRemoveColor}
+                    onRemoveSize={handleRemoveSize}
+                />
+
+                <div className="breadcrumbs__line" />
+
                 <SizeMenu
                     sizes={crocsSizes}
                     selectedSize={selectedSize}
                     onSizeSelect={onSizeSelect}
                 />
+
                 <div className="breadcrumbs__line" />
-                <FilterMenu filters={filters} />
+
+                <ColorMenu />
+
                 <div className="breadcrumbs__line" />
-                <ColorMenu selectedColors={selectedColors} onColorSelect={onColorSelect} />
-                <div className="breadcrumbs__line" />
-                <PriceMenu priceRanges={priceRanges} />
+
+                {/* <PriceMenu priceRanges={priceRanges} /> */}
             </div>
         </div>
     );

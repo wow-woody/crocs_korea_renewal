@@ -49,8 +49,8 @@ const JibbitzProductImage = ({ product }) => {
                     <div className="thumbs__ctrl thumbs__ctrl--top">
                         <button
                             type="button"
-                            className="thumbs__btn thumbs__btn--up"
-                            aria-label="이전 썸네일 보기"
+                            className="product-img__thumbs-link"
+                            // aria-label={`${index + 1}번째 이미지 보기`}
                         >
                             <img
                                 className="thumbs__icon"

@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './scss/CartSidebar.scss';
 import Title from '../components/Title';
 import { Products } from '../data/CrocsProductsData.js';
 import { useCartStore } from '../store/useCartStore';
 
 function CartSidebar({ isOpen, onClose }) {
+    const navigate = useNavigate();
+    
     const {
         cartProducts,
         selectedProducts,
@@ -44,6 +47,41 @@ function CartSidebar({ isOpen, onClose }) {
         return price.toLocaleString('ko-KR');
     };
 
+    // ⭐ 주문 페이지로 이동
+    const handleToOrder = (type) => {
+        let orderData;
+
+        if (type === 'all') {
+            if (cartProducts.length === 0) {
+                alert('장바구니에 상품이 없습니다.');
+                return;
+            }
+            orderData = handleOrderAll();
+        } else {
+            if (selectedProducts.size === 0) {
+                alert('선택된 상품이 없습니다.');
+                return;
+            }
+            orderData = handleOrderSelected();
+        }
+
+        if (!orderData) {
+            return;
+        }
+
+        // ⭐ 사이드바 닫기
+        onClose();
+
+        navigate('/order', {
+            state: {
+                orderProducts: orderData.products,
+                subtotal: orderData.subtotal,
+                shipping: orderData.shipping,
+                total: orderData.total,
+            },
+        });
+    };
+
     // ESC 키로 닫기
     useEffect(() => {
         const handleEsc = (e) => {
@@ -68,9 +106,6 @@ function CartSidebar({ isOpen, onClose }) {
 
     return (
         <>
-            {/* <div className="cart-button">
-            <button><img src="./public/imagescart-icon.svg" alt="" /></button>
-        </div> */}
             <div className={`cart-side-container ${isOpen ? 'open' : ''}`}>
                 <div className="cart-inner">
                     <Title title="Cart" />
@@ -111,7 +146,10 @@ function CartSidebar({ isOpen, onClose }) {
                                     </div>
                                 ) : (
                                     cartProducts.map((product) => (
-                                        <div key={product.id} className="product-item-wrap">
+                                        <div 
+                                            key={`${product.id}-${product.size || 'default'}`} 
+                                            className="product-item-wrap"
+                                        >
                                             <input
                                                 type="checkbox"
                                                 className="product-checkbox"
@@ -128,15 +166,11 @@ function CartSidebar({ isOpen, onClose }) {
 
                                                 <div className="product-info">
                                                     <h3 className="product-name">{product.name}</h3>
-                                                    {/* 지비츠 - 사이즈가 있을때만 표시 */}
                                                     {product.size && (
                                                         <p className="product-option">
                                                             사이즈: {product.size}
                                                         </p>
                                                     )}
-                                                    {/* <p className='product-color'>
-                                                    컬러: {product.color}
-                                                </p> */}
 
                                                     <div className="quantity-control">
                                                         <button
@@ -229,14 +263,17 @@ function CartSidebar({ isOpen, onClose }) {
                             {/* 주문 버튼들 */}
                             {!isOrderComplete ? (
                                 <div className="order-buttons">
-                                    <button className="btn-order-all" onClick={handleOrderAll}>
+                                    <button 
+                                        className="btn-order-all" 
+                                        onClick={() => handleToOrder('all')}
+                                    >
                                         전체상품주문하기
                                     </button>
 
                                     <div className="btn-group">
                                         <button
                                             className="btn-order-selected"
-                                            onClick={handleOrderSelected}
+                                            onClick={() => handleToOrder('selected')}
                                         >
                                             선택상품주문
                                         </button>

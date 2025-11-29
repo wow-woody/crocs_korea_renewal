@@ -7,11 +7,48 @@ import { Link, useNavigate } from 'react-router-dom';
 import { wishListStore } from '../store/wishListStore';
 // import OrderHistoryCard from '../components/OrderHistoryCard';
 import OrderState from '../components/OrderState';
+import { loginAuthStore } from '../store/loginStore';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 
 const UserInfo = () => {
     const { wishLists } = wishListStore();
     const [active, setActive] = useState(false);
     const navigate = useNavigate();
+
+    // props로 전달할 주문 데이터
+    const [orders, setOrders] = useState([]);
+    const { user } = loginAuthStore();
+
+    // 주문 데이터 불러오기
+    useEffect(() => {
+        const fetchOrders = async () => {
+            if (!user) return;
+
+            const userRef = doc(db, 'users', user.uid);
+            const userDoc = await getDoc(userRef);
+
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                const userOrders = userData.orders || [];
+
+                // 최신순 정렬
+                const sorted = userOrders.sort((a, b) => {
+                    const dateA = a.orderDate?.toDate
+                        ? a.orderDate.toDate()
+                        : new Date(a.orderDate);
+                    const dateB = b.orderDate?.toDate
+                        ? b.orderDate.toDate()
+                        : new Date(b.orderDate);
+                    return dateB - dateA;
+                });
+
+                setOrders(sorted);
+            }
+        };
+
+        fetchOrders();
+    }, [user]);
 
     useEffect(() => {
         if (wishLists.length === 0) {
@@ -45,7 +82,7 @@ const UserInfo = () => {
                     </div>
                     <hr />
                     <div className="user_menu_bottom">
-                        <OrderState />
+                        <OrderState orders={orders} />
                     </div>
                 </div>
                 <div className="userinfo_recentOrder_wrap">

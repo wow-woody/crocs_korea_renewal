@@ -1,4 +1,4 @@
-@use '../../App.scss' as g;
+@use "../../App.scss" as g;
 
 .crocs_club_popup_wrap {
     max-width: 1000px;
@@ -12,6 +12,7 @@
 
     .title_wrap {
         .section_title {
+            text-align:center;
             padding-bottom: 2rem;
         }
     }
@@ -78,16 +79,21 @@
                         }
                     }
 
-                    input[type='email'] {
-                        margin-top: 15px;
-                        width: 100%;
-                        padding: 12px 14px;
-                        border: 1px solid #ddd;
-                        border-radius: 50px;
-                        font-size: 14px;
+                    .email_select_wrap {
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                        input[type="email"] {
+                            margin-top: 15px;
+                            width: 100%;
+                            padding: 12px 14px;
+                            border: 1px solid #ddd;
+                            border-radius: 50px;
+                            font-size: 14px;
 
-                        &:focus {
-                            border-color: g.$mainColor;
+                            &:focus {
+                                border-color: g.$mainColor;
+                            }
                         }
                     }
 

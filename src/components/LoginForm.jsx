@@ -1,7 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const LoginForm = ({ onLoginSubmit, email, password, setEmail, setPassword, onGoogleLogin }) => {
+const LoginForm = ({
+    onLoginSubmit,
+    email,
+    password,
+    setEmail,
+    setPassword,
+    onGoogleLogin,
+    onKakaoLogin,
+}) => {
     return (
         <form className="login_form" onSubmit={onLoginSubmit}>
             <input
@@ -43,7 +51,7 @@ const LoginForm = ({ onLoginSubmit, email, password, setEmail, setPassword, onGo
             </Link>
 
             <div className="sns_login_wrap">
-                <button className="sns_login kakao">
+                <button className="sns_login kakao" onClick={onKakaoLogin}>
                     <img src="/images/kakao_icon.svg" alt="kakao_login" />
                 </button>
                 <button className="sns_login google" onClick={onGoogleLogin} type="button">

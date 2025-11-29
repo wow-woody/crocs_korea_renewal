@@ -133,21 +133,99 @@
       }
     }
 
-    .btn-remove-selected {
-      padding: 8px 16px;
-      margin-right: -5px;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5rem;
-      font-size: 14px;
-      cursor: pointer;
-      color: #666;
-      transition: all 0.2s;
+    .product-item {
+        gap: 20px;
+        padding: 10px 50px 10px;
+        border-bottom: 1px solid #f0f0f0;
+        display:flex;
+        justify-content: space-between;
 
-      &:hover {
-        background-color: g.$subColor;
-        color: #f0f0f0;
-      }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .product-info {
+            @include g.flex($jc: center, $ai: flex-start, $fd: column);
+
+            .product-name {
+                font-size: 16px;
+                font-weight: 600;
+                margin-top: 8px;
+                color: $primary-color;
+            }
+
+            .product-option {
+                font-size: 14px;
+                color: $text-light;
+                margin: 4px 0;
+                align-items: center;
+                span {
+                    display: inline-block;
+                    border-radius: 50%;
+                    width: 18px;
+                    height: 18px;
+                    vertical-align: middle;
+                    border: 1px solid currentColor;
+                    cursor: pointer;
+                }
+            }
+
+            .quantity-control {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-top: 12px;
+
+                .quantity-btn {
+                    width: 28px;
+                    height: 28px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    background-color: $white;
+                    cursor: pointer;
+                    font-size: 16px;
+                    transition: all 0.2s;
+
+                    &:hover:not(:disabled) {
+                        background-color: $primary-color;
+                        color: $white;
+                    }
+
+                    &:disabled {
+                        cursor: not-allowed;
+                        opacity: 0.5;
+                    }
+                }
+
+                .quantity-display {
+                    font-size: 14px;
+                    min-width: 50px;
+                    text-align: center;
+                }
+            }
+        }
+
+        .product-price {
+            @include g.flex($jc: flex-end, $ai: flex-end, $fd: column);
+
+            .price {
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: $primary-color;
+                white-space: nowrap;
+                margin-bottom:13px;
+            }
+        }
     }
   }
 

@@ -1,11 +1,11 @@
-// 'use no memo';
+"use no memo";
 
-import React, { useState } from 'react';
-import { wishListStore } from '../store/wishListStore';
-import './scss/wishlistcard.scss';
+import React, { useState } from "react";
+import { wishListStore } from "../store/wishListStore";
+import "./scss/wishlistcard.scss";
 
 const WishListCard = () => {
-    const { wishLists, onRemoveWish, removeWish, toggleRemoveWish, onAddCartBtn } = wishListStore();
+    const { wishLists, onRemoveWish, toggleRemoveWish, onAddCartBtn } = wishListStore();
 
     // 페이징 처리
     // 한페이지에 보여질 개수
@@ -33,7 +33,7 @@ const WishListCard = () => {
             buttons.push(
                 <button
                     key={i}
-                    className={currentPage === i ? 'actvie' : ''}
+                    className={currentPage === i ? "actvie" : ""}
                     onClick={() => handleGoPage(i)}
                 >
                     {i}
@@ -44,11 +44,11 @@ const WishListCard = () => {
     };
 
     return (
-        <div className="wish_inner">
-            <div className="wish_card_wrap">
+        <div className='wish_inner'>
+            <div className='wish_card_wrap'>
                 {currentItems.map((item) => (
-                    <div key={item.id} className="wish_card">
-                        <div className="wish_card_imgbox">
+                    <div key={item.id} className='wish_card'>
+                        <div className='wish_card_imgbox'>
                             <img src={item.imageUrl} alt={item.title} />
                             <input
                                 type='checkbox'
@@ -56,16 +56,16 @@ const WishListCard = () => {
                                 onChange={() => toggleRemoveWish(item)}
                             />
                         </div>
-                        <div className="wish_card_textbox">
+                        <div className='wish_card_textbox'>
                             <p>{item.title}</p>
-                            <div className="wish_card_price">
+                            <div className='wish_card_price'>
                                 <p>
                                     <span>
-                                        {item.discountPrice == '' ? item.price : item.discountPrice}
+                                        {item.discountPrice == "" ? item.price : item.discountPrice}
                                     </span>
-                                    <span>{item.discountPrice == '' ? '' : item.originPrice}</span>
+                                    <span>{item.discountPrice == "" ? "" : item.originPrice}</span>
                                 </p>
-                                <p className="price_bottom">
+                                <p className='price_bottom'>
                                     {/* {(
                                         (1 -
                                             Number(item.discountPrice.replace(/,/g, '')) /
@@ -77,21 +77,19 @@ const WishListCard = () => {
                                 </p>
                             </div>
                         </div>
-                        {/* <button>장바구니 추가</button>
-                    <button onClick={() => onRemoveWish(item)}>삭제</button> */}
                     </div>
                 ))}
             </div>
-            <div className="pager_btn">
+            <div className='pager_btn'>
                 <button onClick={() => handleGoPage(currentPage - 1)}>이전</button>
                 {pagerButton()}
                 <button onClick={() => handleGoPage(currentPage + 1)}>다음</button>
             </div>
-            <div className="wish_select">
-                <button className="wish_remove_btn" onClick={() => onRemoveWish()}>
+            <div className='wish_select'>
+                <button className='wish_remove_btn' onClick={() => onRemoveWish()}>
                     선택상품 삭제
                 </button>
-                <button className="wish_add_btn" onClick={() => onAddCartBtn()}>
+                <button className='wish_add_btn' onClick={() => onAddCartBtn()}>
                     장바구니 추가
                 </button>
             </div>

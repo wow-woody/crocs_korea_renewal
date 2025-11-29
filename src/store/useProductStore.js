@@ -8,7 +8,7 @@ export const useProductStore = create(
             // 삼품목록을 저장할 배열 // 새로고침하면 빈칸이 될수잇음
             items: [],
 
-            //검색어를 저장할 변수 - zustant 전역변수로 만들기
+            //검색어를 저장할 변수
             searchWord: '',
             // 2. 메서드
             // 검색어를 변경할 메서드
@@ -84,8 +84,8 @@ export const useProductStore = create(
                     }
                     return { cartItems: updateCart, cartCount: updateCart.length };
                     // get으로 가져온값이 아니라 리턴에 바로 넣어주고 set 안씀
-                    set({ cartItems: product });
-                    set({ cartCount: cartItems.length });
+                    // set({ cartItems: product });
+                    // set({ cartCount: cartItems.length });
                 });
 
                 // 다른 방식으로
@@ -100,11 +100,11 @@ export const useProductStore = create(
                     (item) => item.id === product.id && item.color === product.color
                     // 조건에 만족하면 existing에 true값, 만족하지않으면 false값이 들어감
                 );
-                let updateCart;
+                let updateCart2;
                 // 기존 카트에 있는 제품이면 수량만 변경되도록
                 // 같은 제품이 아닌 경우만 카트에 담기
                 if (existing) {
-                    updateCart = cart.map(
+                    updateCart2 = cart.map(
                         (item) =>
                             item.id === product.id && item.color === product.color
                                 ? { ...item, count: item.count + product.count }
@@ -115,20 +115,20 @@ export const useProductStore = create(
                     );
                 } else {
                     // 기존에 있는 카트 + 기존에있는 제품 (그냥 product를 가져오면 object자체가 들어감)
-                    updateCart = [...cart, { ...product }];
+                    updateCart2 = [...cart, { ...product }];
                 }
 
                 // 총구매금액
                 let total = 0;
                 // 총금액 구하기
-                updateCart.forEach((item) => {
+                updateCart2.forEach((item) => {
                     total += item.price * item.count;
                 });
 
                 set({
-                    cartItems: updateCart,
+                    cartItems: updateCart2,
                     // 업데이트카트의 길이로 체크해서 카트안에 갯수세기
-                    cartCount: updateCart.length,
+                    cartCount: updateCart2.length,
                     // 위에 선언해둔 전역변수 totalPrice에 total값을 넣어주기
                     totalPrice: total,
                 });
@@ -273,14 +273,32 @@ export const useProductStore = create(
             orderList: [],
 
             // 쿠폰을 저장할 변수
-            coupons: [
-                {
-                    id: 'welcome',
-                    text: '웰컴 쿠폰 5% 할인',
-                    type: 'percent',
-                    per: 5,
-                },
-            ],
+            // coupons: [
+            //     {
+            //         id: 'welcome',
+            //         text: '웰컴 쿠폰 5% 할인',
+            //         type: 'percent',
+            //         per: 5,
+            //     },
+            // ],
+
+            // 사용자 쿠폰 목록을 가져오는 메서드 (loginAuthStore에서 가져옴)
+            getUserCoupons: (user) => {
+                if (!user || !user.coupons) return [];
+                
+                // 사용 가능한 쿠폰만 필터링 (사용하지 않았고, 만료되지 않은 쿠폰)
+                return user.coupons.filter((coupon) => {
+                    if (coupon.isUsed) return false;
+                    
+                    if (coupon.expiresAt) {
+                        const expireDate = coupon.expiresAt.toDate 
+                            ? coupon.expiresAt.toDate() 
+                            : new Date(coupon.expiresAt);
+                        return expireDate >= new Date();
+                    }
+                    return true;
+                });
+            },
 
             //
             finalPrice: 0,
@@ -288,55 +306,70 @@ export const useProductStore = create(
             // 선택된 쿠폰 체크
             selectedCoupon: null,
             // seletedCoupon에 매개값으로 넘어온 coupon값이 들어가도록
-            onSelectCoupon: (coupon) => set({ selectedCoupon: coupon }),
+            onSelectCoupon: (coupon) => {set({ selectedCoupon: coupon });
+            // 쿠폰 선택 시 바로 최종 금액 계산
+                get().onFinalPrice();
+        },
 
+            // 쿠폰적용 최종 결제 금액
             onFinalPrice: () => {
                 const { totalPrice, selectedCoupon } = get();
                 let final = totalPrice;
                 if (selectedCoupon) {
-                    final = Math.floor(totalPrice * (1 - selectedCoupon.per / 100));
+                   if (selectedCoupon.type === 'percentage') {
+                        // 퍼센트 할인
+                        final = Math.floor(totalPrice * (1 - selectedCoupon.discount / 100));
+                    } else if (selectedCoupon.type === 'fixed') {
+                        // 고정 금액 할인
+                        final = Math.max(0, totalPrice - selectedCoupon.discount);
+                    }
                 }
 
                 set({
                     finalPrice: final, // finalPrice라는 변수에 넣기
                 });
+                return final;
             },
 
-            // // 최종 결제 금액 계산
-            // onFinalPrice: () => {
-            //     const { totalPrice, selectedCoupon } = get();
-            //     // 선택된 쿠폰 적용
-            //     if (selectedCoupon) {
-            //         return Math.floor(totalPrice * (1 - selectedCoupon.per / 100))
-            //     }
-            //     else {
-            //         return totalPrice;
-            //     }
-            // },
-
             // 주문하기
-            onAddOrder: () => {
-                const { cartItems, orderList, coupon, selectedCoupon, onFinalPrice, finalPrice } =
+            onAddOrder: (usedCoupon = null) => {
+                const { cartItems, orderList, selectedCoupon, finalPrice, totalPrice } =
                     get();
 
+                    // 최종 금액 계산
+                const orderPrice = finalPrice || totalPrice;
+
                 const newOrder = {
-                    id: new Date().toString(), //<-숫자를 문자로 표시
+                    id: new Date().getTime().toString(), //<-숫자를 문자로 표시
                     // 브라우저의 정보에 의해 언어에 맞게 문자열로 저장할떄 <-년월일순
-                    date: new Date().toLocaleString(),
+                    date: new Date().toLocaleString('ko-KR'),
                     items: [...cartItems],
-                    totalPrice: finalPrice, // onFinalPrice() 메서드는 호출, 변수는 그냥가져다쓰면됨
+                    originalPrice: totalPrice, // 원래 가격
+                     discountAmount: selectedCoupon 
+                        ? (totalPrice - orderPrice) 
+                        : 0, // 할인 금액
+                    finalPrice: orderPrice, // 최종 결제 금액
+                    // totalPrice: finalPrice, // onFinalPrice() 메서드는 호출, 변수는 그냥가져다쓰면됨
+                    usedCoupon: selectedCoupon ? {
+                        id: selectedCoupon.id,
+                        name: selectedCoupon.name,
+                        code: selectedCoupon.code,
+                        discount: selectedCoupon.discount,
+                        type: selectedCoupon.type,
+                    } : null,
                     status: '결제완료',
                 };
                 set({
                     orderList: [...orderList, newOrder],
                     selectedCoupon: null,
+                    finalPrice: 0,
                 });
+                return newOrder;
             },
 
             // 배송 관련
         }),
-        {
-            name: 'product-storage', // localStorage key 이름
+        {   name: 'product-storage', // localStorage key 이름
             // 저장할 항목만 따로 선택할 수도 있음
             partialize: (state) => ({
                 wishLists: state.wishLists,

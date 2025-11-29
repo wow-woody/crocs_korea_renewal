@@ -82,7 +82,7 @@ export const wishListStore = create(
                 // 현재 장바구니 목록
                 const cartWishItems = get().cartWishItems;
 
-                console.log("🛒 장바구니 추가 버튼:", { removeWish, wishLists, cartWishItems });
+                console.log("장바구니 추가 버튼:", { removeWish, wishLists, cartWishItems });
 
                 // 위시리스트에서 선택된 항목 제거
                 const newWishLists = wishLists.filter(

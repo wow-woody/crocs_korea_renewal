@@ -24,9 +24,13 @@
     right: 0;
     z-index: 9999;
 
-    .title_wrap {
-        text-align: center;
-        margin-bottom: 5rem;
+    .main-title {
+        margin-top: 0;
+
+        .title_wrap {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
     }
     .cs-content {
         display: grid;

@@ -1,20 +1,10 @@
 import React from 'react';
 
-function OrderProgress() {
+function OrderProgress({ isOrderComplete = false }) {
     const steps = [
         { id: 1, label: '장바구니', status: 'completed' },
-        { id: 2, label: '주문결제', status: 'current' },
-        { id: 3, label: '주문완료', status: 'pending' },
-
-        // 장바구니 페이지
-        // { id: 1, label: '장바구니', status: 'current' },
-        // { id: 2, label: '주문결제', status: 'pending' },
-        // { id: 3, label: '주문완료', status: 'pending' }
-
-        // 주문완료 페이지
-        // { id: 1, label: '장바구니', status: 'completed' },
-        // { id: 2, label: '주문결제', status: 'completed' },
-        // { id: 3, label: '주문완료', status: 'current' }
+        { id: 2, label: '주문결제', status: isOrderComplete ? 'completed' : 'current' },
+        { id: 3, label: '주문완료', status: isOrderComplete ? 'current' : 'pending' },
     ];
 
     return (
@@ -29,7 +19,7 @@ function OrderProgress() {
                         {index < steps.length - 1 && (
                             <div
                                 className={`progress-line ${
-                                    steps[index + 1].status === 'pending' ? 'inactive' : 'active'
+                                    step.status === 'completed' ? 'active' : 'inactive'
                                 }`}
                             ></div>
                         )}

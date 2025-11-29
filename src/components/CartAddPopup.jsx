@@ -20,9 +20,7 @@ const CartAddPopup = () => {
                 <div className="popup_text">{popUp.message}</div>
                 <div className="popup_btn_wrap">
                     <button onClick={hidePopup}>쇼핑 계속하기</button>
-                    <Link to="/cart">
-                        <button>장바구니 이동</button>
-                    </Link>
+                    <button onClick={handlegotocart}>장바구니 이동</button>
                 </div>
             </div>
         </div>

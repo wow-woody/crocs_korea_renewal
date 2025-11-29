@@ -2,30 +2,34 @@ import React, { useState } from 'react';
 import { joinStore } from '../store/joinStore';
 import PolicyPopup from './PolicyPopup';
 
-const Policy = () => {
+const Policy = ({ agreeTerms, setAgreeTerms }) => {
     const { onPolicyPopup } = joinStore();
     //이용약관 동의 변수
-    const [agree, setAgree] = useState({
-        terms: false,
-        privacy: false,
-        option: false,
-    });
+    // const [agree, setAgree] = useState({
+    //     terms: false,
+    //     privacy: false,
+    //     option: false,
+    // });
 
     // 이용약관 토글버튼
-    const handleToggle = (agree) => {
-        console.log('들어온값 확인:', agree);
-        setAgree((prev) => ({
-            ...prev,
-            [agree]: !prev[agree],
-        }));
-    };
+    // const handleToggle = (agree) => {
+    //     console.log('들어온값 확인:', agree);
+    //     setAgree((prev) => ({
+    //         ...prev,
+    //         [agree]: !prev[agree],
+    //     }));
+    // };
 
     return (
         <div className="policy_wrap">
             <div className="policy_top">약관 전체 동의</div>
             <div className="policy_middle">
                 <div className="policy_checklist">
-                    <input type="checkbox" />
+                    <input
+                        type="checkbox"
+                        checked={agreeTerms}
+                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                    />
                     <div>(필수) 이용약관 동의</div>
                     <div
                         onClick={() => {
@@ -37,7 +41,11 @@ const Policy = () => {
                 </div>
 
                 <div className="policy_checklist">
-                    <input type="checkbox" />
+                    <input
+                        type="checkbox"
+                        checked={agreeTerms}
+                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                    />
                     <div>(필수) 개인정보 수집 및 이용 동의</div>
                     <div
                         onClick={() => {

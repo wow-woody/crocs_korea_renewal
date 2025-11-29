@@ -6,6 +6,7 @@
     left: -10px; // 우측 위치
     transform: translateX(-50%);
     z-index: 1000; // 다른 요소 위
+    transition: all 0.3s;
 
     button {
         height: 5rem;
@@ -17,9 +18,9 @@
         border: none;
         border-radius: 8px;
         cursor: pointer;
-        // transition: background 0.3s;
         transform: rotate(-90deg);
         background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+        box-shadow: 0 4px 15px rgba(102, 222, 27, 0.3);
     }
     &:hover {
         left: 20px;

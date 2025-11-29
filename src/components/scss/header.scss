@@ -1,136 +1,138 @@
-@use '../../App.scss' as g;
+@use "../../App.scss" as g;
 
 .header_wrapper {
-    position: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.5s ease;
+
+  &.hide {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  &.scrolled,
+  &.subpage {
+    .header {
+      .header_left {
+        > nav {
+          li {
+            a {
+              color: #fff;
+            }
+          }
+
+          .collabs {
+            color: g.$mainColor;
+          }
+        }
+      }
+    }
+    &::before {
+      background-color: rgba($color: #aaa, $alpha: 0.4);
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    height: 7rem; // 기본 헤더 높이
+    background: rgba($color: #eee, $alpha: 0.4);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    // transition: height 0.3s ease, border-radius 0.3s ease;
+    z-index: -1;
+  }
+
+  &.open::before {
+    height: 51rem; // 7rem + 44rem
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  header {
+    height: 7rem;
+    background: transparent; // 투명하게 변경
+
     width: 100%;
-    z-index: 1000;
-    transition: background-color 0.5s ease;
 
-    &.hide {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
+    .wide_inner {
+      line-height: 7rem;
 
-    &.scrolled,
-    &.subpage {
-        .header {
-            > nav {
-                li {
-                    a {
-                        color: #fff;
-                    }
-                }
+      .header_left {
+        @include g.flex();
 
-                .collabs {
-                    color: g.$mainColor;
-                }
+        .logo {
+          width: 15rem;
+          a {
+            img {
+              width: 15rem;
             }
+          }
         }
-        &::before {
-            background-color: rgba($color: #aaa, $alpha: 0.8);
-        }
-    }
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 7rem; // 기본 헤더 높이
-        background: rgba($color: #eee, $alpha: 0.4);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        // transition: height 0.3s ease, border-radius 0.3s ease;
-        z-index: -1;
-    }
+        nav {
+          .main_menu {
+            @include g.flex();
 
-    &.open::before {
-        height: 51rem; // 7rem + 44rem
-        border-radius: 0 0 1rem 1rem;
-    }
+            > li {
+              > a {
+                font-size: 1.8rem;
+                font-weight: bold;
+                padding: 1rem 2rem;
+                height: 8rem;
+              }
 
-    header {
-        height: 7rem;
-        background: transparent; // 투명하게 변경
-
-        width: 100%;
-
-        .wide_inner {
-            line-height: 7rem;
-
-            .header_left {
-                @include g.flex();
-
-                .logo {
-                    width: 15rem;
-                    a {
-                        img {
-                            width: 15rem;
-                        }
-                    }
-                }
-
-                nav {
-                    .main_menu {
-                        @include g.flex();
-
-                        > li {
-                            > a {
-                                font-size: 1.8rem;
-                                font-weight: bold;
-                                padding: 1rem 2rem;
-                                height: 8rem;
-                            }
-
-                            &:hover {
-                                color: g.$mainColor;
-                            }
-                        }
-
-                        .collabs {
-                            color: g.$mainColor;
-                        }
-                    }
-                }
+              &:hover {
+                color: g.$mainColor;
+              }
             }
 
-            .header_right {
-                .gnb_wrap {
-                    @include g.flex();
-                    .gnb_left {
-                        @include g.flex();
-                        li {
-                            a {
-                                font-size: 1.8rem;
-                                font-weight: bold;
-                                padding: 1rem 2rem;
-                                height: 8rem;
-                            }
-                        }
-                        .brand {
-                            color: g.$mainColor;
-                        }
-                    }
-
-                    .gnb_right {
-                        @include g.flex($gap: 1rem);
-                        li {
-                            button {
-                                @include g.flex($jc: center);
-                                padding: 0;
-                                line-height: 7rem;
-                            }
-                        }
-
-                        .user_login_out_wrap {
-                            @include g.flex($gap: 1rem);
-                        }
-                    }
-                }
+            .collabs {
+              color: g.$mainColor;
             }
+          }
         }
+      }
+
+      .header_right {
+        .gnb_wrap {
+          @include g.flex();
+          .gnb_left {
+            @include g.flex();
+            li {
+              a {
+                font-size: 1.8rem;
+                font-weight: bold;
+                padding: 1rem 2rem;
+                height: 8rem;
+              }
+            }
+            .brand {
+              color: g.$mainColor;
+            }
+          }
+
+          .gnb_right {
+            @include g.flex($gap: 1rem);
+            li {
+              button {
+                @include g.flex($jc: center);
+                padding: 0;
+                line-height: 7rem;
+              }
+            }
+
+            .user_login_out_wrap {
+              @include g.flex($gap: 1rem);
+            }
+          }
+        }
+      }
     }
+  }
 }

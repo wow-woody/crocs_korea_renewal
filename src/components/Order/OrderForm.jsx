@@ -1,6 +1,22 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
+import { loginAuthStore } from '../../store/loginStore';
+import { useProductStore } from '../../store/useProductStore';
 
 const OrderForm = forwardRef((props, ref) => {
+    const { subtotal = 0, onCouponUpdate } = props;
+
+    // 로그인 사용자 정보 가져오기
+    const { user } = loginAuthStore();
+
+    // ProductStore에서 쿠폰 관련 함수 가져오기
+    const { getUserCoupons, onSelectCoupon } = useProductStore();
+
+    // 쿠폰 관련 상태
+    const [availableCoupons, setAvailableCoupons] = useState([]);
+    const [selectedCoupon, setSelectedCoupon] = useState(null);
+    const [showCouponModal, setShowCouponModal] = useState(false);
+    const [discountAmount, setDiscountAmount] = useState(0);
+
     // 주문자 정보
     const [ordererName, setOrdererName] = useState('');
     const [emailLocal, setEmailLocal] = useState('');
@@ -26,71 +42,186 @@ const OrderForm = forwardRef((props, ref) => {
     const [passwordValid, setPasswordValid] = useState(null);
     const [passwordMatch, setPasswordMatch] = useState(null);
 
-    // 쿠폰
-    const [couponCode, setCouponCode] = useState('');
-    const [couponApplied, setCouponApplied] = useState(false);
-
     // 약관 동의
     const [agreeTerms, setAgreeTerms] = useState(false);
 
+    // 결제수단
+    const [paymentMethod, setPaymentMethod] = useState('card');
+
     // 이메일 도메인 선택지
     const emailDomains = ['직접입력', 'naver.com', 'hanmail.net', 'gmail.com', 'daum.net'];
+
+    // 사용 가능한 쿠폰 목록 가져오기
+    useEffect(() => {
+        if (user) {
+            const coupons = getUserCoupons(user);
+            setAvailableCoupons(coupons);
+        }
+    }, [user, getUserCoupons]);
+
+    // 로그인된 사용자 정보 자동 채우기
+    useEffect(() => {
+        if (user) {
+            if (user.name) {
+                setOrdererName(user.name);
+                setReceiverName(user.name);
+            }
+
+            if (user.email) {
+                const [local, domain] = user.email.split('@');
+                setEmailLocal(local);
+
+                if (emailDomains.includes(domain)) {
+                    setEmailDomain(domain);
+                } else {
+                    setEmailDomain('직접입력');
+                    setCustomEmailDomain(domain);
+                }
+            }
+
+            if (user.phone) {
+                const phoneClean = user.phone.replace(/[^0-9]/g, '');
+                if (phoneClean.length === 10) {
+                    setPhone1(phoneClean.slice(0, 3));
+                    setPhone2(phoneClean.slice(3, 6));
+                    setPhone3(phoneClean.slice(6, 10));
+                    setDeliveryPhone1(phoneClean.slice(0, 3));
+                    setDeliveryPhone2(phoneClean.slice(3, 6));
+                    setDeliveryPhone3(phoneClean.slice(6, 10));
+                } else if (phoneClean.length === 11) {
+                    setPhone1(phoneClean.slice(0, 3));
+                    setPhone2(phoneClean.slice(3, 7));
+                    setPhone3(phoneClean.slice(7, 11));
+                    setDeliveryPhone1(phoneClean.slice(0, 3));
+                    setDeliveryPhone2(phoneClean.slice(3, 7));
+                    setDeliveryPhone3(phoneClean.slice(7, 11));
+                }
+            }
+        }
+    }, [user]);
+
+    // 쿠폰 할인 금액 계산
+    const calculateDiscount = () => {
+        if (!selectedCoupon) return 0;
+        if (!subtotal || subtotal <= 0) return 0;
+
+        if (selectedCoupon.type === 'percentage') {
+            return Math.floor(subtotal * (selectedCoupon.discount / 100));
+        } else if (selectedCoupon.type === 'fixed') {
+            return Math.min(selectedCoupon.discount, subtotal);
+        }
+
+        return 0;
+    };
+
+    // 특정 쿠폰의 할인 금액 미리보기 계산
+    const calculateCouponDiscount = (coupon) => {
+        if (!coupon) return 0;
+        if (!subtotal || subtotal <= 0) return 0;
+
+        if (coupon.type === 'percentage') {
+            return Math.floor(subtotal * (coupon.discount / 100));
+        } else if (coupon.type === 'fixed') {
+            return Math.min(coupon.discount, subtotal);
+        }
+
+        return 0;
+    };
+
+    // 쿠폰 할인 금액 업데이트 및 부모 컴포넌트에 전달
+    useEffect(() => {
+        const discount = calculateDiscount();
+        console.log('쿠폰 할인 계산:', {
+            selectedCoupon,
+            subtotal,
+            calculatedDiscount: discount,
+            couponType: selectedCoupon?.type,
+            couponDiscount: selectedCoupon?.discount
+        });
+        setDiscountAmount(discount);
+        if (onCouponUpdate) {
+            onCouponUpdate(selectedCoupon, discount);
+        }
+    }, [selectedCoupon, subtotal, onCouponUpdate]);
+
+    // 날짜 포맷 함수
+    const formatDate = (date) => {
+        if (!date) return '';
+        const d = date.toDate ? date.toDate() : new Date(date);
+        return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(
+            d.getDate()
+        ).padStart(2, '0')}`;
+    };
+
+    // 쿠폰 선택 핸들러
+    const handleCouponSelect = (coupon) => {
+        if (selectedCoupon?.id === coupon.id) {
+            setSelectedCoupon(null);
+            onSelectCoupon(null);
+        } else {
+            setSelectedCoupon(coupon);
+            onSelectCoupon(coupon);
+        }
+        setShowCouponModal(false);
+    };
 
     // 유효성 검사 함수 - 부모 컴포넌트에서 호출 가능
     useImperativeHandle(ref, () => ({
         validateForm: () => {
             // 주문자 정보 체크
             if (!ordererName.trim()) {
-                alert('입력되지 않은 항목이 있습니다.주문자 이름을 입력해주세요.');
+                alert('입력되지 않은 항목이 있습니다.\n주문자 이름을 입력해주세요.');
                 return false;
             }
 
             if (!emailLocal.trim()) {
-                alert('입력되지 않은 항목이 있습니다.이메일을 입력해주세요.');
+                alert('입력되지 않은 항목이 있습니다.\n이메일을 입력해주세요.');
                 return false;
             }
 
             const finalEmailDomain = emailDomain === '직접입력' ? customEmailDomain : emailDomain;
             if (!finalEmailDomain.trim()) {
-                alert('입력되지 않은 항목이 있습니다.이메일 도메인을 입력해주세요.');
+                alert('입력되지 않은 항목이 있습니다.\n이메일 도메인을 입력해주세요.');
                 return false;
             }
 
             if (!phone1 || !phone2 || !phone3) {
-                alert('입력되지 않은 항목이 있습니다.휴대전화 번호를 입력해주세요.');
+                alert('입력되지 않은 항목이 있습니다.\n휴대전화 번호를 입력해주세요.');
                 return false;
             }
 
             // 배송지 정보 체크
             if (!receiverName.trim()) {
-                alert('입력되지 않은 항목이 있습니다.받는사람 이름을 입력해주세요.');
+                alert('입력되지 않은 항목이 있습니다.\n받는사람 이름을 입력해주세요.');
                 return false;
             }
 
-            if (postcode || address) {
-                alert('입력되지 않은 항목이 있습니다.배송지 주소를 입력해주세요.');
+            if (!postcode || !address) {
+                alert('입력되지 않은 항목이 있습니다.\n배송지 주소를 입력해주세요.');
                 return false;
             }
 
             if (!deliveryPhone1 || !deliveryPhone2 || !deliveryPhone3) {
-                alert('입력되지 않은 항목이 있습니다.n배송지 휴대전화 번호를 입력해주세요.');
+                alert('입력되지 않은 항목이 있습니다.\n배송지 휴대전화 번호를 입력해주세요.');
                 return false;
             }
 
-            // 비밀번호 체크
-            if (!password || !passwordConfirm) {
-                alert('입력되지 않은 항목이 있습니다.비밀번호를 입력해주세요.');
-                return false;
-            }
+            // 비회원일 경우에만 비밀번호 체크
+            if (!user) {
+                if (!password || !passwordConfirm) {
+                    alert('입력되지 않은 항목이 있습니다.\n비밀번호를 입력해주세요.');
+                    return false;
+                }
 
-            if (!passwordValid) {
-                alert('입력되지 않은 항목이 있습니다.비밀번호 형식이 올바르지 않습니다.');
-                return false;
-            }
+                if (!passwordValid) {
+                    alert('입력되지 않은 항목이 있습니다.\n비밀번호 형식이 올바르지 않습니다.');
+                    return false;
+                }
 
-            if (!passwordMatch) {
-                alert('입력되지 않은 항목이 있습니다.비밀번호가 일치하지 않습니다.');
-                return false;
+                if (!passwordMatch) {
+                    alert('입력되지 않은 항목이 있습니다.\n비밀번호가 일치하지 않습니다.');
+                    return false;
+                }
             }
 
             // 약관 동의 체크
@@ -145,6 +276,11 @@ const OrderForm = forwardRef((props, ref) => {
 
     // 우편번호 검색 (다음 API)
     const handlePostcodeSearch = () => {
+        if (!window.daum || !window.daum.Postcode) {
+            alert('우편번호 검색 서비스를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+            return;
+        }
+
         new window.daum.Postcode({
             oncomplete: function (data) {
                 setPostcode(data.zonecode);
@@ -153,18 +289,9 @@ const OrderForm = forwardRef((props, ref) => {
         }).open();
     };
 
-    // 쿠폰 적용
-    const handleCouponApply = () => {
-        if (couponCode.trim()) {
-            setCouponApplied(true);
-            alert('쿠폰이 적용되었습니다.');
-        } else {
-            alert('쿠폰번호를 입력해주세요.');
-        }
-    };
-
     // 배송지 타입 변경 시 주문자 정보 복사 또는 초기화
-    const handleDeliveryTypeChange = (type) => {
+    const handleDeliveryTypeChange = (e) => {
+        const type = e.target.value;
         setDeliveryType(type);
         if (type === 'same') {
             setReceiverName(ordererName);
@@ -289,7 +416,7 @@ const OrderForm = forwardRef((props, ref) => {
                             name="deliveryType"
                             value="same"
                             checked={deliveryType === 'same'}
-                            onChange={() => handleDeliveryTypeChange('same')}
+                            onChange={handleDeliveryTypeChange}
                         />
                         <span className="radio-text">주문자정보와 동일</span>
                     </label>
@@ -299,7 +426,7 @@ const OrderForm = forwardRef((props, ref) => {
                             name="deliveryType"
                             value="new"
                             checked={deliveryType === 'new'}
-                            onChange={() => handleDeliveryTypeChange('new')}
+                            onChange={handleDeliveryTypeChange}
                         />
                         <span className="radio-text">새로운 배송지</span>
                     </label>
@@ -390,87 +517,191 @@ const OrderForm = forwardRef((props, ref) => {
                 </div>
             </div>
 
-            {/* 비회원 주문 비밀번호 */}
-            <div className="form-section">
-                <h2 className="section-title">
-                    비회원 주문 비밀번호 (회원연동시 별도 페이지 필요)
-                </h2>
-                <p className="section-description">
-                    주문조회 시 필요합니다. (영문대소문자구분/숫자/특수문자 중 2가지 이상 조합,
-                    8자~16자)
-                </p>
+            {/* 비회원 주문 비밀번호 - 로그인 시 숨김 */}
+            {!user && (
+                <div className="form-section">
+                    <h2 className="section-title">비회원 주문 비밀번호</h2>
+                    <p className="section-description">
+                        주문조회 시 필요합니다. (영문대소문자구분/숫자/특수문자 중 2가지 이상 조합,
+                        8자~16자)
+                    </p>
 
-                <div className="form-group">
-                    <label className="form-label required">비밀번호</label>
-                    <input
-                        type="password"
-                        className="form-input"
-                        placeholder="비밀번호 입력"
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                    {passwordValid !== null && (
-                        <p className={`password-message ${passwordValid ? 'valid' : 'invalid'}`}>
-                            {passwordValid
-                                ? '✓ 사용가능한 비밀번호입니다.'
-                                : '✗ 사용할 수 없는 비밀번호입니다.'}
-                        </p>
-                    )}
-                </div>
-
-                <div className="form-group">
-                    <label className="form-label required">비밀번호 확인</label>
-                    <input
-                        type="password"
-                        className="form-input"
-                        placeholder="비밀번호 재입력"
-                        value={passwordConfirm}
-                        onChange={handlePasswordConfirmChange}
-                    />
-                    {passwordMatch !== null && (
-                        <p className={`password-message ${passwordMatch ? 'valid' : 'invalid'}`}>
-                            {passwordMatch
-                                ? '✓ 비밀번호가 일치합니다.'
-                                : '✗ 비밀번호가 일치하지 않습니다.'}
-                        </p>
-                    )}
-                </div>
-            </div>
-
-            {/* 쿠폰/할인코드 */}
-            <div className="form-section">
-                <h2 className="section-title">쿠폰/할인코드</h2>
-
-                <div className="form-group">
-                    <label className="form-label">할인쿠폰 적용</label>
-                    <div className="coupon-input-group">
+                    <div className="form-group">
+                        <label className="form-label required">비밀번호</label>
                         <input
-                            type="text"
-                            className="form-input coupon-input"
-                            placeholder="쿠폰번호 입력"
-                            value={couponCode}
-                            onChange={(e) => setCouponCode(e.target.value)}
+                            type="password"
+                            className="form-input"
+                            placeholder="비밀번호 입력"
+                            value={password}
+                            onChange={handlePasswordChange}
                         />
-                        <button type="button" className="btn-coupon" onClick={handleCouponApply}>
-                            적용
-                        </button>
+                        {passwordValid !== null && (
+                            <p
+                                className={`password-message ${
+                                    passwordValid ? 'valid' : 'invalid'
+                                }`}
+                            >
+                                {passwordValid
+                                    ? '✓ 사용가능한 비밀번호입니다.'
+                                    : '✗ 사용할 수 없는 비밀번호입니다.'}
+                            </p>
+                        )}
                     </div>
-                    {couponApplied && <p className="coupon-message">쿠폰이 적용되었습니다.</p>}
-                </div>
 
-                <div className="discount-amount">
-                    <span className="discount-label">적용금액</span>
-                    <span className="discount-value">-0원</span>
+                    <div className="form-group">
+                        <label className="form-label required">비밀번호 확인</label>
+                        <input
+                            type="password"
+                            className="form-input"
+                            placeholder="비밀번호 재입력"
+                            value={passwordConfirm}
+                            onChange={handlePasswordConfirmChange}
+                        />
+                        {passwordMatch !== null && (
+                            <p
+                                className={`password-message ${
+                                    passwordMatch ? 'valid' : 'invalid'
+                                }`}
+                            >
+                                {passwordMatch
+                                    ? '✓ 비밀번호가 일치합니다.'
+                                    : '✗ 비밀번호가 일치하지 않습니다.'}
+                            </p>
+                        )}
+                    </div>
                 </div>
-            </div>
+            )}
+
+            {/* 쿠폰 섹션 - 로그인 사용자만 표시 */}
+            {user && (
+                <div className="form-section">
+                    <h2 className="section-title">쿠폰/할인</h2>
+
+                    {availableCoupons.length > 0 ? (
+                        <>
+                            <div className="coupon-section">
+                                <button
+                                    type="button"
+                                    className="coupon-select-btn"
+                                    onClick={() => setShowCouponModal(true)}
+                                >
+                                    {selectedCoupon
+                                        ? `${selectedCoupon.name} 적용됨`
+                                        : `사용 가능한 쿠폰 ${availableCoupons.length}개`}
+                                </button>
+
+                                {selectedCoupon && (
+                                    <div className="selected-coupon">
+                                        <div className="coupon-info">
+                                            <span className="coupon-name">{selectedCoupon.name}</span>
+                                            <span className="coupon-discount">
+                                                -{discountAmount.toLocaleString()}원
+                                            </span>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            className="cancel-btn"
+                                            onClick={() => {
+                                                setSelectedCoupon(null);
+                                                onSelectCoupon(null);
+                                            }}
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* 할인 금액 표시 - 쿠폰 선택 시에만 */}
+                            {selectedCoupon && (
+                                <div className="discount-amount">
+                                    <span className="discount-label">할인 적용 금액</span>
+                                    <span className="discount-value">
+                                        {discountAmount > 0 
+                                            ? `-${discountAmount.toLocaleString()}원`
+                                            : '계산 중...'}
+                                    </span>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <p className="no-coupon-message">사용 가능한 쿠폰이 없습니다.</p>
+                    )}
+                </div>
+            )}
+
+            {/* 쿠폰 선택 모달 */}
+            {showCouponModal && (
+                <div className="coupon-modal" onClick={() => setShowCouponModal(false)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-header">
+                            <h3>쿠폰 선택</h3>
+                            <button
+                                className="close-btn"
+                                onClick={() => setShowCouponModal(false)}
+                            >
+                                ✕
+                            </button>
+                        </div>
+
+                        <div className="coupon-list">
+                            {availableCoupons.length === 0 ? (
+                                <p className="no-coupon">사용 가능한 쿠폰이 없습니다.</p>
+                            ) : (
+                                availableCoupons.map((coupon) => {
+                                    const previewDiscount = calculateCouponDiscount(coupon);
+                                    
+                                    return (
+                                        <div
+                                            key={coupon.id}
+                                            className={`coupon-item ${
+                                                selectedCoupon?.id === coupon.id ? 'selected' : ''
+                                            }`}
+                                            onClick={() => handleCouponSelect(coupon)}
+                                        >
+                                            <div className="coupon-badge">
+                                                <span className="discount-value">
+                                                    {coupon.discount}
+                                                    {coupon.type === 'percentage' ? '%' : '원'}
+                                                </span>
+                                            </div>
+                                            <div className="coupon-details">
+                                                <h4>{coupon.name}</h4>
+                                                <p className="coupon-code">코드: {coupon.code}</p>
+                                                <p className="expire-date">
+                                                    유효기간: {formatDate(coupon.expiresAt)}까지
+                                                </p>
+                                            </div>
+                                            {selectedCoupon?.id === coupon.id && (
+                                                <span className="check-mark">✓</span>
+                                            )}
+                                        </div>
+                                    );
+                                })
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* 결제수단 */}
             <div className="form-section">
                 <h2 className="section-title">결제수단</h2>
 
                 <div className="payment-methods">
-                    <button type="button" className="payment-btn active">
+                    <button
+                        type="button"
+                        className={`payment-btn ${paymentMethod === 'card' ? 'active' : ''}`}
+                        onClick={() => setPaymentMethod('card')}
+                    >
                         신용카드
+                    </button>
+                    <button
+                        type="button"
+                        className={`payment-btn ${paymentMethod === 'bank' ? 'active' : ''}`}
+                        onClick={() => setPaymentMethod('bank')}
+                    >
+                        무통장입금
                     </button>
                 </div>
                 <p className="payment-notice">

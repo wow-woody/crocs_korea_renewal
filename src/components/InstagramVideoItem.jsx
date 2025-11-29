@@ -16,11 +16,11 @@ const InstagramVideoItem = ({ video, videoRef, isPlaying, onPlayClick }) => {
                 }}
                 onClick={onPlayClick}
             />
-            <a href="#" className="instagram__button-wrap">
+            <div className="instagram__button-wrap">
                 <button className="instagram__button">
                     @&nbsp;<span>{video.username}</span>
                 </button>
-            </a>
+            </div>
         </div>
     );
 };

@@ -33,7 +33,6 @@ export const menuList = [
                 imgUrl: '/images/2_베이_라인드_클로그_1.jpg',
             },
             { key: 'fuzz', label: 'FUZZ', imgUrl: '/images/13_클래식_언퍼게터블_클로그_1.png' },
-
             {
                 key: 'collabs',
                 label: 'COLLABS',
@@ -117,7 +116,6 @@ export const menuList = [
         key: 'jibbitz',
         label: 'JIBBITZ',
         submenu_list: [
-            { key: 'all', label: 'ALL', imgUrl: '/images/3_인디_럭스_실버_5개_세트.jpg' },
             { key: 'pack', label: 'PACK', imgUrl: '/images/1_화이트_펄_5개_세트.jpg' },
             { key: 'single', label: 'SINGLE', imgUrl: '/images/9_허기츠_블랙_벨벳_캣_0.jpg' },
         ],

@@ -25,11 +25,12 @@ export default function WomenPriceMenu({ onPriceSelect }) {
             <div className="price-menu__wrap menu_wrap-style">
                 <div className="price-menu__wrap--title_wrap title--wrap">
                     <h3 className="price-menu__wrap--title title">가격</h3>
-                    <a href="#" className="price-menu--title__toggle title--toggle">
-                        <button>
-                            <img src="/images/Sub_Women_Images/icon-minus.svg" alt="줄이기/더보기 버튼" />
-                        </button>
-                    </a>
+                    <button className="price-menu--title__toggle title--toggle">
+                        <img
+                            src="/images/Sub_Women_Images/icon-minus.svg"
+                            alt="줄이기/더보기 버튼"
+                        />
+                    </button>
                 </div>
                 <ul className="price-menu__wrap price-menu__wrap--price-range">
                     {priceRanges.map((range, index) => (
