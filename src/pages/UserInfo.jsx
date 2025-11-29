@@ -22,7 +22,7 @@ const UserInfo = () => {
     }, [wishLists]);
 
     return (
-        <div className="sub_page">
+        <div className="sub_page userinfo_page">
             <div className="inner">
                 <Title title="My Page" />
                 {/* 마이 페이지 회원정보
@@ -34,7 +34,7 @@ const UserInfo = () => {
                 나의 정보 / 주문 정보 / 1:1 문의 /  */}
                     <button>나의 정보</button>
                     <button onClick={() => navigate('/orderhistory')}>주문 정보</button>
-                    <button>혜택 정보</button>
+                    <button onClick={() => navigate('/coupons')}>혜택 정보</button>
                     <button>1 : 1 문의</button>
                 </div>
                 <div className="userinfo_current_order_wrap">

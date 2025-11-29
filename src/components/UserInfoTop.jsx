@@ -44,7 +44,6 @@ const UserInfoTop = () => {
 
                     <div className="club_join">
                         <strong>Crocs Club</strong>
-                        <p>혜택 안내</p>
                     </div>
                 </div>
             )}
@@ -55,6 +54,9 @@ const UserInfoTop = () => {
                     <strong>쿠폰</strong>
                     <p className="coupon_count">{couponCount}개</p>
                 </div>
+
+                <div className="divider"></div>
+
                 <div className="coupon_popup_link">
                     <button className="view_coupons_btn" onClick={() => navigate('/coupons')}>
                         쿠폰함 보기

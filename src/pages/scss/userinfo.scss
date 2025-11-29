@@ -1,7 +1,14 @@
 @use '../../App.scss' as g;
 
-.sub_page {
+.userinfo_page {
     .inner {
+        .title_wrap {
+            width: 100%;
+            margin-bottom: 5rem;
+            .section_title {
+                text-align: center;
+            }
+        }
         .user_info_top {
             @include g.flex();
             margin-bottom: 5rem;
@@ -12,7 +19,7 @@
                 flex: 1;
                 background: #eee;
                 border-radius: 10px;
-                padding: 0 10rem;
+                padding: 5rem;
             }
 
             .user_info_left_wrap {
@@ -41,7 +48,7 @@
                         border-radius: 50px;
                         border: none;
                         font-weight: 700;
-                        background: g.$mainColor;
+                        background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
                         padding: 2px 10px;
                     }
                 }
@@ -49,6 +56,54 @@
 
             .user_info_right {
                 @include g.flex();
+                width: 100%;
+
+                > .coupons_text {
+                    flex: 1;
+                }
+                > .divider {
+                    flex: none;
+                }
+                > .coupon_popup_link {
+                    flex: 1;
+                }
+
+                .coupons_text {
+                    @include g.flex($fd: column, $ai: center, $jc: center, $gap: 1rem);
+                    strong {
+                        font-size: 1.8rem;
+                        color: g.$mainColor;
+                    }
+
+                    p {
+                        font-weight: 600;
+                    }
+                }
+                /* divider 전체 영역 */
+                .divider {
+                    margin: 0 2rem;
+                    @include g.flex($jc: center);
+                    height: 100%;
+                    width: 2px;
+                    height: 18rem; /* 높이 조절 가능 */
+                    background-color: #ddd;
+                }
+
+                .coupon_popup_link {
+                    width: 100%;
+                    @include g.flex($jc: center, $ai: center);
+                    .view_coupons_btn {
+                        display: block;
+                        width: fit-content;
+                        height: fit-content;
+                        border-radius: 50px;
+                        border: none;
+                        font-weight: 700;
+                        background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+                        padding: 5px 10px;
+                        color: #fff;
+                    }
+                }
             }
         }
 
@@ -58,11 +113,20 @@
             button,
             a {
                 flex: 1;
-                // border: 1px solid red;
                 background: #eee;
                 padding: 5rem 8rem;
                 border-radius: 10px;
                 text-align: center;
+
+                &:hover {
+                    background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+                    color: white;
+                }
+
+                &.active {
+                    background: linear-gradient(135deg, g.$mainColor 0%, #b0d96e 100%);
+                    color: white;
+                }
             }
         }
         > div {

@@ -5,6 +5,7 @@
     padding: 8rem 4rem;
     border-radius: 1rem;
     @include g.flex($jc: center, $ai: center, $gap: 8rem);
+    margin: 5rem 0;
     .order_state_left {
         @include g.flex($jc: center, $ai: center, $gap: 8rem);
         li {

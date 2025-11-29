@@ -5,6 +5,7 @@
     border-radius: 1rem;
     padding: 2rem;
     display: grid;
+    margin: 2rem 0;
 
     .order_list_top {
         @include g.flex();
