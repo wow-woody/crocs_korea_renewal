@@ -1,6 +1,6 @@
 'use no memo';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Title from '../components/Title';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
@@ -11,16 +11,38 @@ import CrocsClubJoin from '../components/CrocsClubJoin';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [saveId, setSaveId] = useState(false);
 
     const { onLogin, onGoogleLogin, onKakaoLogin } = loginAuthStore();
 
     const navigate = useNavigate();
+
+    // 컴포넌트 마운트 시 저장된 아이디 불러오기
+    useEffect(() => {
+        const savedEmail = localStorage.getItem('savedEmail');
+        const isSaved = localStorage.getItem('saveId') === 'true';
+
+        if (savedEmail && isSaved) {
+            setEmail(savedEmail);
+            setSaveId(true);
+        }
+    }, []);
 
     // 메서드
     // 1. 기본 로그인
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('전송.');
+
+        // 아이디 저장 처리
+        if (saveId) {
+            localStorage.setItem('savedEmail', email);
+            localStorage.setItem('saveId', 'true');
+        } else {
+            localStorage.removeItem('savedEmail');
+            localStorage.removeItem('saveId');
+        }
+
         await onLogin(email, password);
         navigate('/userinfo');
     };
