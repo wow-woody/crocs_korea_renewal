@@ -17,13 +17,7 @@
     &.subpage {
         .header {
             .header_left {
-                > nav {
-                    li {
-                        a {
-                            color: #fff;
-                        }
-                    }
-
+                nav {
                     .collabs {
                         color: g.$mainColor;
                     }
@@ -45,7 +39,7 @@
         background: rgba($color: #eee, $alpha: 0.4);
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
-        // transition: height 0.3s ease, border-radius 0.3s ease;
+        transition: height 0.3s ease, border-radius 0.3s ease;
         z-index: -1;
     }
 
@@ -79,7 +73,7 @@
                     .main_menu {
                         @include g.flex();
 
-                        > li {
+                        li {
                             > a {
                                 font-size: 1.8rem;
                                 font-weight: bold;
